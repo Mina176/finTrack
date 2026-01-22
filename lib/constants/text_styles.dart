@@ -5,7 +5,7 @@ class TextStyles {
   static const title = TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.w700,
-    fontSize: 32,
+    fontSize: 28,
     letterSpacing: 0.0,
     height: 1.2,
   );
@@ -17,10 +17,9 @@ class TextStyles {
     height: 1.2,
   );
 
-  static const heading = TextStyle(
+  static const buttonLabel = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 24,
-    height: 1.2,
+    fontSize: 16,
   );
 
   // Regular text (for add/edit task pages)
