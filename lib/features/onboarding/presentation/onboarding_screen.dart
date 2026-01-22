@@ -1,6 +1,7 @@
 import 'package:fintrack/constants/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_page_slider.dart';
+import 'package:fintrack/router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -53,7 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             duration: Duration(milliseconds: 250),
                             curve: Curves.linear,
                           )
-                        : context.go('/home');
+                        : context.go(AppRouter.kLoginScreen);
                   }),
                   child: currentPage < 2
                       ? Text('Next')
