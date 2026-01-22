@@ -1,6 +1,6 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/onboarding/presentation/onboarding_card.dart';
+import 'package:fintrack/features/onboarding/presentation/onboarding_content.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -23,14 +23,14 @@ class SplashScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  OnboardingCard(
+                  OnboardingContent(
+                    width: 120,
+                    height: 120,
+                    title: 'FinTrack',
+                    subTitle: 'Master your money',
                     icon: Icons.account_balance_wallet,
                     borderRadius: Sizes.p24,
                   ),
-                  gapH24,
-                  Text('FinTrack', style: TextStyles.title),
-                  gapH4,
-                  Text('Master Your Money', style: TextStyles.subtitle),
                 ],
               ),
             );
