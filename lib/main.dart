@@ -1,4 +1,4 @@
-import 'package:fintrack/features/onboarding/onboarding.dart';
+import 'package:fintrack/features/onboarding/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,8 +14,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: buildTheme(Brightness.dark),
-
-      home: OnBoarding(),
+      home: SplashScreen(),
     );
   }
 

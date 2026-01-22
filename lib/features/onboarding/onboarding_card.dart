@@ -1,4 +1,4 @@
-import 'package:fintrack/constants.dart';
+import 'package:fintrack/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingCard extends StatelessWidget {
@@ -22,7 +22,6 @@ class OnboardingCard extends StatelessWidget {
             color: kPrimaryColor.withOpacity(0.07),
             spreadRadius: 120,
             blurRadius: 120,
-            offset: Offset(0, 0),
           ),
         ],
       ),
