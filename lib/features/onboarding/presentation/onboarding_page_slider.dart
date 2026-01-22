@@ -1,4 +1,3 @@
-import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_card.dart';
 import 'package:fintrack/features/onboarding/presentation/slider_index.dart';
 import 'package:flutter/material.dart';

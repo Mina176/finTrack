@@ -1,6 +1,5 @@
 import 'package:fintrack/constants/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
-import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_card.dart';
 import 'package:fintrack/router.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +18,9 @@ class SplashScreen extends StatelessWidget {
         decoration: BoxDecoration(gradient: gradientColors),
         child: Center(
           child: TweenAnimationBuilder<double>(
-            tween: Tween(begin: 0.0, end: 1.0),
+            tween: Tween(begin: 0.1, end: 1.0),
             curve: Curves.linear,
-            duration: Duration(milliseconds: 1200),
+            duration: Duration(seconds: 3),
             builder: (context, opacity, child) {
               return Opacity(
                 opacity: opacity,

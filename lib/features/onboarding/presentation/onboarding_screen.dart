@@ -1,10 +1,7 @@
 import 'package:fintrack/constants/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
-import 'package:fintrack/features/onboarding/presentation/onboarding_card.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_page_slider.dart';
-import 'package:fintrack/features/onboarding/presentation/slider_index.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class OnboardingScreen extends StatefulWidget {
