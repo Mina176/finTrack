@@ -13,18 +13,28 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF0D1B12),
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            OnboardingCard(
-              icon: Icons.account_balance_wallet,
-              borderRadius: Sizes.p24,
-            ),
-            gapH24,
-            Text('FinTrack', style: TextStyles.title),
-            gapH4,
-            Text('Master Your Money', style: TextStyles.subtitle),
-          ],
+        child: TweenAnimationBuilder<double>(
+          tween: Tween(begin: 0.0, end: 1.0),
+          curve: Curves.linear,
+          duration: Duration(milliseconds: 1200),
+          builder: (context, opacity, child) {
+            return Opacity(
+              opacity: opacity,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  OnboardingCard(
+                    icon: Icons.account_balance_wallet,
+                    borderRadius: Sizes.p24,
+                  ),
+                  gapH24,
+                  Text('FinTrack', style: TextStyles.title),
+                  gapH4,
+                  Text('Master Your Money', style: TextStyles.subtitle),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
