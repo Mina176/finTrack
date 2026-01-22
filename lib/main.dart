@@ -1,4 +1,3 @@
-import 'package:fintrack/features/onboarding/splash_screen.dart';
 import 'package:fintrack/router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

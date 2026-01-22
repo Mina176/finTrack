@@ -1,4 +1,4 @@
-import 'package:fintrack/features/onboarding/splash_screen.dart';
+import 'package:fintrack/features/onboarding/presentation/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
