@@ -3,8 +3,8 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
-class OnboardingContent extends StatelessWidget {
-  const OnboardingContent({
+class OnboardingCard extends StatelessWidget {
+  const OnboardingCard({
     super.key,
     required this.icon,
     required this.borderRadius,
@@ -29,13 +29,6 @@ class OnboardingContent extends StatelessWidget {
           decoration: BoxDecoration(
             color: kCardColor,
             borderRadius: BorderRadius.circular(borderRadius),
-            boxShadow: [
-              BoxShadow(
-                color: kPrimaryColor.withOpacity(0.07),
-                spreadRadius: 120,
-                blurRadius: 120,
-              ),
-            ],
           ),
           child: Icon(
             icon,

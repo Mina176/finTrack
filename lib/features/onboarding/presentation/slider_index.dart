@@ -15,9 +15,10 @@ class SliderIndex extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         3,
-        (index) => Container(
-          margin: EdgeInsets.all(6),
-          width: currentPage == index ? 32 : 8,
+        (index) => AnimatedContainer(
+          duration: Duration(milliseconds: 250),
+          margin: EdgeInsets.all(4),
+          width: currentPage == index ? 36 : 8,
           height: 8,
           decoration: BoxDecoration(
             color: currentPage == index ? kPrimaryColor : Color(0xFF21452D),
