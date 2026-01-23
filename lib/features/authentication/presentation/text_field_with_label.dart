@@ -2,31 +2,47 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
-class TextFieldWithLabel extends StatelessWidget {
+class TextFieldWithLabel extends StatefulWidget {
   const TextFieldWithLabel({
     super.key,
     required this.label,
     required this.hintText,
-    this.isObscure = false,
-    this.suffixIcon,
+    this.isPassword = false,
   });
   final String label;
   final String hintText;
-  final Widget? suffixIcon;
-  final bool isObscure;
+  final bool isPassword;
+
+  @override
+  State<TextFieldWithLabel> createState() => _TextFieldWithLabelState();
+}
+
+class _TextFieldWithLabelState extends State<TextFieldWithLabel> {
+  bool isObscured = true;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyles.labelText),
+        Text(widget.label, style: TextStyles.labelText),
         gapH4,
         TextField(
           decoration: InputDecoration(
-            hintText: hintText,
-            suffixIcon: suffixIcon,
+            hintText: widget.hintText,
+            suffixIcon: widget.isPassword
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isObscured = !isObscured;
+                      });
+                    },
+                    icon: Icon(
+                      isObscured ? Icons.visibility : Icons.visibility_off,
+                    ),
+                  )
+                : null,
           ),
-          obscureText: isObscure,
+          obscureText: widget.isPassword,
         ),
       ],
     );

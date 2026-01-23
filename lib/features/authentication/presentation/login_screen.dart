@@ -41,13 +41,7 @@ class LoginScreen extends StatelessWidget {
                     TextFieldWithLabel(
                       label: 'Password',
                       hintText: '••••••••',
-                      isObscure: true,
-                      suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.remove_red_eye_rounded,
-                        ),
-                      ),
+                      isPassword: true,
                     ),
                     Text(
                       'Forgot Password?',
