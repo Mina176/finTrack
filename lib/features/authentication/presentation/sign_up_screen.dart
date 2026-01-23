@@ -1,49 +1,45 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/authentication/logic/signup_view_model.dart';
+import 'package:fintrack/features/authentication/logic/auth_controller.dart';
+import 'package:fintrack/features/authentication/logic/loading_state.dart';
 import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/features/authentication/presentation/login_screen.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
-import 'package:fintrack/features/authentication/logic/auth_repository.dart';
 import 'package:fintrack/features/authentication/utils/validators.dart';
-import 'package:fintrack/router.dart';
+import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  // 1. Initialize the ViewModel
-  final _vm = SignUpViewModel();
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  String? emailErrorText;
+  String? passwordErrorText;
 
-  @override
-  void dispose() {
-    _vm.dispose(); // VM handles controller cleanup
-    super.dispose();
-  }
+  void _signUp() async {
+    setState(() {
+      emailErrorText = null;
+      passwordErrorText = null;
+    });
 
-  void _onSubmit() async {
-    // 1. Run Client-side Validation (Regex checks)
     if (_formKey.currentState!.validate()) {
-      // 2. Call VM Logic (Server-side checks)
-      await _vm.signUp();
-
-      // 3. Handle Result
-      if (!mounted) return;
-
-      if (_vm.status == SignUpStatus.success) {
-        context.go(AppRouter.kHomeScreen);
-      } else if (_vm.status == SignUpStatus.accountExists) {
-        _showAccountExistsDialog();
-      }
+      await ref
+          .read(authControllerProvider.notifier)
+          .createUserWithEmailAndPassword(
+            _emailController.text.trim(),
+            _passwordController.text.trim(),
+          );
     }
   }
 
@@ -73,139 +69,165 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
+    final isLoading = authState.isLoading;
+
+    ref.listen(authControllerProvider, (previous, next) {
+      if (next.state == LoadingStateEnum.success) {
+        context.go(AppRoutes.home.path);
+      } else if (next.hasError) {
+        final error = next.error.toString();
+        if (error.contains('weak')) {
+          setState(
+            () => passwordErrorText = "The password provided is too weak.",
+          );
+        } else if (error.contains('exists')) {
+          setState(
+            () => emailErrorText = "The account already exists for that email.",
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(next.error.toString())),
+          );
+        }
+      }
+    });
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(gradient: AppColors.gradientColors),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ListenableBuilder(
-              listenable: _vm,
-              builder: (context, child) => CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Column(
-                      spacing: 12,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        IconButton(
-                          onPressed: () => context.pop(),
-                          icon: Icon(Icons.arrow_back_ios_new),
-                        ),
-                        Text(
-                          'Start Tracking Today',
-                          style: TextStyles.title,
-                        ),
-                        Text(
-                          'Take control of your finances.',
-                          style: TextStyles.subtitle,
-                        ),
-                        gapH16,
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            spacing: 12,
-                            children: [
-                              AuthField(
-                                controller: _vm.nameController,
-                                label: 'Full Name',
-                                hintText: 'John Doe',
-                                validator: (value) =>
-                                    value!.isEmpty ? 'Name is required' : null,
-                              ),
-                              AuthField(
-                                controller: _vm.emailController,
-                                label: 'Email',
-                                hintText: 'john@example.com',
-                                errorText: _vm.emailErrorText,
-                                validator: Validators.validateEmail,
-                              ),
-                              AuthField(
-                                controller: _vm.passwordController,
-                                label: 'Password',
-                                hintText: '••••••••',
-                                errorText: _vm.passwordErrorText,
-                                isPassword: true,
-                                validator: Validators.validatePassword,
-                              ),
-                              AuthField(
-                                label: 'Confirm Password',
-                                hintText: '••••••••',
-                                isPassword: true,
-                                validator: (value) =>
-                                    Validators.validateConfirmPassword(
-                                      _vm.passwordController.text,
-                                      value,
-                                    ),
-                              ),
-                              gapH4,
-                              ElevatedButton(
-                                onPressed: _vm.status == SignUpStatus.loading
-                                    ? null
-                                    : _onSubmit,
-                                child: _vm.status == SignUpStatus.loading
-                                    ? SizedBox(
-                                        height: 24,
-                                        width: 24,
-                                        child: CircularProgressIndicator(),
-                                      )
-                                    : Text('Sign Up'),
-                              ),
-                            ],
-                          ),
-                        ),
-                        CustomDivider(
-                          centeredText: 'Or continue with',
-                        ),
-                        ButtonWithIcon(
-                          label: 'Continue with Google',
-                          onPressed: () {},
-                          icon: SizedBox(
-                            height: Sizes.p32,
-                            child: Image.asset(
-                              'assets/google-logo-png-29546.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          textColor: AppColors.kTitleColor,
-                        ),
-                        ButtonWithIcon(
-                          label: 'Continue with Apple',
-                          onPressed: () {},
-                          icon: SizedBox(
-                            height: Sizes.p28,
-                            child: Image.asset(
-                              'assets/Apple-Logo-500x281.png',
-                              color: Colors.white,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          textColor: AppColors.kTitleColor,
-                        ),
-                        gapH4,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    spacing: 12,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      IconButton(
+                        onPressed: () => context.pop(),
+                        icon: Icon(Icons.arrow_back_ios_new),
+                      ),
+                      Text(
+                        'Start Tracking Today',
+                        style: TextStyles.title,
+                      ),
+                      Text(
+                        'Take control of your finances.',
+                        style: TextStyles.subtitle,
+                      ),
+                      gapH16,
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          spacing: 12,
                           children: [
-                            Text('Don\'t have an account?'),
-                            GestureDetector(
-                              onTap: () => context.go(AppRouter.kLoginScreen),
-                              child: Text(
-                                ' Log in',
-                                style: TextStyle(
-                                  color: AppColors.kPrimaryColor,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
+                            AuthField(
+                              controller: _nameController,
+                              label: 'Full Name',
+                              hintText: 'John Doe',
+                              validator: (value) =>
+                                  value!.isEmpty ? 'Name is required' : null,
+                            ),
+                            AuthField(
+                              controller: _emailController,
+                              label: 'Email',
+                              hintText: 'john@example.com',
+                              errorText: emailErrorText,
+                              validator: Validators.validateEmail,
+                            ),
+                            AuthField(
+                              controller: _passwordController,
+                              label: 'Password',
+                              hintText: '••••••••',
+                              errorText: passwordErrorText,
+                              isPassword: true,
+                              validator: Validators.validatePasswordWhenSignUp,
+                            ),
+                            AuthField(
+                              label: 'Confirm Password',
+                              hintText: '••••••••',
+                              isPassword: true,
+                              validator: (value) =>
+                                  Validators.validateConfirmPassword(
+                                    _passwordController.text,
+                                    value,
+                                  ),
+                            ),
+                            gapH4,
+                            ElevatedButton(
+                              onPressed: isLoading ? null : _signUp,
+                              child: isLoading
+                                  ? SizedBox(
+                                      height: 24,
+                                      width: 24,
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : Text('Sign Up'),
                             ),
                           ],
                         ),
-                        gapH4,
-                      ],
-                    ),
+                      ),
+                      CustomDivider(
+                        centeredText: 'Or continue with',
+                      ),
+                      ButtonWithIcon(
+                        label: 'Continue with Google',
+                        onPressed: () {},
+                        icon: SizedBox(
+                          height: Sizes.p32,
+                          child: Image.asset(
+                            'assets/google-logo-png-29546.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        textColor: AppColors.kTitleColor,
+                      ),
+                      ButtonWithIcon(
+                        label: 'Continue with Apple',
+                        onPressed: () {},
+                        icon: SizedBox(
+                          height: Sizes.p28,
+                          child: Image.asset(
+                            'assets/Apple-Logo-500x281.png',
+                            color: Colors.white,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        textColor: AppColors.kTitleColor,
+                      ),
+                      gapH4,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Don\'t have an account?'),
+                          GestureDetector(
+                            onTap: () => context.go(AppRoutes.signIn.path),
+                            child: Text(
+                              ' Log in',
+                              style: TextStyle(
+                                color: AppColors.kPrimaryColor,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      gapH4,
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -1,72 +1,110 @@
-import 'package:fintrack/features/authentication/logic/auth_repository.dart';
+import 'package:fintrack/features/authentication/logic/auth_controller.dart';
+import 'package:fintrack/features/authentication/logic/loading_state.dart';
 import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/features/authentication/utils/validators.dart';
-import 'package:fintrack/router.dart';
+import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final formKey = GlobalKey<FormState>();
-  late final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final authRepo = AuthRepository();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
-  // State variables for field-level errors
-  String? emailError;
-  String? passwordError;
-  bool isLoading = false;
-
-  void _login() async {
-    // 1. Clear old errors
+  Future<void> _signIn() async {
     setState(() {
       emailError = null;
       passwordError = null;
     });
 
     if (formKey.currentState!.validate()) {
-      setState(() => isLoading = true);
-
-      try {
-        await authRepo.login(
-          email: emailController.text.trim(),
-          password: passwordController.text,
-        );
-        if (mounted) {
-          context.go(AppRouter.kHomeScreen);
-        }
-      } catch (e) {
-        String error = e.toString();
-
-        // 3. Handle Firebase Errors on specific fields
-        if (error.contains('user-not-found') ||
-            error.contains('invalid-email')) {
-          setState(() => emailError = "No account found with this email");
-        } else if (error.contains('wrong-password')) {
-          setState(() => passwordError = "Incorrect password");
-        } else if (emailController.text.isEmpty) {
-          setState(() => emailError = "Email is required");
-        }
-        // Force the UI to update with red text
-        formKey.currentState!.validate();
-      } finally {
-        if (mounted) setState(() => isLoading = false);
-      }
+      await ref
+          .read(authControllerProvider.notifier)
+          .sigInInUserWithEmailAndPassword(
+            _emailController.text.trim(),
+            _passwordController.text.trim(),
+          );
     }
   }
 
+  // State variables for field-level errors
+  String? emailError;
+  String? passwordError;
+
+  // void _login() async {
+  //   // 1. Clear old errors
+  //   setState(() {
+  //     emailError = null;
+  //     passwordError = null;
+  //   });
+
+  //   if (formKey.currentState!.validate()) {
+  //     setState(() => isLoading = true);
+
+  //     try {
+  //       await authRepo.login(
+  //         email: emailController.text.trim(),
+  //         password: passwordController.text,
+  //       );
+  //       if (mounted) {
+  //         context.go(AppRouter.kHomeScreen);
+  //       }
+  //     } catch (e) {
+  //       String error = e.toString();
+
+  //       // 3. Handle Firebase Errors on specific fields
+  //       if (error.contains('user-not-found') ||
+  //           error.contains('invalid-email')) {
+  //         setState(() => emailError = "No account found with this email");
+  //       } else if (error.contains('wrong-password')) {
+  //         setState(() => passwordError = "Incorrect password");
+  //       } else if (emailController.text.isEmpty) {
+  //         setState(() => emailError = "Email is required");
+  //       }
+  //       // Force the UI to update with red text
+  //       formKey.currentState!.validate();
+  //     } finally {
+  //       if (mounted) setState(() => isLoading = false);
+  //     }
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
+    final isLoading = authState.isLoading;
+
+    ref.listen(authControllerProvider, (previous, next) {
+      if (next.state == LoadingStateEnum.success) {
+        context.go(AppRoutes.home.path);
+      } else if (next.hasError) {
+        final error = next.error.toString();
+        if (error.contains('No user found')) {
+          setState(() => emailError = "No account found with this email");
+        } else if (error.contains('credential is incorrect')) {
+          setState(() => passwordError = "Password is incorrect");
+        } else if (error.contains('Wrong password')) {
+          setState(() => passwordError = "Incorrect password");
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(next.error.toString())),
+          );
+        }
+      }
+    });
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(gradient: AppColors.gradientColors),
@@ -100,8 +138,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             AuthField(
                               label: 'Email Address',
                               hintText: 'name@example.com',
-                              controller: emailController,
-                              errorText: emailError, 
+                              controller: _emailController,
+                              errorText: emailError,
                               validator: Validators.validateEmail,
                               onChanged: (val) {
                                 if (emailError != null) {
@@ -112,9 +150,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             AuthField(
                               label: 'Password',
                               hintText: '••••••••',
-                              controller: passwordController,
+                              controller: _passwordController,
                               isPassword: true,
                               errorText: passwordError,
+                              validator: Validators.validatePasswordWhenSignIn,
                               onChanged: (val) {
                                 if (passwordError != null) {
                                   setState(() => passwordError = null);
@@ -134,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       gapH4,
                       ElevatedButton(
-                        onPressed: isLoading ? null : _login,
+                        onPressed: isLoading ? null : _signIn,
                         child: isLoading
                             ? SizedBox(
                                 height: 24,
