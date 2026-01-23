@@ -12,12 +12,14 @@ class AuthField extends StatefulWidget {
     this.onSaved,
     this.validator,
     this.errorText,
+    this.onChanged,
   });
   final String label;
   final String hintText;
   final bool isPassword;
   final TextEditingController? controller;
   final FormFieldSetter<String>? onSaved;
+  final Function(String)? onChanged;
   final String? Function(String?)? validator;
   final String? errorText;
 
@@ -37,6 +39,7 @@ class _AuthFieldState extends State<AuthField> {
         TextFormField(
           controller: widget.controller,
           onSaved: widget.onSaved,
+          onChanged: widget.onChanged,
           obscureText: isObscured && widget.isPassword == true,
           validator: (val) {
             // Priority 1: Custom Error (from your Submit logic)
