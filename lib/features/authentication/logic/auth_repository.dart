@@ -1,72 +1,86 @@
 import 'package:fintrack/features/authentication/data/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'auth_repository.g.dart';
+
+@Riverpod(keepAlive: true)
+AuthRepository authRepository(Ref ref) {
+  final auth = ref.watch(firebaseAuthProvider);
+  return AuthRepository(auth);
+}
+
+@Riverpod(keepAlive: true)
+FirebaseAuth firebaseAuth(Ref ref) {
+  return FirebaseAuth.instance;
+}
+
+@Riverpod(keepAlive: true)
+Stream<UserModel?> authStateChange(Ref ref) {
+  final auth = ref.watch(authRepositoryProvider);
+  return auth.authStateChanges();
+}
+
+
 
 class AuthRepository {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  AuthRepository(this._firebaseAuth);
+  final FirebaseAuth _firebaseAuth;
 
-  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
+  UserModel? get currentUser => _convertUser(_firebaseAuth.currentUser);
 
-  Future<void> signUp({
-    required String name,
+  // converts the nullable FirebaseUser to our UserModel
+  UserModel? _convertUser(User? user) =>
+      user == null ? null : UserModel.fromUser(user);
+
+  Stream<UserModel?> authStateChanges() {
+    return _firebaseAuth.authStateChanges().map(_convertUser);
+  }
+
+  Future<void> createUserWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     try {
-      UserCredential credential = await _auth.createUserWithEmailAndPassword(
+      await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      User? user = credential.user;
-
-      if (user != null) {
-        UserModel newUser = UserModel(
-          uid: user.uid,
-          name: name,
-          email: email,
-        );
-
-        await _dbRef.child("users/${user.uid}").set(newUser.toMap());
-      }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        throw Exception(
-          'This email is already registered. Please login instead.',
-        );
-      } else if (e.code == 'weak-password') {
-        throw Exception('Password is too weak.');
-      } else if (e.code == 'invalid-email') {
-        throw Exception('This email address is invalid.');
-      } else {
-        throw Exception(e.message ?? 'An error occurred.');
+      if (e.code == 'weak-password') {
+        throw Exception('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        throw Exception('The account already exists for that email.');
       }
-    } catch (e) {
-      throw Exception(e.toString());
+      throw Exception(e.message ?? 'An error occurred during sign up.');
     }
   }
 
-  Future<void> login({
+  Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     try {
-      UserCredential credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-            email: email,
-            password: password,
-          );
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        throw Exception('user-not-found');
-      } else if (e.code == 'wrong-password') {
-        throw Exception('wrong-password');
-      } else if (e.code == 'invalid-email') {
-          throw Exception('invalid-email');
-      } else {
-        throw Exception(e.message ?? 'Login failed');
+      if (e.code == 'user-not-found' || e.code == 'invalid-email') {
+        throw Exception('No user found for that email.');
       }
-    } catch (e) {
-      throw Exception(e.toString());
+      if (e.code == 'wrong-password') {
+        throw Exception('Wrong password provided for that user.');
+      }
+      if (e.code == 'invalid-credential') {
+        throw Exception('credential is incorrect');
+      }
+      throw Exception(e.message ?? 'An error occurred during sign in.');
     }
+  }
+
+  Future<void> signOut() async {
+    return _firebaseAuth.signOut();
   }
 }
