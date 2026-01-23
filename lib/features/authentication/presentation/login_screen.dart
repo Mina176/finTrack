@@ -1,5 +1,7 @@
+import 'package:fintrack/features/authentication/logic/auth_repository.dart';
 import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
-import 'package:fintrack/features/authentication/presentation/text_field_with_label.dart';
+import 'package:fintrack/features/authentication/presentation/auth_field.dart';
+import 'package:fintrack/features/authentication/utils/validators.dart';
 import 'package:fintrack/router.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
@@ -7,8 +9,61 @@ import 'package:fintrack/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final formKey = GlobalKey<FormState>();
+  late final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final authRepo = AuthRepository();
+
+  // State variables for field-level errors
+  String? emailError;
+  String? passwordError;
+  bool isLoading = false;
+
+  void _login() async {
+    // 1. Clear old errors
+    setState(() {
+      emailError = null;
+      passwordError = null;
+    });
+
+    if (formKey.currentState!.validate()) {
+      setState(() => isLoading = true);
+
+      try {
+        await authRepo.login(
+          email: emailController.text.trim(),
+          password: passwordController.text,
+        );
+        if (mounted) {
+          context.go(AppRouter.kHomeScreen);
+        }
+      } catch (e) {
+        String error = e.toString();
+
+        // 3. Handle Firebase Errors on specific fields
+        if (error.contains('user-not-found') ||
+            error.contains('invalid-email')) {
+          setState(() => emailError = "No account found with this email");
+        } else if (error.contains('wrong-password')) {
+          setState(() => passwordError = "Incorrect password");
+        } else if (emailController.text.isEmpty) {
+          setState(() => emailError = "Email is required");
+        }
+        // Force the UI to update with red text
+        formKey.currentState!.validate();
+      } finally {
+        if (mounted) setState(() => isLoading = false);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +92,39 @@ class LoginScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       gapH16,
-                      TextFieldWithLabel(
-                        label: 'Email Address',
-                        hintText: 'name@example.com',
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          spacing: 12,
+                          children: [
+                            AuthField(
+                              label: 'Email Address',
+                              hintText: 'name@example.com',
+                              controller: emailController,
+                              errorText: emailError, 
+                              validator: Validators.validateEmail,
+                              onChanged: (val) {
+                                if (emailError != null) {
+                                  setState(() => emailError = null);
+                                }
+                              },
+                            ),
+                            AuthField(
+                              label: 'Password',
+                              hintText: '••••••••',
+                              controller: passwordController,
+                              isPassword: true,
+                              errorText: passwordError,
+                              onChanged: (val) {
+                                if (passwordError != null) {
+                                  setState(() => passwordError = null);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                      TextFieldWithLabel(
-                        label: 'Password',
-                        hintText: '••••••••',
-                        isPassword: true,
-                      ),
+
                       Text(
                         'Forgot Password?',
                         style: TextStyles.hintText.copyWith(
@@ -53,8 +132,17 @@ class LoginScreen extends StatelessWidget {
                         ),
                         textAlign: TextAlign.end,
                       ),
-                      gapH8,
-                      ElevatedButton(onPressed: () {}, child: Text('Login')),
+                      gapH4,
+                      ElevatedButton(
+                        onPressed: isLoading ? null : _login,
+                        child: isLoading
+                            ? SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: CircularProgressIndicator(),
+                              )
+                            : Text('Login'),
+                      ),
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(

@@ -7,7 +7,7 @@ class AuthRepository {
 
   final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
 
-  Future<void> signUpUser({
+  Future<void> signUp({
     required String name,
     required String email,
     required String password,
@@ -30,7 +30,7 @@ class AuthRepository {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        throw Exception(  
+        throw Exception(
           'This email is already registered. Please login instead.',
         );
       } else if (e.code == 'weak-password') {
@@ -39,6 +39,31 @@ class AuthRepository {
         throw Exception('This email address is invalid.');
       } else {
         throw Exception(e.message ?? 'An error occurred.');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      UserCredential credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw Exception('user-not-found');
+      } else if (e.code == 'wrong-password') {
+        throw Exception('wrong-password');
+      } else if (e.code == 'invalid-email') {
+          throw Exception('invalid-email');
+      } else {
+        throw Exception(e.message ?? 'Login failed');
       }
     } catch (e) {
       throw Exception(e.toString());
