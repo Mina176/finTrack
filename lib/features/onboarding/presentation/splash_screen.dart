@@ -1,4 +1,4 @@
-import 'package:fintrack/constants/app_colors.dart';
+import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_card.dart';
 import 'package:fintrack/router.dart';
@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF0D1B12),
       body: Container(
-        decoration: BoxDecoration(gradient: gradientColors),
+        decoration: BoxDecoration(gradient: AppColors.gradientColors),
         child: Center(
           child: TweenAnimationBuilder<double>(
             tween: Tween(begin: 0.1, end: 1.0),

@@ -1,4 +1,4 @@
-import 'package:fintrack/constants/app_colors.dart';
+import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +27,12 @@ class OnboardingCard extends StatelessWidget {
           width: width,
           height: height,
           decoration: BoxDecoration(
-            color: kCardColor,
+            color: AppColors.kCardColor,
             borderRadius: BorderRadius.circular(borderRadius),
           ),
           child: Icon(
             icon,
-            color: kPrimaryColor,
+            color: AppColors.kPrimaryColor,
             size: 60,
           ),
         ),

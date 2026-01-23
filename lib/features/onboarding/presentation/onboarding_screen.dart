@@ -1,4 +1,4 @@
-import 'package:fintrack/constants/app_colors.dart';
+import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_page_slider.dart';
 import 'package:fintrack/router.dart';
@@ -24,11 +24,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: gradientColors,
-          ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: AppColors.gradientColors,
+        ),
+        child: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(Sizes.p12),
             child: Column(

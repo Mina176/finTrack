@@ -1,20 +1,20 @@
-import 'package:fintrack/constants/app_colors.dart';
+import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TextStyles {
   static const title = TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.w700,
-    fontSize: 28,
+    fontSize: 32,
     letterSpacing: 0.0,
     height: 1.2,
   );
 
   static const subtitle = TextStyle(
-    color: kSubtitleColor,
+    color: AppColors.kSubtitleColor,
     fontWeight: FontWeight.w400,
-    fontSize: 14,
-    height: 1.2,
+    fontSize: 16,
+    height: 1.4,
   );
 
   static const buttonLabel = TextStyle(
@@ -22,10 +22,15 @@ class TextStyles {
     fontSize: 16,
   );
 
-  // Regular text (for add/edit task pages)
-  static const content = TextStyle(
+  static const hintText = TextStyle(
+    color: Color(0xFF5A8069),
     fontWeight: FontWeight.w500,
-    fontSize: 22,
-    height: 1.2,
+    fontSize: 14,
+  );
+
+  static const labelText = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
   );
 }
