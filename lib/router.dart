@@ -17,7 +17,7 @@ class AppRouter {
   static const String kResetPasswordScreen = '/resetPassword';
   // GoRouter configuration
   static final router = GoRouter(
-    initialLocation: '/',
+    initialLocation: kLoginScreen,
     routes: [
       GoRoute(
         path: kSplashScreen,
