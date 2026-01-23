@@ -37,12 +37,12 @@ class _TextFieldWithLabelState extends State<TextFieldWithLabel> {
                       });
                     },
                     icon: Icon(
-                      isObscured ? Icons.visibility : Icons.visibility_off,
+                      isObscured ? Icons.visibility_off : Icons.visibility,
                     ),
                   )
                 : null,
           ),
-          obscureText: widget.isPassword,
+          obscureText: isObscured,
         ),
       ],
     );
