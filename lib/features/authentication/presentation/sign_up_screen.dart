@@ -63,7 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ElevatedButton(
             onPressed: () {
               Navigator.of(ctx).pop(); // Close dialog
-              context.go(AppRouter.kLoginScreen); // Go to Login
+              context.go(AppRoutes.signIn.path); // Go to Login
             },
             child: const Text("Log In"),
           ),

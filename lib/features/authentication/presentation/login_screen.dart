@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Text('Don\'t have an account?'),
                           GestureDetector(
-                            onTap: () => context.push(AppRouter.kSignUpScreen),
+                            onTap: () => context.push(AppRoutes.signUp.path),
                             child: Text(
                               ' Sign Up',
                               style: TextStyle(
