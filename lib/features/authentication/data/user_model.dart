@@ -1,4 +1,6 @@
 // user_model.dart
+import 'package:firebase_auth/firebase_auth.dart';
+
 class UserModel {
   final String uid;
   final String name;
@@ -9,11 +11,12 @@ class UserModel {
     required this.name,
     required this.email,
   });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'email': email,
-    };
+  static UserModel? fromUser(User? user) {
+    if (user == null) return null;
+    return UserModel(
+      uid: user.uid,
+      name: user.displayName!,
+      email: user.email!,
+    );
   }
 }
