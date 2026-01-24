@@ -2,6 +2,7 @@ import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_page_slider.dart';
+import 'package:fintrack/widgets/button_label_with_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -58,15 +59,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   }),
                   child: currentPage < 2
                       ? Text('Next')
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Get Started  '),
-                            Icon(
-                              Icons.arrow_forward_rounded,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ],
+                      : ButtonLabelWithIcon(
+                          label: 'Get Started',
+                          icon: Icons.arrow_forward_rounded,
                         ),
                 ),
               ],

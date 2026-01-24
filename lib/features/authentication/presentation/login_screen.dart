@@ -39,47 +39,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
   }
 
-  // State variables for field-level errors
   String? emailError;
   String? passwordError;
-
-  // void _login() async {
-  //   // 1. Clear old errors
-  //   setState(() {
-  //     emailError = null;
-  //     passwordError = null;
-  //   });
-
-  //   if (formKey.currentState!.validate()) {
-  //     setState(() => isLoading = true);
-
-  //     try {
-  //       await authRepo.login(
-  //         email: emailController.text.trim(),
-  //         password: passwordController.text,
-  //       );
-  //       if (mounted) {
-  //         context.go(AppRouter.kHomeScreen);
-  //       }
-  //     } catch (e) {
-  //       String error = e.toString();
-
-  //       // 3. Handle Firebase Errors on specific fields
-  //       if (error.contains('user-not-found') ||
-  //           error.contains('invalid-email')) {
-  //         setState(() => emailError = "No account found with this email");
-  //       } else if (error.contains('wrong-password')) {
-  //         setState(() => passwordError = "Incorrect password");
-  //       } else if (emailController.text.isEmpty) {
-  //         setState(() => emailError = "Email is required");
-  //       }
-  //       // Force the UI to update with red text
-  //       formKey.currentState!.validate();
-  //     } finally {
-  //       if (mounted) setState(() => isLoading = false);
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +60,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         } else if (error.contains('wrong-password')) {
           setState(() => passwordError = "Incorrect password");
         } else {
-          throw Exception(error);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(error.replaceAll('Exception: ', ''))),
+          );
         }
       }
     });
@@ -109,12 +72,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         decoration: BoxDecoration(gradient: AppColors.gradientColors),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.kHorizontalPadding,
+            ),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
                   child: Column(
-                    spacing: 12,
+                    spacing: 10,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       gapH32,

@@ -70,7 +70,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         decoration: BoxDecoration(gradient: AppColors.gradientColors),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.kHorizontalPadding,
+            ),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
