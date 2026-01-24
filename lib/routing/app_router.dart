@@ -26,10 +26,21 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isLoginRoute = state.matchedLocation == AppRoutes.signIn.path;
       final isSignUpRoute = state.matchedLocation == AppRoutes.signUp.path;
       final isOnboarding = state.matchedLocation == AppRoutes.onboarding.path;
+      final isForgotPassword =
+          state.matchedLocation == AppRoutes.forgotPassword.path;
+      final isResetPassword =
+          state.matchedLocation == AppRoutes.resetPassword.path;
 
       // If NOT logged in, but trying to access Home -> Redirect to Login
+
       if (!isLoggedIn) {
-        if (isLoginRoute || isSignUpRoute || isOnboarding) return null;
+        if (isLoginRoute ||
+            isSignUpRoute ||
+            isOnboarding ||
+            isForgotPassword ||
+            isResetPassword) {
+          return null;
+        }
         return AppRoutes.signIn.path;
       }
 

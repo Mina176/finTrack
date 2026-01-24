@@ -1,11 +1,9 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
-import 'package:fintrack/features/authentication/logic/auth_repository.dart';
 import 'package:fintrack/features/authentication/logic/loading_state.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/features/authentication/utils/validators.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_card.dart';
-import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/widgets/button_label_with_icon.dart';
 import 'package:flutter/material.dart';

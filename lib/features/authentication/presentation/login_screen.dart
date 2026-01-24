@@ -49,7 +49,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     ref.listen(authControllerProvider, (previous, next) {
       if (next.state == LoadingStateEnum.success) {
-        context.go(AppRoutes.home.path);  
+        context.go(AppRoutes.home.path);
       } else if (next.hasError) {
         final error = next.error.toString();
         if (error.contains('auth credential is incorrect')) {

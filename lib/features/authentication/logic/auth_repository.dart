@@ -139,8 +139,21 @@ class AuthRepository {
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      // PRINT THE REAL ERROR CODE HERE
+      print("FIREBASE ERROR CODE: ${e.code}");
+      print("FIREBASE ERROR MESSAGE: ${e.message}");
+
+      if (e.code == 'user-not-found') {
+        throw Exception('No user found for that email.');
+      }
+      if (e.code == 'invalid-email') {
+        throw Exception('Invalid email address.');
+      }
+      // If it's not the above, it throws this:
+      throw Exception('Failed to send reset email. Code: ${e.code}');
     } catch (e) {
-      print(e.toString());
+      throw Exception('An unknown error occurred: $e');
     }
   }
 }
