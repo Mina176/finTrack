@@ -72,4 +72,16 @@ class AuthController extends _$AuthController {
       state = AuthLoadingState(LoadingStateEnum.error, e);
     }
   }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    state = const AuthLoadingState(LoadingStateEnum.loading, null);
+    try {
+      final authRepository = ref.read(authRepositoryProvider);
+      await authRepository.sendPasswordResetEmail(email);
+      print('success');
+      state = const AuthLoadingState(LoadingStateEnum.success, null);
+    } on Exception catch (e) {
+      state = AuthLoadingState(LoadingStateEnum.error, e);
+    }
+  }
 }

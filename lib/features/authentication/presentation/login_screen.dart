@@ -49,7 +49,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     ref.listen(authControllerProvider, (previous, next) {
       if (next.state == LoadingStateEnum.success) {
-        context.go(AppRoutes.home.path);
+        context.go(AppRoutes.home.path);  
       } else if (next.hasError) {
         final error = next.error.toString();
         if (error.contains('auth credential is incorrect')) {
@@ -127,14 +127,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ],
                         ),
                       ),
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyles.hintText.copyWith(
-                          color: AppColors.kPrimaryColor,
+                      GestureDetector(
+                        onTap: () =>
+                            context.push(AppRoutes.forgotPassword.path),
+                        child: Text(
+                          'Forgot Password?',
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            color: AppColors.kPrimaryColor,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                        textAlign: TextAlign.end,
                       ),
-                      gapH4,
+                      gapH8,
                       ElevatedButton(
                         onPressed: isLoading ? null : _signIn,
                         child: isLoading
