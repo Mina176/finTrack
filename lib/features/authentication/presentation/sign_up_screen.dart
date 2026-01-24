@@ -149,7 +149,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       ),
                       ButtonWithIcon(
                         label: 'Continue with Google',
-                        onPressed: () {},
+                        onPressed: () => ref
+                            .read(authControllerProvider.notifier)
+                            .signInWithGoogle(),
                         icon: SizedBox(
                           height: Sizes.p32,
                           child: Image.asset(
