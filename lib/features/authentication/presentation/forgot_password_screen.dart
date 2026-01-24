@@ -21,16 +21,18 @@ class ForgotPasswordScreen extends ConsumerStatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
   String? emailError;
   final _emailContoller = TextEditingController();
   void sendResetEmail() async {
     setState(() {
       emailError = null;
     });
-    await ref
-        .read(authControllerProvider.notifier)
-        .sendPasswordResetEmail(_emailContoller.text);
-    print('sent email');
+    if (_formKey.currentState?.validate() ?? false) {
+      await ref
+          .read(authControllerProvider.notifier)
+          .sendPasswordResetEmail(_emailContoller.text.trim());
+    }
   }
 
   @override
@@ -40,12 +42,26 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
 
     ref.listen(authControllerProvider, (previous, next) {
       if (next.state == LoadingStateEnum.success) {
-        final currentUser = ref.read(authRepositoryProvider).currentUser;
-        if (currentUser != null) {
-          context.go(AppRoutes.home.path);
-        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'If an account exists, a reset link has been sent.',
+            ),
+          ),
+        );
         context.pop();
-      } else {}
+      } else if (next.hasError) {
+        final error = next.error.toString();
+        final validationError = Validators.getResetError(error);
+        if (validationError != null) {
+          setState(() => emailError = validationError);
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(next.error.toString().replaceAll('Exception: ', '')),
+          ),
+        );
+      }
     });
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
@@ -72,12 +88,15 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                 subTitle:
                     'Don\'t worry, it happens. Please enter the email address associated with your account.',
               ),
-              AuthField(
-                label: 'Email Address',
-                hintText: 'you@example.com',
-                errorText: emailError,
-                controller: _emailContoller,
-                validator: Validators.validateEmail,
+              Form(
+                key: _formKey,
+                child: AuthField(
+                  label: 'Email Address',
+                  hintText: 'you@example.com',
+                  errorText: emailError,
+                  controller: _emailContoller,
+                  validator: Validators.validateEmail,
+                ),
               ),
               Spacer(),
               ElevatedButton(

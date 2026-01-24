@@ -39,4 +39,12 @@ class Validators {
     }
     return null;
   }
+
+  static String? getResetError(String error) {
+    final err = error.toLowerCase();
+    if (err.contains('user-not-found') || err.contains('no user found')) {
+      return 'This email is not registered.';
+    }
+    return null;
+  }
 }
