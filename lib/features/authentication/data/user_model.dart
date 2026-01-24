@@ -15,8 +15,8 @@ class UserModel {
     if (user == null) return null;
     return UserModel(
       uid: user.uid,
-      name: user.displayName!,
-      email: user.email!,
+      name: user.displayName ?? '',
+      email: user.email ?? '',
     );
   }
 }

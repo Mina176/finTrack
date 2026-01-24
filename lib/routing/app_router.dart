@@ -8,74 +8,69 @@ import 'package:fintrack/features/onboarding/presentation/onboarding_screen.dart
 import 'package:fintrack/features/onboarding/presentation/splash_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/utils/refresh_listenable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'app_router.g.dart';
+final routerProvider = Provider<GoRouter>((ref) {
+  // accessing the auth repository
+  final authRepo = ref.watch(authRepositoryProvider);
 
-@riverpod
-GoRouter router(Ref ref) {
-  final appRouter = AppRouter();
-  return appRouter.router(ref);
-}
+  return GoRouter(
+    initialLocation: AppRoutes.splash.path,
+    refreshListenable: GoRouterRefreshStream(authRepo.authStateChanges()),
+    redirect: (context, state) {
+      final isLoggedIn = FirebaseAuth.instance.currentUser != null;
 
-class AppRouter {
-  // GoRouter configuration
-  GoRouter router(Ref ref) {
-    // accessing the auth repository
-    final auth = ref.watch(authRepositoryProvider);
-    return GoRouter(
-      initialLocation: AppRoutes.splash.path,
-      routes: [
-        GoRoute(
-          path: AppRoutes.splash.path,
-          builder: (context, state) => SplashScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.onboarding.path,
-          builder: (context, state) => OnboardingScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.signUp.path,
-          builder: (context, state) => SignUpScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.signIn.path,
-          builder: (context, state) => LoginScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.forgotPassword.path,
-          builder: (context, state) => ForgotPasswordScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.resetPassword.path,
-          builder: (context, state) => ResetPasswordScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.home.path,
-          builder: (context, state) => HomeScreen(),
-        ),
-      ],
-      refreshListenable: GoRouterRefreshStream(auth.authStateChanges()),
-      redirect: (context, state) async {
-        final bool isLoggedIn = auth.currentUser != null;
-        final bool isLoggingIn =
-            state.matchedLocation == AppRoutes.signIn.path ||
-            state.matchedLocation == AppRoutes.signUp.path;
+      final isLoginRoute = state.matchedLocation == AppRoutes.signIn.path;
+      final isSignUpRoute = state.matchedLocation == AppRoutes.signUp.path;
+      final isOnboarding = state.matchedLocation == AppRoutes.onboarding.path;
 
-        // should redirect the user to the sign in page if they are not logged in
-        if (!isLoggedIn && !isLoggingIn) {
-          return AppRoutes.signIn.path;
-        }
+      // If NOT logged in, but trying to access Home -> Redirect to Login
+      if (!isLoggedIn) {
+        if (isLoginRoute || isSignUpRoute || isOnboarding) return null;
+        return AppRoutes.signIn.path;
+      }
 
-        // should redirect the user after they have logged in
-        if (isLoggedIn && isLoggingIn) {
+      // If LOGGED IN, but sitting on Login/SignUp -> Redirect to Home
+      if (isLoggedIn) {
+        if (isLoginRoute || isSignUpRoute || isOnboarding) {
           return AppRoutes.home.path;
         }
-        // do not redirect
-        return null;
-      },
-    );
-  }
-}
+      }
+
+      return null;
+    },
+    routes: [
+      GoRoute(
+        path: AppRoutes.splash.path,
+        builder: (context, state) => SplashScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.onboarding.path,
+        builder: (context, state) => OnboardingScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.signUp.path,
+        builder: (context, state) => SignUpScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.signIn.path,
+        builder: (context, state) => LoginScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.forgotPassword.path,
+        builder: (context, state) => ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.resetPassword.path,
+        builder: (context, state) => ResetPasswordScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.home.path,
+        builder: (context, state) => HomeScreen(),
+      ),
+    ],
+  );
+});

@@ -1,6 +1,7 @@
 import 'package:fintrack/features/authentication/data/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_repository.g.dart';
@@ -21,8 +22,6 @@ Stream<UserModel?> authStateChange(Ref ref) {
   final auth = ref.watch(authRepositoryProvider);
   return auth.authStateChanges();
 }
-
-
 
 class AuthRepository {
   AuthRepository(this._firebaseAuth);
@@ -80,7 +79,51 @@ class AuthRepository {
     }
   }
 
+  final _googleSignIn = GoogleSignIn.instance;
+  bool _isGoogleSignInInitialized = false;
+
+  Future<void> _initializeGoogleSignIn() async {
+    try {
+      await _googleSignIn.initialize(
+        serverClientId:
+            '18177035239-fa2crfmvdiu4p5cv2ki9ud24ruvesvv3.apps.googleusercontent.com',
+      );
+      _isGoogleSignInInitialized = true;
+    } catch (e) {
+      print('Failed to initialize Google Sign-In: $e');
+    }
+  }
+
+  Future<void> _ensureGoogleSignInInitialized() async {
+    if (!_isGoogleSignInInitialized) {
+      await _initializeGoogleSignIn();
+    }
+  }
+
+  Future<User?> signInWithGoogle() async {
+    await _ensureGoogleSignInInitialized();
+    try {
+      final GoogleSignInAccount googleUser = await _googleSignIn.authenticate(
+        scopeHint: ['email'],
+      );
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.idToken,
+        idToken: googleAuth.idToken,
+      );
+      final UserCredential userCredential = await _firebaseAuth
+          .signInWithCredential(credential);
+      print('Mina');
+      return userCredential.user;
+    } on GoogleSignInException catch (e) {
+      throw Exception(e.code);
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   Future<void> signOut() async {
-    return _firebaseAuth.signOut();
+    await _googleSignIn.signOut();
+    await _firebaseAuth.signOut();
   }
 }

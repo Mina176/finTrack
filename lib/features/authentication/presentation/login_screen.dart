@@ -91,9 +91,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         context.go(AppRoutes.home.path);
       } else if (next.hasError) {
         final error = next.error.toString();
-        if (error.contains('No user found')) {
+        if (error.contains('auth credential is incorrect')) {
           setState(() => emailError = "No account found with this email");
         } else if (error.contains('credential is incorrect')) {
+          print(error);
           setState(() => passwordError = "Password is incorrect");
         } else if (error.contains('Wrong password')) {
           setState(() => passwordError = "Incorrect password");
@@ -163,7 +164,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ],
                         ),
                       ),
-
                       Text(
                         'Forgot Password?',
                         style: TextStyles.hintText.copyWith(
@@ -210,25 +210,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       ButtonWithIcon(
                         label: 'Continue with Google',
-                        onPressed: () {},
+                        onPressed: () => ref
+                            .read(authControllerProvider.notifier)
+                            .signInWithGoogle(),
                         icon: SizedBox(
                           height: Sizes.p32,
                           child: Image.asset(
                             'assets/google-logo-png-29546.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        textColor: AppColors.kTitleColor,
-                      ),
-                      ButtonWithIcon(
-                        label: 'Continue with Apple',
-                        onPressed: () {},
-                        icon: SizedBox(
-                          height: Sizes.p24,
-                          width: Sizes.p24,
-                          child: Image.asset(
-                            'assets/Apple-Logo-500x281.png',
-                            color: Colors.white,
                             fit: BoxFit.cover,
                           ),
                         ),

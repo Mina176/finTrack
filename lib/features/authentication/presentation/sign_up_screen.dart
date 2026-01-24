@@ -43,31 +43,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     }
   }
 
-  void _showAccountExistsDialog() {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text("Account Exists"),
-        content: const Text(
-          "This email is already registered. Log in instead?",
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text("Cancel"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(ctx).pop(); // Close dialog
-              context.go(AppRoutes.signIn.path); // Go to Login
-            },
-            child: const Text("Log In"),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   void dispose() {
     _nameController.dispose();
@@ -92,12 +67,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           );
         } else if (error.contains('exists')) {
           setState(
-            () => emailErrorText = "The account already exists for that email.",
+            () => emailErrorText = "This Email already exists, Login instead",
           );
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(next.error.toString())),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   SnackBar(content: Text(next.error.toString())),
+          // );
         }
       }
     });
@@ -188,19 +163,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           height: Sizes.p32,
                           child: Image.asset(
                             'assets/google-logo-png-29546.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        textColor: AppColors.kTitleColor,
-                      ),
-                      ButtonWithIcon(
-                        label: 'Continue with Apple',
-                        onPressed: () {},
-                        icon: SizedBox(
-                          height: Sizes.p28,
-                          child: Image.asset(
-                            'assets/Apple-Logo-500x281.png',
-                            color: Colors.white,
                             fit: BoxFit.cover,
                           ),
                         ),

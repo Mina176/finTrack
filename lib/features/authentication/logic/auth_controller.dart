@@ -45,10 +45,24 @@ class AuthController extends _$AuthController {
     }
   }
 
+  Future<void> signInWithGoogle() async {
+    state = const AuthLoadingState(LoadingStateEnum.loading, null);
+    try {
+      final authRepository = ref.read(authRepositoryProvider);
+
+      await authRepository.signInWithGoogle();
+
+      state = const AuthLoadingState(LoadingStateEnum.success, null);
+    } on Exception catch (e) {
+      print(e);
+      state = AuthLoadingState(LoadingStateEnum.error, e);
+    }
+  }
+
   Future<void> signOut() async {
     state = const AuthLoadingState(LoadingStateEnum.loading, null);
 
-    final authRepository = ref.watch(authRepositoryProvider);
+    final authRepository = ref.read(authRepositoryProvider);
     try {
       await authRepository.signOut();
       state = const AuthLoadingState(LoadingStateEnum.success, null);
