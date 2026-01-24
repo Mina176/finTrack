@@ -96,12 +96,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         } else if (error.contains('credential is incorrect')) {
           print(error);
           setState(() => passwordError = "Password is incorrect");
-        } else if (error.contains('Wrong password')) {
+        } else if (error.contains('wrong-password')) {
           setState(() => passwordError = "Incorrect password");
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(next.error.toString())),
-          );
+          throw Exception(error);
         }
       }
     });

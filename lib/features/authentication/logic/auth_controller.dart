@@ -49,12 +49,14 @@ class AuthController extends _$AuthController {
     state = const AuthLoadingState(LoadingStateEnum.loading, null);
     try {
       final authRepository = ref.read(authRepositoryProvider);
+      final user = await authRepository.signInWithGoogle();
 
-      await authRepository.signInWithGoogle();
-
-      state = const AuthLoadingState(LoadingStateEnum.success, null);
+      if (user != null) {
+        state = const AuthLoadingState(LoadingStateEnum.success, null);
+      } else {
+        state = const AuthLoadingState(LoadingStateEnum.initial, null);
+      }
     } on Exception catch (e) {
-      print(e);
       state = AuthLoadingState(LoadingStateEnum.error, e);
     }
   }
