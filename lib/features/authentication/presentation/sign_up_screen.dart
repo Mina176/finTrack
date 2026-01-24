@@ -60,20 +60,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       if (next.state == LoadingStateEnum.success) {
         context.go(AppRoutes.home.path);
       } else if (next.hasError) {
-        final error = next.error.toString();
-        if (error.contains('weak')) {
-          setState(
-            () => passwordErrorText = "The password provided is too weak.",
-          );
-        } else if (error.contains('exists')) {
-          setState(
-            () => emailErrorText = "This Email already exists, Login instead",
-          );
-        } else {
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   SnackBar(content: Text(next.error.toString())),
-          // );
-        }
+        setState(() {
+          emailErrorText = next.error.toString().replaceAll('Exception: ', '');
+        });
       }
     });
     return Scaffold(

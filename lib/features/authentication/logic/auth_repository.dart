@@ -47,10 +47,11 @@ class AuthRepository {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        throw Exception('The account already exists for that email.');
+      }
       if (e.code == 'weak-password') {
         throw Exception('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        throw Exception('The account already exists for that email.');
       }
       throw Exception(e.message ?? 'An error occurred during sign up.');
     }
@@ -103,9 +104,12 @@ class AuthRepository {
   Future<User?> signInWithGoogle() async {
     await _ensureGoogleSignInInitialized();
     try {
-      final GoogleSignInAccount googleUser = await _googleSignIn.authenticate(
+      final GoogleSignInAccount? googleUser = await _googleSignIn.authenticate(
         scopeHint: ['email'],
       );
+      if (googleUser == null) {
+        return null;
+      }
       final GoogleSignInAuthentication googleAuth = googleUser.authentication;
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.idToken,
@@ -113,11 +117,16 @@ class AuthRepository {
       );
       final UserCredential userCredential = await _firebaseAuth
           .signInWithCredential(credential);
-      print('Mina');
       return userCredential.user;
     } on GoogleSignInException catch (e) {
-      throw Exception(e.code);
-    } catch (error) {
+      if (e.toString().toLowerCase().contains('cancel')) {
+        return null;
+      }
+      throw Exception(e.toString());
+    } catch (e) {
+      if (e.toString().toLowerCase().contains('cancel')) {
+        return null;
+      }
       rethrow;
     }
   }
