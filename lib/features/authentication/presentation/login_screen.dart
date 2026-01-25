@@ -233,7 +233,7 @@ class CustomDivider extends StatelessWidget {
       children: [
         Expanded(
           child: Divider(
-            color: TextStyles.hintText.color,
+            color: AppColors.kDividerColor,
           ),
         ),
         gapW4,
@@ -241,7 +241,7 @@ class CustomDivider extends StatelessWidget {
         gapW4,
         Expanded(
           child: Divider(
-            color: TextStyles.hintText.color,
+            color: AppColors.kDividerColor,
           ),
         ),
       ],

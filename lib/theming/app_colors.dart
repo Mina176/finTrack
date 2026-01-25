@@ -25,6 +25,8 @@ class AppColors {
 
   static const kBarGraphNotHighest = Color(0xFF18532D);
 
+  static const kDividerColor = Color(0xFF2C3E32);
+
   static const gradientColors = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

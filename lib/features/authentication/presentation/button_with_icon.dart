@@ -9,19 +9,21 @@ class ButtonWithIcon extends StatelessWidget {
     required this.onPressed,
     required this.label,
     required this.textColor,
+    this.borderColor = AppColors.kButtonBorderColor,
     required this.icon,
   });
   final VoidCallback onPressed;
   final String label;
   final Color textColor;
+  final Color borderColor;
   final Widget icon;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        side: BorderSide(color: AppColors.kButtonBorderColor),
+        backgroundColor:  Colors.transparent,
+        side: BorderSide(color: borderColor),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

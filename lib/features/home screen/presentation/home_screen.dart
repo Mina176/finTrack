@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Divider(
                             height: 16,
                             thickness: 0.3,
-                            color: Colors.grey.shade500,
+                            color: AppColors.kDividerColor,
                           ),
                           gapH32,
                           WeeklySpendingSummary(),
