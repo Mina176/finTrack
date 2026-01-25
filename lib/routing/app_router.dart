@@ -1,7 +1,7 @@
 import 'package:fintrack/features/authentication/logic/auth_repository.dart';
 import 'package:fintrack/features/authentication/presentation/forgot_password_screen.dart';
 import 'package:fintrack/features/authentication/presentation/login_screen.dart';
-import 'package:fintrack/features/authentication/presentation/reset_Password_screen.dart';
+import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/features/authentication/presentation/sign_up_screen.dart';
 import 'package:fintrack/features/home%20screen/presentation/root_home.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_screen.dart';
@@ -28,8 +28,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isOnboarding = state.matchedLocation == AppRoutes.onboarding.path;
       final isForgotPassword =
           state.matchedLocation == AppRoutes.forgotPassword.path;
-      final isResetPassword =
-          state.matchedLocation == AppRoutes.resetPassword.path;
+      final isResetPassword = state.matchedLocation == AppRoutes.profile.path;
       final isSplash = state.matchedLocation == AppRoutes.splash.path;
 
       // If NOT logged in, but trying to access Home -> Redirect to Login
@@ -81,8 +80,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => ForgotPasswordScreen(),
       ),
       GoRoute(
-        path: AppRoutes.resetPassword.path,
-        builder: (context, state) => ResetPasswordScreen(),
+        path: AppRoutes.profile.path,
+        builder: (context, state) => ProfileScreen(),
       ),
       GoRoute(
         path: AppRoutes.home.path,

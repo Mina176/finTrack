@@ -7,7 +7,7 @@ enum AppRoutes {
   signUp,
   home,
   forgotPassword,
-  resetPassword,
+  profile,
 }
 
 extension AppRoutesExtension on AppRoutes {
@@ -22,18 +22,18 @@ extension AppRoutesExtension on AppRoutes {
     switch (this) {
       case AppRoutes.splash:
         return '/';
+      case AppRoutes.onboarding:
+        return '/onboarding';
       case AppRoutes.signIn:
         return '/signin';
       case AppRoutes.signUp:
         return '/signup';
-      case AppRoutes.home:
-        return '/home';
-      case AppRoutes.onboarding:
-        return '/onboarding';
       case AppRoutes.forgotPassword:
         return '/forgotPassword';
-      case AppRoutes.resetPassword:
-        return '/resetPassword';
+      case AppRoutes.home:
+        return '/home';
+      case AppRoutes.profile:
+        return '/profile';
     }
   }
 }

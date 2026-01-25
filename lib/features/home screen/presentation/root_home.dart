@@ -1,3 +1,4 @@
+import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/features/home%20screen/presentation/home_screen.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
@@ -19,7 +20,7 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
       const HomeScreen(), // Index 0
       Center(child: Text("Wallet & Transactions".hardcoded)), // Index 1
       Center(child: Text("Statistics & Reports".hardcoded)), // Index 2
-      Center(child: Text("User Profile & Settings".hardcoded)), // Index 3
+      const ProfileScreen(), // Index 3
     ];
     return Scaffold(
       body: SafeArea(child: pages[_currentIndex]),
