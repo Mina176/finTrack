@@ -3,6 +3,7 @@ import 'package:fintrack/features/authentication/presentation/forgot_password_sc
 import 'package:fintrack/features/authentication/presentation/login_screen.dart';
 import 'package:fintrack/features/authentication/presentation/reset_Password_screen.dart';
 import 'package:fintrack/features/authentication/presentation/sign_up_screen.dart';
+import 'package:fintrack/features/home%20screen/presentation/root_home.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:fintrack/features/onboarding/presentation/splash_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
@@ -87,7 +88,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AppRoutes.home.path,
-        builder: (context, state) => HomeScreen(),
+        builder: (context, state) => RootHomeScreen(),
       ),
     ],
   );
