@@ -33,4 +33,16 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     fontSize: 14,
   );
+
+  static const header = TextStyle(
+    color: AppColors.kTitleColor,
+    fontWeight: FontWeight.w800,
+    fontSize: 18,
+  );
+
+  static const headerLink = TextStyle(
+    color: AppColors.kPrimaryColor,
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+  );
 }

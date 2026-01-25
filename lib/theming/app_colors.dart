@@ -6,15 +6,23 @@ class AppColors {
   static const kPrimaryColor = Color(0xFF13EC5B);
   static const kBackgroundColor = Color(0xFF102216);
   static const kCardColor = Color(0xFF193322);
+
   static const kTitleColor = Color(0xFFFFFFFF);
   static const kSubtitleColor = Color(0xFFB3B3B3);
   static const kButtonLabelColor = Color(0xFF102216);
   static const kTransparentButtonlabelColor = Color(0xFF92C9A4);
   static const kButtonBorderColor = Color(0xFF326744);
   static const surfaceDark = Color(0xFF1E1E1E);
-  static const kVsLastMonthBackground = Color(0xFF1E1E1E);
+
+  static const kSavingBackground = Color(0xFF1E1E1E);
+
+  static const knotSavingBackground = Color(0xFF2F3025);
+  static const knotSavingForeground = Color(0xFFF47070);
+
   static const kCustomContainerBackground = Color(0xFF1A2E22);
+
   static const kTextFieldFillColor = Color(0xFF1A2E22);
+
   static const kBarGraphNotHighest = Color(0xFF18532D);
 
   static const gradientColors = LinearGradient(
