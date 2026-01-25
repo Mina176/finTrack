@@ -12,7 +12,10 @@ class AppColors {
   static const kTransparentButtonlabelColor = Color(0xFF92C9A4);
   static const kButtonBorderColor = Color(0xFF326744);
   static const surfaceDark = Color(0xFF1E1E1E);
-  // Text Colors
+  static const kVsLastMonthBackground = Color(0xFF1E1E1E);
+  static const kCustomContainerBackground = Color(0xFF1A2E22);
+  static const kTextFieldFillColor = Color(0xFF1A2E22);
+  static const kBarGraphNotHighest = Color(0xFF18532D);
 
   static const gradientColors = LinearGradient(
     begin: Alignment.topLeft,

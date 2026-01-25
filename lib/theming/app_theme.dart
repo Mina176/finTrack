@@ -44,7 +44,7 @@ class AppTheme {
         focusedBorder: buildBorder(),
         suffixIconColor: Color(0xFF92C9A4),
         filled: true,
-        fillColor: Color(0xFF193322),
+        fillColor: AppColors.kTextFieldFillColor,
         hintStyle: TextStyles.hintText,
       ),
     );

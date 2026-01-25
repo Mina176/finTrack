@@ -6,7 +6,7 @@ class TextStyles {
     color: Colors.white,
     fontWeight: FontWeight.w700,
     fontSize: 32,
-    letterSpacing: 0.0,
+    letterSpacing: 0.1,
     height: 1.2,
   );
 

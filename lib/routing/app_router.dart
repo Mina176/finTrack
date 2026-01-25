@@ -3,7 +3,6 @@ import 'package:fintrack/features/authentication/presentation/forgot_password_sc
 import 'package:fintrack/features/authentication/presentation/login_screen.dart';
 import 'package:fintrack/features/authentication/presentation/reset_Password_screen.dart';
 import 'package:fintrack/features/authentication/presentation/sign_up_screen.dart';
-import 'package:fintrack/features/home%20screen/presentation/home_screen.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:fintrack/features/onboarding/presentation/splash_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
@@ -12,6 +11,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../features/home screen/presentation/home_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   // accessing the auth repository
@@ -30,6 +31,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           state.matchedLocation == AppRoutes.forgotPassword.path;
       final isResetPassword =
           state.matchedLocation == AppRoutes.resetPassword.path;
+      final isSplash = state.matchedLocation == AppRoutes.splash.path;
 
       // If NOT logged in, but trying to access Home -> Redirect to Login
 
@@ -46,7 +48,12 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       // If LOGGED IN, but sitting on Login/SignUp -> Redirect to Home
       if (isLoggedIn) {
-        if (isLoginRoute || isSignUpRoute || isOnboarding) {
+        if (isLoginRoute ||
+            isSignUpRoute ||
+            isOnboarding ||
+            isForgotPassword ||
+            isResetPassword ||
+            isSplash) {
           return AppRoutes.home.path;
         }
       }
