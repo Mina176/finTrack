@@ -20,22 +20,12 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
       const HomeScreen(), // Index 0
       Center(child: Text("Wallet & Transactions".hardcoded)), // Index 1
       Center(child: Text("Statistics & Reports".hardcoded)), // Index 2
-      const ProfileScreen(), // Index 3
+      Center(child: Text("Statistics & Reports".hardcoded)), // Index 3
+      const ProfileScreen(), // Index 4
     ];
     return Scaffold(
       body: SafeArea(child: pages[_currentIndex]),
       backgroundColor: AppColors.kBackgroundColor,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        shape: CircleBorder(),
-        foregroundColor: AppColors.kButtonLabelColor,
-        backgroundColor: AppColors.kPrimaryColor,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
           indicatorColor: AppColors.kPrimaryColor.withOpacity(0.2),
@@ -62,20 +52,26 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
                 Icons.account_balance_wallet,
                 color: _currentIndex == 1 ? AppColors.kPrimaryColor : null,
               ),
-
               label: 'Wallet',
             ),
             NavigationDestination(
               icon: Icon(
-                FontAwesomeIcons.chartSimple,
+                Icons.add_circle_rounded,
                 color: _currentIndex == 2 ? AppColors.kPrimaryColor : null,
+              ),
+              label: 'Add',
+            ),
+            NavigationDestination(
+              icon: Icon(
+                FontAwesomeIcons.chartSimple,
+                color: _currentIndex == 3 ? AppColors.kPrimaryColor : null,
               ),
               label: 'Stats',
             ),
             NavigationDestination(
               icon: Icon(
                 Icons.person,
-                color: _currentIndex == 3 ? AppColors.kPrimaryColor : null,
+                color: _currentIndex == 4 ? AppColors.kPrimaryColor : null,
               ),
               label: 'Profile',
             ),
