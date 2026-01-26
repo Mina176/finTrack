@@ -19,7 +19,6 @@ class ProfileScreen extends ConsumerWidget {
       backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.transparent,
         title: Text(
           'Profile',
           style: TextStyles.title.copyWith(fontSize: 18),

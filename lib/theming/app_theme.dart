@@ -26,7 +26,9 @@ class AppTheme {
           color: AppColors.kSubtitleColor,
         ),
       ),
-
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.transparent,
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           minimumSize: Size(double.infinity, Sizes.p48),
