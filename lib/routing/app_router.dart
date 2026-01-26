@@ -1,3 +1,4 @@
+import 'package:fintrack/features/add%20transaction/add_transaction.dart';
 import 'package:fintrack/features/authentication/logic/auth_repository.dart';
 import 'package:fintrack/features/authentication/presentation/forgot_password_screen.dart';
 import 'package:fintrack/features/authentication/presentation/login_screen.dart';
@@ -86,6 +87,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.home.path,
         builder: (context, state) => RootHomeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.addTransaction.path,
+        builder: (context, state) => AddTransationScreen(),
       ),
     ],
   );

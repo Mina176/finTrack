@@ -8,6 +8,7 @@ enum AppRoutes {
   home,
   forgotPassword,
   profile,
+  addTransaction,
 }
 
 extension AppRoutesExtension on AppRoutes {
@@ -34,6 +35,8 @@ extension AppRoutesExtension on AppRoutes {
         return '/home';
       case AppRoutes.profile:
         return '/profile';
+      case AppRoutes.addTransaction:
+        return '/addTransaction';
     }
   }
 }
