@@ -8,13 +8,15 @@ class ButtonWithIcon extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.label,
-    required this.textColor,
+    required this.foregroundColor,
+    this.backgroundColor = Colors.transparent,
     this.borderColor = AppColors.kButtonBorderColor,
     required this.icon,
   });
   final VoidCallback onPressed;
   final String label;
-  final Color textColor;
+  final Color backgroundColor;
+  final Color foregroundColor;
   final Color borderColor;
   final Widget icon;
   @override
@@ -22,7 +24,7 @@ class ButtonWithIcon extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor:  Colors.transparent,
+        backgroundColor: backgroundColor,
         side: BorderSide(color: borderColor),
       ),
       child: Row(
@@ -34,7 +36,7 @@ class ButtonWithIcon extends StatelessWidget {
             label,
             textAlign: TextAlign.center,
             style: TextStyles.buttonLabel.copyWith(
-              color: textColor,
+              color: foregroundColor,
             ),
           ),
         ],

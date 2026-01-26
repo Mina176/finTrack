@@ -45,4 +45,11 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 12,
   );
+
+  static const amount = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w900,
+    fontSize: 48,
+    height: 1.5,
+  );
 }

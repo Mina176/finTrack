@@ -4,24 +4,18 @@ import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/widgets.dart';
 
-class ExpenseOrIncome extends StatefulWidget {
-  const ExpenseOrIncome({super.key});
-
-  @override
-  State<ExpenseOrIncome> createState() => _ExpenseOrIncomeState();
-}
-
-class _ExpenseOrIncomeState extends State<ExpenseOrIncome> {
-  final List<String> expenseOrIncome = ['Expense', 'Income'];
-  int selectedIndex = 0;
-  void selectItem(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
+class ExpenseOrIncome extends StatelessWidget {
+  const ExpenseOrIncome({
+    super.key,
+    required this.onChanged,
+    required this.selectedIndex,
+  });
+  final int selectedIndex;
+  final ValueChanged<int> onChanged;
 
   @override
   Widget build(BuildContext context) {
+    final List<String> expenseOrIncome = ['Expense', 'Income'];
     bool isSelected(int index) => selectedIndex == index;
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -42,10 +36,7 @@ class _ExpenseOrIncomeState extends State<ExpenseOrIncome> {
                 top: 6,
                 bottom: 6,
                 width: pillWidth,
-                onEnd: () {
-                  setState(() {});
-                },
-                child: Container(
+                child: DecoratedBox(
                   decoration: BoxDecoration(
                     color: selectedIndex == 0
                         ? Color(0xFF3F1212)
@@ -61,9 +52,9 @@ class _ExpenseOrIncomeState extends State<ExpenseOrIncome> {
                   2,
                   (index) => Expanded(
                     child: GestureDetector(
-                      onTap: () => selectItem(index),
+                      onTap: () => onChanged(index),
                       behavior: HitTestBehavior.opaque,
-                      child: Container(
+                      child: Align(
                         alignment: Alignment.center,
                         child: AnimatedDefaultTextStyle(
                           duration: Duration(milliseconds: 100),

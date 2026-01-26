@@ -36,6 +36,7 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
       body: SafeArea(child: pages[_currentIndex]),
       backgroundColor: AppColors.kBackgroundColor,
       bottomNavigationBar: FABBottomAppBar(
+        backgroundColor: AppColors.kBackgroundColor,
         onTabSelected: (index) {
           setState(() => _currentIndex = index);
         },

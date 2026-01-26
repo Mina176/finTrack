@@ -7,6 +7,7 @@ import 'package:fintrack/features/authentication/presentation/button_with_icon.d
 import 'package:fintrack/features/home%20screen/presentation/custom_app_bar.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
+import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,28 +35,30 @@ class ProfileScreen extends ConsumerWidget {
             gapH12,
             SettingsSection(
               header: 'SECURITY',
-              widget: Column(
-                children: [
-                  SettingsTile(
-                    icon: Icons.lock,
-                    label: 'Change Password',
-                    trailing: Icon(Icons.arrow_forward_ios, size: 14),
-                    onTap: () {},
-                  ),
-                  Divider(
-                    height: 0.1,
-                    color: AppColors.kDividerColor,
+              widget: CustomTile(
+                icon: Icons.lock,
+                titleAndSubtitle: [
+                  Text(
+                    'Change Password',
+                    style: TextStyles.labelText,
                   ),
                 ],
+                trailing: Icon(Icons.arrow_forward_ios, size: 14),
+                onTap: () {},
               ),
             ),
             SettingsSection(
               header: "APP PREFERENCES",
               widget: Column(
                 children: [
-                  SettingsTile(
+                  CustomTile(
                     icon: Icons.attach_money,
-                    label: 'Currency',
+                    titleAndSubtitle: [
+                      Text(
+                        'Currency',
+                        style: TextStyles.labelText,
+                      ),
+                    ],
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -69,9 +72,18 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                     onTap: () {},
                   ),
-                  SettingsTile(
+                  Divider(
+                    height: 0.1,
+                    color: AppColors.kDividerColor,
+                  ),
+                  CustomTile(
                     icon: Icons.color_lens,
-                    label: 'Theme',
+                    titleAndSubtitle: [
+                      Text(
+                        'Theme',
+                        style: TextStyles.labelText,
+                      ),
+                    ],
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -93,7 +105,7 @@ class ProfileScreen extends ConsumerWidget {
               onPressed: ref.read(authControllerProvider.notifier).signOut,
               label: 'Log Out',
               borderColor: AppColors.knotSavingForeground,
-              textColor: AppColors.knotSavingForeground,
+              foregroundColor: AppColors.knotSavingForeground,
               icon: Icon(Icons.logout, color: AppColors.knotSavingForeground),
             ),
             gapW16,
@@ -135,54 +147,6 @@ class SettingsSection extends StatelessWidget {
           child: widget,
         ),
       ],
-    );
-  }
-}
-
-class SettingsTile extends StatelessWidget {
-  const SettingsTile({
-    super.key,
-    required this.icon,
-    required this.label,
-    required this.trailing,
-    required this.onTap,
-  });
-  final String label;
-  final Widget trailing;
-  final IconData icon;
-  final VoidCallback onTap;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: AppColors.kBarGraphNotHighest,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Icon(
-                  icon,
-                  color: AppColors.kPrimaryColor,
-                  size: 22,
-                ),
-              ),
-            ),
-            gapW8,
-            Text(
-              label,
-              style: TextStyles.header.copyWith(fontSize: 14),
-            ),
-            Spacer(),
-            trailing,
-          ],
-        ),
-      ),
     );
   }
 }

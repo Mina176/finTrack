@@ -159,7 +159,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        textColor: AppColors.kTitleColor,
+                        foregroundColor: AppColors.kTitleColor,
                       ),
                       gapH4,
                       Row(

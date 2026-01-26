@@ -188,7 +188,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        textColor: AppColors.kTitleColor,
+                        foregroundColor: AppColors.kTitleColor,
                       ),
                       gapH4,
                       Row(
