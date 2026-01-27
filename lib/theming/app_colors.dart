@@ -27,6 +27,9 @@ class AppColors {
 
   static const kDividerColor = Color(0xFF2C3E32);
 
+  static const kKeyboardColor = Color(0xFF1A1A1C);
+  static const kKeyboardKeyColor = Color(0xFF434344);
+
   static const gradientColors = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

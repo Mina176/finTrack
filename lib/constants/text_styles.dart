@@ -52,4 +52,10 @@ class TextStyles {
     fontSize: 48,
     height: 1.5,
   );
+
+  static const keyboardKey = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w900,
+    fontSize: 20,
+  );
 }
