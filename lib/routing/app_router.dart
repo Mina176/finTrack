@@ -90,7 +90,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AppRoutes.addTransaction.path,
-        builder: (context, state) => AddTransationScreen(),
+        builder: (context, state) => AddTransactionScreen(),
       ),
     ],
   );

@@ -11,7 +11,7 @@ const List<String> keyboardInputs = [
   '7',
   '8',
   '9',
-  '',
+  '.',
   '0',
   '⌫',
 ];

@@ -1,3 +1,4 @@
+import 'package:fintrack/features/add%20transaction/add_transaction.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class TextStyles {
   );
 
   static const buttonLabel = TextStyle(
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
     fontSize: 16,
   );
 
@@ -57,5 +58,16 @@ class TextStyles {
     color: Colors.white,
     fontWeight: FontWeight.w900,
     fontSize: 20,
+  );
+
+  static const addTransactionSettingstitle = TextStyle(
+    color: Color.fromARGB(255, 116, 116, 116),
+    fontWeight: FontWeight.w900,
+    fontSize: 14,
+  );
+  static const addTransactionSettingsSubtitle = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w500,
+    fontSize: 14,
   );
 }
