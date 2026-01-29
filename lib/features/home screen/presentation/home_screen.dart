@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     CustomAppBar(),
                     CustomCard(
-                      widget: Column(
+                      child: Column(
                         spacing: 4,
                         children: [
                           Text(
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     CustomCard(
-                      widget: Column(
+                      child: Column(
                         children: [
                           Row(
                             children: [
@@ -79,11 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 savingPercentage: -5,
                               ),
                             ],
-                          ),
-                          Divider(
-                            height: 16,
-                            thickness: 0.3,
-                            color: AppColors.kDividerColor,
                           ),
                           gapH32,
                           WeeklySpendingSummary(),

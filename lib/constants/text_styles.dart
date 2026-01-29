@@ -1,4 +1,3 @@
-import 'package:fintrack/features/add%20transaction/add_transaction.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 

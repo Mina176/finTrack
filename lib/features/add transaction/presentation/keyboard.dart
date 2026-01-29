@@ -3,27 +3,12 @@ import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class Keyboard extends StatefulWidget {
+class Keyboard extends StatelessWidget {
   const Keyboard({
     super.key,
     required this.onBtnTap,
   });
   final void Function(String) onBtnTap;
-  @override
-  State<Keyboard> createState() => _KeyboardState();
-}
-
-class _KeyboardState extends State<Keyboard> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +21,7 @@ class _KeyboardState extends State<Keyboard> {
         children: List.generate(
           keyboardInputs.length,
           (index) => InkWell(
-            onTap: () => widget.onBtnTap(keyboardInputs[index]),
+            onTap: () => onBtnTap(keyboardInputs[index]),
             child: Padding(
               padding: const EdgeInsets.all(4),
               child: DecoratedBox(

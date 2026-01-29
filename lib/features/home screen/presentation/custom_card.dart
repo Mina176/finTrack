@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class CustomCard extends StatelessWidget {
   const CustomCard({
     super.key,
-    required this.widget,
+    required this.child,
   });
-  final Widget widget;
+  final Widget child;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +17,7 @@ class CustomCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 22.0),
-        child: widget,
+        child: child,
       ),
     );
   }
