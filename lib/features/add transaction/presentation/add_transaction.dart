@@ -1,4 +1,5 @@
 import 'package:fintrack/constants/app_sizes.dart';
+import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/add%20transaction/presentation/add_details_section.dart';
 import 'package:fintrack/features/add%20transaction/presentation/add_note_section.dart';
 import 'package:fintrack/features/add%20transaction/presentation/amount_of_money.dart';
@@ -90,17 +91,15 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
 
     return GestureDetector(
       onTap: dismissKeypads,
-      behavior: HitTestBehavior.opaque,
+      behavior: HitTestBehavior.translucent,
       child: Scaffold(
         backgroundColor: Colors.black,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           forceMaterialTransparency: true,
-          backgroundColor: Colors.black,
-          leading: const Icon(Icons.arrow_back, color: Colors.white),
-          title: const Text(
+          title: Text(
             "Add Transaction",
-            style: TextStyle(color: Colors.white),
+            style: TextStyles.title.copyWith(fontSize: 20),
           ),
           centerTitle: true,
         ),
