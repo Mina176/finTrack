@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:fintrack/constants/duration_constants.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/widgets.dart';
@@ -30,7 +31,7 @@ class ExpenseOrIncome extends StatelessWidget {
           child: Stack(
             children: [
               AnimatedPositioned(
-                duration: Duration(milliseconds: 100),
+                duration: addTransactionAnimationDuration,
                 curve: Curves.easeInCubic,
                 left: selectedIndex == 0 ? 4 : width - 4 - pillWidth,
                 top: 6,

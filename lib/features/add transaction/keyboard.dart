@@ -1,4 +1,3 @@
-import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/keyboard_input.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -8,24 +7,16 @@ class Keyboard extends StatefulWidget {
   const Keyboard({
     super.key,
     required this.onBtnTap,
-    required this.controller,
-    required this.focusNode,
   });
-  final Function(int) onBtnTap;
-  final TextEditingController controller;
-  final FocusNode focusNode;
+  final void Function(String) onBtnTap;
   @override
   State<Keyboard> createState() => _KeyboardState();
 }
 
 class _KeyboardState extends State<Keyboard> {
-  late TextEditingController _controller;
-  late FocusNode _focusNode;
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller;
-    _focusNode = widget.focusNode;
   }
 
   @override
@@ -41,11 +32,11 @@ class _KeyboardState extends State<Keyboard> {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 3,
-        childAspectRatio: 1.8,
+        childAspectRatio: 2.15,
         children: List.generate(
           keyboardInputs.length,
-          (index) => GestureDetector(
-            onTap: widget.onBtnTap(index),
+          (index) => InkWell(
+            onTap: () => widget.onBtnTap(keyboardInputs[index]),
             child: Padding(
               padding: const EdgeInsets.all(4),
               child: DecoratedBox(
@@ -65,17 +56,5 @@ class _KeyboardState extends State<Keyboard> {
         ),
       ),
     );
-  }
-
-  void _input(String text) {
-    final value = widget.controller.text + text;
-    widget.controller.text = value;
-  }
-
-  void _backspace() {
-    final value = widget.controller.text;
-    if (value.isNotEmpty) {
-      widget.controller.text = value.substring(0, value.length - 1);
-    }
   }
 }
