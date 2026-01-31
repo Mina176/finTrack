@@ -1,5 +1,3 @@
-// app_route_enum.dart
-
 enum AppRoutes {
   splash,
   onboarding,
@@ -9,16 +7,10 @@ enum AppRoutes {
   forgotPassword,
   profile,
   addTransaction,
+  selectCategory,
 }
 
 extension AppRoutesExtension on AppRoutes {
-  // static const String kSplashScreen = '/';
-  // static const String kOnBoardingScreen = '/onboarding';
-  // static const String kHomeScreen = '/home';
-  // static const String kLoginScreen = '/login';
-  // static const String kSignUpScreen = '/signUp';
-  // static const String kForgotPasswordScreen = '/forgotPassword';
-  // static const String kResetPasswordScreen = '/resetPassword';
   String get path {
     switch (this) {
       case AppRoutes.splash:
@@ -37,6 +29,8 @@ extension AppRoutesExtension on AppRoutes {
         return '/profile';
       case AppRoutes.addTransaction:
         return '/addTransaction';
+      case AppRoutes.selectCategory:
+        return '/selectCategory';
     }
   }
 }

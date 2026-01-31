@@ -6,7 +6,9 @@ import 'package:fintrack/features/add%20transaction/presentation/amount_of_money
 import 'package:fintrack/features/add%20transaction/presentation/animated_positiomed_button.dart';
 import 'package:fintrack/features/add%20transaction/presentation/animated_positioned_keyboard.dart';
 import 'package:fintrack/features/add%20transaction/presentation/expense_or_income.dart';
+import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AddTransactionScreen extends StatefulWidget {
   const AddTransactionScreen({super.key});
@@ -135,7 +137,12 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                       showCustomKeypad: _showCustomKeypad,
                     ),
                     SizedBox(height: screenSize.height * 0.005),
-                    AddDetailsSection(),
+                    AddDetailsSection(
+                      categoryOnTap: () {
+                        context.push(AppRoutes.selectCategory.path);
+                        dismissKeypads();
+                      },
+                    ),
                     AddNoteSection(
                       screenSize: screenSize,
                       noteFocusNode: _noteFocusNode,
