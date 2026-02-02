@@ -3,6 +3,7 @@ import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_app_bar.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/features/home%20screen/presentation/last_month_container.dart';
+import 'package:fintrack/features/home%20screen/presentation/transaction_card.dart';
 import 'package:fintrack/features/home%20screen/presentation/weekly_spending_summary.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
@@ -112,76 +113,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class TransactionCard extends StatelessWidget {
-  const TransactionCard({super.key, this.isIncome = false});
-  final bool isIncome;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        children: [
-          CategoryIcon(
-            iconData: Icons.fastfood,
-            iconColor: Colors.orange,
-            backgoroundColor: Colors.orange.shade100,
-          ),
-          gapW12,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Food & Dining'.hardcoded,
-                style: TextStyles.title.copyWith(fontSize: 16),
-              ),
-              Text(
-                'Today'.hardcoded,
-                style: TextStyles.subtitle.copyWith(
-                  fontSize: 12,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          Spacer(),
-          Text(
-            '-\$45.00'.hardcoded,
-            style: TextStyles.title.copyWith(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: isIncome ? Colors.green : null,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
-class CategoryIcon extends StatelessWidget {
-  const CategoryIcon({
-    super.key,
-    required this.iconData,
-    required this.iconColor,
-    required this.backgoroundColor,
-  });
-  final IconData iconData;
-  final Color iconColor;
-  final Color backgoroundColor;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: backgoroundColor,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Icon(
-          iconData,
-          color: iconColor,
-        ),
-      ),
-    );
-  }
-}

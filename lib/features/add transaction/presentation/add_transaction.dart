@@ -1,7 +1,6 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/add%20transaction/logic/supabase.dart';
-import 'package:fintrack/features/add%20transaction/presentation/add_details_section.dart';
 import 'package:fintrack/features/add%20transaction/presentation/add_note_section.dart';
 import 'package:fintrack/features/add%20transaction/presentation/amount_of_money.dart';
 import 'package:fintrack/features/add%20transaction/presentation/animated_positiomed_button.dart';
@@ -10,7 +9,7 @@ import 'package:fintrack/features/add%20transaction/presentation/expense_or_inco
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:intl/intl.dart';
 
 class AddTransactionScreen extends StatefulWidget {
   const AddTransactionScreen({super.key});
