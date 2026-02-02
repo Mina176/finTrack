@@ -12,10 +12,12 @@ class AddNoteSection extends StatelessWidget {
     super.key,
     required this.screenSize,
     required this.noteFocusNode,
+    required this.controller,
   });
 
   final Size screenSize;
   final FocusNode noteFocusNode;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class AddNoteSection extends StatelessWidget {
             SizedBox(
               width: screenSize.width * 0.6,
               child: TextField(
+                controller: controller,
                 focusNode: noteFocusNode,
                 style: TextStyles.addTransactionSettingsSubtitle,
                 decoration: const InputDecoration(

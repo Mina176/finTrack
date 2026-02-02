@@ -1,20 +1,22 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/theming/app_colors.dart';
+import 'package:fintrack/widgets/category_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CustomTile extends StatelessWidget {
   const CustomTile({
     super.key,
     required this.onTap,
-    required this.icon,
+    this.icon,
     this.trailing,
     required this.titleAndSubtitle,
+    this.categoryIcon,
   });
   final VoidCallback onTap;
   final Widget? trailing;
-  final IconData icon;
+  final IconData? icon;
   final List<Widget> titleAndSubtitle;
+  final CategoryIcon? categoryIcon;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -24,7 +26,7 @@ class CustomTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         child: Row(
           children: [
-            CustomIcon(icon: icon),
+            categoryIcon ?? CustomIcon(icon: icon ?? Icons.category),
             gapW12,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
