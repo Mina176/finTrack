@@ -11,10 +11,10 @@ class AnimatedPositiomedButton extends StatelessWidget {
     required this.buttonAreaHeight,
     required this.safeAreaBottom,
     required this.expenseOrIncome,
-    required this.dismissKeypads,
+    required this.onTap,
   });
 
-  final VoidCallback dismissKeypads;
+  final VoidCallback onTap;
   final bool showCustomKeypad;
   final double keypadHeight;
   final double buttonAreaHeight;
@@ -45,7 +45,7 @@ class AnimatedPositiomedButton extends StatelessWidget {
             horizontal: Sizes.kHorizontalPadding,
           ),
           child: AnimatedButtonWithIcon(
-            onTap: dismissKeypads,
+            onTap: onTap,
             expenseOrIncome: expenseOrIncome,
             color: expenseOrIncome == 0 ? Colors.red : AppColors.kPrimaryColor,
             label: "Add Transaction",

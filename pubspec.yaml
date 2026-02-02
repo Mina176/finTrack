@@ -19,6 +19,7 @@ dependencies:
   google_fonts: ^7.1.0
   google_sign_in: ^7.2.0
   riverpod_annotation: ^2.6.1
+  supabase_flutter: ^2.12.0
 
 dev_dependencies:
   flutter_test:
