@@ -1,6 +1,7 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
+import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/add%20transaction/logic/supabase.dart';
 import 'package:fintrack/features/add%20transaction/presentation/add_note_section.dart';
 import 'package:fintrack/features/add%20transaction/presentation/amount_of_money.dart';
@@ -13,30 +14,28 @@ import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/widgets/category_icon.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-class AddTransactionScreen extends StatefulWidget {
+class AddTransactionScreen extends ConsumerStatefulWidget {
   const AddTransactionScreen({super.key});
 
   @override
-  State<AddTransactionScreen> createState() => _AddTransactionScreenState();
+  ConsumerState<AddTransactionScreen> createState() =>
+      _AddTransactionScreenState();
 }
 
-class _AddTransactionScreenState extends State<AddTransactionScreen> {
+class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   int expenseOrIncome = 0; // 0 for Expense
-  String _amount = "0.00";
+  String amount = "0.00";
   bool _showCustomKeypad = false;
   DateTime selectedDate = DateTime.now();
   final FocusNode _noteFocusNode = FocusNode();
   final TextEditingController noteController = TextEditingController();
 
   CategoryIcon selectedCategory = CategoryIcon(
-    iconData: Icons.fastfood_outlined,
-    iconColor: const Color(0xFFFFA726),
-    backgoroundColor: const Color(0xFFFFF3E0),
     categoryType: CategoryTypes.food,
-    hasLabel: false,
   );
   @override
   void initState() {
@@ -53,18 +52,18 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
   void _onKeyTap(String value) {
     setState(() {
       if (value == '⌫') {
-        if (_amount.length > 1) {
-          _amount = _amount.substring(0, _amount.length - 1);
+        if (amount.length > 1) {
+          amount = amount.substring(0, amount.length - 1);
         } else {
-          _amount = "0";
+          amount = "0";
         }
       } else if (value == '.') {
-        if (!_amount.contains('.')) _amount += value;
+        if (!amount.contains('.')) amount += value;
       } else {
-        if (_amount == "0.00" || _amount == "0") {
-          _amount = value;
+        if (amount == "0.00" || amount == "0") {
+          amount = value;
         } else {
-          _amount += value;
+          amount += value;
         }
       }
     });
@@ -106,7 +105,15 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
     final double listBottomPadding = _showCustomKeypad
         ? (keypadHeight + buttonAreaHeight)
         : (buttonAreaHeight + safeAreaBottom + screenSize.height * 0.151);
-
+    final transactionState = ref.watch(transactionControllerProvider);
+    final isLoading = transactionState.isLoading;
+    ref.listen(transactionControllerProvider, (previous, next) {
+      if (!next.isLoading && !next.hasError) {
+        context.pop();
+      } else if (next.hasError) {
+        return;
+      }
+    });
     return GestureDetector(
       onTap: dismissKeypads,
       behavior: HitTestBehavior.translucent,
@@ -149,7 +156,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     AmountOfMoney(
                       activateCustomKeypad: activateCustomKeypad,
                       screenSize: screenSize,
-                      amount: _amount,
+                      amount: amount,
                       showCustomKeypad: _showCustomKeypad,
                     ),
                     SizedBox(height: screenSize.height * 0.005),
@@ -228,18 +235,21 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
             ),
             AnimatedPositiomedButton(
               onTap: () {
-                if (_amount == "0.00") return;
+                if (isLoading) return;
+                if (amount == "0.00") return;
                 dismissKeypads();
                 final transaction = TransactionModel(
                   isExpense: expenseOrIncome == 0,
-                  amount: double.tryParse(_amount) ?? 0.0,
+                  amount: double.tryParse(amount) ?? 0.0,
                   category: selectedCategory.categoryType,
                   date: selectedDate,
                   note: noteController.text,
                 );
-                SupabaseService().createTransaction(transaction);
-                context.pop();
+                ref
+                    .read(transactionControllerProvider.notifier)
+                    .createTransaction(transaction);
               },
+              isLoading: isLoading,
               showCustomKeypad: _showCustomKeypad,
               keypadHeight: keypadHeight,
               buttonAreaHeight: buttonAreaHeight,
