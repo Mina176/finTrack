@@ -1,65 +1,36 @@
+// No manual colors needed here anymore!
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
+import 'package:fintrack/features/add%20transaction/presentation/category_icon_with_label.dart';
 import 'package:fintrack/widgets/category_icon.dart';
-import 'package:flutter/material.dart';
 
-List<CategoryIcon> spendingCategoriesList = [
-  CategoryIcon(
-    iconData: Icons.fastfood_outlined,
-    iconColor: const Color(0xFFFFA726),
-    backgoroundColor: const Color(0xFFFFF3E0),
-    categoryType: CategoryTypes.food,
-    hasLabel: true,
-  ),
-  CategoryIcon(
-    iconData: Icons.directions_car_outlined,
-    iconColor: const Color(0xFF29B6F6),
-    backgoroundColor: const Color(0xFFE1F5FE),
-    categoryType: CategoryTypes.transport,
-    hasLabel: true,
-  ),
-  CategoryIcon(
-    iconData: Icons.home_outlined,
-    iconColor: const Color(0xFF66BB6A),
-    backgoroundColor: const Color(0xFFE8F5E9),
-    categoryType: CategoryTypes.housing,
-    hasLabel: true,
-  ),
-  CategoryIcon(
-    iconData: Icons.health_and_safety_outlined,
-    iconColor: const Color(0xFFAB47BC),
-    backgoroundColor: const Color(0xFFF3E5F5),
-    categoryType: CategoryTypes.health,
-    hasLabel: true,
-  ),
-  CategoryIcon(
-    iconData: Icons.home_outlined,
-    iconColor: const Color(0xFF66BB6A),
-    backgoroundColor: const Color(0xFFE8F5E9),
-    categoryType: CategoryTypes.housing,
-    hasLabel: true,
-  ),
-  CategoryIcon(
-    iconData: Icons.health_and_safety_outlined,
-    iconColor: const Color(0xFFAB47BC),
-    backgoroundColor: const Color(0xFFF3E5F5),
-    categoryType: CategoryTypes.health,
-    hasLabel: true,
-  ),
+final List<CategoryIcon> spendingCategoriesList = [
+  CategoryIcon(categoryType: CategoryTypes.food),
+  CategoryIcon(categoryType: CategoryTypes.transport),
+  CategoryIcon(categoryType: CategoryTypes.housing),
+  CategoryIcon(categoryType: CategoryTypes.health),
+  CategoryIcon(categoryType: CategoryTypes.entertainment),
+  CategoryIcon(categoryType: CategoryTypes.shopping),
+  CategoryIcon(categoryType: CategoryTypes.bills),
+  CategoryIcon(categoryType: CategoryTypes.freelance),
+  CategoryIcon(categoryType: CategoryTypes.investment),
 ];
 
-List<CategoryIcon> incomeCategoriesList = [
-  CategoryIcon(
-    iconData: Icons.monetization_on_outlined,
-    iconColor: const Color(0xFF43A047),
-    backgoroundColor: const Color(0xFFE8F5E9),
-    categoryType: CategoryTypes.salary,
-    hasLabel: true,
-  ),
-  CategoryIcon(
-    iconData: Icons.card_giftcard_outlined,
-    iconColor: const Color(0xFF8E24AA),
-    backgoroundColor: const Color(0xFFF3E5F5),
-    categoryType: CategoryTypes.gifts,
-    hasLabel: true,
-  ),
+final List<CategoryIcon> incomeCategoriesList = [
+  CategoryIcon(categoryType: CategoryTypes.salary),
+  CategoryIcon(categoryType: CategoryTypes.gifts),
+];
+
+final List<CategoryIconWithLabel> spendingCategoriesWithLabelsList = [
+  CategoryIconWithLabel(categoryType: CategoryTypes.food),
+  CategoryIconWithLabel(categoryType: CategoryTypes.transport),
+  CategoryIconWithLabel(categoryType: CategoryTypes.housing),
+  CategoryIconWithLabel(categoryType: CategoryTypes.entertainment),
+  CategoryIconWithLabel(categoryType: CategoryTypes.shopping),
+  CategoryIconWithLabel(categoryType: CategoryTypes.bills),
+];
+final List<CategoryIconWithLabel> incomeCategoriesWithLabelsList = [
+  CategoryIconWithLabel(categoryType: CategoryTypes.freelance),
+  CategoryIconWithLabel(categoryType: CategoryTypes.investment),
+  CategoryIconWithLabel(categoryType: CategoryTypes.salary),
+  CategoryIconWithLabel(categoryType: CategoryTypes.gifts),
 ];
