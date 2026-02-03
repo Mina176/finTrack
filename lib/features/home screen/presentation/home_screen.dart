@@ -1,5 +1,6 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
+import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_app_bar.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/features/home%20screen/presentation/last_month_container.dart';
@@ -8,17 +9,14 @@ import 'package:fintrack/features/home%20screen/presentation/weekly_spending_sum
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final transactions = ref.watch(transactionsProvider);
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       body: SafeArea(
@@ -100,10 +98,28 @@ class _HomeScreenState extends State<HomeScreen> {
               SliverToBoxAdapter(
                 child: gapH20,
               ),
-              SliverList.separated(
-                itemCount: 5,
-                separatorBuilder: (context, index) => gapH16,
-                itemBuilder: (context, index) => TransactionCard(),
+              transactions.when(
+                data: (transactions) {
+                  if (transactions.isEmpty) {
+                    return const SliverToBoxAdapter(
+                      child: Center(child: Text("No transactions yet")),
+                    );
+                  }
+                  return SliverList.separated(
+                    itemCount: 5,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemBuilder: (context, index) {
+                      return TransactionCard(transaction: transactions[index]);
+                    },
+                  );
+                },
+                loading: () => const SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                error: (error, stack) => SliverToBoxAdapter(
+                  child: Center(child: Text('Error: $error')),
+                ),
               ),
             ],
           ),
@@ -112,5 +128,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
