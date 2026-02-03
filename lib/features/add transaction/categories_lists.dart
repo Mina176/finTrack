@@ -15,6 +15,8 @@ final List<CategoryIcon> spendingCategoriesList = [
 ];
 
 final List<CategoryIcon> incomeCategoriesList = [
+  CategoryIcon(categoryType: CategoryTypes.freelance),
+  CategoryIcon(categoryType: CategoryTypes.investment),
   CategoryIcon(categoryType: CategoryTypes.salary),
   CategoryIcon(categoryType: CategoryTypes.gifts),
 ];

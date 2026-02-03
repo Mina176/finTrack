@@ -16,7 +16,8 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final transactions = ref.watch(transactionsProvider);
+    final transactionsAsync = ref.watch(getTransactionsProvider);
+    final weeklyDashboardAsync = ref.watch(getWeeklyDashboardDataProvider);
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       body: SafeArea(
@@ -51,37 +52,65 @@ class HomeScreen extends ConsumerWidget {
                       ),
                     ),
                     CustomCard(
-                      child: Column(
-                        children: [
-                          Row(
+                      child: weeklyDashboardAsync.when(
+                        data: (weeklyDashboardData) {
+                          final totalWeeklySpendings = weeklyDashboardData
+                              .weeklySpendings
+                              .fold(
+                                0.0,
+                                (sum, item) => sum + item,
+                              );
+                          return Column(
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
                                 children: [
-                                  Text(
-                                    '\$845.20',
-                                    style: TextStyles.title.copyWith(
-                                      fontSize: 20,
-                                    ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '\$${totalWeeklySpendings.toStringAsFixed(2)}',
+                                        style: TextStyles.title.copyWith(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Total spent this week',
+                                        style: TextStyles.subtitle.copyWith(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'Total spent this week',
-                                    style: TextStyles.subtitle.copyWith(
-                                      fontSize: 12,
-                                    ),
+                                  Spacer(),
+                                  LastMonthContainer(
+                                    isShrinked: true,
+                                    savingPercentage:
+                                        weeklyDashboardData.percentChange,
                                   ),
                                 ],
                               ),
-                              Spacer(),
-                              LastMonthContainer(
-                                isShrinked: true,
-                                savingPercentage: -5,
+                              Divider(
+                                color: AppColors.kDividerColor,
+                                height: 12,
+                              ),
+                              gapH32,
+                              WeeklySpendingSummary(
+                                weeklySummary:
+                                    weeklyDashboardData.weeklySpendings,
                               ),
                             ],
+                          );
+                        },
+                        loading: () => SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          child: Center(
+                            child: CircularProgressIndicator(),
                           ),
-                          gapH32,
-                          WeeklySpendingSummary(),
-                        ],
+                        ),
+                        error: (error, stackTrace) => Center(
+                          child: Text('Error: $error'),
+                        ),
                       ),
                     ),
                     Row(
@@ -97,7 +126,7 @@ class HomeScreen extends ConsumerWidget {
               SliverToBoxAdapter(
                 child: gapH20,
               ),
-              transactions.when(
+              transactionsAsync.when(
                 data: (transactions) {
                   if (transactions.isEmpty) {
                     return const SliverToBoxAdapter(

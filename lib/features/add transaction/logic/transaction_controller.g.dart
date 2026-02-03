@@ -6,26 +6,102 @@ part of 'transaction_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$transactionsHash() => r'cd1ebc0e71c49a47885eb13f4977ee21ccf4396b';
+String _$getTransactionsHash() => r'3ed8a9729b34746daf4fa95d4385ed9b68733a11';
 
-/// See also [transactions].
+/// See also [getTransactions].
 @ProviderFor(getTransactions)
-final transactionsProvider =
+final getTransactionsProvider =
     AutoDisposeFutureProvider<List<TransactionModel>>.internal(
       getTransactions,
-      name: r'transactionsProvider',
+      name: r'getTransactionsProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$transactionsHash,
+          : _$getTransactionsHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef TransactionsRef = AutoDisposeFutureProviderRef<List<TransactionModel>>;
+typedef GetTransactionsRef =
+    AutoDisposeFutureProviderRef<List<TransactionModel>>;
+String _$getWeeklySpendingsHash() =>
+    r'b8d22121329afbb31be3e8811a882d7c553697d0';
+
+/// See also [getWeeklySpendings].
+@ProviderFor(getWeeklySpendings)
+final getWeeklySpendingsProvider =
+    AutoDisposeFutureProvider<List<double>>.internal(
+      getWeeklySpendings,
+      name: r'getWeeklySpendingsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getWeeklySpendingsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetWeeklySpendingsRef = AutoDisposeFutureProviderRef<List<double>>;
+String _$getPreviousWeekTotalHash() =>
+    r'b02f5e8ad0a33607b92ca08cd406a7b955dbaa57';
+
+/// See also [getPreviousWeekTotal].
+@ProviderFor(getPreviousWeekTotal)
+final getPreviousWeekTotalProvider = AutoDisposeFutureProvider<double>.internal(
+  getPreviousWeekTotal,
+  name: r'getPreviousWeekTotalProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getPreviousWeekTotalHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetPreviousWeekTotalRef = AutoDisposeFutureProviderRef<double>;
+String _$getPreviousMonthTotalHash() =>
+    r'f6cbc4f2ba3a5d44fb6c6bdb33f173eb8f108e54';
+
+/// See also [getPreviousMonthTotal].
+@ProviderFor(getPreviousMonthTotal)
+final getPreviousMonthTotalProvider =
+    AutoDisposeFutureProvider<double>.internal(
+      getPreviousMonthTotal,
+      name: r'getPreviousMonthTotalProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getPreviousMonthTotalHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetPreviousMonthTotalRef = AutoDisposeFutureProviderRef<double>;
+String _$getWeeklyDashboardDataHash() =>
+    r'cb7cfe9fa3567d55b2f9fad942592d87dc57c52b';
+
+/// See also [getWeeklyDashboardData].
+@ProviderFor(getWeeklyDashboardData)
+final getWeeklyDashboardDataProvider =
+    AutoDisposeFutureProvider<DashboardData>.internal(
+      getWeeklyDashboardData,
+      name: r'getWeeklyDashboardDataProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getWeeklyDashboardDataHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetWeeklyDashboardDataRef = AutoDisposeFutureProviderRef<DashboardData>;
 String _$transactionControllerHash() =>
-    r'a626d99fc5900d4f7f12e86fd659220277f00229';
+    r'2d87b79e17722e04e057f20b59d199bcab0b0fa5';
 
 /// See also [TransactionController].
 @ProviderFor(TransactionController)

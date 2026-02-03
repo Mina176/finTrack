@@ -28,7 +28,7 @@ class MyBarGraph extends StatelessWidget {
               vertical: 4,
               horizontal: 8,
             ),
-            tooltipMargin: 8,
+            tooltipMargin: 2,
             getTooltipColor: (group) => AppColors.kBackgroundColor,
             tooltipBorderRadius: BorderRadius.circular(6),
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
