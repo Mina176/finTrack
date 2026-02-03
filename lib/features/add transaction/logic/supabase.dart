@@ -20,7 +20,7 @@ class SupabaseService {
     final response = await Supabase.instance.client
         .from('transactions')
         .select()
-        .order('date', ascending: false);
+        .order('id', ascending: false);
 
     final data = response as List<dynamic>;
 

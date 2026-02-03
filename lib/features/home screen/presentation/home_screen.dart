@@ -84,12 +84,11 @@ class HomeScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Recent Transactions', style: TextStyles.header),
-                        Text('See All', style: TextStyles.headerLink),
+                        Text('See All'.hardcoded, style: TextStyles.headerLink),
                       ],
                     ),
                   ],
@@ -102,11 +101,16 @@ class HomeScreen extends ConsumerWidget {
                 data: (transactions) {
                   if (transactions.isEmpty) {
                     return const SliverToBoxAdapter(
-                      child: Center(child: Text("No transactions yet")),
+                      child: SizedBox(
+                        height: 250,
+                        child: Center(
+                          child: Text("No transactions yet"),
+                        ),
+                      ),
                     );
                   }
                   return SliverList.separated(
-                    itemCount: 5,
+                    itemCount: transactions.length,
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 16),
                     itemBuilder: (context, index) {
@@ -115,7 +119,10 @@ class HomeScreen extends ConsumerWidget {
                   );
                 },
                 loading: () => const SliverToBoxAdapter(
-                  child: Center(child: CircularProgressIndicator()),
+                  child: SizedBox(
+                    height: 250,
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
                 ),
                 error: (error, stack) => SliverToBoxAdapter(
                   child: Center(child: Text('Error: $error')),
