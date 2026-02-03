@@ -26,4 +26,32 @@ class SupabaseService {
 
     return data.map((item) => TransactionModel.fromMap(item)).toList();
   }
+
+  Future<List<double>> getWeeklySpendings() async {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final startOfWeek = today.subtract(Duration(days: now.weekday - 1));
+    final endOfWeek = startOfWeek.add(const Duration(days: 7));
+    final response = await Supabase.instance.client
+        .from('transactions')
+        .select('amount, date, is_expense')
+        .gte('date', startOfWeek.toIso8601String())
+        .lt('date', endOfWeek.toIso8601String())
+        .eq('is_expense', true);
+
+    final data = response as List<dynamic>;
+
+    List<double> weeklySpendings = List.filled(7, 0.0);
+
+    for (var item in data) {
+      final date = DateTime.parse(item['date']);
+      final amount = (item['amount'] as num).toDouble();
+
+      int dayIndex = date.weekday - 1;
+
+      weeklySpendings[dayIndex] += amount;
+    }
+
+    return weeklySpendings;
+  }
 }
