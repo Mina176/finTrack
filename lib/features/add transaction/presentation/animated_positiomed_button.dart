@@ -12,6 +12,7 @@ class AnimatedPositiomedButton extends StatelessWidget {
     required this.safeAreaBottom,
     required this.expenseOrIncome,
     required this.onTap,
+    required this.isLoading,
   });
 
   final VoidCallback onTap;
@@ -19,6 +20,7 @@ class AnimatedPositiomedButton extends StatelessWidget {
   final double keypadHeight;
   final double buttonAreaHeight;
   final double safeAreaBottom;
+  final bool isLoading;
   final int expenseOrIncome;
 
   @override
@@ -50,6 +52,7 @@ class AnimatedPositiomedButton extends StatelessWidget {
             color: expenseOrIncome == 0 ? Colors.red : AppColors.kPrimaryColor,
             label: "Add Transaction",
             icon: Icons.check_circle_rounded,
+            isLoading: isLoading,
           ),
         ),
       ),

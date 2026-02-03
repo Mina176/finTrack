@@ -1,4 +1,3 @@
-
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/duration_constants.dart';
 import 'package:fintrack/constants/text_styles.dart';
@@ -13,6 +12,7 @@ class AnimatedButtonWithIcon extends StatelessWidget {
     required this.color,
     required this.label,
     required this.icon,
+    required this.isLoading,
   });
 
   final VoidCallback onTap;
@@ -20,6 +20,7 @@ class AnimatedButtonWithIcon extends StatelessWidget {
   final Color color;
   final String label;
   final IconData icon;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -27,26 +28,36 @@ class AnimatedButtonWithIcon extends StatelessWidget {
       height: Sizes.p48,
       duration: addTransactionAnimationDuration,
       decoration: BoxDecoration(
-        color: expenseOrIncome == 0
-            ? Colors.red
-            : AppColors.kPrimaryColor,
+        color: expenseOrIncome == 0 ? Colors.red : AppColors.kPrimaryColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: GestureDetector(
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, color: Colors.white),
-              SizedBox(width: 8),
-              Text(
-                label,
-                style: TextStyles.buttonLabel.copyWith(color: Colors.white),
-              ),
-            ],
-          ),
+          child: isLoading
+              ? Center(
+                  child: SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(icon, color: Colors.white),
+                    SizedBox(width: 8),
+                    Text(
+                      label,
+                      style: TextStyles.buttonLabel.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
         ),
       ),
     );
