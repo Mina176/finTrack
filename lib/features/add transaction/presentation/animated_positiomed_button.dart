@@ -32,7 +32,7 @@ class AnimatedPositiomedButton extends StatelessWidget {
       right: 0,
       bottom: showCustomKeypad ? keypadHeight : 0,
       height: buttonAreaHeight + (showCustomKeypad ? 0 : safeAreaBottom),
-      child: Container(
+      child: DecoratedBox(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,

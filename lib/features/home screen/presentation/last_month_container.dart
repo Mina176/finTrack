@@ -17,7 +17,7 @@ class LastMonthContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isSaving = savingPercentage >= 0;
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: isSaving
             ? AppColors.kButtonBorderColor

@@ -23,17 +23,19 @@ class OnboardingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           width: width,
           height: height,
-          decoration: BoxDecoration(
-            color: AppColors.kCardColor,
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
-          child: Icon(
-            icon,
-            color: AppColors.kPrimaryColor,
-            size: 60,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: AppColors.kCardColor,
+              borderRadius: BorderRadius.circular(borderRadius),
+            ),
+            child: Icon(
+              icon,
+              color: AppColors.kPrimaryColor,
+              size: 60,
+            ),
           ),
         ),
         gapH24,

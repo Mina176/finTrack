@@ -9,15 +9,17 @@ class CustomCard extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.kCustomContainerBackground,
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 22.0),
-        child: child,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: AppColors.kCustomContainerBackground,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 22.0),
+          child: child,
+        ),
       ),
     );
   }

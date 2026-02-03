@@ -11,8 +11,10 @@ class Keyboard extends StatelessWidget {
   final void Function(String) onBtnTap;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.kKeyboardColor,
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.kKeyboardColor,
+      ),
       child: GridView.count(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),

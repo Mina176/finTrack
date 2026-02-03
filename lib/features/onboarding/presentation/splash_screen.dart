@@ -16,7 +16,7 @@ class SplashScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Color(0xFF0D1B12),
-      body: Container(
+      body: DecoratedBox(
         decoration: BoxDecoration(gradient: AppColors.gradientColors),
         child: Center(
           child: TweenAnimationBuilder<double>(

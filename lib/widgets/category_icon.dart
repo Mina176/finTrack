@@ -11,7 +11,7 @@ class CategoryIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = getCategoryStyle(categoryType);
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: style.backgroundColor,
         borderRadius: BorderRadius.circular(10),

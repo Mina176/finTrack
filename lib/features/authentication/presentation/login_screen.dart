@@ -68,7 +68,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     });
 
     return Scaffold(
-      body: Container(
+      body: DecoratedBox(
         decoration: BoxDecoration(gradient: AppColors.gradientColors),
         child: SafeArea(
           child: Padding(
