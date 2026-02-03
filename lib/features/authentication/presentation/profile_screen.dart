@@ -146,7 +146,7 @@ class SettingsSection extends StatelessWidget {
             color: backgroundColor,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: AppColors.kAddTransactionDividerColor,
+              color: AppColors.kDividerColor,
               width: 1,
             ),
           ),
@@ -160,7 +160,7 @@ class SettingsSection extends StatelessWidget {
                             widget,
                             Divider(
                               height: 0.1,
-                              color: AppColors.kAddTransactionDividerColor,
+                              color: AppColors.kDividerColor,
                             ),
                           ],
                         )

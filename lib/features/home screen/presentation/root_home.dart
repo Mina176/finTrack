@@ -1,3 +1,4 @@
+import 'package:fintrack/features/accounts/presentation/accounts_screen.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/features/home%20screen/presentation/home_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
@@ -20,7 +21,7 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       const HomeScreen(), // Index 0
-      Center(child: Text("Wallet & Transactions".hardcoded)), // Index 1
+      const AccountsScreen(),
       Center(child: Text("Statistics & Reports".hardcoded)), // Index 2
       const ProfileScreen(), // Index 3
     ];

@@ -25,7 +25,7 @@ class LastMonthContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
