@@ -27,23 +27,51 @@ class ChooseCategoryScreen extends StatelessWidget {
             ),
             Expanded(
               child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(
                   horizontal: Sizes.kHorizontalPadding,
                   vertical: Sizes.kVerticalPadding,
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  mainAxisExtent: 80,
+                  mainAxisExtent: 70,
                   mainAxisSpacing: Sizes.kVerticalPadding,
                   crossAxisSpacing: Sizes.kHorizontalPadding,
                 ),
-                itemCount: spendingCategoriesList.length,
+                itemCount: spendingCategoriesWithLabelsList.length,
                 itemBuilder: (context, index) => GestureDetector(
                   onTap: () => Navigator.pop(
                     context,
                     spendingCategoriesList[index],
                   ),
-                  child: spendingCategoriesList[index],
+                  child: spendingCategoriesWithLabelsList[index],
+                ),
+              ),
+            ),
+            Text(
+              'Income',
+              style: TextStyles.subtitle.copyWith(fontSize: 14),
+            ),
+            Expanded(
+              child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.symmetric(
+                  horizontal: Sizes.kHorizontalPadding,
+                  vertical: Sizes.kVerticalPadding,
+                ),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  mainAxisExtent: 70,
+                  mainAxisSpacing: Sizes.kVerticalPadding,
+                  crossAxisSpacing: Sizes.kHorizontalPadding,
+                ),
+                itemCount: incomeCategoriesWithLabelsList.length,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => Navigator.pop(
+                    context,
+                    incomeCategoriesList[index],
+                  ),
+                  child: incomeCategoriesWithLabelsList[index],
                 ),
               ),
             ),

@@ -6,13 +6,12 @@ import 'package:fintrack/widgets/category_icon.dart';
 final List<CategoryIcon> spendingCategoriesList = [
   CategoryIcon(categoryType: CategoryTypes.food),
   CategoryIcon(categoryType: CategoryTypes.transport),
-  CategoryIcon(categoryType: CategoryTypes.housing),
   CategoryIcon(categoryType: CategoryTypes.health),
+  CategoryIcon(categoryType: CategoryTypes.housing),
   CategoryIcon(categoryType: CategoryTypes.entertainment),
   CategoryIcon(categoryType: CategoryTypes.shopping),
   CategoryIcon(categoryType: CategoryTypes.bills),
   CategoryIcon(categoryType: CategoryTypes.freelance),
-  CategoryIcon(categoryType: CategoryTypes.investment),
 ];
 
 final List<CategoryIcon> incomeCategoriesList = [
@@ -23,10 +22,12 @@ final List<CategoryIcon> incomeCategoriesList = [
 final List<CategoryIconWithLabel> spendingCategoriesWithLabelsList = [
   CategoryIconWithLabel(categoryType: CategoryTypes.food),
   CategoryIconWithLabel(categoryType: CategoryTypes.transport),
+  CategoryIconWithLabel(categoryType: CategoryTypes.health),
   CategoryIconWithLabel(categoryType: CategoryTypes.housing),
   CategoryIconWithLabel(categoryType: CategoryTypes.entertainment),
   CategoryIconWithLabel(categoryType: CategoryTypes.shopping),
   CategoryIconWithLabel(categoryType: CategoryTypes.bills),
+  CategoryIconWithLabel(categoryType: CategoryTypes.freelance),
 ];
 final List<CategoryIconWithLabel> incomeCategoriesWithLabelsList = [
   CategoryIconWithLabel(categoryType: CategoryTypes.freelance),
