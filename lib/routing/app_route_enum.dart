@@ -8,6 +8,7 @@ enum AppRoutes {
   profile,
   addTransaction,
   chooseCategory,
+  addAccount,
 }
 
 extension AppRoutesExtension on AppRoutes {
@@ -31,6 +32,8 @@ extension AppRoutesExtension on AppRoutes {
         return '/addTransaction';
       case AppRoutes.chooseCategory:
         return '/chooseCategory';
+      case AppRoutes.addAccount:
+        return '/addAccount';
     }
   }
 }

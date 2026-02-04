@@ -1,3 +1,4 @@
+import 'package:fintrack/features/accounts/presentation/add_account_screen.dart';
 import 'package:fintrack/features/add%20transaction/presentation/add_transaction.dart';
 import 'package:fintrack/features/add%20transaction/presentation/choose_category_screen.dart';
 import 'package:fintrack/features/authentication/logic/auth_repository.dart';
@@ -96,6 +97,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.chooseCategory.path,
         builder: (context, state) => ChooseCategoryScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.addAccount.path,
+        builder: (context, state) => AddAccountScreen(),
       ),
     ],
   );

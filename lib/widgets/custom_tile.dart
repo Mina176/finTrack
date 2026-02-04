@@ -26,7 +26,14 @@ class CustomTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         child: Row(
           children: [
-            categoryIcon ?? CustomIcon(icon: icon ?? Icons.category),
+            categoryIcon ??
+                (icon != null
+                    ? Icon(
+                        icon,
+                        size: 28,
+                        color: AppColors.kPrimaryColor,
+                      )
+                    : SizedBox.shrink()),
             gapW12,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

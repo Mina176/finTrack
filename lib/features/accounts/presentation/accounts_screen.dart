@@ -2,10 +2,12 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/features/home%20screen/presentation/last_month_container.dart';
+import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AccountsScreen extends StatelessWidget {
   const AccountsScreen({super.key});
@@ -28,7 +30,13 @@ class AccountsScreen extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(6),
-              child: Icon(Icons.add, color: Colors.black),
+              child: GestureDetector(
+                onTap: () => context.push(AppRoutes.addAccount.path),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                ),
+              ),
             ),
           ),
           gapW20,
