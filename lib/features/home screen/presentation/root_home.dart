@@ -1,5 +1,6 @@
 import 'package:fintrack/features/accounts/presentation/accounts_screen.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
+import 'package:fintrack/features/budgets/presentation/budgets_screen.dart';
 import 'package:fintrack/features/home%20screen/presentation/home_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -20,10 +21,10 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      const HomeScreen(), // Index 0
+      const HomeScreen(),
       const AccountsScreen(),
-      Center(child: Text("Statistics & Reports".hardcoded)), // Index 2
-      const ProfileScreen(), // Index 3
+      const BudgetsScreen(),
+      const ProfileScreen(),
     ];
     return Scaffold(
       floatingActionButtonLocation: const CustomFabLocation(20),
@@ -52,8 +53,8 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
             iconData: Icons.account_balance_wallet,
           ),
           FABBottomAppBarItem(
-            text: 'Stats',
-            iconData: FontAwesomeIcons.chartSimple,
+            text: 'Budgets',
+            iconData: Icons.pie_chart,
           ),
           FABBottomAppBarItem(
             text: 'Profile',
