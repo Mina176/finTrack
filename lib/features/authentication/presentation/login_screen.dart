@@ -99,7 +99,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         child: Column(
                           spacing: 12,
                           children: [
-                            AuthField(
+                            TextFieldWithLabel(
                               label: 'Email Address',
                               hintText: 'name@example.com',
                               controller: _emailController,
@@ -111,7 +111,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 }
                               },
                             ),
-                            AuthField(
+                            TextFieldWithLabel(
                               label: 'Password',
                               hintText: '••••••••',
                               controller: _passwordController,

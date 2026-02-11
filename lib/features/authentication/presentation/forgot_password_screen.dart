@@ -88,7 +88,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
               ),
               Form(
                 key: _formKey,
-                child: AuthField(
+                child: TextFieldWithLabel(
                   label: 'Email Address',
                   hintText: 'you@example.com',
                   errorText: emailError,

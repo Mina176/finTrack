@@ -98,21 +98,21 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         child: Column(
                           spacing: 12,
                           children: [
-                            AuthField(
+                            TextFieldWithLabel(
                               controller: _nameController,
                               label: 'Full Name',
                               hintText: 'John Doe',
                               validator: (value) =>
                                   value!.isEmpty ? 'Name is required' : null,
                             ),
-                            AuthField(
+                            TextFieldWithLabel(
                               controller: _emailController,
                               label: 'Email',
                               hintText: 'john@example.com',
                               errorText: emailErrorText,
                               validator: Validators.validateEmail,
                             ),
-                            AuthField(
+                            TextFieldWithLabel(
                               controller: _passwordController,
                               label: 'Password',
                               hintText: '••••••••',
@@ -120,7 +120,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                               isPassword: true,
                               validator: Validators.validatePasswordWhenSignUp,
                             ),
-                            AuthField(
+                            TextFieldWithLabel(
                               label: 'Confirm Password',
                               hintText: '••••••••',
                               isPassword: true,

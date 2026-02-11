@@ -2,8 +2,8 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
-class AuthField extends StatefulWidget {
-  const AuthField({
+class TextFieldWithLabel extends StatefulWidget {
+  const TextFieldWithLabel({
     super.key,
     required this.label,
     required this.hintText,
@@ -13,6 +13,7 @@ class AuthField extends StatefulWidget {
     this.validator,
     this.errorText,
     this.onChanged,
+    this.keyboardType,
   });
   final String label;
   final String hintText;
@@ -22,12 +23,13 @@ class AuthField extends StatefulWidget {
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
   final String? errorText;
+  final TextInputType? keyboardType;
 
   @override
-  State<AuthField> createState() => _AuthFieldState();
+  State<TextFieldWithLabel> createState() => _TextFieldWithLabelState();
 }
 
-class _AuthFieldState extends State<AuthField> {
+class _TextFieldWithLabelState extends State<TextFieldWithLabel> {
   bool isObscured = true;
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class _AuthFieldState extends State<AuthField> {
         gapH4,
         TextFormField(
           controller: widget.controller,
+          keyboardType: widget.keyboardType,
           onSaved: widget.onSaved,
           onChanged: widget.onChanged,
           obscureText: isObscured && widget.isPassword == true,
