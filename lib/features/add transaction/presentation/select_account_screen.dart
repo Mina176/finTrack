@@ -85,7 +85,12 @@ class SelectAccountScreen extends ConsumerWidget {
                     ],
                     trailing: Text(
                       '\$${accounts[index].currentBalance.toStringAsFixed(2)}',
-                      style: TextStyles.title.copyWith(fontSize: 16),
+                      style: TextStyles.title.copyWith(
+                        fontSize: 16,
+                        color: accounts[index].currentBalance < 0
+                            ? AppColors.kErrorColor
+                            : null,
+                      ),
                     ),
                   );
                 },
