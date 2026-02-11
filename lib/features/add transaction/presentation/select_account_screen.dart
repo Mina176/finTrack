@@ -1,0 +1,106 @@
+import 'package:fintrack/constants/app_sizes.dart';
+import 'package:fintrack/constants/text_styles.dart';
+import 'package:fintrack/features/accounts/logic/account_controller.dart';
+import 'package:fintrack/features/accounts/presentation/accounts_screen.dart';
+import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
+import 'package:fintrack/routing/app_route_enum.dart';
+import 'package:fintrack/theming/app_colors.dart';
+import 'package:fintrack/widgets/custom_tile.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+class SelectAccountScreen extends ConsumerWidget {
+  const SelectAccountScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final accountsAsync = ref.watch(getAccountsProvider);
+    return Scaffold(
+      backgroundColor: AppColors.kBackgroundColor,
+      appBar: AppBar(
+        title: Text('Select Account'),
+      ),
+      body: accountsAsync.when(
+        data: (accounts) {
+          if (accounts.isEmpty) {
+            return Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Sizes.kHorizontalPadding,
+                  vertical: Sizes.kVerticalPadding,
+                ),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: 'No accounts found. Please add account first.\n',
+                    style: TextStyles.subtitle,
+                    children: [
+                      TextSpan(
+                        text: 'Go to Accounts',
+                        style: TextStyles.subtitle.copyWith(
+                          color: AppColors.kPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            context.push(AppRoutes.addAccount.path);
+                          },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+          return Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: Sizes.kHorizontalPadding,
+              vertical: Sizes.kVerticalPadding,
+            ),
+            child: SettingsSection(
+              backgroundColor: AppColors.kCardColor,
+              widgets: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: accounts.length,
+                  itemBuilder: (context, index) => CustomTile(
+                    onTap: () {
+                      context.pop(accounts[index]);
+                    },
+                    leadingIcon: Icon(accounts[index].accountTypeIcon),
+                    titleAndSubtitle: [
+                      Text(
+                        accounts[index].accountName,
+                        style: TextStyles.title.copyWith(fontSize: 16),
+                      ),
+                      gapH4,
+                      Text(
+                        '\$${accounts[index].balance.toStringAsFixed(2)}',
+                        style: TextStyles.subtitle.copyWith(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                    trailing: Text(
+                      '\$${accounts[index].currentBalance.toStringAsFixed(2)}',
+                      style: TextStyles.title.copyWith(fontSize: 16),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+        loading: () => Center(
+          child: CircularProgressIndicator(),
+        ),
+        error: (error, stackTrace) => Center(
+          child: Text(error.toString()),
+        ),
+      ),
+    );
+  }
+}
