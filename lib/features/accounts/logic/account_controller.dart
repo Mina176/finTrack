@@ -27,6 +27,46 @@ class AccountController extends _$AccountController {
       state = AsyncError(error, stackTrace);
     }
   }
+
+  Future<AccountModel> updateAccountBalance({
+    required AccountModel account,
+    required double amount,
+    required bool isExpense,
+  }) async {
+    state = const AsyncLoading();
+
+    try {
+      final service = ref.read(accountSupabaseServiceProvider);
+      AccountModel accountToUpdate = account;
+      if (account.id == null) {
+        final allAccounts = await ref.read(getAccountsProvider.future);
+        try {
+          accountToUpdate = allAccounts.firstWhere(
+            (a) =>
+                a.accountType == account.accountType &&
+                a.accountName == account.accountName,
+          );
+        } catch (e) {
+          throw Exception(
+            "Could not find account to update. Ensure the account exists and has an ID.",
+          );
+        }
+      }
+      final updatedAccount = await service.updateAccountBalance(
+        accountToUpdate,
+        amount,
+        isExpense,
+      );
+
+      state = const AsyncData(null);
+      ref.invalidate(getAccountsProvider);
+
+      return updatedAccount;
+    } catch (error, stackTrace) {
+      state = AsyncError(error, stackTrace);
+      rethrow;
+    }
+  }
 }
 
 @riverpod

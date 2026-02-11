@@ -12,8 +12,14 @@ AccountSupabaseService accountSupabaseService(Ref ref) {
 
 class AccountSupabaseService {
   final SupabaseClient client = Supabase.instance.client;
-  Future<void> createAccount(AccountModel account) async {
-    await client.from('accounts').insert(account.toMap());
+  Future<AccountModel> createAccount(AccountModel account) async {
+    final response = await client
+        .from('accounts')
+        .insert(account.toMap())
+        .select()
+        .single();
+
+    return AccountModel.fromMap(response);
   }
 
   Future<List<AccountModel>> getAccounts() async {
@@ -25,6 +31,28 @@ class AccountSupabaseService {
 
   Future<void> deleteAllAccounts() async {
     await client.from('accounts').delete().neq('id', 0);
+  }
+
+  Future<AccountModel> updateAccountBalance(
+    AccountModel account,
+    double amount,
+    bool isExpense,
+  ) async {
+    if (account.id == null) {
+      throw Exception('Account ID is null');
+    }
+    final response = await client
+        .from('accounts')
+        .update({
+          'current_balance': isExpense
+              ? account.currentBalance - amount
+              : account.currentBalance + amount,
+        })
+        .eq('id', account.id!)
+        .select()
+        .single();
+
+    return AccountModel.fromMap(response);
   }
 
   Future<double> getNetWorth() async {
