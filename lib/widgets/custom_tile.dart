@@ -7,16 +7,16 @@ class CustomTile extends StatelessWidget {
   const CustomTile({
     super.key,
     required this.onTap,
-    this.icon,
+    this.iconData,
     this.trailing,
     required this.titleAndSubtitle,
-    this.categoryIcon,
+    this.leadingIcon,
   });
   final VoidCallback onTap;
   final Widget? trailing;
-  final IconData? icon;
+  final IconData? iconData;
   final List<Widget> titleAndSubtitle;
-  final CategoryIcon? categoryIcon;
+  final Widget? leadingIcon;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -26,10 +26,10 @@ class CustomTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         child: Row(
           children: [
-            categoryIcon ??
-                (icon != null
+            leadingIcon ??
+                (iconData != null
                     ? Icon(
-                        icon,
+                        iconData,
                         size: 28,
                         color: AppColors.kPrimaryColor,
                       )

@@ -26,7 +26,7 @@ class AddNoteSection extends StatelessWidget {
       widgets: [
         CustomTile(
           onTap: () {},
-          icon: FontAwesomeIcons.noteSticky,
+          iconData: FontAwesomeIcons.noteSticky,
           trailing: SizedBox(),
           titleAndSubtitle: [
             const Text(

@@ -26,3 +26,27 @@ class CategoryIcon extends StatelessWidget {
     );
   }
 }
+class AccountIcon extends StatelessWidget {
+  const AccountIcon({
+    super.key,
+    required this.accountTypes,
+  });
+  final AccountTypes accountTypes;
+  @override
+  Widget build(BuildContext context) {
+    final style = getAccountStyle(accountTypes);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: style.backgroundColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Icon(
+          style.icon,
+          color: style.color,
+        ),
+      ),
+    );
+  }
+}

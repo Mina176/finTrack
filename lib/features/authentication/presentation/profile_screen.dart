@@ -39,7 +39,7 @@ class ProfileScreen extends ConsumerWidget {
               backgroundColor: AppColors.kCustomContainerBackground,
               widgets: [
                 CustomTile(
-                  icon: Icons.lock,
+                  iconData: Icons.lock,
                   titleAndSubtitle: [
                     Text(
                       'Change Password',
@@ -60,7 +60,7 @@ class ProfileScreen extends ConsumerWidget {
               backgroundColor: AppColors.kCustomContainerBackground,
               widgets: [
                 CustomTile(
-                  icon: Icons.attach_money,
+                  iconData: Icons.attach_money,
                   titleAndSubtitle: [
                     Text(
                       'Currency',
@@ -85,7 +85,7 @@ class ProfileScreen extends ConsumerWidget {
                   color: AppColors.kDividerColor,
                 ),
                 CustomTile(
-                  icon: Icons.color_lens,
+                  iconData: Icons.color_lens,
                   titleAndSubtitle: [
                     Text(
                       'Theme',

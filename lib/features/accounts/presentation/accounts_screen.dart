@@ -114,7 +114,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                         itemCount: accounts.length,
                         itemBuilder: (context, index) => CustomTile(
                           onTap: () {},
-                          icon: accounts[index].accountTypeIcon,
+                          iconData: accounts[index].accountTypeIcon,
                           titleAndSubtitle: [
                             Text(
                               accounts[index].accountName,
@@ -129,7 +129,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                             ),
                           ],
                           trailing: Text(
-                            '\$${accounts[index].balance.toStringAsFixed(2)}',
+                            '\$${accounts[index].currentBalance.toStringAsFixed(2)}',
                             style: TextStyles.title.copyWith(fontSize: 16),
                           ),
                         ),
@@ -158,17 +158,15 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
 
 extension AccountModelX on AccountModel {
   IconData get accountTypeIcon {
-    switch (accountType) {
+    switch (accountType.index) {
       case 0:
-        return Icons.account_balance;
+        return Icons.credit_card;
       case 1:
         return Icons.credit_card;
       case 2:
         return Icons.wallet;
-      case 3:
-        return FontAwesomeIcons.arrowTrendUp;
       default:
-        return Icons.attach_money;
+        return FontAwesomeIcons.arrowTrendUp;
     }
   }
 }
