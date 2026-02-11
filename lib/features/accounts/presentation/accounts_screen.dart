@@ -25,6 +25,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
   @override
   Widget build(BuildContext context) {
     final accountsAsync = ref.watch(getAccountsProvider);
+    final netWorthAsync = ref.watch(getNetWorthProvider);
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
@@ -67,7 +68,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'TOTAL NET WORTH',
+                    'Total Balance',
                     style: TextStyles.subtitle.copyWith(fontSize: 14),
                     textAlign: TextAlign.center,
                   ),
@@ -76,7 +77,11 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '\$12,450.00'.hardcoded,
+                        netWorthAsync.when(
+                          data: (data) => '\$${data.toStringAsFixed(2)}',
+                          error: (error, stackTrace) => 'Error',
+                          loading: () => 'Loading...',
+                        ),
                         style: TextStyles.title,
                         textAlign: TextAlign.center,
                       ),

@@ -1,5 +1,6 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
+import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_app_bar.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
@@ -18,6 +19,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final transactionsAsync = ref.watch(getTransactionsProvider);
     final weeklyDashboardAsync = ref.watch(getWeeklyDashboardDataProvider);
+    final netWorthAsync = ref.watch(getNetWorthProvider);
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       body: SafeArea(
@@ -42,7 +44,11 @@ class HomeScreen extends ConsumerWidget {
                             style: TextStyles.subtitle.copyWith(fontSize: 14),
                           ),
                           Text(
-                            '\$14,235.00'.hardcoded,
+                            netWorthAsync.when(
+                              data: (data) => '\$${data.toStringAsFixed(2)}',
+                              error: (error, stackTrace) => 'Error',
+                              loading: () => 'Loading...',
+                            ),
                             style: TextStyles.title,
                           ),
                           LastMonthContainer(

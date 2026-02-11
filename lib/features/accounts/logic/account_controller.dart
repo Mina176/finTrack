@@ -71,3 +71,14 @@ Future<List<AccountModel>> getAccounts(Ref ref) async {
   final service = ref.read(accountSupabaseServiceProvider);
   return service.getAccounts();
 }
+@riverpod
+Future<double> getNetWorth(Ref ref) async {
+  final accounts = await ref.watch(getAccountsProvider.future);
+  double total = 0.0;
+  for (var account in accounts) {
+    if (account.includeInNetWorth) {
+      total += account.currentBalance;
+    }
+  }
+    return total;
+}
