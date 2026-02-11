@@ -1,6 +1,8 @@
+import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
+
 class AccountModel {
   final int? id;
-  final int accountType;
+  final AccountTypes accountType;
   final String accountName;
   final double balance;
   final bool includeInNetWorth;
@@ -17,7 +19,7 @@ class AccountModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'account_type': accountType,
+      'account_type': accountType.name,
       'account_name': accountName,
       'balance': balance,
       'include_in_net_worth': includeInNetWorth,
@@ -28,7 +30,10 @@ class AccountModel {
   factory AccountModel.fromMap(Map<String, dynamic> map) {
     return AccountModel(
       id: map['id'] as int?,
-      accountType: map['account_type'] as int,
+      accountType: AccountTypes.values.firstWhere(
+        (e) => e.name == map['account_type'],
+        orElse: () => AccountTypes.cashWallet,
+      ),
       accountName: map['account_name'] as String,
       balance: (map['balance'] as num).toDouble(),
       includeInNetWorth: map['include_in_net_worth'] as bool,

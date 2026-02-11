@@ -82,7 +82,7 @@ final getPreviousMonthTotalProvider =
 // ignore: unused_element
 typedef GetPreviousMonthTotalRef = AutoDisposeFutureProviderRef<double>;
 String _$getWeeklyDashboardDataHash() =>
-    r'cb7cfe9fa3567d55b2f9fad942592d87dc57c52b';
+    r'46d65a4a6ff5e609ccfda03562ccf40cdaaeca9d';
 
 /// See also [getWeeklyDashboardData].
 @ProviderFor(getWeeklyDashboardData)
