@@ -2,15 +2,13 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
-import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
-import 'package:fintrack/features/add%20transaction/presentation/animated_button_with_icon.dart';
+import 'package:fintrack/features/add%20transaction/utils/categories_lists.dart';
+import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/theming/app_colors.dart';
-import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class AddAccountScreen extends ConsumerStatefulWidget {
@@ -21,16 +19,10 @@ class AddAccountScreen extends ConsumerStatefulWidget {
 }
 
 class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
-  int selectedIndex = 0;
+  AccountTypes selectedAccount = AccountTypes.debitCard;
   bool includeInNetWorth = true;
   final TextEditingController accountNameController = TextEditingController();
   final TextEditingController balanceController = TextEditingController();
-  final List<Map<String, dynamic>> accountOptions = [
-    {'icon': Icons.credit_card, 'label': 'Debit Card'},
-    {'icon': Icons.credit_card, 'label': 'Credit Card'},
-    {'icon': Icons.wallet, 'label': 'Cash Wallet'},
-    {'icon': FontAwesomeIcons.arrowTrendUp, 'label': 'Investment'},
-  ];
   @override
   Widget build(BuildContext context) {
     ref.listen(accountControllerProvider, (previous, next) {
@@ -54,7 +46,7 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
           spacing: 10,
           children: [
             GridView.builder(
-              itemCount: accountOptions.length,
+              itemCount: accountTypes.length,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -64,18 +56,21 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
                 crossAxisSpacing: 8,
               ),
               itemBuilder: (context, index) {
-                final isSelected = selectedIndex == index;
+                final isSelected =
+                    selectedAccount == AccountTypes.values[index];
                 return GestureDetector(
-                  onTap: () => setState(() => selectedIndex = index),
+                  onTap: () => setState(
+                    () => selectedAccount = AccountTypes.values[index],
+                  ),
                   child: CustomCard(
                     isSelected: isSelected,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(accountOptions[index]['icon'], size: 28),
+                        Icon(accountTypes[index]['icon'], size: 28),
                         gapH4,
                         Text(
-                          accountOptions[index]['label'],
+                          accountTypes[index]['label'],
                           style: TextStyles.subtitle.copyWith(fontSize: 12),
                         ),
                       ],
@@ -123,7 +118,7 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
                     .read(accountControllerProvider.notifier)
                     .createAccount(
                       AccountModel(
-                        accountType: selectedIndex,
+                        accountType: selectedAccount,
                         accountName: accountNameController.text,
                         balance: double.tryParse(balanceController.text) ?? 0.0,
                         includeInNetWorth: includeInNetWorth,

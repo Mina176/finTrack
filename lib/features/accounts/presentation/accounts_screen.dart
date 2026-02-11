@@ -8,7 +8,6 @@ import 'package:fintrack/features/home%20screen/presentation/last_month_containe
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
-import 'package:fintrack/widgets/category_icon.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -107,12 +106,10 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                 return SliverToBoxAdapter(
                   child: SettingsSection(
                     backgroundColor: AppColors.kCardColor,
-                    widgets: [
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: accounts.length,
-                        itemBuilder: (context, index) => CustomTile(
+                    widgets: List.generate(
+                      accounts.length,
+                      (index) {
+                        return CustomTile(
                           onTap: () {},
                           iconData: accounts[index].accountTypeIcon,
                           titleAndSubtitle: [
@@ -132,9 +129,9 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                             '\$${accounts[index].currentBalance.toStringAsFixed(2)}',
                             style: TextStyles.title.copyWith(fontSize: 16),
                           ),
-                        ),
-                      ),
-                    ],
+                        );
+                      },
+                    ),
                   ),
                 );
               },

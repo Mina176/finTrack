@@ -1,6 +1,5 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/theming/app_colors.dart';
-import 'package:fintrack/widgets/category_icon.dart';
 import 'package:flutter/material.dart';
 
 class CustomTile extends StatelessWidget {

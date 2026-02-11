@@ -1,5 +1,7 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
+import 'package:fintrack/features/accounts/data/account_model.dart';
+import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
 import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/add%20transaction/presentation/add_note_section.dart';
@@ -7,6 +9,7 @@ import 'package:fintrack/features/add%20transaction/presentation/amount_of_money
 import 'package:fintrack/features/add%20transaction/presentation/animated_positiomed_button.dart';
 import 'package:fintrack/features/add%20transaction/presentation/animated_positioned_keyboard.dart';
 import 'package:fintrack/features/add%20transaction/presentation/expense_or_income.dart';
+import 'package:fintrack/features/add%20transaction/utils/helpers.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -36,6 +39,14 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   CategoryIcon selectedCategory = CategoryIcon(
     categoryType: CategoryTypes.food,
   );
+  AccountModel selectedAccount = AccountModel(
+    accountType: AccountTypes.debitCard,
+    accountName: "Select Account",
+    balance: 0.0,
+    includeInNetWorth: true,
+    currentBalance: 0.0,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -89,28 +100,24 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-
     final double keypadHeight = screenSize.height * 0.35;
-
     final double buttonAreaHeight = (screenSize.height * 0.1).clamp(
       70.0,
       100.0,
     );
-
     final double safeAreaBottom = MediaQuery.of(context).padding.bottom;
-
     final double hiddenOffset = -(keypadHeight + safeAreaBottom);
-
     final double listBottomPadding = _showCustomKeypad
         ? (keypadHeight + buttonAreaHeight)
         : (buttonAreaHeight + safeAreaBottom + screenSize.height * 0.151);
     final transactionState = ref.watch(transactionControllerProvider);
-    final isLoading = transactionState.isLoading;
+    final accountState = ref.watch(accountControllerProvider);
+    final isLoading = transactionState.isLoading || accountState.isLoading;
     ref.listen(transactionControllerProvider, (previous, next) {
-      if (!next.isLoading && !next.hasError) {
+      if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
         context.pop();
       } else if (next.hasError) {
-        return;
+        print("Error: ${next.error}");
       }
     });
     return GestureDetector(
@@ -174,7 +181,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                               });
                             }
                           },
-                          categoryIcon: selectedCategory,
+                          leadingIcon: selectedCategory,
                           titleAndSubtitle: [
                             Text(
                               "Category",
@@ -182,6 +189,32 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                             ),
                             Text(
                               selectedCategory.categoryType.name,
+                              style: TextStyles.addTransactionSettingsSubtitle,
+                            ),
+                          ],
+                        ),
+                        CustomTile(
+                          onTap: () async {
+                            dismissKeypads();
+                            final result = await context.push<AccountModel>(
+                              AppRoutes.selectAccount.path,
+                            );
+                            if (result != null) {
+                              setState(() {
+                                selectedAccount = result;
+                              });
+                            }
+                          },
+                          leadingIcon: getAccountIcon(
+                            selectedAccount.accountType,
+                          ),
+                          titleAndSubtitle: [
+                            Text(
+                              getAccountName(selectedAccount.accountType),
+                              style: TextStyles.addTransactionSettingstitle,
+                            ),
+                            Text(
+                              selectedAccount.accountName,
                               style: TextStyles.addTransactionSettingsSubtitle,
                             ),
                           ],
@@ -208,7 +241,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                               });
                             }
                           },
-                          icon: Icons.date_range,
+                          iconData: Icons.calendar_today,
                           titleAndSubtitle: [
                             const Text(
                               "Date",
@@ -233,20 +266,41 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
               ),
             ),
             AnimatedPositiomedButton(
-              onTap: () {
+              onTap: () async {
                 if (isLoading) return;
                 if (amount == "0.00") return;
+                if (selectedAccount.id == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Please select a valid account"),
+                      backgroundColor: Colors.white,
+                    ),
+                  );
+                  return;
+                }
                 dismissKeypads();
                 final transaction = TransactionModel(
                   isExpense: expenseOrIncome == 0,
                   amount: double.tryParse(amount) ?? 0.0,
                   category: selectedCategory.categoryType,
+                  account: selectedAccount.accountType,
                   date: selectedDate,
                   note: noteController.text,
                 );
-                ref
-                    .read(transactionControllerProvider.notifier)
-                    .createTransaction(transaction);
+                try {
+                  await ref
+                      .read(accountControllerProvider.notifier)
+                      .updateAccountBalance(
+                        account: selectedAccount,
+                        amount: transaction.amount,
+                        isExpense: expenseOrIncome == 0 ? true : false,
+                      );
+                  ref
+                      .read(transactionControllerProvider.notifier)
+                      .createTransaction(transaction);
+                } catch (e) {
+                  print("Error: $e");
+                }
               },
               isLoading: isLoading,
               showCustomKeypad: _showCustomKeypad,
@@ -255,7 +309,6 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
               safeAreaBottom: safeAreaBottom,
               expenseOrIncome: expenseOrIncome,
             ),
-            // LAYER 3: RESPONSIVE KEYPAD
             AnimatedPositionedKeyboard(
               onKeyTap: _onKeyTap,
               showCustomKeypad: _showCustomKeypad,

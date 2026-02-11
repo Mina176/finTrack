@@ -25,31 +25,29 @@ class SelectAccountScreen extends ConsumerWidget {
       body: accountsAsync.when(
         data: (accounts) {
           if (accounts.isEmpty) {
-            return Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Sizes.kHorizontalPadding,
-                  vertical: Sizes.kVerticalPadding,
-                ),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: 'No accounts found. Please add account first.\n',
-                    style: TextStyles.subtitle,
-                    children: [
-                      TextSpan(
-                        text: 'Go to Accounts',
-                        style: TextStyles.subtitle.copyWith(
-                          color: AppColors.kPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            context.push(AppRoutes.addAccount.path);
-                          },
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Sizes.kHorizontalPadding,
+                vertical: Sizes.kVerticalPadding,
+              ),
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'No accounts found. Please add account first.\n',
+                  style: TextStyles.subtitle,
+                  children: [
+                    TextSpan(
+                      text: 'Go to Accounts',
+                      style: TextStyles.subtitle.copyWith(
+                        color: AppColors.kPrimaryColor,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
-                  ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          context.push(AppRoutes.addAccount.path);
+                        },
+                    ),
+                  ],
                 ),
               ),
             );
@@ -61,16 +59,17 @@ class SelectAccountScreen extends ConsumerWidget {
             ),
             child: SettingsSection(
               backgroundColor: AppColors.kCardColor,
-              widgets: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: accounts.length,
-                  itemBuilder: (context, index) => CustomTile(
+              widgets: List.generate(
+                accounts.length,
+                (index) {
+                  return CustomTile(
                     onTap: () {
                       context.pop(accounts[index]);
                     },
-                    leadingIcon: Icon(accounts[index].accountTypeIcon),
+                    leadingIcon: Icon(
+                      accounts[index].accountTypeIcon,
+                      color: AppColors.kPrimaryColor,
+                    ),
                     titleAndSubtitle: [
                       Text(
                         accounts[index].accountName,
@@ -88,9 +87,9 @@ class SelectAccountScreen extends ConsumerWidget {
                       '\$${accounts[index].currentBalance.toStringAsFixed(2)}',
                       style: TextStyles.title.copyWith(fontSize: 16),
                     ),
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           );
         },
