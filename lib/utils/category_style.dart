@@ -19,71 +19,70 @@ IconStyle getCategoryStyle(CategoryTypes type) {
     // --- Spending ---
     case CategoryTypes.food:
       return IconStyle(
-        icon: Icons.fastfood_outlined,
-        color: const Color(0xFFFFA726),
-        backgroundColor: const Color(0xFFFFF3E0),
+        icon: Icons.restaurant,
+        color: const Color(0xFFFB923C),
+        backgroundColor: const Color(0xFF321704),
       );
     case CategoryTypes.transport:
       return IconStyle(
         icon: Icons.directions_car_outlined,
-        color: const Color(0xFF29B6F6),
-        backgroundColor: const Color(0xFFE1F5FE),
+        color: const Color(0xFFC084FC),
+        backgroundColor: const Color(0xFF221131),
       );
     case CategoryTypes.housing:
       return IconStyle(
         icon: Icons.home_outlined,
-        color: const Color(0xFF66BB6A),
-        backgroundColor: const Color(0xFFE8F5E9),
+        color: const Color(0xFFFACC15),
+        backgroundColor: const Color(0xFF2F2402),
       );
     case CategoryTypes.health:
       return IconStyle(
         icon: Icons.health_and_safety_outlined,
-        color: const Color(0xFFAB47BC),
-        backgroundColor: const Color(0xFFF3E5F5),
+        color: const Color(0xFF4ADE80),
+        backgroundColor: const Color(0xFF072713),
       );
     case CategoryTypes.entertainment:
       return IconStyle(
         icon: Icons.movie_outlined,
-        color: Colors.purple,
-        backgroundColor: Colors.purple.shade100,
+        color: Color(0xFFF472B6),
+        backgroundColor: Color(0xFF2F0E1F),
       );
     case CategoryTypes.shopping:
       return IconStyle(
         icon: Icons.shopping_bag_outlined,
-        color: Colors.pink,
-        backgroundColor: Colors.pink.shade100,
+        color: Color(0xFF60A5FA),
+        backgroundColor: Color(0xFF0C1930),
       );
     case CategoryTypes.bills:
       return IconStyle(
         icon: Icons.receipt_long_outlined,
-        color: Colors.red,
-        backgroundColor: Colors.red.shade100,
+        color: Color(0xFF22D3EE),
+        backgroundColor: Color(0xFF01242A),
       );
     case CategoryTypes.freelance:
       return IconStyle(
         icon: Icons.work_outline,
-        color: Colors.blue,
-        backgroundColor: Colors.blue.shade100,
+        color: Color(0xFF818CF8),
+        backgroundColor: Color(0xFF141430),
       );
     case CategoryTypes.investment:
       return IconStyle(
         icon: Icons.trending_up,
-        color: Colors.green,
-        backgroundColor: Colors.green.shade100,
+        color: Color(0xFFFB7185),
+        backgroundColor: Color(0xFF310D13),
       );
 
-    // --- Income ---
     case CategoryTypes.salary:
       return IconStyle(
         icon: Icons.monetization_on_outlined,
-        color: const Color(0xFF43A047),
-        backgroundColor: const Color(0xFFE8F5E9),
+        color: const Color(0xFF34D399),
+        backgroundColor: const Color(0xFF03251A),
       );
     case CategoryTypes.gifts:
       return IconStyle(
         icon: Icons.card_giftcard_outlined,
-        color: const Color(0xFF8E24AA),
-        backgroundColor: const Color(0xFFF3E5F5),
+        color: const Color(0xFF2DD4BF),
+        backgroundColor: const Color(0xFF042521),
       );
 
     // --- Default ---
