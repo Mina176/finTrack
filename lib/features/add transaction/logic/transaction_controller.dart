@@ -1,5 +1,5 @@
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
-import 'package:fintrack/features/add%20transaction/logic/supabase.dart';
+import 'package:fintrack/features/add%20transaction/logic/transaction_supabase_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -15,7 +15,7 @@ class TransactionController extends _$TransactionController {
     state = const AsyncLoading();
 
     try {
-      final service = ref.read(supabaseServiceProvider);
+      final service = ref.read(transactionSupabaseServiceProvider);
       await service.createTransaction(transaction);
 
       state = const AsyncData(null);
@@ -30,7 +30,7 @@ class TransactionController extends _$TransactionController {
 
 @riverpod
 Future<List<TransactionModel>> getTransactions(Ref ref) async {
-  final service = ref.watch(supabaseServiceProvider);
+  final service = ref.watch(transactionSupabaseServiceProvider);
   return service.getTransactions();
 }
 

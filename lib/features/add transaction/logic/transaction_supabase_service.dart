@@ -2,14 +2,14 @@ import 'package:fintrack/features/add%20transaction/data/transaction_model.dart'
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-part 'supabase.g.dart';
+part 'transaction_supabase_service.g.dart';
 
 @Riverpod(keepAlive: true)
-SupabaseService supabaseService(Ref ref) {
-  return SupabaseService();
+TransactionSupabaseService transactionSupabaseService(Ref ref) {
+  return TransactionSupabaseService();
 }
 
-class SupabaseService {
+class TransactionSupabaseService {
   Future<void> createTransaction(TransactionModel transaction) async {
     await Supabase.instance.client
         .from('transactions')
