@@ -8,10 +8,11 @@ class ButtonWithIcon extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.label,
-    required this.foregroundColor,
+    this.foregroundColor = Colors.black,
     this.backgroundColor = Colors.transparent,
     this.borderColor = AppColors.kButtonBorderColor,
     required this.icon,
+    this.isLoading = false,
   });
   final VoidCallback onPressed;
   final String label;
@@ -19,6 +20,7 @@ class ButtonWithIcon extends StatelessWidget {
   final Color foregroundColor;
   final Color borderColor;
   final Widget icon;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -27,20 +29,24 @@ class ButtonWithIcon extends StatelessWidget {
         backgroundColor: backgroundColor,
         side: BorderSide(color: borderColor),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          icon,
-          gapW4,
-          Text(
-            label,
-            textAlign: TextAlign.center,
-            style: TextStyles.buttonLabel.copyWith(
-              color: foregroundColor,
+      child: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                icon,
+                gapW4,
+                Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: TextStyles.buttonLabel.copyWith(
+                    color: foregroundColor,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -25,43 +25,43 @@ IconStyle getCategoryStyle(CategoryTypes type) {
       );
     case CategoryTypes.transport:
       return IconStyle(
-        icon: Icons.directions_car_outlined,
+        icon: Icons.directions_car,
         color: const Color(0xFFC084FC),
         backgroundColor: const Color(0xFF221131),
       );
     case CategoryTypes.housing:
       return IconStyle(
-        icon: Icons.home_outlined,
+        icon: Icons.home,
         color: const Color(0xFFFACC15),
         backgroundColor: const Color(0xFF2F2402),
       );
     case CategoryTypes.health:
       return IconStyle(
-        icon: Icons.health_and_safety_outlined,
+        icon: Icons.health_and_safety,
         color: const Color(0xFF4ADE80),
         backgroundColor: const Color(0xFF072713),
       );
     case CategoryTypes.entertainment:
       return IconStyle(
-        icon: Icons.movie_outlined,
+        icon: Icons.movie,
         color: Color(0xFFF472B6),
         backgroundColor: Color(0xFF2F0E1F),
       );
     case CategoryTypes.shopping:
       return IconStyle(
-        icon: Icons.shopping_bag_outlined,
+        icon: Icons.shopping_bag,
         color: Color(0xFF60A5FA),
         backgroundColor: Color(0xFF0C1930),
       );
     case CategoryTypes.bills:
       return IconStyle(
-        icon: Icons.receipt_long_outlined,
+        icon: Icons.receipt_long,
         color: Color(0xFF22D3EE),
         backgroundColor: Color(0xFF01242A),
       );
     case CategoryTypes.freelance:
       return IconStyle(
-        icon: Icons.work_outline,
+        icon: Icons.work,
         color: Color(0xFF818CF8),
         backgroundColor: Color(0xFF141430),
       );
@@ -74,13 +74,13 @@ IconStyle getCategoryStyle(CategoryTypes type) {
 
     case CategoryTypes.salary:
       return IconStyle(
-        icon: Icons.monetization_on_outlined,
+        icon: Icons.monetization_on,
         color: const Color(0xFF34D399),
         backgroundColor: const Color(0xFF03251A),
       );
     case CategoryTypes.gifts:
       return IconStyle(
-        icon: Icons.card_giftcard_outlined,
+        icon: Icons.card_giftcard,
         color: const Color(0xFF2DD4BF),
         backgroundColor: const Color(0xFF042521),
       );

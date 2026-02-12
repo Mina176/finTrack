@@ -2,22 +2,17 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/controllers/keyboard_controller.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
-import 'package:fintrack/features/add%20transaction/presentation/animated_button_with_icon.dart';
-import 'package:fintrack/features/add%20transaction/presentation/animated_position_color_button.dart';
 import 'package:fintrack/features/add%20transaction/presentation/animated_positioned_keyboard.dart';
 import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
 import 'package:fintrack/features/add%20transaction/utils/categories_lists.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
-import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/features/budgets/presentation/animated_position_button.dart';
 import 'package:fintrack/features/budgets/presentation/recurrence_duration_selector.dart';
-import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/category_style.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class AddBudgetScreen extends ConsumerStatefulWidget {
   const AddBudgetScreen({super.key});

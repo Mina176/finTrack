@@ -3,8 +3,8 @@ import 'package:fintrack/features/add%20transaction/presentation/animated_button
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class AnimatedPositiomedButton extends StatelessWidget {
-  const AnimatedPositiomedButton({
+class AnimatedPositionColorButton extends StatelessWidget {
+  const AnimatedPositionColorButton({
     super.key,
     required this.showCustomKeypad,
     required this.keypadHeight,

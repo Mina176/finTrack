@@ -7,7 +7,7 @@ import 'package:fintrack/features/add%20transaction/data/transaction_model.dart'
 import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/add%20transaction/presentation/add_note_section.dart';
 import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
-import 'package:fintrack/features/add%20transaction/presentation/animated_positiomed_button.dart';
+import 'package:fintrack/features/add%20transaction/presentation/animated_position_color_button.dart';
 import 'package:fintrack/features/add%20transaction/presentation/animated_positioned_keyboard.dart';
 import 'package:fintrack/features/add%20transaction/presentation/expense_or_income.dart';
 import 'package:fintrack/features/add%20transaction/utils/helpers.dart';
@@ -250,7 +250,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                 ),
               ),
             ),
-            AnimatedPositiomedButton(
+            AnimatedPositionColorButton(
               onTap: () async {
                 if (isLoading) return;
                 if (amount == "0.00") return;
