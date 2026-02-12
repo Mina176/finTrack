@@ -6,6 +6,8 @@ import 'package:fintrack/features/add%20transaction/presentation/animated_positi
 import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
 import 'package:fintrack/features/add%20transaction/utils/categories_lists.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
+import 'package:fintrack/features/budgets/data/budget_model.dart';
+import 'package:fintrack/features/budgets/logic/budget_controller.dart';
 import 'package:fintrack/features/budgets/presentation/animated_position_button.dart';
 import 'package:fintrack/features/budgets/presentation/recurrence_duration_selector.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -13,6 +15,7 @@ import 'package:fintrack/utils/category_style.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class AddBudgetScreen extends ConsumerStatefulWidget {
   const AddBudgetScreen({super.key});
@@ -23,8 +26,9 @@ class AddBudgetScreen extends ConsumerStatefulWidget {
 
 class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
   String amount = "0.00";
+  final nameController = TextEditingController();
+  CategoryTypes selectedCategory = CategoryTypes.food;
   int selectedRecurrenceIndex = 1;
-
   @override
   void initState() {
     super.initState();
@@ -64,14 +68,14 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
     final double listBottomPadding = showCustomKeypad
         ? (keypadHeight + buttonAreaHeight)
         : (buttonAreaHeight + safeAreaBottom + screenSize.height * 0.125);
-    final isLoading = false;
-    // ref.listen(transactionControllerProvider, (previous, next) {
-    //   if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
-    //     context.pop();
-    //   } else if (next.hasError) {
-    //     print("Error: ${next.error}");
-    //   }
-    // });
+    final isLoading = ref.watch(budgetControllerProvider).isLoading;
+    ref.listen(budgetControllerProvider, (previous, next) {
+      if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
+        context.pop();
+      } else if (next.hasError) {
+        print("Error: ${next.error}");
+      }
+    });
     return GestureDetector(
       onTap: ref.read(keypadControllerProvider.notifier).hide,
       behavior: HitTestBehavior.translucent,
@@ -98,6 +102,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                     child: TextFieldWithLabel(
                       label: 'Budget Name',
                       hintText: 'e.g. Monthly Groceries',
+                      controller: nameController,
                     ),
                   ),
                   Padding(
@@ -107,7 +112,14 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
 
                     child: Text('Category', style: TextStyles.labelText),
                   ),
-                  ChooseCategoryHorizontalListView(),
+                  ChooseCategoryHorizontalListView(
+                    selectedCategory: selectedCategory,
+                    onCategorySelected: (category) {
+                      setState(() {
+                        selectedCategory = category;
+                      });
+                    },
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: Sizes.kHorizontalPadding,
@@ -145,7 +157,32 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
               ),
             ),
             AnimatedPositionButton(
-              onTap: () {},
+              onTap: () async {
+                if (isLoading) return;
+                if (amount == "0.00") return;
+                ref.read(keypadControllerProvider.notifier).hide();
+                try {
+                  await ref
+                      .read(budgetControllerProvider.notifier)
+                      .createBudget(
+                        BudgetModel(
+                          limit: amount.isEmpty ? 0.0 : double.parse(amount),
+                          spent: 0.0,
+                          budgetName: nameController.text.isEmpty
+                              ? "Unnamed Budget"
+                              : nameController.text,
+                          category: selectedCategory,
+                          recurrenceDuration: selectedRecurrenceIndex == 0
+                              ? RecurrenceDuration.weekly
+                              : selectedRecurrenceIndex == 1
+                              ? RecurrenceDuration.monthly
+                              : RecurrenceDuration.yearly,
+                        ),
+                      );
+                } catch (e) {
+                  print("Error: $e");
+                }
+              },
               showCustomKeypad: showCustomKeypad,
               keypadHeight: keypadHeight,
               buttonAreaHeight: buttonAreaHeight,
@@ -166,20 +203,14 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
   }
 }
 
-class ChooseCategoryHorizontalListView extends StatefulWidget {
+class ChooseCategoryHorizontalListView extends StatelessWidget {
   const ChooseCategoryHorizontalListView({
     super.key,
+    required this.selectedCategory,
+    required this.onCategorySelected,
   });
-
-  @override
-  State<ChooseCategoryHorizontalListView> createState() =>
-      _ChooseCategoryHorizontalListViewState();
-}
-
-class _ChooseCategoryHorizontalListViewState
-    extends State<ChooseCategoryHorizontalListView> {
-  CategoryTypes? selectedCategory = spendingCategoriesList[0].categoryType;
-
+  final CategoryTypes selectedCategory;
+  final ValueChanged<CategoryTypes> onCategorySelected;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -194,11 +225,7 @@ class _ChooseCategoryHorizontalListViewState
             child: SelectCategoryListviewItem(
               categoryType: categoryType,
               isSelected: selectedCategory == categoryType,
-              onTap: () {
-                setState(() {
-                  selectedCategory = categoryType;
-                });
-              },
+              onTap: () => onCategorySelected(categoryType),
             ),
           );
         },
