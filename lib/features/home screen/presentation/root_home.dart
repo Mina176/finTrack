@@ -4,9 +4,7 @@ import 'package:fintrack/features/budgets/presentation/budgets_screen.dart';
 import 'package:fintrack/features/home%20screen/presentation/home_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
-import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class RootHomeScreen extends StatefulWidget {

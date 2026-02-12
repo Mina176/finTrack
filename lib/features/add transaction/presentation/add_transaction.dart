@@ -32,11 +32,9 @@ class AddTransactionScreen extends ConsumerStatefulWidget {
 class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   int expenseOrIncome = 0; // 0 for Expense
   String amount = "0.00";
-  bool _showCustomKeypad = false;
   DateTime selectedDate = DateTime.now();
   final FocusNode _noteFocusNode = FocusNode();
   final TextEditingController noteController = TextEditingController();
-
   CategoryIcon selectedCategory = CategoryIcon(
     categoryType: CategoryTypes.food,
   );
@@ -103,9 +101,9 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
     );
     final double safeAreaBottom = MediaQuery.of(context).padding.bottom;
     final double hiddenOffset = -(keypadHeight + safeAreaBottom);
-    final double listBottomPadding = _showCustomKeypad
+    final double listBottomPadding = showCustomKeypad
         ? (keypadHeight + buttonAreaHeight)
-        : (buttonAreaHeight + safeAreaBottom + screenSize.height * 0.151);
+        : (buttonAreaHeight + safeAreaBottom + screenSize.height * 0.09);
     final transactionState = ref.watch(transactionControllerProvider);
     final accountState = ref.watch(accountControllerProvider);
     final isLoading = transactionState.isLoading || accountState.isLoading;
@@ -149,15 +147,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                       },
                     ),
                     SizedBox(height: screenSize.height * 0.01),
-                    const Text(
-                      "Amount (USD)",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    const SizedBox(height: 10),
-                    AmountOfMoney(
-                      activateCustomKeypad: activateCustomKeypad,
-                      screenSize: screenSize,
+                    DisplayAmount(
                       amount: amount,
                     ),
                     SizedBox(height: screenSize.height * 0.005),
@@ -298,7 +288,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                 }
               },
               isLoading: isLoading,
-              showCustomKeypad: _showCustomKeypad,
+              showCustomKeypad: showCustomKeypad,
               keypadHeight: keypadHeight,
               buttonAreaHeight: buttonAreaHeight,
               safeAreaBottom: safeAreaBottom,
