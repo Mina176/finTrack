@@ -1,5 +1,6 @@
 import 'package:fintrack/features/budgets/data/budget_model.dart';
 import 'package:fintrack/features/budgets/logic/budget_supabase.dart';
+import 'package:fintrack/features/budgets/presentation/budgets_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -25,18 +26,21 @@ class BudgetController extends _$BudgetController {
 }
 
 @riverpod
-Future<List<BudgetModel>> getBudgets(Ref ref) async {
+Future<List<BudgetModel>> getBudgets(Ref ref, RecurrenceDuration period) async {
   try {
-    final service = ref.read(budgetSupabaseServiceProvider);
-    return await service.getBudgets();
+    final service = ref.watch(budgetSupabaseServiceProvider);
+    return await service.getBudgets(period);
   } catch (error) {
     throw Exception('Failed to fetch budgets: $error');
   }
 }
 
 @riverpod
-Future<AllBudgetsDetails> getAllBudgetsDetails(Ref ref) async {
-  final budgets = await ref.watch(getBudgetsProvider.future);
+Future<AllBudgetsDetails> getAllBudgetsDetails(
+  Ref ref,
+  RecurrenceDuration period,
+) async {
+  final budgets = await ref.watch(getBudgetsProvider(period).future);
   double totalLimit = 0.0;
   for (var budget in budgets) {
     totalLimit += budget.limit;

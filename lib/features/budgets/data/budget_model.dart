@@ -17,6 +17,22 @@ class BudgetModel {
     required this.recurrenceDuration,
   });
 
+  BudgetModel copyWith({
+    double? limit,
+    double? spent,
+    String? budgetName,
+    CategoryTypes? category,
+    RecurrenceDuration? recurrenceDuration,
+  }) {
+    return BudgetModel(
+      limit: limit ?? this.limit,
+      spent: spent ?? this.spent,
+      budgetName: budgetName ?? this.budgetName,
+      category: category ?? this.category,
+      recurrenceDuration: recurrenceDuration ?? this.recurrenceDuration,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'limit': limit,
