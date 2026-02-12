@@ -1,11 +1,12 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
+import 'package:fintrack/controllers/keyboard_controller.dart';
 import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
 import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/add%20transaction/presentation/add_note_section.dart';
-import 'package:fintrack/features/add%20transaction/presentation/amount_of_money.dart';
+import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
 import 'package:fintrack/features/add%20transaction/presentation/animated_positiomed_button.dart';
 import 'package:fintrack/features/add%20transaction/presentation/animated_positioned_keyboard.dart';
 import 'package:fintrack/features/add%20transaction/presentation/expense_or_income.dart';
@@ -52,9 +53,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
     super.initState();
     _noteFocusNode.addListener(() {
       if (_noteFocusNode.hasFocus) {
-        setState(() {
-          _showCustomKeypad = false;
-        });
+        ref.read(keypadControllerProvider.notifier).hide();
       }
     });
   }
@@ -79,15 +78,11 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
     });
   }
 
-  void activateCustomKeypad() {
-    FocusScope.of(context).unfocus();
-    setState(() => _showCustomKeypad = true);
-  }
-
   void dismissKeypads() {
-    if (_showCustomKeypad || _noteFocusNode.hasFocus) {
+    final isKeypadVisible = ref.read(keypadControllerProvider);
+    if (isKeypadVisible || _noteFocusNode.hasFocus) {
       FocusScope.of(context).unfocus();
-      setState(() => _showCustomKeypad = false);
+      ref.read(keypadControllerProvider.notifier).hide();
     }
   }
 
@@ -99,6 +94,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final showCustomKeypad = ref.watch(keypadControllerProvider);
     final Size screenSize = MediaQuery.of(context).size;
     final double keypadHeight = screenSize.height * 0.35;
     final double buttonAreaHeight = (screenSize.height * 0.1).clamp(
@@ -163,7 +159,6 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                       activateCustomKeypad: activateCustomKeypad,
                       screenSize: screenSize,
                       amount: amount,
-                      showCustomKeypad: _showCustomKeypad,
                     ),
                     SizedBox(height: screenSize.height * 0.005),
                     SettingsSection(
@@ -311,7 +306,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
             ),
             AnimatedPositionedKeyboard(
               onKeyTap: _onKeyTap,
-              showCustomKeypad: _showCustomKeypad,
+              showCustomKeypad: showCustomKeypad,
               hiddenOffset: hiddenOffset,
               keypadHeight: keypadHeight,
               safeAreaBottom: safeAreaBottom,
