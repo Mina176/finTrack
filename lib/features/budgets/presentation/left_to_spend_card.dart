@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 class LeftToSpendCard extends StatelessWidget {
   const LeftToSpendCard({
     super.key,
-    required this.leftToSpendAmount,
     required this.spentAmount,
     required this.spendLimit,
+    required this.leading,
   });
-  final double leftToSpendAmount;
   final double spentAmount;
   final double spendLimit;
+  final Widget leading;
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +23,8 @@ class LeftToSpendCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'LEFT TO SPEND',
-              style: TextStyles.headerLink,
-            ),
-            Text(
-              '\$${leftToSpendAmount.toStringAsFixed(0)}',
-              style: TextStyles.header.copyWith(fontSize: 32),
-            ),
+            leading,
             gapH16,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
