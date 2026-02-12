@@ -13,4 +13,10 @@ class BudgetSupabaseService {
   Future<void> createBudget(BudgetModel budget) async {
     await Supabase.instance.client.from('budgets').insert(budget.toMap());
   }
+
+  Future<List<BudgetModel>> getBudgets() async {
+    final response = await Supabase.instance.client.from('budgets').select();
+    final data = response as List<dynamic>;
+    return data.map((item) => BudgetModel.fromMap(item)).toList();
+  }
 }

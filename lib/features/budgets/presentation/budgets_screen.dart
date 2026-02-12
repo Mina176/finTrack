@@ -1,19 +1,24 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
+import 'package:fintrack/features/budgets/logic/budget_controller.dart';
+import 'package:fintrack/features/budgets/logic/budget_supabase.dart';
 import 'package:fintrack/features/budgets/presentation/category_remaining_card.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class BudgetsScreen extends StatelessWidget {
+class BudgetsScreen extends ConsumerWidget {
   const BudgetsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final budgetsAsync = ref.watch(getBudgetsProvider);
+    final budgetsDetails = ref.watch(getAllBudgetsDetailsProvider);
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
@@ -50,27 +55,46 @@ class BudgetsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  LeftToSpendCard(),
+                  LeftToSpendCard(
+                    leftToSpendAmount: budgetsDetails.value?.totalLimit ?? 0.0,
+                    spentAmount: budgetsDetails.value?.totalSpent ?? 0.0,
+                    spendLimit: budgetsDetails.value?.totalLimit ?? 0.0,
+                  ),
                   gapH16,
                   Text('Categories', style: TextStyles.header),
                   gapH8,
                 ],
               ),
             ),
-            SliverList.separated(
-              itemBuilder: (context, index) {
-                return CategoryRemainingCard(
-                  categoryDetails: CategoryDetails(
-                    categoryType: CategoryTypes.transport,
-                    amountSpent: 120,
-                    spendLimit: 200,
-                  ),
-                );
-              },
-              itemCount: 5,
-              separatorBuilder: (context, index) {
-                return gapH8;
-              },
+            budgetsAsync.when(
+              data: (budgets) => SliverList.builder(
+                itemCount: budgets.length,
+                itemBuilder: (context, index) {
+                  final budget = budgets[index];
+                  return Column(
+                    children: [
+                      CategoryRemainingCard(
+                        categoryDetails: CategoryDetails(
+                          categoryType: budget.category,
+                          amountSpent: budget.spent,
+                          spendLimit: budget.limit,
+                        ),
+                      ),
+                      gapH12,
+                    ],
+                  );
+                },
+              ),
+              loading: () => const SliverToBoxAdapter(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+              error: (error, stackTrace) => SliverToBoxAdapter(
+                child: Center(
+                  child: Text('Error loading budgets'),
+                ),
+              ),
             ),
           ],
         ),
@@ -82,7 +106,13 @@ class BudgetsScreen extends StatelessWidget {
 class LeftToSpendCard extends StatelessWidget {
   const LeftToSpendCard({
     super.key,
+    required this.leftToSpendAmount,
+    required this.spentAmount,
+    required this.spendLimit,
   });
+  final double leftToSpendAmount;
+  final double spentAmount;
+  final double spendLimit;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +127,7 @@ class LeftToSpendCard extends StatelessWidget {
               style: TextStyles.headerLink,
             ),
             Text(
-              '\$1,300',
+              '\$${leftToSpendAmount.toStringAsFixed(0)}',
               style: TextStyles.header.copyWith(fontSize: 32),
             ),
             gapH16,
@@ -109,14 +139,15 @@ class LeftToSpendCard extends StatelessWidget {
                   style: TextStyles.subtitle.copyWith(fontSize: 12),
                 ),
                 Text(
-                  '\$700 / \$2,000'.hardcoded,
+                  '\$${spentAmount.toStringAsFixed(0)} / \$${spendLimit.toStringAsFixed(0)}'
+                      .hardcoded,
                   style: TextStyles.subtitle.copyWith(fontSize: 12),
                 ),
               ],
             ),
             gapH8,
             LinearProgressIndicator(
-              value: 0.35,
+              value: spentAmount / spendLimit,
               backgroundColor: Colors.black,
               minHeight: 6,
               borderRadius: BorderRadius.circular(8),

@@ -6,7 +6,43 @@ part of 'budget_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$budgetControllerHash() => r'e9a777db9ea0548c7e18021c0f11da9dcee7fac0';
+String _$getBudgetsHash() => r'c894305d4e14dd3813e597614715d879f02f4d91';
+
+/// See also [getBudgets].
+@ProviderFor(getBudgets)
+final getBudgetsProvider =
+    AutoDisposeFutureProvider<List<BudgetModel>>.internal(
+      getBudgets,
+      name: r'getBudgetsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getBudgetsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetBudgetsRef = AutoDisposeFutureProviderRef<List<BudgetModel>>;
+String _$getBudgetsDetailsHash() => r'39c1d195735070eb534825a9793f20593924433c';
+
+/// See also [getAllBudgetsDetails].
+@ProviderFor(getAllBudgetsDetails)
+final getAllBudgetsDetailsProvider =
+    AutoDisposeFutureProvider<AllBudgetsDetails>.internal(
+      getAllBudgetsDetails,
+      name: r'getAllBudgetsDetailsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getBudgetsDetailsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetBudgetsDetailsRef = AutoDisposeFutureProviderRef<AllBudgetsDetails>;
+String _$budgetControllerHash() => r'abab231005efa3754c888c48869667c86f4656d5';
 
 /// See also [BudgetController].
 @ProviderFor(BudgetController)
