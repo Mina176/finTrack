@@ -1,14 +1,13 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
-import 'package:fintrack/features/add%20transaction/utils/helpers.dart';
 import 'package:fintrack/features/budgets/presentation/category_remaining_card.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
+import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
-import 'package:fintrack/widgets/category_icon.dart';
-import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BudgetsScreen extends StatelessWidget {
   const BudgetsScreen({super.key});
@@ -32,7 +31,9 @@ class BudgetsScreen extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(AppRoutes.addBudget.path);
+                },
                 icon: const Icon(Icons.add, color: Colors.black),
               ),
             ),
@@ -77,6 +78,7 @@ class BudgetsScreen extends StatelessWidget {
     );
   }
 }
+
 class LeftToSpendCard extends StatelessWidget {
   const LeftToSpendCard({
     super.key,
