@@ -150,29 +150,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               )
                             : Text('Login'),
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          side: BorderSide(color: AppColors.kButtonBorderColor),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.fingerprint_rounded,
-                              color: AppColors.kTransparentButtonlabelColor,
-                            ),
-                            gapW4,
-                            Text(
-                              'Sign in with Face ID',
-                              style: TextStyles.buttonLabel.copyWith(
-                                color: AppColors.kTransparentButtonlabelColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       CustomDivider(
                         centeredText: 'OR',
                       ),

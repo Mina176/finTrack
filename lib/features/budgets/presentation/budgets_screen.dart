@@ -38,26 +38,25 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
       backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
         forceMaterialTransparency: true,
-        title: const Text(
-          'My Budgets',
-          style: TextStyles.header,
-        ),
+        title: Text('My budgets'),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.kPrimaryColor,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                onPressed: () {
-                  context.push(AppRoutes.addBudget.path);
-                },
-                icon: const Icon(Icons.add, color: Colors.black),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: AppColors.kPrimaryColor,
+              shape: BoxShape.circle,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(6),
+              child: GestureDetector(
+                onTap: () => context.push(AppRoutes.addBudget.path),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
+          gapW20,
         ],
       ),
       body: Padding(

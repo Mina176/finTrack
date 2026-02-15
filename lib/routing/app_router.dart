@@ -43,7 +43,8 @@ final routerProvider = Provider<GoRouter>((ref) {
             isSignUpRoute ||
             isOnboarding ||
             isForgotPassword ||
-            isResetPassword) {
+            isResetPassword ||
+            isSplash) {
           return null;
         }
         return AppRoutes.signIn.path;
@@ -55,8 +56,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             isSignUpRoute ||
             isOnboarding ||
             isForgotPassword ||
-            isResetPassword ||
-            isSplash) {
+            isResetPassword) {
           return AppRoutes.home.path;
         }
       }
