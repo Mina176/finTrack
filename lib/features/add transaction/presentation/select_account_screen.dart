@@ -6,6 +6,7 @@ import 'package:fintrack/features/authentication/presentation/profile_screen.dar
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
+import 'package:fintrack/widgets/settings_section.dart' show SettingsSection;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

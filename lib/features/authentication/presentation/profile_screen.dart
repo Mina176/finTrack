@@ -1,10 +1,13 @@
+import 'package:currency_picker/currency_picker.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
 import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
+import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
+import 'package:fintrack/widgets/settings_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,6 +16,7 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentCurrencyCode = ref.watch(currencyProvider);
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
@@ -38,16 +42,31 @@ class ProfileScreen extends ConsumerWidget {
               ),
               backgroundColor: AppColors.kCustomContainerBackground,
               widgets: [
-                CustomTile(
-                  iconData: Icons.lock,
-                  titleAndSubtitle: [
-                    Text(
-                      'Change Password',
-                      style: TextStyles.labelText,
-                    ),
-                  ],
-                  trailing: Icon(Icons.arrow_forward_ios, size: 14),
+                ListTile(
                   onTap: () {},
+                  leading: Icon(
+                    Icons.fingerprint,
+                    size: 28,
+                    color: AppColors.kPrimaryColor,
+                  ),
+                  title: Text(
+                    'Change Password',
+                    style: TextStyles.labelText,
+                  ),
+                  trailing: Icon(Icons.arrow_forward_ios, size: 14),
+                ),
+                ListTile(
+                  onTap: () {},
+                  leading: Icon(
+                    Icons.fingerprint,
+                    size: 28,
+                    color: AppColors.kPrimaryColor,
+                  ),
+                  title: Text(
+                    'Change Password',
+                    style: TextStyles.labelText,
+                  ),
+                  trailing: Icon(Icons.arrow_forward_ios, size: 14),
                 ),
               ],
             ),
@@ -91,18 +110,13 @@ class ProfileScreen extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'USD'.hardcoded,
+                        currentCurrencyCode,
                         style: TextStyles.subtitle.copyWith(fontSize: 12),
                       ),
                       SizedBox(width: 8),
                       Icon(Icons.arrow_forward_ios, size: 14),
                     ],
                   ),
-                  onTap: () {},
-                ),
-                Divider(
-                  height: 0.1,
-                  color: AppColors.kDividerColor,
                 ),
                 CustomTile(
                   iconData: Icons.color_lens,
@@ -127,7 +141,6 @@ class ProfileScreen extends ConsumerWidget {
                 ),
               ],
             ),
-
             Spacer(),
             ButtonWithIcon(
               onPressed: ref.read(authControllerProvider.notifier).signOut,
@@ -140,56 +153,6 @@ class ProfileScreen extends ConsumerWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class SettingsSection extends StatelessWidget {
-  const SettingsSection({
-    super.key,
-    required this.widgets,
-    required this.backgroundColor,
-    this.header,
-  });
-  final Widget? header;
-  final Color backgroundColor;
-  final List<Widget> widgets;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      spacing: 8,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        header ?? SizedBox.shrink(),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: AppColors.kDividerColor,
-              width: 1,
-            ),
-          ),
-          child: widgets.length == 1
-              ? widgets.first
-              : Column(
-                  children: [
-                    ...widgets
-                        .expand(
-                          (widget) => [
-                            widget,
-                            Divider(
-                              height: 0.1,
-                              color: AppColors.kDividerColor,
-                            ),
-                          ],
-                        )
-                        .toList()
-                      ..removeLast(),
-                  ],
-                ),
-        ),
-      ],
     );
   }
 }

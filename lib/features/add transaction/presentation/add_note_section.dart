@@ -2,6 +2,7 @@ import 'package:fintrack/constants/app_sizes.dart' show gapH8;
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
+import 'package:fintrack/widgets/settings_section.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
