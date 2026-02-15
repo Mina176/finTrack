@@ -60,6 +60,26 @@ class ProfileScreen extends ConsumerWidget {
               backgroundColor: AppColors.kCustomContainerBackground,
               widgets: [
                 CustomTile(
+                  onTap: () => showCurrencyPicker(
+                    theme: CurrencyPickerThemeData(
+                      inputDecoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: AppColors.kSubtitleColor,
+                        ),
+                        hintText: 'Search currency name or code',
+                      ),
+                      backgroundColor: AppColors.kBackgroundColor,
+                      titleTextStyle: TextStyles.title.copyWith(fontSize: 18),
+                      subtitleTextStyle: TextStyles.subtitle.copyWith(
+                        fontSize: 14,
+                      ),
+                    ),
+                    context: context,
+                    onSelect: (value) {
+                      ref.read(currencyProvider.notifier).state = value.code;
+                    },
+                  ),
                   iconData: Icons.attach_money,
                   titleAndSubtitle: [
                     Text(
