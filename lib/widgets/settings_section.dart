@@ -1,4 +1,3 @@
-
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -25,20 +24,25 @@ class SettingsSection extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              ...widgets.length == 1
-                    ? widgets
-                    : widgets
-                          .expand(
-                            (widget) => [
-                              widget,
-                              Divider(
-                                height: 0.1,
-                                color: AppColors.kDividerColor,
-                              ),
-                            ],
-                          )
-                          .toList()
-                ..removeLast(),
+              if (widgets.isEmpty)
+                const SizedBox.shrink()
+              else if (widgets.length == 1)
+                ...widgets
+              else
+                ...widgets.length == 1
+                      ? widgets
+                      : widgets
+                            .expand(
+                              (widget) => [
+                                widget,
+                                Divider(
+                                  height: 0.1,
+                                  color: AppColors.kDividerColor,
+                                ),
+                              ],
+                            )
+                            .toList()
+                  ..removeLast(),
             ],
           ),
         ),

@@ -155,7 +155,8 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                     SettingsSection(
                       backgroundColor: AppColors.kDefaultTileBackground,
                       widgets: [
-                        CustomTile(
+                        ListTile(
+                          dense: true,
                           onTap: () async {
                             dismissKeypads();
                             final result = await context.push<CategoryIcon>(
@@ -167,19 +168,18 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                               });
                             }
                           },
-                          leadingIcon: selectedCategory,
-                          titleAndSubtitle: [
-                            Text(
-                              "Category",
-                              style: TextStyles.addTransactionSettingstitle,
-                            ),
-                            Text(
-                              selectedCategory.categoryType.name,
-                              style: TextStyles.addTransactionSettingsSubtitle,
-                            ),
-                          ],
+                          leading: selectedCategory,
+                          title: Text(
+                            "Category",
+                            style: TextStyles.addTransactionSettingstitle,
+                          ),
+                          subtitle: Text(
+                            selectedCategory.categoryType.name,
+                            style: TextStyles.addTransactionSettingsSubtitle,
+                          ),
                         ),
-                        CustomTile(
+                        ListTile(
+                          dense: true,
                           onTap: () async {
                             dismissKeypads();
                             final result = await context.push<AccountModel>(
@@ -191,21 +191,20 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                               });
                             }
                           },
-                          leadingIcon: getAccountIcon(
+                          leading: getAccountIcon(
                             selectedAccount.accountType,
                           ),
-                          titleAndSubtitle: [
-                            Text(
-                              getAccountName(selectedAccount.accountType),
-                              style: TextStyles.addTransactionSettingstitle,
-                            ),
-                            Text(
-                              selectedAccount.accountName,
-                              style: TextStyles.addTransactionSettingsSubtitle,
-                            ),
-                          ],
+                          title: Text(
+                            getAccountName(selectedAccount.accountType),
+                            style: TextStyles.addTransactionSettingstitle,
+                          ),
+                          subtitle: Text(
+                            selectedAccount.accountName,
+                            style: TextStyles.addTransactionSettingsSubtitle,
+                          ),
                         ),
-                        CustomTile(
+                        ListTile(
+                          dense: true,
                           onTap: () async {
                             dismissKeypads();
                             final pickedDate = await showDatePicker(
@@ -227,17 +226,18 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                               });
                             }
                           },
-                          iconData: Icons.calendar_today,
-                          titleAndSubtitle: [
-                            const Text(
-                              "Date",
-                              style: TextStyles.addTransactionSettingstitle,
-                            ),
-                            Text(
-                              DateFormat('EEE, MMM d').format(selectedDate),
-                              style: TextStyles.addTransactionSettingsSubtitle,
-                            ),
-                          ],
+                          leading: Icon(
+                            Icons.calendar_today,
+                            color: AppColors.kPrimaryColor,
+                          ),
+                          title: const Text(
+                            "Date",
+                            style: TextStyles.addTransactionSettingstitle,
+                          ),
+                          subtitle: Text(
+                            DateFormat('EEE, MMM d').format(selectedDate),
+                            style: TextStyles.addTransactionSettingsSubtitle,
+                          ),
                         ),
                       ],
                     ),

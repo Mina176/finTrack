@@ -114,22 +114,19 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                     widgets: List.generate(
                       accounts.length,
                       (index) {
-                        return CustomTile(
+                        return ListTile(
                           onTap: () {},
-                          iconData: accounts[index].accountTypeIcon,
-                          titleAndSubtitle: [
-                            Text(
-                              accounts[index].accountName,
-                              style: TextStyles.title.copyWith(fontSize: 16),
+                          leading: Icon(accounts[index].accountTypeIcon),
+                          title: Text(
+                            accounts[index].accountName,
+                            style: TextStyles.title.copyWith(fontSize: 16),
+                          ),
+                          subtitle: Text(
+                            '\$${accounts[index].balance.toStringAsFixed(2)}',
+                            style: TextStyles.subtitle.copyWith(
+                              fontSize: 14,
                             ),
-                            gapH4,
-                            Text(
-                              '\$${accounts[index].balance.toStringAsFixed(2)}',
-                              style: TextStyles.subtitle.copyWith(
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                          ),
                           trailing: Text(
                             '\$${accounts[index].currentBalance.toStringAsFixed(2)}',
                             style: TextStyles.title.copyWith(

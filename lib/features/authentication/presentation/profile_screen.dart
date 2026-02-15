@@ -55,19 +55,6 @@ class ProfileScreen extends ConsumerWidget {
                   ),
                   trailing: Icon(Icons.arrow_forward_ios, size: 14),
                 ),
-                ListTile(
-                  onTap: () {},
-                  leading: Icon(
-                    Icons.fingerprint,
-                    size: 28,
-                    color: AppColors.kPrimaryColor,
-                  ),
-                  title: Text(
-                    'Change Password',
-                    style: TextStyles.labelText,
-                  ),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 14),
-                ),
               ],
             ),
             SettingsSection(
@@ -78,7 +65,7 @@ class ProfileScreen extends ConsumerWidget {
               ),
               backgroundColor: AppColors.kCustomContainerBackground,
               widgets: [
-                CustomTile(
+                ListTile(
                   onTap: () => showCurrencyPicker(
                     theme: CurrencyPickerThemeData(
                       inputDecoration: InputDecoration(
@@ -99,13 +86,14 @@ class ProfileScreen extends ConsumerWidget {
                       ref.read(currencyProvider.notifier).state = value.code;
                     },
                   ),
-                  iconData: Icons.attach_money,
-                  titleAndSubtitle: [
-                    Text(
-                      'Currency',
-                      style: TextStyles.labelText,
-                    ),
-                  ],
+                  leading: Icon(
+                    Icons.attach_money,
+                    color: AppColors.kPrimaryColor,
+                  ),
+                  title: Text(
+                    'Currency',
+                    style: TextStyles.labelText,
+                  ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -118,14 +106,16 @@ class ProfileScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-                CustomTile(
-                  iconData: Icons.color_lens,
-                  titleAndSubtitle: [
-                    Text(
-                      'Theme',
-                      style: TextStyles.labelText,
-                    ),
-                  ],
+                ListTile(
+                  onTap: () {},
+                  leading: Icon(
+                    Icons.color_lens,
+                    color: AppColors.kPrimaryColor,
+                  ),
+                  title: Text(
+                    'Theme',
+                    style: TextStyles.labelText,
+                  ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -137,7 +127,6 @@ class ProfileScreen extends ConsumerWidget {
                       Icon(Icons.arrow_forward_ios, size: 14),
                     ],
                   ),
-                  onTap: () {},
                 ),
               ],
             ),

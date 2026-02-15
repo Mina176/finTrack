@@ -12,39 +12,27 @@ class TransactionCard extends StatelessWidget {
   final TransactionModel transaction;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        children: [
-          CategoryIcon(categoryType: transaction.category),
-          gapW12,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                transaction.category.name[0].toUpperCase() +
-                    transaction.category.name.substring(1),
-                style: TextStyles.title.copyWith(fontSize: 16),
-              ),
-              Text(
-                DateFormat('EEE, MMM d').format(transaction.date),
-                style: TextStyles.subtitle.copyWith(
-                  fontSize: 12,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          Spacer(),
-          Text(
-            formatDouble(transaction.amount, transaction.isExpense).hardcoded,
-            style: TextStyles.title.copyWith(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: transaction.isExpense ? null : AppColors.kPrimaryColor,
-            ),
-          ),
-        ],
+    return ListTile(
+      leading: CategoryIcon(categoryType: transaction.category),
+      title: Text(
+        transaction.category.name[0].toUpperCase() +
+            transaction.category.name.substring(1),
+        style: TextStyles.title.copyWith(fontSize: 16),
+      ),
+      subtitle: Text(
+        DateFormat('EEE, MMM d').format(transaction.date),
+        style: TextStyles.subtitle.copyWith(
+          fontSize: 12,
+          color: Colors.grey,
+        ),
+      ),
+      trailing: Text(
+        formatDouble(transaction.amount, transaction.isExpense).hardcoded,
+        style: TextStyles.title.copyWith(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: transaction.isExpense ? null : AppColors.kPrimaryColor,
+        ),
       ),
     );
   }

@@ -63,27 +63,26 @@ class SelectAccountScreen extends ConsumerWidget {
               widgets: List.generate(
                 accounts.length,
                 (index) {
-                  return CustomTile(
+                  return ListTile(
                     onTap: () {
                       context.pop(accounts[index]);
                     },
-                    leadingIcon: Icon(
+                    leading: Icon(
                       accounts[index].accountTypeIcon,
                       color: AppColors.kPrimaryColor,
                     ),
-                    titleAndSubtitle: [
-                      Text(
-                        accounts[index].accountName,
-                        style: TextStyles.title.copyWith(fontSize: 16),
+                    title: Text(
+                      accounts[index].accountName,
+                      style: TextStyles.title.copyWith(fontSize: 16),
+                    ),
+
+                    subtitle: Text(
+                      '\$${accounts[index].balance.toStringAsFixed(2)}',
+                      style: TextStyles.subtitle.copyWith(
+                        fontSize: 14,
                       ),
-                      gapH4,
-                      Text(
-                        '\$${accounts[index].balance.toStringAsFixed(2)}',
-                        style: TextStyles.subtitle.copyWith(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
+                    ),
+
                     trailing: Text(
                       '\$${accounts[index].currentBalance.toStringAsFixed(2)}',
                       style: TextStyles.title.copyWith(

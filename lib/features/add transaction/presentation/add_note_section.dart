@@ -25,35 +25,32 @@ class AddNoteSection extends StatelessWidget {
     return SettingsSection(
       backgroundColor: AppColors.kDefaultTileBackground,
       widgets: [
-        CustomTile(
+        ListTile(
           onTap: () {},
-          iconData: FontAwesomeIcons.noteSticky,
+          leading: Icon(FontAwesomeIcons.noteSticky),
           trailing: SizedBox(),
-          titleAndSubtitle: [
-            const Text(
-              "Note",
-              style: TextStyles.addTransactionSettingstitle,
-            ),
-            gapH8,
-            SizedBox(
-              width: screenSize.width * 0.6,
-              child: TextField(
-                controller: controller,
-                focusNode: noteFocusNode,
-                style: TextStyles.addTransactionSettingsSubtitle,
-                decoration: const InputDecoration(
-                  filled: false,
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  isDense: true,
-                  contentPadding: EdgeInsets.zero,
-                  hintText: 'Add a note...',
-                  hintStyle: TextStyles.addTransactionSettingsSubtitle,
-                ),
+          title: const Text(
+            "Note",
+            style: TextStyles.addTransactionSettingstitle,
+          ),
+          subtitle: SizedBox(
+            width: screenSize.width * 0.6,
+            child: TextField(
+              controller: controller,
+              focusNode: noteFocusNode,
+              style: TextStyles.addTransactionSettingsSubtitle,
+              decoration: const InputDecoration(
+                filled: false,
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+                hintText: 'Add a note...',
+                hintStyle: TextStyles.addTransactionSettingsSubtitle,
               ),
             ),
-          ],
+          ),
         ),
       ],
     );
