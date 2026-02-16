@@ -3,6 +3,7 @@ import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/accounts/presentation/accounts_screen.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
+import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
@@ -18,6 +19,7 @@ class SelectAccountScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final accountsAsync = ref.watch(getAccountsProvider);
+    final currencySymbol = ref.watch(currencySymbolProvider);
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
@@ -77,14 +79,14 @@ class SelectAccountScreen extends ConsumerWidget {
                     ),
 
                     subtitle: Text(
-                      '\$${accounts[index].balance.toStringAsFixed(2)}',
+                      '$currencySymbol${accounts[index].balance.toStringAsFixed(2)}',
                       style: TextStyles.subtitle.copyWith(
                         fontSize: 14,
                       ),
                     ),
 
                     trailing: Text(
-                      '\$${accounts[index].currentBalance.toStringAsFixed(2)}',
+                      '$currencySymbol${accounts[index].currentBalance.toStringAsFixed(2)}',
                       style: TextStyles.title.copyWith(
                         fontSize: 16,
                         color: accounts[index].currentBalance < 0

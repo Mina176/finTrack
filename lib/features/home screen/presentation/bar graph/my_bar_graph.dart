@@ -1,13 +1,16 @@
+import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/features/home%20screen/presentation/bar%20graph/bar_data.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyBarGraph extends StatelessWidget {
+class MyBarGraph extends ConsumerWidget {
   const MyBarGraph({super.key, required this.weeklySummary});
   final List<double> weeklySummary;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currencySymbol = ref.read(currencySymbolProvider);
     BarData myBarData = BarData(
       sunAmount: weeklySummary[0].toDouble(),
       monAmount: weeklySummary[1].toDouble(),
@@ -33,7 +36,7 @@ class MyBarGraph extends StatelessWidget {
             tooltipBorderRadius: BorderRadius.circular(6),
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
               return BarTooltipItem(
-                '\$${rod.toY.toInt()}',
+                '$currencySymbol${rod.toY.toInt()}',
                 const TextStyle(
                   color: AppColors.kPrimaryColor,
                   fontWeight: FontWeight.bold,

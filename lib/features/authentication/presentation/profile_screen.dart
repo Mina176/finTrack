@@ -16,7 +16,7 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentCurrencyCode = ref.watch(currencyProvider);
+    final currentCurrencyCode = ref.watch(currencyCodeProvider);
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
@@ -83,7 +83,10 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                     context: context,
                     onSelect: (value) {
-                      ref.read(currencyProvider.notifier).state = value.code;
+                      ref.read(currencyCodeProvider.notifier).state =
+                          value.code;
+                      ref.read(currencySymbolProvider.notifier).state =
+                          value.symbol;
                     },
                   ),
                   leading: Icon(

@@ -4,6 +4,7 @@ import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/accounts/logic/account_supabase_service.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
+import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/features/home%20screen/presentation/last_month_container.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -26,6 +27,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
   Widget build(BuildContext context) {
     final accountsAsync = ref.watch(getAccountsProvider);
     final netWorthAsync = ref.watch(getNetWorthProvider);
+    final currencySymbol = ref.watch(currencySymbolProvider);
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
@@ -78,7 +80,8 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                     children: [
                       Text(
                         netWorthAsync.when(
-                          data: (data) => '\$${data.toStringAsFixed(2)}',
+                          data: (data) =>
+                              '$currencySymbol${data.toStringAsFixed(2)}',
                           error: (error, stackTrace) => 'Error',
                           loading: () => 'Loading...',
                         ),
@@ -122,13 +125,13 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                             style: TextStyles.title.copyWith(fontSize: 16),
                           ),
                           subtitle: Text(
-                            '\$${accounts[index].balance.toStringAsFixed(2)}',
+                            '$currencySymbol${accounts[index].balance.toStringAsFixed(2)}',
                             style: TextStyles.subtitle.copyWith(
                               fontSize: 14,
                             ),
                           ),
                           trailing: Text(
-                            '\$${accounts[index].currentBalance.toStringAsFixed(2)}',
+                            '$currencySymbol${accounts[index].currentBalance.toStringAsFixed(2)}',
                             style: TextStyles.title.copyWith(
                               fontSize: 16,
                               color: accounts[index].currentBalance < 0

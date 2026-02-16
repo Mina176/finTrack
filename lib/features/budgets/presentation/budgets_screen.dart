@@ -6,6 +6,7 @@ import 'package:fintrack/features/budgets/data/budget_model.dart';
 import 'package:fintrack/features/budgets/logic/budget_controller.dart';
 import 'package:fintrack/features/budgets/logic/budget_supabase.dart';
 import 'package:fintrack/features/budgets/presentation/left_to_spend_card.dart';
+import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -31,6 +32,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
     final budgetsDetails = ref.watch(
       getAllBudgetsDetailsProvider(selectedPeriod),
     );
+    final currencySymbol = ref.watch(currencySymbolProvider);
     final double spendLimit = budgetsDetails.value?.totalLimit ?? 0.0;
     final double spentAmount = budgetsDetails.value?.totalSpent ?? 0.0;
 
@@ -92,7 +94,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                               style: TextStyles.headerLink,
                             ),
                             Text(
-                              '\$${spendLimit == 0 ? 0 : (spendLimit - spentAmount).toStringAsFixed(0)}',
+                              '$currencySymbol${spendLimit == 0 ? 0 : (spendLimit - spentAmount).toStringAsFixed(0)}',
                               style: TextStyles.header.copyWith(fontSize: 32),
                             ),
                           ],
@@ -155,7 +157,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                                   ),
                                   gapH4,
                                   Text(
-                                    '\$${(budget.limit - budget.spent).toStringAsFixed(0)} remaining',
+                                    '$currencySymbol${(budget.limit - budget.spent).toStringAsFixed(0)} remaining',
                                     style: TextStyles.subtitle.copyWith(
                                       fontSize: 12,
                                     ),

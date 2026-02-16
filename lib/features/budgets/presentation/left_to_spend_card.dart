@@ -1,9 +1,11 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
+import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LeftToSpendCard extends StatelessWidget {
+class LeftToSpendCard extends ConsumerWidget {
   const LeftToSpendCard({
     super.key,
     required this.spentAmount,
@@ -15,7 +17,8 @@ class LeftToSpendCard extends StatelessWidget {
   final Widget leading;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currencySymbol = ref.read(currencySymbolProvider);
     final double progressValue = spendLimit == 0
         ? 0.0
         : (spentAmount / spendLimit).clamp(0.0, 1.0);
@@ -34,7 +37,7 @@ class LeftToSpendCard extends StatelessWidget {
                   style: TextStyles.subtitle.copyWith(fontSize: 12),
                 ),
                 Text(
-                  '\$${spentAmount.toStringAsFixed(0)} / \$${spendLimit.toStringAsFixed(0)}',
+                  '$currencySymbol${spentAmount.toStringAsFixed(0)} / $currencySymbol${spendLimit.toStringAsFixed(0)}',
                   style: TextStyles.subtitle.copyWith(fontSize: 12),
                 ),
               ],
