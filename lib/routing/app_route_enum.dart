@@ -11,6 +11,7 @@ enum AppRoutes {
   addAccount,
   selectAccount,
   addBudget,
+  setAppearance,
 }
 
 extension AppRoutesExtension on AppRoutes {
@@ -40,6 +41,8 @@ extension AppRoutesExtension on AppRoutes {
         return '/selectAccount';
       case AppRoutes.addBudget:
         return '/addBudget';
+      case AppRoutes.setAppearance:
+        return '/setAppearance';
     }
   }
 }
