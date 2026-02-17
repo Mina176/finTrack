@@ -119,7 +119,6 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
       onTap: dismissKeypads,
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
-        backgroundColor: Colors.black,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           forceMaterialTransparency: true,
@@ -153,7 +152,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                     ),
                     SizedBox(height: screenSize.height * 0.005),
                     SettingsSection(
-                      backgroundColor: AppColors.kDefaultTileBackground,
+                      backgroundColor: Theme.of(context).cardColor,
                       widgets: [
                         ListTile(
                           dense: true,
@@ -255,15 +254,6 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
               onTap: () async {
                 if (isLoading) return;
                 if (amount == "0.00") return;
-                if (selectedAccount.id == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Please select a valid account"),
-                      backgroundColor: Colors.white,
-                    ),
-                  );
-                  return;
-                }
                 dismissKeypads();
                 final transaction = TransactionModel(
                   isExpense: expenseOrIncome == 0,

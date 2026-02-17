@@ -37,7 +37,7 @@ class SettingsSection extends StatelessWidget {
                                 widget,
                                 Divider(
                                   height: 0.1,
-                                  color: AppColors.kDividerColor,
+                                  color: Theme.of(context).dividerColor,
                                 ),
                               ],
                             )

@@ -1,15 +1,18 @@
 import 'package:currency_picker/currency_picker.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
+import 'package:fintrack/features/appearance/logic/theme_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
 import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
+import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:fintrack/widgets/settings_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -18,7 +21,7 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentCurrencyCode = ref.watch(currencyCodeProvider);
     return Scaffold(
-      backgroundColor: AppColors.kBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -40,7 +43,7 @@ class ProfileScreen extends ConsumerWidget {
                 style: TextStyles.subtitle.copyWith(fontSize: 12),
                 textAlign: TextAlign.left,
               ),
-              backgroundColor: AppColors.kCustomContainerBackground,
+              backgroundColor: Theme.of(context).cardColor,
               widgets: [
                 ListTile(
                   onTap: () {},
@@ -63,7 +66,7 @@ class ProfileScreen extends ConsumerWidget {
                 style: TextStyles.subtitle.copyWith(fontSize: 12),
                 textAlign: TextAlign.left,
               ),
-              backgroundColor: AppColors.kCustomContainerBackground,
+              backgroundColor: Theme.of(context).cardColor,
               widgets: [
                 ListTile(
                   onTap: () => showCurrencyPicker(
@@ -75,7 +78,9 @@ class ProfileScreen extends ConsumerWidget {
                         ),
                         hintText: 'Search currency name or code',
                       ),
-                      backgroundColor: AppColors.kBackgroundColor,
+                      backgroundColor: Theme.of(
+                        context,
+                      ).scaffoldBackgroundColor,
                       titleTextStyle: TextStyles.title.copyWith(fontSize: 18),
                       subtitleTextStyle: TextStyles.subtitle.copyWith(
                         fontSize: 14,
@@ -110,7 +115,7 @@ class ProfileScreen extends ConsumerWidget {
                   ),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () => context.push(AppRoutes.setAppearance.path),
                   leading: Icon(
                     Icons.color_lens,
                     color: AppColors.kPrimaryColor,
@@ -123,7 +128,9 @@ class ProfileScreen extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Dark'.hardcoded,
+                        ref.watch(themeControllerProvider) == ThemeMode.light
+                            ? 'Light'
+                            : 'Dark',
                         style: TextStyles.subtitle.copyWith(fontSize: 12),
                       ),
                       SizedBox(width: 8),
@@ -135,11 +142,16 @@ class ProfileScreen extends ConsumerWidget {
             ),
             Spacer(),
             ButtonWithIcon(
-              onPressed: ref.read(authControllerProvider.notifier).signOut,
+              onPressed: () =>
+                  ref.read(authControllerProvider.notifier).signOut(),
               label: 'Log Out',
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
               borderColor: AppColors.knotSavingForeground,
-              foregroundColor: AppColors.knotSavingForeground,
-              icon: Icon(Icons.logout, color: AppColors.knotSavingForeground),
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
             ),
             gapW16,
           ],

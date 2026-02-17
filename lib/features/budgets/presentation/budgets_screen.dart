@@ -37,7 +37,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
     final double spentAmount = budgetsDetails.value?.totalSpent ?? 0.0;
 
     return Scaffold(
-      backgroundColor: AppColors.kBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text('My budgets'),
@@ -239,7 +239,7 @@ class ChoosePeriodHorizontalListViewItem extends StatelessWidget {
       onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.kPrimaryColor : AppColors.kDividerColor,
+          color: isSelected ? AppColors.kPrimaryColor : AppColors.kCardColor,
           borderRadius: BorderRadius.circular(18),
           boxShadow: isSelected
               ? [

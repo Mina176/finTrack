@@ -16,9 +16,8 @@ class SplashScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Color(0xFF0D1B12),
       body: DecoratedBox(
-        decoration: BoxDecoration(gradient: AppColors.gradientColors),
+        decoration: BoxDecoration(gradient: AppColors.lightGradientColors),
         child: Center(
           child: TweenAnimationBuilder<double>(
             tween: Tween(begin: 0.1, end: 1.0),

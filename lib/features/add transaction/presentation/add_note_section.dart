@@ -23,7 +23,7 @@ class AddNoteSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsSection(
-      backgroundColor: AppColors.kDefaultTileBackground,
+      backgroundColor: Theme.of(context).cardColor,
       widgets: [
         ListTile(
           onTap: () {},

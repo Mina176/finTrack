@@ -21,7 +21,7 @@ class SelectAccountScreen extends ConsumerWidget {
     final accountsAsync = ref.watch(getAccountsProvider);
     final currencySymbol = ref.watch(currencySymbolProvider);
     return Scaffold(
-      backgroundColor: AppColors.kBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text('Select Account'),
       ),
@@ -61,7 +61,7 @@ class SelectAccountScreen extends ConsumerWidget {
               vertical: Sizes.kVerticalPadding,
             ),
             child: SettingsSection(
-              backgroundColor: AppColors.kCardColor,
+              backgroundColor: Theme.of(context).cardColor,
               widgets: List.generate(
                 accounts.length,
                 (index) {

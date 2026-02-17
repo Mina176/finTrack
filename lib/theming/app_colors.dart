@@ -28,17 +28,21 @@ class AppColors {
   static const kProfileDividerColor = Color(0xFF2C3E32);
   static const kAddTransactionDividerColor = Color(0xFF2E2E30);
 
-  static const kDividerColor = Color(0xFF2C3E32);
-
   static const kKeyboardColor = Color(0xFF1A1A1C);
   static const kKeyboardKeyColor = Color(0xFF434344);
 
   static const kDefaultTileBackground = Color(0xFF1C1C1E);
   static const kErrorColor = Color(0xFFF43F5E);
 
-  static const gradientColors = LinearGradient(
+  static const darkGradientColors = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [Color(0xFF0D2018), Colors.black],
+  );
+
+  static const lightGradientColors = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFF0D2018), Colors.white],
   );
 }

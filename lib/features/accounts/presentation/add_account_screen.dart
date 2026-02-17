@@ -33,7 +33,7 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
       }
     });
     return Scaffold(
-      backgroundColor: AppColors.kBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text('Add Account'),
       ),

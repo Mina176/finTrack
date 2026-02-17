@@ -1,9 +1,7 @@
-import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TextStyles {
   static const title = TextStyle(
-    color: Colors.white,
     fontWeight: FontWeight.w700,
     fontSize: 32,
     letterSpacing: 0.1,
@@ -11,7 +9,6 @@ class TextStyles {
   );
 
   static const subtitle = TextStyle(
-    color: AppColors.kSubtitleColor,
     fontWeight: FontWeight.w400,
     fontSize: 16,
     height: 1.4,
@@ -29,43 +26,36 @@ class TextStyles {
   );
 
   static const labelText = TextStyle(
-    color: Colors.white,
     fontWeight: FontWeight.w600,
     fontSize: 14,
   );
 
   static const header = TextStyle(
-    color: AppColors.kTitleColor,
     fontWeight: FontWeight.w800,
     fontSize: 18,
   );
 
   static const headerLink = TextStyle(
-    color: AppColors.kPrimaryColor,
     fontWeight: FontWeight.w400,
     fontSize: 12,
   );
 
   static const amount = TextStyle(
-    color: Colors.white,
     fontWeight: FontWeight.w900,
     fontSize: 48,
     height: 1.5,
   );
 
   static const keyboardKey = TextStyle(
-    color: Colors.white,
     fontWeight: FontWeight.w900,
     fontSize: 20,
   );
 
   static const addTransactionSettingstitle = TextStyle(
-    color: Color.fromARGB(255, 116, 116, 116),
     fontWeight: FontWeight.w900,
     fontSize: 14,
   );
   static const addTransactionSettingsSubtitle = TextStyle(
-    color: Colors.white,
     fontWeight: FontWeight.w500,
     fontSize: 14,
   );

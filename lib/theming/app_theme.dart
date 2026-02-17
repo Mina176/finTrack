@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
-  // 1. Define the Light Theme
   static ThemeData get darkTheme {
     final base = ThemeData.dark();
     final baseTextTheme = GoogleFonts.interTextTheme(base.textTheme);
@@ -17,15 +16,13 @@ class AppTheme {
         surface: AppColors.surfaceDark,
         onSurface: AppColors.kTitleColor,
       ),
-      textTheme: baseTextTheme.copyWith(
-        displayLarge: baseTextTheme.displayLarge?.copyWith(
-          color: AppColors.kTitleColor,
-          fontWeight: FontWeight.bold,
-        ),
-        bodyMedium: baseTextTheme.bodyMedium?.copyWith(
-          color: AppColors.kSubtitleColor,
-        ),
+      scaffoldBackgroundColor: AppColors.kBackgroundColor,
+      cardColor: AppColors.kCardColor,
+      textTheme: baseTextTheme.apply(
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
       ),
+      dividerColor: Color(0xFF2C2C2E),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
       ),
@@ -48,6 +45,40 @@ class AppTheme {
         filled: true,
         fillColor: AppColors.kTextFieldFillColor,
         hintStyle: TextStyles.hintText,
+      ),
+    );
+  }
+
+  static ThemeData get lightTheme {
+    final base = ThemeData.light();
+    final baseTextTheme = GoogleFonts.interTextTheme(base.textTheme);
+
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: const ColorScheme.light(
+        primary: AppColors.kPrimaryColor,
+        secondary: AppColors.kPrimaryColor,
+        surface: Colors.white,
+        onSurface: Colors.black,
+      ),
+      scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        elevation: 0,
+      ),
+      dividerColor: Color(0xFFE5E5EA),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(double.infinity, 48),
+          backgroundColor: AppColors.kPrimaryColor,
+          foregroundColor: AppColors.kButtonLabelColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+      textTheme: baseTextTheme.apply(
+        bodyColor: Colors.black,
+        displayColor: Colors.black,
       ),
     );
   }

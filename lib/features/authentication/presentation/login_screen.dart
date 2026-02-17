@@ -69,7 +69,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     return Scaffold(
       body: DecoratedBox(
-        decoration: BoxDecoration(gradient: AppColors.gradientColors),
+        decoration: BoxDecoration(gradient: AppColors.darkGradientColors),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -209,17 +209,13 @@ class CustomDivider extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Divider(
-            color: AppColors.kDividerColor,
-          ),
+          child: Divider(),
         ),
         gapW4,
         Text(centeredText, style: TextStyles.hintText),
         gapW4,
         Expanded(
-          child: Divider(
-            color: AppColors.kDividerColor,
-          ),
+          child: Divider(),
         ),
       ],
     );

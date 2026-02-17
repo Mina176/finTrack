@@ -32,28 +32,18 @@ class AnimatedPositionColorButton extends StatelessWidget {
       right: 0,
       bottom: showCustomKeypad ? keypadHeight : 0,
       height: buttonAreaHeight + (showCustomKeypad ? 0 : safeAreaBottom),
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.black54, Colors.black],
-            stops: [0.0, 0.4],
-          ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 8,
+          horizontal: 8,
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: Sizes.kHorizontalPadding,
-          ),
-          child: AnimatedButtonWithIcon(
-            onTap: onTap,
-            expenseOrIncome: expenseOrIncome,
-            color: expenseOrIncome == 0 ? Colors.red : AppColors.kPrimaryColor,
-            label: "Add Transaction",
-            icon: Icons.check_circle_rounded,
-            isLoading: isLoading,
-          ),
+        child: AnimatedButtonWithIcon(
+          onTap: onTap,
+          expenseOrIncome: expenseOrIncome,
+          color: expenseOrIncome == 0 ? Colors.red : AppColors.kPrimaryColor,
+          label: "Add Transaction",
+          icon: Icons.check_circle_rounded,
+          isLoading: isLoading,
         ),
       ),
     );

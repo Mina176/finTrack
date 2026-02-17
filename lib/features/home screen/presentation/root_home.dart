@@ -33,9 +33,9 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
         child: Icon(Icons.add),
       ),
       body: SafeArea(child: pages[_currentIndex]),
-      backgroundColor: AppColors.kBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: FABBottomAppBar(
-        backgroundColor: AppColors.kBackgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         onTabSelected: (index) {
           setState(() => _currentIndex = index);
         },

@@ -6,26 +6,33 @@ class CustomCard extends StatelessWidget {
     super.key,
     required this.child,
     this.isSelected,
+    this.height,
+    this.padding,
   });
   final Widget child;
   final bool? isSelected;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: height,
       width: double.infinity,
       child: DecoratedBox(
         decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
           border: BoxBorder.all(
             color: isSelected == true
                 ? AppColors.kPrimaryColor
-                : AppColors.kDividerColor,
+                : Colors.transparent,
             width: 1,
           ),
-          color: AppColors.kCustomContainerBackground,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 22.0),
+          padding:
+              padding ??
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 22.0),
           child: child,
         ),
       ),

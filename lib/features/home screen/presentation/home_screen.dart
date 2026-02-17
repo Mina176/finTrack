@@ -2,6 +2,7 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
+import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_app_bar.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/features/home%20screen/presentation/last_month_container.dart';
@@ -20,8 +21,9 @@ class HomeScreen extends ConsumerWidget {
     final transactionsAsync = ref.watch(getTransactionsProvider);
     final weeklyDashboardAsync = ref.watch(getWeeklyDashboardDataProvider);
     final netWorthAsync = ref.watch(getNetWorthProvider);
+    final currencySymbol = ref.watch(currencySymbolProvider);
     return Scaffold(
-      backgroundColor: AppColors.kBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -40,12 +42,13 @@ class HomeScreen extends ConsumerWidget {
                         spacing: 4,
                         children: [
                           Text(
-                            'Total Balance'.hardcoded,
+                            'Total Balance',
                             style: TextStyles.subtitle.copyWith(fontSize: 14),
                           ),
                           Text(
                             netWorthAsync.when(
-                              data: (data) => '\$${data.toStringAsFixed(2)}',
+                              data: (data) =>
+                                  '$currencySymbol${data.toStringAsFixed(2)}',
                               error: (error, stackTrace) => 'Error',
                               loading: () => 'Loading...',
                             ),
@@ -75,7 +78,7 @@ class HomeScreen extends ConsumerWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '\$${totalWeeklySpendings.toStringAsFixed(2)}',
+                                        '$currencySymbol${totalWeeklySpendings.toStringAsFixed(2)}',
                                         style: TextStyles.title.copyWith(
                                           fontSize: 20,
                                         ),
@@ -97,8 +100,8 @@ class HomeScreen extends ConsumerWidget {
                                 ],
                               ),
                               Divider(
-                                color: AppColors.kDividerColor,
                                 height: 12,
+                                color: Theme.of(context).dividerColor,
                               ),
                               gapH32,
                               WeeklySpendingSummary(
@@ -144,10 +147,8 @@ class HomeScreen extends ConsumerWidget {
                       ),
                     );
                   }
-                  return SliverList.separated(
+                  return SliverList.builder(
                     itemCount: transactions.length,
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
                     itemBuilder: (context, index) {
                       return TransactionCard(transaction: transactions[index]);
                     },

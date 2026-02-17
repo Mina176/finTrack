@@ -9,7 +9,7 @@ class ButtonWithIcon extends StatelessWidget {
     required this.onPressed,
     required this.label,
     this.foregroundColor = Colors.black,
-    this.backgroundColor = Colors.transparent,
+    this.backgroundColor = AppColors.kPrimaryColor,
     this.borderColor = AppColors.kButtonBorderColor,
     required this.icon,
     this.isLoading = false,

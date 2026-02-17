@@ -67,7 +67,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     });
     return Scaffold(
       body: DecoratedBox(
-        decoration: BoxDecoration(gradient: AppColors.gradientColors),
+        decoration: BoxDecoration(gradient: AppColors.darkGradientColors),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(

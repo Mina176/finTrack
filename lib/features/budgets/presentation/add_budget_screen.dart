@@ -80,7 +80,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
       onTap: ref.read(keypadControllerProvider.notifier).hide,
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
-        backgroundColor: AppColors.kBackgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           forceMaterialTransparency: true,
           title: const Text('New Budget'),
@@ -251,7 +251,7 @@ class SelectCategoryListviewItem extends StatelessWidget {
       onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.kPrimaryColor : AppColors.kDividerColor,
+          color: isSelected ? AppColors.kPrimaryColor : null,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(

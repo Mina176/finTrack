@@ -1,3 +1,5 @@
+import 'package:fintrack/features/appearance/data/theme_service.dart';
+import 'package:fintrack/features/appearance/logic/theme_controller.dart';
 import 'package:fintrack/features/onboarding/data/onboarding_repository.dart';
 import 'package:fintrack/routing/app_router.dart';
 import 'package:fintrack/theming/app_theme.dart';
@@ -26,6 +28,9 @@ void main() async {
         onboardingRepositoryProvider.overrideWithValue(
           OnboardingRepository(sharedPreferences),
         ),
+        themeServiceProvider.overrideWithValue(
+          ThemeRepository(sharedPreferences),
+        ),
       ],
       child: const MainApp(),
     ),
@@ -38,11 +43,13 @@ class MainApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
+    final themeMode = ref.watch(themeControllerProvider);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: router,
-      theme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: themeMode,
     );
   }
 }
