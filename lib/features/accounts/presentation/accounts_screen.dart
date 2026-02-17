@@ -5,6 +5,7 @@ import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/accounts/logic/account_supabase_service.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
+import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/features/home%20screen/presentation/last_month_container.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -29,7 +30,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
     final netWorthAsync = ref.watch(getNetWorthProvider);
     final currencySymbol = ref.watch(currencySymbolProvider);
     return Scaffold(
-      backgroundColor: AppColors.kBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text('Accounts'),
         actions: [
@@ -117,28 +118,12 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                     widgets: List.generate(
                       accounts.length,
                       (index) {
-                        return ListTile(
-                          onTap: () {},
-                          leading: Icon(accounts[index].accountTypeIcon),
-                          title: Text(
-                            accounts[index].accountName,
-                            style: TextStyles.title.copyWith(fontSize: 16),
-                          ),
-                          subtitle: Text(
-                            '$currencySymbol${accounts[index].balance.toStringAsFixed(2)}',
-                            style: TextStyles.subtitle.copyWith(
-                              fontSize: 14,
-                            ),
-                          ),
-                          trailing: Text(
-                            '$currencySymbol${accounts[index].currentBalance.toStringAsFixed(2)}',
-                            style: TextStyles.title.copyWith(
-                              fontSize: 16,
-                              color: accounts[index].currentBalance < 0
-                                  ? AppColors.kErrorColor
-                                  : null,
-                            ),
-                          ),
+                        return AccountCard(
+                          accountType: accounts[index].accountType.name,
+                          accountName: accounts[index].accountName,
+                          balance: accounts[index].balance,
+                          currentBalance: accounts[index].currentBalance,
+                          currencySymbol: currencySymbol,
                         );
                       },
                     ),
@@ -155,6 +140,63 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                   child: Text(error.toString()),
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AccountCard extends StatelessWidget {
+  const AccountCard({
+    super.key,
+    required this.accountType,
+    required this.accountName,
+    required this.balance,
+    required this.currentBalance,
+    required this.currencySymbol,
+  });
+  final String accountType;
+  final String accountName;
+  final double balance;
+  final double currentBalance;
+  final String currencySymbol;
+  @override
+  Widget build(BuildContext context) {
+    return CustomCard(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Row(
+          children: [
+            Icon(
+              Icons.account_balance,
+              color: AppColors.kPrimaryColor,
+            ),
+            gapW12,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  accountName,
+                  style: TextStyles.title.copyWith(fontSize: 16),
+                ),
+                Text(
+                  '$currencySymbol${balance.toStringAsFixed(0)}',
+                  style: TextStyles.subtitle.copyWith(fontSize: 14),
+                ),
+              ],
+            ),
+            Spacer(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  '$currencySymbol${balance.toStringAsFixed(2)}',
+                  style: TextStyles.title.copyWith(fontSize: 16),
+                ),
+                Text(''),
+              ],
             ),
           ],
         ),
