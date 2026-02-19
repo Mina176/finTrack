@@ -36,7 +36,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              AccountSupabaseService().deleteAllAccounts();
+              AccountSupabaseService().deleteAllData();
             },
             icon: Icon(Icons.remove_red_eye),
           ),
