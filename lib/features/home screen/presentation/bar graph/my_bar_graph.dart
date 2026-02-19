@@ -10,7 +10,7 @@ class MyBarGraph extends ConsumerWidget {
   final List<double> weeklySummary;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currencySymbol = ref.read(currencySymbolProvider);
+    final currencySymbol = ref.watch(currencySymbolProvider);
     BarData myBarData = BarData(
       sunAmount: weeklySummary[0].toDouble(),
       monAmount: weeklySummary[1].toDouble(),
@@ -60,26 +60,24 @@ class MyBarGraph extends ConsumerWidget {
         ),
         maxY: highestSpend,
         minY: 0,
-        barGroups: myBarData
-            .getBarData()
-            .map(
-              (data) => BarChartGroupData(
-                barsSpace: 6,
-                x: data.x,
-                showingTooltipIndicators: highestSpend == data.y ? [0] : [],
-                barRods: [
-                  BarChartRodData(
-                    toY: data.y,
-                    color: data.y == highestSpend
-                        ? AppColors.kPrimaryColor
-                        : AppColors.kBarGraphNotHighest,
-                    width: 26,
-                    borderRadius: BorderRadius.all(Radius.circular(0)),
-                  ),
-                ],
+        barGroups: myBarData.getBarData().map((data) {
+          return BarChartGroupData(
+            barsSpace: 6,
+            x: data.x,
+            showingTooltipIndicators:
+                highestSpend == data.y && highestSpend != 0 ? [0] : [],
+            barRods: [
+              BarChartRodData(
+                toY: data.y,
+                color: data.y == highestSpend
+                    ? AppColors.kPrimaryColor
+                    : AppColors.kBarGraphNotHighest,
+                width: 26,
+                borderRadius: BorderRadius.all(Radius.circular(0)),
               ),
-            )
-            .toList(),
+            ],
+          );
+        }).toList(),
       ),
     );
   }
