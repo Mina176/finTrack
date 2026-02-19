@@ -34,15 +34,18 @@ class CategoryIcon extends ConsumerWidget {
   }
 }
 
-class AccountIcon extends StatelessWidget {
+class AccountIcon extends ConsumerWidget {
   const AccountIcon({
     super.key,
     required this.accountTypes,
   });
   final AccountTypes accountTypes;
   @override
-  Widget build(BuildContext context) {
-    final style = getAccountStyle(accountTypes);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final style = getAccountStyle(
+      accountTypes,
+      ref.watch(themeControllerProvider),
+    );
     return DecoratedBox(
       decoration: BoxDecoration(
         color: style.backgroundColor,

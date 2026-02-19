@@ -5,6 +5,7 @@ import 'package:fintrack/features/add%20transaction/data/transaction_model.dart'
 import 'package:fintrack/features/add%20transaction/presentation/animated_positioned_keyboard.dart';
 import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
 import 'package:fintrack/features/add%20transaction/utils/categories_lists.dart';
+import 'package:fintrack/features/appearance/logic/theme_controller.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/features/budgets/data/budget_model.dart';
 import 'package:fintrack/features/budgets/logic/budget_controller.dart';
@@ -234,7 +235,7 @@ class ChooseCategoryHorizontalListView extends StatelessWidget {
   }
 }
 
-class SelectCategoryListviewItem extends StatelessWidget {
+class SelectCategoryListviewItem extends ConsumerWidget {
   const SelectCategoryListviewItem({
     super.key,
     required this.isSelected,
@@ -245,13 +246,18 @@ class SelectCategoryListviewItem extends StatelessWidget {
   final CategoryTypes categoryType;
   final VoidCallback onTap;
   @override
-  Widget build(BuildContext context) {
-    final style = getCategoryStyle(categoryType);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final style = getCategoryStyle(
+      categoryType,
+      ref.watch(themeControllerProvider),
+    );
     return GestureDetector(
       onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.kPrimaryColor : null,
+          color: isSelected
+              ? AppColors.kPrimaryColor
+              : Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
