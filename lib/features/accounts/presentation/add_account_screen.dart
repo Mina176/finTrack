@@ -23,13 +23,15 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
   bool includeInNetWorth = true;
   final TextEditingController accountNameController = TextEditingController();
   final TextEditingController balanceController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(accountControllerProvider).isLoading;
     ref.listen(accountControllerProvider, (previous, next) {
-      if (!next.isLoading && !next.hasError) {
+      if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
         context.pop();
       } else if (next.hasError) {
-        return;
+        print("Error: ${next.error}");
       }
     });
     return Scaffold(
@@ -79,16 +81,38 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
                 );
               },
             ),
-            TextFieldWithLabel(
-              label: 'ACCOUNT NAME',
-              hintText: 'e.g. My Savings',
-              controller: accountNameController,
-            ),
-            TextFieldWithLabel(
-              label: 'ACCOUNT BALANCE',
-              hintText: '0.0',
-              controller: balanceController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+            Form(
+              key: formKey,
+              child: Column(
+                spacing: 10,
+                children: [
+                  TextFieldWithLabel(
+                    label: 'ACCOUNT NAME',
+                    hintText: 'e.g. My Savings',
+                    controller: accountNameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Account name is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldWithLabel(
+                    label: 'ACCOUNT BALANCE',
+                    hintText: '0.0',
+                    controller: balanceController,
+                    keyboardType: TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Account Balance is required';
+                      }
+                      return null;
+                    },
+                  ),
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,22 +138,28 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
             Spacer(),
             ElevatedButton(
               onPressed: () {
-                ref
-                    .read(accountControllerProvider.notifier)
-                    .createAccount(
-                      AccountModel(
-                        accountType: selectedAccount,
-                        accountName: accountNameController.text,
-                        balance: double.tryParse(balanceController.text) ?? 0.0,
-                        includeInNetWorth: includeInNetWorth,
-                        currentBalance:
-                            double.tryParse(balanceController.text) ?? 0.0,
-                      ),
-                    );
+                if (isLoading) return;
+                if (formKey.currentState!.validate()) {
+                  ref
+                      .read(accountControllerProvider.notifier)
+                      .createAccount(
+                        AccountModel(
+                          accountType: selectedAccount,
+                          accountName: accountNameController.text,
+                          balance:
+                              double.tryParse(balanceController.text) ?? 0.0,
+                          includeInNetWorth: includeInNetWorth,
+                          currentBalance:
+                              double.tryParse(balanceController.text) ?? 0.0,
+                        ),
+                      );
+                }
               },
-              child: Text(
-                'Add Account',
-              ),
+              child: isLoading
+                  ? CircularProgressIndicator()
+                  : Text(
+                      'Add Account',
+                    ),
             ),
           ],
         ),
