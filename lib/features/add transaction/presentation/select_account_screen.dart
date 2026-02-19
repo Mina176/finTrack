@@ -24,6 +24,7 @@ class SelectAccountScreen extends ConsumerWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text('Select Account'),
+        forceMaterialTransparency: true,
       ),
       body: accountsAsync.when(
         data: (accounts) {
@@ -33,24 +34,26 @@ class SelectAccountScreen extends ConsumerWidget {
                 horizontal: Sizes.kHorizontalPadding,
                 vertical: Sizes.kVerticalPadding,
               ),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: 'No accounts found. Please add account first.\n',
-                  style: TextStyles.subtitle,
-                  children: [
-                    TextSpan(
-                      text: 'Go to Accounts',
-                      style: TextStyles.subtitle.copyWith(
-                        color: AppColors.kPrimaryColor,
-                        fontWeight: FontWeight.bold,
+              child: Center(
+                child: Text.rich(
+                  TextSpan(
+                    text: 'No accounts found. Please add account first.\n',
+                    style: TextStyles.subtitle,
+                    children: [
+                      TextSpan(
+                        text: 'Go to Accounts',
+                        style: TextStyles.subtitle.copyWith(
+                          color: AppColors.kPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            context.push(AppRoutes.addAccount.path);
+                          },
                       ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          context.push(AppRoutes.addAccount.path);
-                        },
-                    ),
-                  ],
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             );
@@ -60,42 +63,44 @@ class SelectAccountScreen extends ConsumerWidget {
               horizontal: Sizes.kHorizontalPadding,
               vertical: Sizes.kVerticalPadding,
             ),
-            child: SettingsSection(
-              backgroundColor: Theme.of(context).cardColor,
-              widgets: List.generate(
-                accounts.length,
-                (index) {
-                  return ListTile(
-                    onTap: () {
-                      context.pop(accounts[index]);
-                    },
-                    leading: Icon(
-                      accounts[index].accountTypeIcon,
-                      color: AppColors.kPrimaryColor,
-                    ),
-                    title: Text(
-                      accounts[index].accountName,
-                      style: TextStyles.title.copyWith(fontSize: 16),
-                    ),
-
-                    subtitle: Text(
-                      '$currencySymbol${accounts[index].balance.toStringAsFixed(2)}',
-                      style: TextStyles.subtitle.copyWith(
-                        fontSize: 14,
+            child: SingleChildScrollView(
+              child: SettingsSection(
+                backgroundColor: Theme.of(context).cardColor,
+                widgets: List.generate(
+                  accounts.length,
+                  (index) {
+                    return ListTile(
+                      onTap: () {
+                        context.pop(accounts[index]);
+                      },
+                      leading: Icon(
+                        accounts[index].accountTypeIcon,
+                        color: AppColors.kPrimaryColor,
                       ),
-                    ),
-
-                    trailing: Text(
-                      '$currencySymbol${accounts[index].currentBalance.toStringAsFixed(2)}',
-                      style: TextStyles.title.copyWith(
-                        fontSize: 16,
-                        color: accounts[index].currentBalance < 0
-                            ? AppColors.kErrorColor
-                            : null,
+                      title: Text(
+                        accounts[index].accountName,
+                        style: TextStyles.title.copyWith(fontSize: 16),
                       ),
-                    ),
-                  );
-                },
+
+                      subtitle: Text(
+                        '$currencySymbol${accounts[index].balance.toStringAsFixed(2)}',
+                        style: TextStyles.subtitle.copyWith(
+                          fontSize: 14,
+                        ),
+                      ),
+
+                      trailing: Text(
+                        '$currencySymbol${accounts[index].currentBalance.toStringAsFixed(2)}',
+                        style: TextStyles.title.copyWith(
+                          fontSize: 16,
+                          color: accounts[index].currentBalance < 0
+                              ? AppColors.kErrorColor
+                              : null,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           );
