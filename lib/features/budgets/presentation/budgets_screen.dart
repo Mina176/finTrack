@@ -94,13 +94,13 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                               style: TextStyles.headerLink,
                             ),
                             Text(
-                              '$currencySymbol${spendLimit == 0 ? 0 : (spendLimit - spentAmount).toStringAsFixed(0)}',
+                              '$currencySymbol${spendLimit == 0 ? 0 : (spendLimit - spentAmount).round()}',
                               style: TextStyles.header.copyWith(fontSize: 32),
                             ),
                           ],
                         ),
                         Text(
-                          '${spendLimit == 0 ? 0 : (spentAmount * 100 / spendLimit).toStringAsFixed(0)}%',
+                          '${spendLimit == 0 ? 0 : (spentAmount * 100 / spendLimit).round()}%',
                           style: TextStyles.title.copyWith(fontSize: 14),
                         ),
                       ],
@@ -157,7 +157,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                                   ),
                                   gapH4,
                                   Text(
-                                    '$currencySymbol${(budget.limit - budget.spent).toStringAsFixed(0)} remaining',
+                                    '$currencySymbol${(budget.limit - budget.spent).round()} remaining',
                                     style: TextStyles.subtitle.copyWith(
                                       fontSize: 12,
                                     ),
@@ -166,7 +166,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                               ),
                               Spacer(),
                               Text(
-                                '${(budget.spent * 100 / budget.limit).toStringAsFixed(0)}%',
+                                '${(budget.spent * 100 / budget.limit).round()}%',
                                 style: TextStyles.title.copyWith(fontSize: 14),
                               ),
                             ],

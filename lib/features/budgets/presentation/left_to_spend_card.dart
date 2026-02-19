@@ -37,7 +37,7 @@ class LeftToSpendCard extends ConsumerWidget {
                   style: TextStyles.subtitle.copyWith(fontSize: 12),
                 ),
                 Text(
-                  '$currencySymbol${spentAmount.toStringAsFixed(0)} / $currencySymbol${spendLimit.toStringAsFixed(0)}',
+                  '$currencySymbol${spentAmount.round()} / $currencySymbol${spendLimit.round()}',
                   style: TextStyles.subtitle.copyWith(fontSize: 12),
                 ),
               ],

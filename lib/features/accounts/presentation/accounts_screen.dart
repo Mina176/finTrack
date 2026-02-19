@@ -182,7 +182,7 @@ class AccountCard extends StatelessWidget {
                   style: TextStyles.title.copyWith(fontSize: 16),
                 ),
                 Text(
-                  '$currencySymbol${balance.toStringAsFixed(0)}',
+                  '$currencySymbol${balance.round()}',
                   style: TextStyles.subtitle.copyWith(fontSize: 14),
                 ),
               ],
