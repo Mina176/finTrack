@@ -1,6 +1,8 @@
 import 'package:fintrack/constants/app_sizes.dart' show gapH8;
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/theming/app_colors.dart';
+import 'package:fintrack/utils/category_style.dart';
+import 'package:fintrack/widgets/category_icon.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:fintrack/widgets/settings_section.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,7 @@ class AddNoteSection extends StatelessWidget {
       widgets: [
         ListTile(
           onTap: () {},
-          leading: Icon(FontAwesomeIcons.noteSticky),
+          leading: OtherIcons(OtherIconTypes.note),
           trailing: SizedBox(),
           title: const Text(
             "Note",

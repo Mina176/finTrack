@@ -14,6 +14,7 @@ import 'package:fintrack/features/add%20transaction/utils/helpers.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
+import 'package:fintrack/utils/category_style.dart';
 import 'package:fintrack/widgets/category_icon.dart';
 import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:fintrack/widgets/settings_section.dart';
@@ -31,7 +32,7 @@ class AddTransactionScreen extends ConsumerStatefulWidget {
 }
 
 class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
-  int expenseOrIncome = 0; // 0 for Expense
+  int expenseOrIncome = 0;
   String amount = "0.00";
   DateTime selectedDate = DateTime.now();
   final FocusNode _noteFocusNode = FocusNode();
@@ -225,10 +226,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                               });
                             }
                           },
-                          leading: Icon(
-                            Icons.calendar_today,
-                            color: AppColors.kPrimaryColor,
-                          ),
+                          leading: OtherIcons(OtherIconTypes.date),
                           title: const Text(
                             "Date",
                             style: TextStyles.addTransactionSettingstitle,
