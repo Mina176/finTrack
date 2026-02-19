@@ -1,6 +1,7 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
+import 'package:fintrack/features/authentication/logic/auth_repository.dart';
 import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,17 +11,22 @@ class CustomAppBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(authRepositoryProvider).currentUser;
+    final String? photoUrl = currentUser?.photoUrl;
+    final bool hasValidPhoto =
+        photoUrl != null && photoUrl.startsWith('https://');
     return Row(
       children: [
         GestureDetector(
           onTap: () => ref.read(authControllerProvider.notifier).signOut(),
           child: CircleAvatar(
             radius: 24,
-            child: ClipOval(
-              child: Image.asset(
-                'assets/9440461.jpg',
-              ),
-            ),
+            backgroundImage: hasValidPhoto
+                ? NetworkImage(photoUrl)
+                : const AssetImage('assets/9440461.jpg'),
+            child: currentUser?.photoUrl == null
+                ? const Icon(Icons.person, color: Colors.white)
+                : null,
           ),
         ),
         gapW8,
@@ -32,7 +38,7 @@ class CustomAppBar extends ConsumerWidget {
               style: TextStyles.subtitle.copyWith(fontSize: 14),
             ),
             Text(
-              'Alex Morgan'.hardcoded,
+              currentUser!.name,
               style: TextStyles.title.copyWith(fontSize: 18),
             ),
           ],
