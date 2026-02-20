@@ -22,7 +22,11 @@ class AppTheme {
         bodyColor: Colors.white,
         displayColor: Colors.white,
       ),
-      dividerColor: Color(0xFF2C2C2E),
+      dividerColor: Color(0xFF334155),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: AppColors.kPrimaryColor,
+        refreshBackgroundColor: Colors.black,
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
       ),
@@ -38,9 +42,9 @@ class AppTheme {
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        border: buildBorder(),
-        enabledBorder: buildBorder(),
-        focusedBorder: buildBorder(),
+        border: buildBorder(AppColors.kButtonBorderColor),
+        enabledBorder: buildBorder(AppColors.kButtonBorderColor),
+        focusedBorder: buildBorder(AppColors.kButtonBorderColor),
         suffixIconColor: Color(0xFF92C9A4),
         filled: true,
         fillColor: AppColors.kTextFieldFillColor,
@@ -61,20 +65,35 @@ class AppTheme {
         surface: Colors.white,
         onSurface: Colors.black,
       ),
-      scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+      scaffoldBackgroundColor: const Color(
+        0xFFF5F5F5,
+      ),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      dividerColor: Color(0xFFE5E5EA),
+      dividerTheme: DividerThemeData(
+        color: const Color(0xFFE5E5EA),
+        thickness: 1,
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(double.infinity, 48),
           backgroundColor: AppColors.kPrimaryColor,
           foregroundColor: AppColors.kButtonLabelColor,
+          textStyle: TextStyles.buttonLabel,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: buildBorder(Color(0xFFEDEFF2)),
+        enabledBorder: buildBorder(Color(0xFFEDEFF2)),
+        focusedBorder: buildBorder(Color(0xFFEDEFF2)),
+        suffixIconColor: Color(0xFF92C9A4),
+        filled: true,
+        fillColor: Color(0xFFF9FAFB),
+        hintStyle: TextStyles.hintText,
       ),
       textTheme: baseTextTheme.apply(
         bodyColor: Colors.black,
@@ -84,9 +103,9 @@ class AppTheme {
   }
 }
 
-OutlineInputBorder buildBorder() {
+OutlineInputBorder buildBorder(Color color) {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(8),
-    borderSide: BorderSide(color: AppColors.kButtonBorderColor),
+    borderSide: BorderSide(color: color),
   );
 }

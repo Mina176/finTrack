@@ -114,7 +114,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                 }
                 return SliverToBoxAdapter(
                   child: SettingsSection(
-                    backgroundColor: AppColors.kCardColor,
+                    backgroundColor: Theme.of(context).cardColor,
                     widgets: List.generate(
                       accounts.length,
                       (index) {

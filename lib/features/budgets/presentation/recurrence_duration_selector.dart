@@ -1,5 +1,6 @@
 import 'package:fintrack/constants/duration_constants.dart';
 import 'package:fintrack/constants/text_styles.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class RecurrenceDurationSelector extends StatelessWidget {
@@ -22,7 +23,7 @@ class RecurrenceDurationSelector extends StatelessWidget {
           height: 50,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: Color(0xFF1C3022),
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Stack(
@@ -40,7 +41,7 @@ class RecurrenceDurationSelector extends StatelessWidget {
                   width: pillWidth,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      color: Color(0xFF334538),
+                      color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),

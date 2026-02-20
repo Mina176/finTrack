@@ -239,7 +239,9 @@ class ChoosePeriodHorizontalListViewItem extends StatelessWidget {
       onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.kPrimaryColor : AppColors.kCardColor,
+          color: isSelected
+              ? AppColors.kPrimaryColor
+              : Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(18),
           boxShadow: isSelected
               ? [

@@ -28,7 +28,7 @@ class OnboardingCard extends StatelessWidget {
           height: height,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: AppColors.kCardColor,
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(borderRadius),
             ),
             child: Icon(
