@@ -34,6 +34,7 @@ class HomeScreen extends ConsumerWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 16,
                   children: [
                     CustomAppBar(),
@@ -122,18 +123,9 @@ class HomeScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Recent Transactions', style: TextStyles.header),
-                        Text('See All'.hardcoded, style: TextStyles.headerLink),
-                      ],
-                    ),
+                    Text('Recent Transactions', style: TextStyles.header),
                   ],
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: gapH20,
               ),
               transactionsAsync.when(
                 data: (transactions) {

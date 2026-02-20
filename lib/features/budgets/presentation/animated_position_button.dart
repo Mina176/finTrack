@@ -37,10 +37,11 @@ class AnimatedPositionButton extends StatelessWidget {
         ),
         child: ButtonWithIcon(
           onPressed: onTap,
-          label: "Add Transaction",
+          label: "Save Bugdet",
           icon: Icon(Icons.check_circle_rounded),
           isLoading: isLoading,
           backgroundColor: AppColors.kPrimaryColor,
+          borderColor: AppColors.kPrimaryColor,
         ),
       ),
     );

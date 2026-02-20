@@ -32,7 +32,7 @@ class DisplayAmount extends ConsumerWidget {
               child: Text(
                 amount,
                 style: TextStyles.amount.copyWith(
-                  color: isKeypadVisible ? Colors.white : Colors.grey,
+                  color: isKeypadVisible ? null : Colors.grey,
                 ),
               ),
             ),

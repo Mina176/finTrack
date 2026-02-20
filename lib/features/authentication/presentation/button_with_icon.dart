@@ -18,7 +18,7 @@ class ButtonWithIcon extends StatelessWidget {
   final String label;
   final Color backgroundColor;
   final Color foregroundColor;
-  final Color borderColor;
+  final Color? borderColor;
   final Widget icon;
   final bool isLoading;
   @override
@@ -27,7 +27,7 @@ class ButtonWithIcon extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
-        side: BorderSide(color: borderColor),
+        side: BorderSide(color: borderColor ?? backgroundColor),
       ),
       child: isLoading
           ? Center(

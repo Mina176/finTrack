@@ -1,3 +1,4 @@
+import 'package:fintrack/features/appearance/logic/theme_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
 import 'package:fintrack/features/authentication/logic/loading_state.dart';
 import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
@@ -66,130 +67,129 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         }
       }
     });
-
     return Scaffold(
-      body: DecoratedBox(
-        decoration: BoxDecoration(gradient: AppColors.darkGradientColors),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Sizes.kHorizontalPadding,
-            ),
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Column(
-                    spacing: 10,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      gapH32,
-                      Text(
-                        'Welcome Back',
-                        style: TextStyles.title,
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'Track your wealth securely.\n Please log in to your account.',
-                        style: TextStyles.subtitle,
-                        textAlign: TextAlign.center,
-                      ),
-                      gapH16,
-                      Form(
-                        key: formKey,
-                        child: Column(
-                          spacing: 12,
-                          children: [
-                            TextFieldWithLabel(
-                              label: 'Email Address',
-                              hintText: 'name@example.com',
-                              controller: _emailController,
-                              errorText: emailError,
-                              validator: Validators.validateEmail,
-                              onChanged: (val) {
-                                if (emailError != null) {
-                                  setState(() => emailError = null);
-                                }
-                              },
-                            ),
-                            TextFieldWithLabel(
-                              label: 'Password',
-                              hintText: '••••••••',
-                              controller: _passwordController,
-                              isPassword: true,
-                              errorText: passwordError,
-                              validator: Validators.validatePasswordWhenSignIn,
-                              onChanged: (val) {
-                                if (passwordError != null) {
-                                  setState(() => passwordError = null);
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () =>
-                            context.push(AppRoutes.forgotPassword.path),
-                        child: Text(
-                          'Forgot Password?',
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            color: AppColors.kPrimaryColor,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      gapH8,
-                      ElevatedButton(
-                        onPressed: isLoading ? null : _signIn,
-                        child: isLoading
-                            ? SizedBox(
-                                height: 24,
-                                width: 24,
-                                child: CircularProgressIndicator(),
-                              )
-                            : Text('Login'),
-                      ),
-                      CustomDivider(
-                        centeredText: 'OR',
-                      ),
-                      ButtonWithIcon(
-                        label: 'Continue with Google',
-                        onPressed: () => ref
-                            .read(authControllerProvider.notifier)
-                            .signInWithGoogle(),
-                        icon: SizedBox(
-                          height: Sizes.p32,
-                          child: Image.asset(
-                            'assets/google-logo-png-29546.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        foregroundColor: AppColors.kTitleColor,
-                      ),
-                      gapH4,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.kHorizontalPadding,
+          ),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Column(
+                  spacing: 10,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    gapH32,
+                    Text(
+                      'Welcome Back',
+                      style: TextStyles.title,
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      'Track your wealth securely.\n Please log in to your account.',
+                      style: TextStyles.subtitle,
+                      textAlign: TextAlign.center,
+                    ),
+                    gapH16,
+                    Form(
+                      key: formKey,
+                      child: Column(
+                        spacing: 12,
                         children: [
-                          Text('Don\'t have an account?'),
-                          GestureDetector(
-                            onTap: () => context.push(AppRoutes.signUp.path),
-                            child: Text(
-                              ' Sign Up',
-                              style: TextStyle(
-                                color: AppColors.kPrimaryColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                          TextFieldWithLabel(
+                            label: 'Email Address',
+                            hintText: 'name@example.com',
+                            controller: _emailController,
+                            errorText: emailError,
+                            validator: Validators.validateEmail,
+                            onChanged: (val) {
+                              if (emailError != null) {
+                                setState(() => emailError = null);
+                              }
+                            },
+                          ),
+                          TextFieldWithLabel(
+                            label: 'Password',
+                            hintText: '••••••••',
+                            controller: _passwordController,
+                            isPassword: true,
+                            errorText: passwordError,
+                            validator: Validators.validatePasswordWhenSignIn,
+                            onChanged: (val) {
+                              if (passwordError != null) {
+                                setState(() => passwordError = null);
+                              }
+                            },
                           ),
                         ],
                       ),
-                      gapH4,
-                    ],
-                  ),
+                    ),
+                    GestureDetector(
+                      onTap: () => context.push(AppRoutes.forgotPassword.path),
+                      child: Text(
+                        'Forgot Password?',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          color: AppColors.kPrimaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    gapH8,
+                    ElevatedButton(
+                      onPressed: isLoading ? null : _signIn,
+                      child: isLoading
+                          ? SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(),
+                            )
+                          : Text('Login'),
+                    ),
+                    CustomDivider(
+                      centeredText: 'OR',
+                    ),
+                    ElevatedButton(
+                      onPressed: () => ref
+                          .read(authControllerProvider.notifier)
+                          .signInWithGoogle(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: Sizes.p32,
+                            child: Image.asset(
+                              'assets/google-logo-png-29546.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Text('Continue with Google'),
+                        ],
+                      ),
+                    ),
+                    gapH4,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Don\'t have an account?'),
+                        GestureDetector(
+                          onTap: () => context.push(AppRoutes.signUp.path),
+                          child: Text(
+                            ' Sign Up',
+                            style: TextStyle(
+                              color: AppColors.kPrimaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    gapH4,
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
