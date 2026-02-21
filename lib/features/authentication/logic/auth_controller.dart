@@ -1,4 +1,4 @@
-import 'package:fintrack/features/authentication/logic/auth_repository.dart';
+import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/authentication/logic/loading_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,8 +17,8 @@ class AuthController extends _$AuthController {
   ) async {
     state = const AuthLoadingState(LoadingStateEnum.loading, null);
     try {
-      final authRepository = ref.watch(authRepositoryProvider);
-      await authRepository.signInWithEmailAndPassword(
+      final authService = ref.read(authServiceProvider);
+      await authService.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -34,8 +34,8 @@ class AuthController extends _$AuthController {
   ) async {
     state = const AuthLoadingState(LoadingStateEnum.loading, null);
     try {
-      final authRepository = ref.watch(authRepositoryProvider);
-      await authRepository.createUserWithEmailAndPassword(
+      final authService = ref.read(authServiceProvider);
+      await authService.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -45,28 +45,12 @@ class AuthController extends _$AuthController {
     }
   }
 
-  Future<void> signInWithGoogle() async {
-    state = const AuthLoadingState(LoadingStateEnum.loading, null);
-    try {
-      final authRepository = ref.read(authRepositoryProvider);
-      final user = await authRepository.signInWithGoogle();
-
-      if (user != null) {
-        state = const AuthLoadingState(LoadingStateEnum.success, null);
-      } else {
-        state = const AuthLoadingState(LoadingStateEnum.initial, null);
-      }
-    } on Exception catch (e) {
-      state = AuthLoadingState(LoadingStateEnum.error, e);
-    }
-  }
-
   Future<void> signOut() async {
     state = const AuthLoadingState(LoadingStateEnum.loading, null);
 
-    final authRepository = ref.read(authRepositoryProvider);
+    final authService = ref.read(authServiceProvider);
     try {
-      await authRepository.signOut();
+      await authService.signOut();
       state = const AuthLoadingState(LoadingStateEnum.success, null);
     } on Exception catch (e) {
       state = AuthLoadingState(LoadingStateEnum.error, e);
@@ -76,8 +60,19 @@ class AuthController extends _$AuthController {
   Future<void> sendPasswordResetEmail(String email) async {
     state = const AuthLoadingState(LoadingStateEnum.loading, null);
     try {
-      final authRepository = ref.read(authRepositoryProvider);
-      await authRepository.sendPasswordResetEmail(email);
+      final authService = ref.read(authServiceProvider);
+      await authService.sendPasswordResetEmail(email);
+      state = const AuthLoadingState(LoadingStateEnum.success, null);
+    } on Exception catch (e) {
+      state = AuthLoadingState(LoadingStateEnum.error, e);
+    }
+  }
+
+  Future<void> signInWithGoogle() async {
+    state = const AuthLoadingState(LoadingStateEnum.loading, null);
+    try {
+      final authService = ref.read(authServiceProvider);
+      await authService.signInWithGoogle();
       state = const AuthLoadingState(LoadingStateEnum.success, null);
     } on Exception catch (e) {
       state = AuthLoadingState(LoadingStateEnum.error, e);

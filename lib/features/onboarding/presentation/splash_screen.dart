@@ -1,4 +1,4 @@
-import 'package:fintrack/features/authentication/logic/auth_repository.dart';
+import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/onboarding/data/onboarding_repository.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -41,7 +41,7 @@ class SplashScreen extends ConsumerWidget {
             );
           },
           onEnd: () {
-            final user = ref.read(authRepositoryProvider).currentUser;
+            final user = ref.read(authServiceProvider).currentUser;
             final onboardingCompleted = ref
                 .read(onboardingRepositoryProvider)
                 .isOnboardingCompleted;

@@ -2,7 +2,7 @@ import 'package:fintrack/features/accounts/presentation/add_account_screen.dart'
 import 'package:fintrack/features/add%20transaction/presentation/add_transaction.dart';
 import 'package:fintrack/features/add%20transaction/presentation/choose_category_screen.dart';
 import 'package:fintrack/features/add%20transaction/presentation/select_account_screen.dart';
-import 'package:fintrack/features/authentication/logic/auth_repository.dart';
+import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/authentication/presentation/forgot_password_screen.dart';
 import 'package:fintrack/features/authentication/presentation/login_screen.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
@@ -14,20 +14,18 @@ import 'package:fintrack/features/onboarding/presentation/splash_screen.dart';
 import 'package:fintrack/features/appearance/presentation/set_appearance_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/utils/refresh_listenable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  // accessing the auth repository
-  final authRepo = ref.watch(authRepositoryProvider);
+  final authService = ref.watch(authServiceProvider);
 
   return GoRouter(
     initialLocation: AppRoutes.splash.path,
-    refreshListenable: GoRouterRefreshStream(authRepo.authStateChanges()),
+    refreshListenable: GoRouterRefreshStream(authService.authStateChanges()),
     redirect: (context, state) {
-      final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+      final isLoggedIn = authService.currentUser != null;
 
       final isLoginRoute = state.matchedLocation == AppRoutes.signIn.path;
       final isSignUpRoute = state.matchedLocation == AppRoutes.signUp.path;

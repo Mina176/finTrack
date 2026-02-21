@@ -4,6 +4,7 @@ import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/add%20transaction/utils/categories_lists.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
+import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -140,10 +141,15 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
               onPressed: () {
                 if (isLoading) return;
                 if (formKey.currentState!.validate()) {
+                  final userId = ref
+                      .read(authServiceProvider)
+                      .currentUser!
+                      .userId;
                   ref
                       .read(accountControllerProvider.notifier)
                       .createAccount(
                         AccountModel(
+                          userId: userId,
                           accountType: selectedAccount,
                           accountName: accountNameController.text,
                           balance:

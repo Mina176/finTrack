@@ -4,18 +4,13 @@ import 'package:fintrack/features/onboarding/data/onboarding_repository.dart';
 import 'package:fintrack/routing/app_router.dart';
 import 'package:fintrack/theming/app_theme.dart';
 import 'package:flutter/material.dart';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  
   await Supabase.initialize(
     url: 'https://dzztxtttepayqevwdhvg.supabase.co',
     anonKey:

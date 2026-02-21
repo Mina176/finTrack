@@ -6,6 +6,7 @@ import 'package:fintrack/features/add%20transaction/presentation/animated_positi
 import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
 import 'package:fintrack/features/add%20transaction/utils/categories_lists.dart';
 import 'package:fintrack/features/appearance/logic/theme_controller.dart';
+import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/features/budgets/data/budget_model.dart';
 import 'package:fintrack/features/budgets/logic/budget_controller.dart';
@@ -17,6 +18,7 @@ import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AddBudgetScreen extends ConsumerStatefulWidget {
   const AddBudgetScreen({super.key});
@@ -163,10 +165,15 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                 if (amount == "0.00") return;
                 ref.read(keypadControllerProvider.notifier).hide();
                 try {
+                  final userId = ref
+                      .read(authServiceProvider)
+                      .currentUser!
+                      .userId;
                   await ref
                       .read(budgetControllerProvider.notifier)
                       .createBudget(
                         BudgetModel(
+                          userId: userId,
                           limit: amount.isEmpty ? 0.0 : double.parse(amount),
                           spent: 0.0,
                           budgetName: nameController.text.isEmpty

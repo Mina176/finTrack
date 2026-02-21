@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AddTransactionScreen extends ConsumerStatefulWidget {
   const AddTransactionScreen({super.key});
@@ -40,14 +41,15 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   CategoryIcon selectedCategory = CategoryIcon(
     categoryType: CategoryTypes.food,
   );
-  AccountModel selectedAccount = AccountModel(
+  final uid = Supabase.instance.client.auth.currentUser!.id;
+  late AccountModel selectedAccount = AccountModel(
+    userId: uid,
     accountType: AccountTypes.debitCard,
     accountName: "Select Account",
     balance: 0.0,
     includeInNetWorth: true,
     currentBalance: 0.0,
   );
-
   @override
   void initState() {
     super.initState();
@@ -254,6 +256,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                 if (amount == "0.00") return;
                 dismissKeypads();
                 final transaction = TransactionModel(
+                  userId: uid,
                   isExpense: expenseOrIncome == 0,
                   amount: double.tryParse(amount) ?? 0.0,
                   category: selectedCategory.categoryType,
@@ -269,7 +272,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                         amount: transaction.amount,
                         isExpense: expenseOrIncome == 0 ? true : false,
                       );
-                  ref
+                  await ref
                       .read(transactionControllerProvider.notifier)
                       .createTransaction(transaction);
                 } catch (e) {

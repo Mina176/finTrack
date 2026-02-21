@@ -1,46 +1,46 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_repository.dart';
+part of 'auth_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authRepositoryHash() => r'a2b85b8ead203ee006a5d3fb2b2a75f7555c4d78';
+String _$authServiceHash() => r'85c1a5d9e782312a2c80f619fdc7ee5134870237';
 
-/// See also [authRepository].
-@ProviderFor(authRepository)
-final authRepositoryProvider = Provider<AuthRepository>.internal(
-  authRepository,
-  name: r'authRepositoryProvider',
+/// See also [authService].
+@ProviderFor(authService)
+final authServiceProvider = Provider<AuthService>.internal(
+  authService,
+  name: r'authServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$authRepositoryHash,
+      : _$authServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AuthRepositoryRef = ProviderRef<AuthRepository>;
-String _$firebaseAuthHash() => r'cb440927c3ab863427fd4b052a8ccba4c024c863';
+typedef AuthServiceRef = ProviderRef<AuthService>;
+String _$supabaseAuthHash() => r'1d92dffa2601f21feaf4a3757a7479303800612c';
 
-/// See also [firebaseAuth].
-@ProviderFor(firebaseAuth)
-final firebaseAuthProvider = Provider<FirebaseAuth>.internal(
-  firebaseAuth,
-  name: r'firebaseAuthProvider',
+/// See also [supabaseAuth].
+@ProviderFor(supabaseAuth)
+final supabaseAuthProvider = Provider<supabase.GoTrueClient>.internal(
+  supabaseAuth,
+  name: r'supabaseAuthProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$firebaseAuthHash,
+      : _$supabaseAuthHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FirebaseAuthRef = ProviderRef<FirebaseAuth>;
-String _$authStateChangeHash() => r'b0499d9a00650d56a3f7d9f8e8c2a9bb2a047a26';
+typedef SupabaseAuthRef = ProviderRef<supabase.GoTrueClient>;
+String _$authStateChangeHash() => r'39f6c89ec0680d3700900e67dd75ab8135fd41cb';
 
 /// See also [authStateChange].
 @ProviderFor(authStateChange)

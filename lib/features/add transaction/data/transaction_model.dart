@@ -21,6 +21,7 @@ enum AccountTypes {
 }
 
 class TransactionModel {
+  final String userId;
   final bool isExpense;
   final double amount;
   final CategoryTypes category;
@@ -29,6 +30,7 @@ class TransactionModel {
   final String? note;
 
   TransactionModel({
+    required this.userId,
     required this.isExpense,
     required this.amount,
     required this.category,
@@ -39,6 +41,7 @@ class TransactionModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'user_Id': userId,
       'is_expense': isExpense,
       'amount': amount,
       'category': category.name,
@@ -50,6 +53,7 @@ class TransactionModel {
 
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
+      userId: map['user_Id'] as String,
       isExpense: map['is_expense'] as bool,
       amount: (map['amount'] as num).toDouble(),
       category: CategoryTypes.values.firstWhere(

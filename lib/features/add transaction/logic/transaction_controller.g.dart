@@ -6,7 +6,7 @@ part of 'transaction_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getTransactionsHash() => r'fca27e8fabceb6a085108ff1562d149812c02e2c';
+String _$getTransactionsHash() => r'c8c57b6141543b8cbcb5053b7a47038fa3d4c78d';
 
 /// See also [getTransactions].
 @ProviderFor(getTransactions)
@@ -101,7 +101,7 @@ final getWeeklyDashboardDataProvider =
 // ignore: unused_element
 typedef GetWeeklyDashboardDataRef = AutoDisposeFutureProviderRef<DashboardData>;
 String _$transactionControllerHash() =>
-    r'64177aa980ca357fe63a56f39a5b352ce46e0444';
+    r'd891f8eb8193221875dceeddda9003324ddfdb3e';
 
 /// See also [TransactionController].
 @ProviderFor(TransactionController)

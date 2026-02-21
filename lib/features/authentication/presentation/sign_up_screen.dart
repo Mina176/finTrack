@@ -66,124 +66,122 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       }
     });
     return Scaffold(
-      body: DecoratedBox(
-        decoration: BoxDecoration(gradient: AppColors.darkGradientColors),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Sizes.kHorizontalPadding,
-            ),
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Column(
-                    spacing: 12,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      IconButton(
-                        onPressed: () => context.pop(),
-                        icon: Icon(Icons.arrow_back_ios_new),
-                      ),
-                      Text(
-                        'Start Tracking Today',
-                        style: TextStyles.title,
-                      ),
-                      Text(
-                        'Take control of your finances.',
-                        style: TextStyles.subtitle,
-                      ),
-                      gapH16,
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          spacing: 12,
-                          children: [
-                            TextFieldWithLabel(
-                              controller: _nameController,
-                              label: 'Full Name',
-                              hintText: 'John Doe',
-                              validator: (value) =>
-                                  value!.isEmpty ? 'Name is required' : null,
-                            ),
-                            TextFieldWithLabel(
-                              controller: _emailController,
-                              label: 'Email',
-                              hintText: 'john@example.com',
-                              errorText: emailErrorText,
-                              validator: Validators.validateEmail,
-                            ),
-                            TextFieldWithLabel(
-                              controller: _passwordController,
-                              label: 'Password',
-                              hintText: '••••••••',
-                              errorText: passwordErrorText,
-                              isPassword: true,
-                              validator: Validators.validatePasswordWhenSignUp,
-                            ),
-                            TextFieldWithLabel(
-                              label: 'Confirm Password',
-                              hintText: '••••••••',
-                              isPassword: true,
-                              validator: (value) =>
-                                  Validators.validateConfirmPassword(
-                                    _passwordController.text,
-                                    value,
-                                  ),
-                            ),
-                            gapH4,
-                            ElevatedButton(
-                              onPressed: isLoading ? null : _signUp,
-                              child: isLoading
-                                  ? SizedBox(
-                                      height: 24,
-                                      width: 24,
-                                      child: CircularProgressIndicator(),
-                                    )
-                                  : Text('Sign Up'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      CustomDivider(
-                        centeredText: 'Or continue with',
-                      ),
-                      ButtonWithIcon(
-                        label: 'Continue with Google',
-                        onPressed: () => ref
-                            .read(authControllerProvider.notifier)
-                            .signInWithGoogle(),
-                        icon: SizedBox(
-                          height: Sizes.p32,
-                          child: Image.asset(
-                            'assets/google-logo-png-29546.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        foregroundColor: AppColors.kTitleColor,
-                      ),
-                      gapH4,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.kHorizontalPadding,
+          ),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Column(
+                  spacing: 12,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: () => context.pop(),
+                      icon: Icon(Icons.arrow_back_ios_new),
+                    ),
+                    Text(
+                      'Start Tracking Today',
+                      style: TextStyles.title,
+                    ),
+                    Text(
+                      'Take control of your finances.',
+                      style: TextStyles.subtitle,
+                    ),
+                    gapH16,
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        spacing: 12,
                         children: [
-                          Text('Don\'t have an account?'),
-                          GestureDetector(
-                            onTap: () => context.go(AppRoutes.signIn.path),
-                            child: Text(
-                              ' Log in',
-                              style: TextStyle(
-                                color: AppColors.kPrimaryColor,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
+                          TextFieldWithLabel(
+                            controller: _nameController,
+                            label: 'Full Name',
+                            hintText: 'John Doe',
+                            validator: (value) =>
+                                value!.isEmpty ? 'Name is required' : null,
+                          ),
+                          TextFieldWithLabel(
+                            controller: _emailController,
+                            label: 'Email',
+                            hintText: 'john@example.com',
+                            errorText: emailErrorText,
+                            validator: Validators.validateEmail,
+                          ),
+                          TextFieldWithLabel(
+                            controller: _passwordController,
+                            label: 'Password',
+                            hintText: '••••••••',
+                            errorText: passwordErrorText,
+                            isPassword: true,
+                            validator: Validators.validatePasswordWhenSignUp,
+                          ),
+                          TextFieldWithLabel(
+                            label: 'Confirm Password',
+                            hintText: '••••••••',
+                            isPassword: true,
+                            validator: (value) =>
+                                Validators.validateConfirmPassword(
+                                  _passwordController.text,
+                                  value,
+                                ),
+                          ),
+                          gapH4,
+                          ElevatedButton(
+                            onPressed: isLoading ? null : _signUp,
+                            child: isLoading
+                                ? SizedBox(
+                                    height: 24,
+                                    width: 24,
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Text('Sign Up'),
                           ),
                         ],
                       ),
-                      gapH4,
-                    ],
-                  ),
+                    ),
+                    CustomDivider(
+                      centeredText: 'Or continue with',
+                    ),
+                    ButtonWithIcon(
+                      label: 'Continue with Google',
+                      onPressed: () => ref
+                          .read(authControllerProvider.notifier)
+                          .signInWithGoogle(),
+                      icon: SizedBox(
+                        height: Sizes.p32,
+                        child: Image.asset(
+                          'assets/google-logo-png-29546.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      foregroundColor: AppColors.kTitleColor,
+                    ),
+                    gapH4,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Don\'t have an account?'),
+                        GestureDetector(
+                          onTap: () => context.go(AppRoutes.signIn.path),
+                          child: Text(
+                            ' Log in',
+                            style: TextStyle(
+                              color: AppColors.kPrimaryColor,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    gapH4,
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

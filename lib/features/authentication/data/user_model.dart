@@ -1,25 +1,27 @@
-// user_model.dart
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserModel {
-  final String uid;
+  final String userId;
   final String name;
   final String email;
-  final String? photoUrl;
+  final String? avatarUrl;
 
   UserModel({
-    required this.uid,
+    required this.userId,
     required this.name,
     required this.email,
-    this.photoUrl,
+    this.avatarUrl,
   });
   static UserModel? fromUser(User? user) {
     if (user == null) return null;
+    final metadata = user.userMetadata ?? {};
+    final displayName = metadata['full_name'] ?? metadata['name'] ?? 'User';
+    final avatarUrl = metadata['avatar_url'] ?? metadata['picture'];
     return UserModel(
-      uid: user.uid,
-      name: user.displayName?.isNotEmpty == true ? user.displayName! : 'User',
+      userId: user.id,
+      name: displayName.isNotEmpty ? displayName : 'User',
       email: user.email ?? '',
-      photoUrl: user.photoURL,
+      avatarUrl: avatarUrl,
     );
   }
 }

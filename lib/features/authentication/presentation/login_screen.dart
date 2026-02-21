@@ -139,34 +139,36 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     gapH8,
                     ElevatedButton(
                       onPressed: isLoading ? null : _signIn,
+                      child: Text('Login'),
+                    ),
+                    CustomDivider(
+                      centeredText: 'OR',
+                    ),
+                    ElevatedButton(
+                      onPressed: isLoading
+                          ? null
+                          : () => ref
+                                .read(authControllerProvider.notifier)
+                                .signInWithGoogle(),
                       child: isLoading
                           ? SizedBox(
                               height: 24,
                               width: 24,
                               child: CircularProgressIndicator(),
                             )
-                          : Text('Login'),
-                    ),
-                    CustomDivider(
-                      centeredText: 'OR',
-                    ),
-                    ElevatedButton(
-                      onPressed: () => ref
-                          .read(authControllerProvider.notifier)
-                          .signInWithGoogle(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: Sizes.p32,
-                            child: Image.asset(
-                              'assets/google-logo-png-29546.png',
-                              fit: BoxFit.cover,
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: Sizes.p32,
+                                  child: Image.asset(
+                                    'assets/google-logo-png-29546.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Text('Continue with Google'),
+                              ],
                             ),
-                          ),
-                          Text('Continue with Google'),
-                        ],
-                      ),
                     ),
                     gapH4,
                     Row(
