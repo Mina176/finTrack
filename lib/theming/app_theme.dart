@@ -22,10 +22,9 @@ class AppTheme {
         bodyColor: Colors.white,
         displayColor: Colors.white,
       ),
-      dividerColor: Color(0xFF334155),
+      dividerTheme: DividerThemeData(color: Colors.black.withOpacity(0.4)),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: AppColors.kPrimaryColor,
-        refreshBackgroundColor: Colors.black,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
@@ -62,12 +61,9 @@ class AppTheme {
       colorScheme: const ColorScheme.light(
         primary: AppColors.kPrimaryColor,
         secondary: AppColors.kPrimaryColor,
-        surface: Colors.white,
         onSurface: Colors.black,
       ),
-      scaffoldBackgroundColor: const Color(
-        0xFFF5F5F5,
-      ),
+      cardColor: Color.fromARGB(255, 243, 243, 243),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
