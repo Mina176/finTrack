@@ -28,9 +28,7 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
     ref.listen(accountControllerProvider, (previous, next) {
       if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
         context.pop();
-      } else if (next.hasError) {
-        print("Error: ${next.error}");
-      }
+      } 
     });
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

@@ -54,15 +54,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         if (error.contains('auth credential is incorrect')) {
           setState(() => emailError = "No account found with this email");
         } else if (error.contains('credential is incorrect')) {
-          print(error);
           setState(() => passwordError = "Password is incorrect");
         } else if (error.contains('wrong-password')) {
           setState(() => passwordError = "Incorrect password");
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(error.replaceAll('Exception: ', ''))),
-          );
-        }
+        } else {}
       }
     });
     return Scaffold(

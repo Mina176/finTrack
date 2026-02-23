@@ -218,7 +218,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                             .read(transactionControllerProvider.notifier)
                             .createTransaction(transaction);
                       } catch (e) {
-                        print("Error: $e");
+                        throw Exception("Failed to add transaction: $e");
                       }
                     },
                     icon: Icons.check,

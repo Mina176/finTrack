@@ -41,7 +41,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              'If an account exists, a reset link has been sent.',
+              'Reset link has been sent.',
             ),
           ),
         );
@@ -52,11 +52,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
         if (validationError != null) {
           setState(() => emailError = validationError);
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(next.error.toString().replaceAll('Exception: ', '')),
-          ),
-        );
       }
     });
     return Scaffold(

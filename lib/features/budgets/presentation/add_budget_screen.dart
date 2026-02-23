@@ -37,8 +37,6 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
     ref.listen(budgetControllerProvider, (previous, next) {
       if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
         context.pop();
-      } else if (next.hasError) {
-        print("Error: ${next.error}");
       }
     });
     return GestureDetector(
@@ -161,7 +159,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                               ),
                             );
                       } catch (e) {
-                        print("Error: $e");
+                        throw Exception("Failed to create budget: $e");
                       }
                     },
                     isLoading: isLoading,
