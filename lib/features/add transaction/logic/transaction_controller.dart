@@ -164,3 +164,28 @@ Future<DashboardData> getWeeklyDashboardData(Ref ref) async {
     percentChange: percent.round(),
   );
 }
+
+@riverpod
+Future<bool> isFirstMonthOfActivity(Ref ref) async {
+  final service = ref.watch(transactionSupabaseServiceProvider);
+  final earliestDate = await service.getFirstTransactionDate();
+
+  if (earliestDate == null) return true;
+
+  final now = DateTime.now();
+  return earliestDate.year == now.year && earliestDate.month == now.month;
+}
+
+@riverpod
+Future<bool> isFirstWeekOfActivity(Ref ref) async {
+  final service = ref.watch(transactionSupabaseServiceProvider);
+  final earliestDate = await service.getFirstTransactionDate();
+
+  if (earliestDate == null) return true;
+
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
+  final startOfWeek = today.subtract(Duration(days: now.weekday - 1));
+
+  return earliestDate.isAfter(startOfWeek);
+}

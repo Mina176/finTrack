@@ -54,4 +54,17 @@ class TransactionSupabaseService {
 
     return weeklySpendings;
   }
+
+  Future<DateTime?> getFirstTransactionDate() async {
+    final response = await Supabase.instance.client
+        .from('transactions')
+        .select('date')
+        .order('date', ascending: true)
+        .limit(1);
+
+    final data = response as List<dynamic>;
+    if (data.isEmpty) return null;
+
+    return DateTime.parse(data[0]['date']);
+  }
 }

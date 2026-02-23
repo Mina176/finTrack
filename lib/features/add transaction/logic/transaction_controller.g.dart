@@ -100,6 +100,42 @@ final getWeeklyDashboardDataProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetWeeklyDashboardDataRef = AutoDisposeFutureProviderRef<DashboardData>;
+String _$isFirstMonthOfActivityHash() =>
+    r'd25346f4bd5b2397af83460c2cf01ee3ffa78358';
+
+/// See also [isFirstMonthOfActivity].
+@ProviderFor(isFirstMonthOfActivity)
+final isFirstMonthOfActivityProvider = AutoDisposeFutureProvider<bool>.internal(
+  isFirstMonthOfActivity,
+  name: r'isFirstMonthOfActivityProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$isFirstMonthOfActivityHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef IsFirstMonthOfActivityRef = AutoDisposeFutureProviderRef<bool>;
+String _$isFirstWeekOfActivityHash() =>
+    r'94b2254903c84cd41499103c53513a6ed2d5aea5';
+
+/// See also [isFirstWeekOfActivity].
+@ProviderFor(isFirstWeekOfActivity)
+final isFirstWeekOfActivityProvider = AutoDisposeFutureProvider<bool>.internal(
+  isFirstWeekOfActivity,
+  name: r'isFirstWeekOfActivityProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$isFirstWeekOfActivityHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef IsFirstWeekOfActivityRef = AutoDisposeFutureProviderRef<bool>;
 String _$transactionControllerHash() =>
     r'd891f8eb8193221875dceeddda9003324ddfdb3e';
 
