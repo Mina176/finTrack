@@ -115,17 +115,14 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
             ),
             budgetsAsync.when(
               data: (budgets) => budgets.isEmpty
-                  ? SliverToBoxAdapter(
-                      child: SizedBox(
-                        height: 200,
-                        child: Center(
-                          child: Text(
-                            'No budgets found. Add a budget to get started!',
-                            style: TextStyles.subtitle.copyWith(
-                              color: Colors.grey,
-                            ),
-                            textAlign: TextAlign.center,
+                  ? SliverFillRemaining(
+                      child: Center(
+                        child: Text(
+                          'No budgets found. Add a budget to get started!',
+                          style: TextStyles.subtitle.copyWith(
+                            color: Colors.grey,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     )
@@ -174,12 +171,12 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                         );
                       },
                     ),
-              loading: () => const SliverToBoxAdapter(
+              loading: () => const SliverFillRemaining(
                 child: Center(
                   child: CircularProgressIndicator(),
                 ),
               ),
-              error: (error, stackTrace) => SliverToBoxAdapter(
+              error: (error, stackTrace) => SliverFillRemaining(
                 child: Center(
                   child: Text('Error loading budgets'),
                 ),
