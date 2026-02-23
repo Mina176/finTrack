@@ -41,7 +41,7 @@ class TransactionModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'user_Id': userId,
+      'user_id': userId,
       'is_expense': isExpense,
       'amount': amount,
       'category': category.name,
@@ -53,7 +53,7 @@ class TransactionModel {
 
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
-      userId: map['user_Id'] as String,
+      userId: map['user_id'] as String,
       isExpense: map['is_expense'] as bool,
       amount: (map['amount'] as num).toDouble(),
       category: CategoryTypes.values.firstWhere(

@@ -21,7 +21,7 @@ class AccountModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'user_Id': userId,
+      'user_id': userId,
       'account_type': accountType.name,
       'account_name': accountName,
       'balance': balance,
@@ -33,7 +33,7 @@ class AccountModel {
   factory AccountModel.fromMap(Map<String, dynamic> map) {
     return AccountModel(
       id: map['id'] as int?,
-      userId: map['user_Id'] as String,
+      userId: map['user_id'] as String,
       accountType: AccountTypes.values.firstWhere(
         (e) => e.name == map['account_type'],
         orElse: () => AccountTypes.cashWallet,

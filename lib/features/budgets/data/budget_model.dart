@@ -39,7 +39,7 @@ class BudgetModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'user_Id': userId,
+      'user_id': userId,
       'limit': limit,
       'budget_name': budgetName,
       'category': category.name,
@@ -50,16 +50,16 @@ class BudgetModel {
 
   factory BudgetModel.fromMap(Map<String, dynamic> map) {
     return BudgetModel(
-      userId: map['user_Id'] as String,
-      limit: (map['limit'] as num).toDouble(),
-      spent: (map['spent'] as num).toDouble(),
-      budgetName: map['budget_name'] as String,
+      userId: (map['user_id'] ?? "") as String,
+      budgetName: (map['budget_name'] ?? "Unnamed Budget") as String,
+      limit: (map['limit'] ?? 0.0).toDouble(),
+      spent: (map['spent'] ?? 0.0).toDouble(),
       category: CategoryTypes.values.firstWhere(
-        (e) => e.name == map['category'],
+        (e) => e.name == (map['category'] ?? ""),
         orElse: () => CategoryTypes.others,
       ),
       recurrenceDuration: RecurrenceDuration.values.firstWhere(
-        (e) => e.name == map['recurrence_duration'],
+        (e) => e.name == (map['recurrence_duration'] ?? ""),
         orElse: () => RecurrenceDuration.monthly,
       ),
     );
