@@ -28,12 +28,6 @@ class AccountSupabaseService {
     return data.map((item) => AccountModel.fromMap(item)).toList();
   }
 
-  Future<void> deleteAllData() async {
-    await client.from('accounts').delete().neq('id', 0);
-    await client.from('transactions').delete().neq('id', 0);
-    await client.from('budgets').delete().neq('id', 0);
-  }
-
   Future<AccountModel> updateAccountBalance(
     AccountModel account,
     double amount,

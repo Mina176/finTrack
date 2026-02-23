@@ -43,13 +43,6 @@ class CustomAppBar extends ConsumerWidget {
             ),
           ],
         ),
-        Spacer(),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.notifications,
-          ),
-        ),
       ],
     );
   }

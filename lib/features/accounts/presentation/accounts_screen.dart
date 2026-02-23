@@ -36,12 +36,6 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
       appBar: AppBar(
         title: Text('Accounts'),
         actions: [
-          IconButton(
-            onPressed: () {
-              AccountSupabaseService().deleteAllData();
-            },
-            icon: Icon(Icons.remove_red_eye),
-          ),
           DecoratedBox(
             decoration: BoxDecoration(
               color: AppColors.kPrimaryColor,
