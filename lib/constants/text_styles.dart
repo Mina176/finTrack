@@ -46,10 +46,7 @@ class TextStyles {
     height: 1.5,
   );
 
-  static const keyboardKey = TextStyle(
-    fontWeight: FontWeight.w900,
-    fontSize: 20,
-  );
+
 
   static const addTransactionSettingstitle = TextStyle(
     fontWeight: FontWeight.w900,

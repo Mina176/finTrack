@@ -2,7 +2,6 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/controllers/keyboard_controller.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
-import 'package:fintrack/features/add%20transaction/presentation/animated_positioned_keyboard.dart';
 import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
 import 'package:fintrack/features/add%20transaction/utils/categories_lists.dart';
 import 'package:fintrack/features/appearance/logic/theme_controller.dart';
@@ -28,49 +27,13 @@ class AddBudgetScreen extends ConsumerStatefulWidget {
 }
 
 class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
-  String amount = "0.00";
+  final TextEditingController amountController = TextEditingController();
   final nameController = TextEditingController();
   CategoryTypes selectedCategory = CategoryTypes.food;
   int selectedRecurrenceIndex = 1;
   @override
-  void initState() {
-    super.initState();
-  }
-
-  void _onKeyTap(String value) {
-    setState(() {
-      if (value == '⌫') {
-        if (amount.length > 1) {
-          amount = amount.substring(0, amount.length - 1);
-        } else {
-          amount = "0";
-        }
-      } else if (value == '.') {
-        if (!amount.contains('.')) amount += value;
-      } else {
-        if (amount == "0.00" || amount == "0") {
-          amount = value;
-        } else {
-          amount += value;
-        }
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final showCustomKeypad = ref.watch(keypadControllerProvider);
-    final Size screenSize = MediaQuery.of(context).size;
-    final double keypadHeight = screenSize.height * 0.35;
-    final double buttonAreaHeight = (screenSize.height * 0.1).clamp(
-      70.0,
-      100.0,
-    );
-    final double safeAreaBottom = MediaQuery.of(context).padding.bottom;
-    final double hiddenOffset = -(keypadHeight + safeAreaBottom);
-    final double listBottomPadding = showCustomKeypad
-        ? (keypadHeight + buttonAreaHeight)
-        : (buttonAreaHeight + safeAreaBottom + screenSize.height * 0.125);
+    final double buttonAreaHeight = 90.0;
     final isLoading = ref.watch(budgetControllerProvider).isLoading;
     ref.listen(budgetControllerProvider, (previous, next) {
       if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
@@ -88,15 +51,15 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
           forceMaterialTransparency: true,
           title: const Text('New Budget'),
         ),
-        body: Stack(
-          children: [
-            SingleChildScrollView(
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
               child: Column(
                 spacing: 10,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   DisplayAmount(
-                    amount: amount,
+                    controller: amountController,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -155,54 +118,57 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(height: listBottomPadding),
+                  SizedBox(height: buttonAreaHeight),
                 ],
               ),
             ),
-            AnimatedPositionButton(
-              onTap: () async {
-                if (isLoading) return;
-                if (amount == "0.00") return;
-                ref.read(keypadControllerProvider.notifier).hide();
-                try {
-                  final userId = ref
-                      .read(authServiceProvider)
-                      .currentUser!
-                      .userId;
-                  await ref
-                      .read(budgetControllerProvider.notifier)
-                      .createBudget(
-                        BudgetModel(
-                          userId: userId,
-                          limit: amount.isEmpty ? 0.0 : double.parse(amount),
-                          spent: 0.0,
-                          budgetName: nameController.text.isEmpty
-                              ? "Unnamed Budget"
-                              : nameController.text,
-                          category: selectedCategory,
-                          recurrenceDuration: selectedRecurrenceIndex == 0
-                              ? RecurrenceDuration.weekly
-                              : selectedRecurrenceIndex == 1
-                              ? RecurrenceDuration.monthly
-                              : RecurrenceDuration.yearly,
-                        ),
-                      );
-                } catch (e) {
-                  print("Error: $e");
-                }
-              },
-              showCustomKeypad: showCustomKeypad,
-              keypadHeight: keypadHeight,
-              buttonAreaHeight: buttonAreaHeight,
-              safeAreaBottom: safeAreaBottom,
-              isLoading: isLoading,
-            ),
-            AnimatedPositionedKeyboard(
-              onKeyTap: _onKeyTap,
-              showCustomKeypad: showCustomKeypad,
-              hiddenOffset: hiddenOffset,
-              keypadHeight: keypadHeight,
-              safeAreaBottom: safeAreaBottom,
+            SliverFillRemaining(
+              hasScrollBody: false,
+
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: Sizes.kVerticalPadding,
+                  ),
+                  child: AnimatedPositionButton(
+                    onTap: () async {
+                      if (isLoading) return;
+                      if (amountController.text == "0.00") return;
+                      ref.read(keypadControllerProvider.notifier).hide();
+                      try {
+                        final userId = ref
+                            .read(authServiceProvider)
+                            .currentUser!
+                            .userId;
+                        await ref
+                            .read(budgetControllerProvider.notifier)
+                            .createBudget(
+                              BudgetModel(
+                                userId: userId,
+                                limit: amountController.text.isEmpty
+                                    ? 0.0
+                                    : double.parse(amountController.text),
+                                spent: 0.0,
+                                budgetName: nameController.text.isEmpty
+                                    ? "Unnamed Budget"
+                                    : nameController.text,
+                                category: selectedCategory,
+                                recurrenceDuration: selectedRecurrenceIndex == 0
+                                    ? RecurrenceDuration.weekly
+                                    : selectedRecurrenceIndex == 1
+                                    ? RecurrenceDuration.monthly
+                                    : RecurrenceDuration.yearly,
+                              ),
+                            );
+                      } catch (e) {
+                        print("Error: $e");
+                      }
+                    },
+                    isLoading: isLoading,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
