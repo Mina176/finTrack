@@ -35,6 +35,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text('Accounts'),
+        forceMaterialTransparency: true,
         actions: [
           DecoratedBox(
             decoration: BoxDecoration(
@@ -88,50 +89,45 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                         savingPercentage: 2,
                         isShrinked: true,
                       ),
-                    ],
-                  ),
-                  gapH16,
-                ],
-              ),
+              ],
             ),
-            accountsAsync.when(
-              data: (accounts) {
-                if (accounts.isEmpty) {
-                  return const SliverToBoxAdapter(
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Text("No accounts added yet."),
+            gapH16,
+            Expanded(
+              child: SingleChildScrollView(
+                child: accountsAsync.when(
+                  data: (accounts) {
+                    if (accounts.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No accounts added yet.',
+                          style: TextStyles.subtitle.copyWith(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      );
+                    }
+                    return SettingsSection(
+                      backgroundColor: Theme.of(context).cardColor,
+                      widgets: List.generate(
+                        accounts.length,
+                        (index) {
+                          return AccountCard(
+                            accountType: accounts[index].accountType.name,
+                            accountName: accounts[index].accountName,
+                            balance: accounts[index].balance,
+                            currentBalance: accounts[index].currentBalance,
+                            currencySymbol: currencySymbol,
+                          );
+                        },
                       ),
-                    ),
-                  );
-                }
-                return SliverToBoxAdapter(
-                  child: SettingsSection(
-                    backgroundColor: Theme.of(context).cardColor,
-                    widgets: List.generate(
-                      accounts.length,
-                      (index) {
-                        return AccountCard(
-                          accountType: accounts[index].accountType.name,
-                          accountName: accounts[index].accountName,
-                          balance: accounts[index].balance,
-                          currentBalance: accounts[index].currentBalance,
-                          currencySymbol: currencySymbol,
-                        );
-                      },
-                    ),
+                    );
+                  },
+                  loading: () => Center(
+                    child: CircularProgressIndicator(),
                   ),
-                );
-              },
-              loading: () => SliverToBoxAdapter(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-              error: (error, stackTrace) => SliverToBoxAdapter(
-                child: Center(
-                  child: Text(error.toString()),
+                  error: (error, stackTrace) => Center(
+                    child: Text(error.toString()),
+                  ),
                 ),
               ),
             ),
