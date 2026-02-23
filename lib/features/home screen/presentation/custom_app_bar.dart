@@ -38,7 +38,8 @@ class CustomAppBar extends ConsumerWidget {
               style: TextStyles.subtitle.copyWith(fontSize: 14),
             ),
             Text(
-              currentUser!.name,
+              currentUser?.name ??
+                  'Guest${currentUser!.userId.substring(0, 5)}',
               style: TextStyles.title.copyWith(fontSize: 18),
             ),
           ],
