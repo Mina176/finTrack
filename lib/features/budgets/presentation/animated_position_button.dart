@@ -6,19 +6,11 @@ import 'package:flutter/material.dart';
 class AnimatedPositionButton extends StatelessWidget {
   const AnimatedPositionButton({
     super.key,
-    required this.showCustomKeypad,
-    required this.keypadHeight,
-    required this.buttonAreaHeight,
-    required this.safeAreaBottom,
     required this.onTap,
     required this.isLoading,
   });
 
   final VoidCallback onTap;
-  final bool showCustomKeypad;
-  final double keypadHeight;
-  final double buttonAreaHeight;
-  final double safeAreaBottom;
   final bool isLoading;
 
   @override
@@ -28,20 +20,21 @@ class AnimatedPositionButton extends StatelessWidget {
       curve: Curves.easeOut,
       left: 0,
       right: 0,
-      bottom: showCustomKeypad ? keypadHeight : 0,
-      height: buttonAreaHeight + (showCustomKeypad ? 0 : safeAreaBottom),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: Sizes.kHorizontalPadding - 4,
+      bottom: 0,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
         ),
-        child: ButtonWithIcon(
-          onPressed: onTap,
-          label: "Save Bugdet",
-          icon: Icon(Icons.check_circle_rounded),
-          isLoading: isLoading,
-          backgroundColor: AppColors.kPrimaryColor,
-          borderColor: AppColors.kPrimaryColor,
+        child: SafeArea(
+          minimum: const EdgeInsets.all(8),
+          child: ButtonWithIcon(
+            onPressed: onTap,
+            label: "Save Bugdet",
+            icon: Icon(Icons.check_circle_rounded),
+            isLoading: isLoading,
+            backgroundColor: AppColors.kPrimaryColor,
+            borderColor: AppColors.kPrimaryColor,
+          ),
         ),
       ),
     );

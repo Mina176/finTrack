@@ -5,7 +5,6 @@ import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/features/authentication/utils/validators.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_card.dart';
 import 'package:fintrack/theming/app_colors.dart';
-import 'package:fintrack/widgets/button_label_with_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -105,10 +104,12 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                         width: 20,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : (ButtonLabelWithIcon(
-                        label: 'Send Reset Link',
-                        icon: Icons.arrow_forward_rounded,
-                      )),
+                    : Row(
+                        children: [
+                          Text('Send Reset Link'),
+                          Icon(Icons.arrow_forward_rounded),
+                        ],
+                      ),
               ),
             ],
           ),

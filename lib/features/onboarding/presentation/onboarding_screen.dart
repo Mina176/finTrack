@@ -3,7 +3,6 @@ import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_page_slider.dart';
-import 'package:fintrack/widgets/button_label_with_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -60,13 +59,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           duration: Duration(milliseconds: 250),
                           curve: Curves.linear,
                         )
-                      : completeOnboarding;
+                      : completeOnboarding();
                 }),
                 child: currentPage < 2
                     ? Text('Next')
-                    : ButtonLabelWithIcon(
-                        label: 'Get Started',
-                        icon: Icons.arrow_forward_rounded,
+                    : ElevatedButton(
+                        onPressed: completeOnboarding,
+                        child: Text('Get Started'),
                       ),
               ),
             ],
