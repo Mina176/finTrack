@@ -35,10 +35,7 @@ class SettingsSection extends StatelessWidget {
                             .expand(
                               (widget) => [
                                 widget,
-                                Divider(
-                                  height: 0.1,
-                                  color: Theme.of(context).dividerColor,
-                                ),
+                                Divider(height: 0.1),
                               ],
                             )
                             .toList()

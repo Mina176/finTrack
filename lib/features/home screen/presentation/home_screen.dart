@@ -100,10 +100,7 @@ class HomeScreen extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-                              Divider(
-                                height: 12,
-                                color: Theme.of(context).dividerColor,
-                              ),
+                              Divider(height: 12),
                               gapH32,
                               WeeklySpendingSummary(
                                 weeklySummary:

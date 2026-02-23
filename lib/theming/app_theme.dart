@@ -73,9 +73,10 @@ class AppTheme {
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      dividerTheme: DividerThemeData(
-        color: const Color(0xFFE5E5EA),
-        thickness: 1,
+      dividerTheme: DividerThemeData(color: const Color(0xFFE5E7EB)),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: AppColors.kPrimaryColor,
+        refreshBackgroundColor: Colors.white,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
