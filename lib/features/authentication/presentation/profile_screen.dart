@@ -3,6 +3,7 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/appearance/logic/theme_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
+import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
@@ -70,6 +71,7 @@ class ProfileScreen extends ConsumerWidget {
               widgets: [
                 ListTile(
                   onTap: () => showCurrencyPicker(
+                    showFlag: false,
                     theme: CurrencyPickerThemeData(
                       inputDecoration: InputDecoration(
                         prefixIcon: Icon(
@@ -161,20 +163,21 @@ class ProfileScreen extends ConsumerWidget {
   }
 }
 
-class DetailsSection extends StatelessWidget {
+class DetailsSection extends ConsumerWidget {
   const DetailsSection({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(authServiceProvider).currentUser;
     return Column(
       children: [
         Text(
-          'Alex Morgan'.hardcoded,
+          currentUser?.name ?? 'User${currentUser?.userId.substring(0, 5)}',
           textAlign: TextAlign.center,
           style: TextStyles.title.copyWith(fontSize: 28),
         ),
         Text(
-          'alex.j@example.com'.hardcoded,
+          currentUser?.email ?? '',
           textAlign: TextAlign.center,
           style: TextStyles.subtitle.copyWith(fontSize: 16),
         ),

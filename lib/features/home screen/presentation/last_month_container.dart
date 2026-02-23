@@ -44,7 +44,7 @@ class LastMonthContainer extends StatelessWidget {
             Text(
               isShrinked
                   ? '${savingPercentage.toString()}%'
-                  : '$savingPercentage% vs last month'.hardcoded,
+                  : '$savingPercentage% vs last month',
               textAlign: TextAlign.center,
               style: TextStyles.buttonLabel.copyWith(
                 color: isSaving
