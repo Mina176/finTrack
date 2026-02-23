@@ -1,4 +1,3 @@
-import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -26,13 +25,18 @@ class AnimatedPositionButton extends StatelessWidget {
         ),
         child: SafeArea(
           minimum: const EdgeInsets.all(8),
-          child: ButtonWithIcon(
+          child: ElevatedButton(
             onPressed: onTap,
-            label: "Save Bugdet",
-            icon: Icon(Icons.check_circle_rounded),
-            isLoading: isLoading,
-            backgroundColor: AppColors.kPrimaryColor,
-            borderColor: AppColors.kPrimaryColor,
+            child: isLoading
+                ? const CircularProgressIndicator()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.check_circle_rounded),
+                      const SizedBox(width: 8),
+                      Text("Save Budget"),
+                    ],
+                  ),
           ),
         ),
       ),

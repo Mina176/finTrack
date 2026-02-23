@@ -2,7 +2,6 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
 import 'package:fintrack/features/authentication/logic/loading_state.dart';
-import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/features/authentication/presentation/login_screen.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/utils/validators.dart';
@@ -146,19 +145,30 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     CustomDivider(
                       centeredText: 'Or continue with',
                     ),
-                    ButtonWithIcon(
-                      label: 'Continue with Google',
+                    ElevatedButton(
                       onPressed: () => ref
                           .read(authControllerProvider.notifier)
                           .signInWithGoogle(),
-                      icon: SizedBox(
-                        height: Sizes.p32,
-                        child: Image.asset(
-                          'assets/google-logo-png-29546.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      foregroundColor: AppColors.kTitleColor,
+                      child: isLoading
+                          ? const SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: Sizes.p32,
+                                  child: Image.asset(
+                                    'assets/google-logo-png-29546.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                gapW4,
+                                Text('Continue with Google'),
+                              ],
+                            ),
                     ),
                     gapH4,
                     Row(

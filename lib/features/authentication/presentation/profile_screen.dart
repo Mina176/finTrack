@@ -4,7 +4,6 @@ import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/appearance/logic/theme_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
-import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
@@ -118,16 +117,22 @@ class ProfileScreen extends ConsumerWidget {
               ],
             ),
             Spacer(),
-            ButtonWithIcon(
+            ElevatedButton(
               onPressed: () =>
                   ref.read(authControllerProvider.notifier).signOut(),
-              label: 'Log Out',
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
-              borderColor: AppColors.knotSavingForeground,
-              icon: Icon(
-                Icons.logout,
-                color: Colors.white,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: AppColors.kErrorColor,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.logout,
+                  ),
+                  gapW4,
+                  Text('Log Out'),
+                ],
               ),
             ),
             gapW16,
