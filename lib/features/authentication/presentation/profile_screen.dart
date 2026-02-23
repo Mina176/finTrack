@@ -38,29 +38,6 @@ class ProfileScreen extends ConsumerWidget {
             gapH12,
             SettingsSection(
               header: Text(
-                'SECURITY',
-                style: TextStyles.subtitle.copyWith(fontSize: 12),
-                textAlign: TextAlign.left,
-              ),
-              backgroundColor: Theme.of(context).cardColor,
-              widgets: [
-                ListTile(
-                  onTap: () {},
-                  leading: Icon(
-                    Icons.fingerprint,
-                    size: 28,
-                    color: AppColors.kPrimaryColor,
-                  ),
-                  title: Text(
-                    'Change Password',
-                    style: TextStyles.labelText,
-                  ),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 14),
-                ),
-              ],
-            ),
-            SettingsSection(
-              header: Text(
                 "APP PREFERENCES",
                 style: TextStyles.subtitle.copyWith(fontSize: 12),
                 textAlign: TextAlign.left,
