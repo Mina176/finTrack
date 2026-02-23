@@ -213,9 +213,12 @@ class CustomDivider extends StatelessWidget {
         Expanded(
           child: Divider(),
         ),
-        gapW4,
-        Text(centeredText, style: TextStyles.hintText),
-        gapW4,
+        gapW8,
+        Text(
+          centeredText,
+          style: TextStyle(color: Colors.grey[500]),
+        ),
+        gapW8,
         Expanded(
           child: Divider(),
         ),

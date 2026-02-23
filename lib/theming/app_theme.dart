@@ -22,7 +22,9 @@ class AppTheme {
         bodyColor: Colors.white,
         displayColor: Colors.white,
       ),
-      dividerTheme: DividerThemeData(color: Colors.black.withOpacity(0.4)),
+      dividerTheme: DividerThemeData(
+        color: Color(0xFF94A3B8).withOpacity(0.3),
+      ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: AppColors.kPrimaryColor,
       ),

@@ -45,7 +45,7 @@ class LeftToSpendCard extends ConsumerWidget {
             gapH8,
             LinearProgressIndicator(
               value: progressValue,
-              backgroundColor: Theme.of(context).dividerColor,
+              backgroundColor: Theme.of(context).dividerTheme.color,
               minHeight: 6,
               borderRadius: BorderRadius.circular(8),
             ),
