@@ -8,8 +8,6 @@ import 'package:fintrack/features/authentication/presentation/button_with_icon.d
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
-import 'package:fintrack/utils/get_hardcode.dart';
-import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:fintrack/widgets/settings_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

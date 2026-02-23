@@ -2,7 +2,6 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
-import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

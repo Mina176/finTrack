@@ -1,7 +1,5 @@
-import 'package:fintrack/features/appearance/logic/theme_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
 import 'package:fintrack/features/authentication/logic/loading_state.dart';
-import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/features/authentication/utils/validators.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
@@ -170,7 +168,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               ],
                             ),
                     ),
-                    gapH4,
+                    gapH16,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -187,7 +185,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                       ],
                     ),
-                    gapH4,
                   ],
                 ),
               ),

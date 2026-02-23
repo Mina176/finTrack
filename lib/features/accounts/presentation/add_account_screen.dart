@@ -7,7 +7,6 @@ import 'package:fintrack/features/add%20transaction/data/transaction_model.dart'
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
-import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -137,35 +136,40 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
               ],
             ),
             Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                if (isLoading) return;
-                if (formKey.currentState!.validate()) {
-                  final userId = ref
-                      .read(authServiceProvider)
-                      .currentUser!
-                      .userId;
-                  ref
-                      .read(accountControllerProvider.notifier)
-                      .createAccount(
-                        AccountModel(
-                          userId: userId,
-                          accountType: selectedAccount,
-                          accountName: accountNameController.text,
-                          balance:
-                              double.tryParse(balanceController.text) ?? 0.0,
-                          includeInNetWorth: includeInNetWorth,
-                          currentBalance:
-                              double.tryParse(balanceController.text) ?? 0.0,
-                        ),
-                      );
-                }
-              },
-              child: isLoading
-                  ? CircularProgressIndicator()
-                  : Text(
-                      'Add Account',
-                    ),
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: Sizes.kVerticalPadding,
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  if (isLoading) return;
+                  if (formKey.currentState!.validate()) {
+                    final userId = ref
+                        .read(authServiceProvider)
+                        .currentUser!
+                        .userId;
+                    ref
+                        .read(accountControllerProvider.notifier)
+                        .createAccount(
+                          AccountModel(
+                            userId: userId,
+                            accountType: selectedAccount,
+                            accountName: accountNameController.text,
+                            balance:
+                                double.tryParse(balanceController.text) ?? 0.0,
+                            includeInNetWorth: includeInNetWorth,
+                            currentBalance:
+                                double.tryParse(balanceController.text) ?? 0.0,
+                          ),
+                        );
+                  }
+                },
+                child: isLoading
+                    ? CircularProgressIndicator()
+                    : Text(
+                        'Add Account',
+                      ),
+              ),
             ),
           ],
         ),

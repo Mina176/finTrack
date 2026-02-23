@@ -1,5 +1,4 @@
 import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/controllers/keyboard_controller.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

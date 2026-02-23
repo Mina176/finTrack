@@ -1,9 +1,7 @@
-import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/theming/app_colors.dart';
-import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:fintrack/widgets/category_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

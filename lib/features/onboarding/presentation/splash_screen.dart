@@ -1,7 +1,6 @@
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/onboarding/data/onboarding_repository.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
-import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/features/onboarding/presentation/onboarding_card.dart';
 import 'package:flutter/material.dart';

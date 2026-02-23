@@ -8,8 +8,6 @@ import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/features/home%20screen/presentation/last_month_container.dart';
 import 'package:fintrack/features/home%20screen/presentation/transaction_card.dart';
 import 'package:fintrack/features/home%20screen/presentation/weekly_spending_summary.dart';
-import 'package:fintrack/theming/app_colors.dart';
-import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

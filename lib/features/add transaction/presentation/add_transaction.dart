@@ -1,6 +1,5 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/controllers/keyboard_controller.dart';
 import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
@@ -10,14 +9,9 @@ import 'package:fintrack/features/add%20transaction/presentation/animated_button
 import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
 import 'package:fintrack/features/add%20transaction/presentation/expense_or_income.dart';
 import 'package:fintrack/features/add%20transaction/utils/helpers.dart';
-import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
-import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
-import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
-import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/category_style.dart';
 import 'package:fintrack/widgets/category_icon.dart';
-import 'package:fintrack/widgets/custom_tile.dart';
 import 'package:fintrack/widgets/settings_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

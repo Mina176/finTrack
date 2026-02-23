@@ -1,7 +1,6 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/appearance/logic/theme_controller.dart';
-import 'package:fintrack/features/authentication/presentation/button_with_icon.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/material.dart';

@@ -9,7 +9,6 @@ class AnimatedButtonWithIcon extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.expenseOrIncome,
-    required this.color,
     required this.label,
     required this.icon,
     required this.isLoading,
@@ -17,7 +16,6 @@ class AnimatedButtonWithIcon extends StatelessWidget {
 
   final VoidCallback onTap;
   final int expenseOrIncome;
-  final Color color;
   final String label;
   final IconData icon;
   final bool isLoading;
@@ -25,7 +23,7 @@ class AnimatedButtonWithIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      height: Sizes.p48,
+      height: Sizes.p52,
       duration: addTransactionAnimationDuration,
       decoration: BoxDecoration(
         color: expenseOrIncome == 0 ? Colors.red : AppColors.kPrimaryColor,
