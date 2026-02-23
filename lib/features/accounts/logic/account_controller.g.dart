@@ -41,6 +41,23 @@ final getNetWorthProvider = AutoDisposeFutureProvider<double>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetNetWorthRef = AutoDisposeFutureProviderRef<double>;
+String _$netWorthStatsHash() => r'a8913cc7930f4d25e1f15ad36464d052ab3fcf82';
+
+/// See also [netWorthStats].
+@ProviderFor(netWorthStats)
+final netWorthStatsProvider = AutoDisposeFutureProvider<NetWorthStats>.internal(
+  netWorthStats,
+  name: r'netWorthStatsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$netWorthStatsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef NetWorthStatsRef = AutoDisposeFutureProviderRef<NetWorthStats>;
 String _$accountControllerHash() => r'c343e1f610221838c9555260aaa7fd420a09b535';
 
 /// See also [AccountController].

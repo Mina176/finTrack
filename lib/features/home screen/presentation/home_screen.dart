@@ -20,8 +20,10 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final transactionsAsync = ref.watch(getTransactionsProvider);
     final weeklyDashboardAsync = ref.watch(getWeeklyDashboardDataProvider);
-    final netWorthAsync = ref.watch(getNetWorthProvider);
+    final netWorthStatsAsync = ref.watch(netWorthStatsProvider);
     final currencySymbol = ref.watch(currencySymbolProvider);
+    final isFirstMonth = ref.watch(isFirstMonthOfActivityProvider);
+    final isFirstWeek = ref.watch(isFirstWeekOfActivityProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
@@ -47,16 +49,26 @@ class HomeScreen extends ConsumerWidget {
                             style: TextStyles.subtitle.copyWith(fontSize: 14),
                           ),
                           Text(
-                            netWorthAsync.when(
+                            netWorthStatsAsync.when(
                               data: (data) =>
-                                  '$currencySymbol${data.toStringAsFixed(2)}',
+                                  '$currencySymbol${data.currentBalance.toStringAsFixed(2)}',
                               error: (error, stackTrace) => 'Error',
-                              loading: () => 'Loading...',
+                              loading: () => '${currencySymbol}0.00',
                             ),
                             style: TextStyles.title,
                           ),
-                          LastMonthContainer(
-                            savingPercentage: 12,
+                          netWorthStatsAsync.when(
+                            data: (netWorthStats) => isFirstMonth.value!
+                                ? SizedBox.shrink()
+                                : LastMonthContainer(
+                                    savingPercentage:
+                                        netWorthStats.percentChange,
+                                  ),
+                            error: (error, stackTrace) => SizedBox.shrink(),
+                            loading: () => Text(
+                              '',
+                              style: TextStyles.buttonLabel,
+                            ),
                           ),
                         ],
                       ),
@@ -93,11 +105,14 @@ class HomeScreen extends ConsumerWidget {
                                     ],
                                   ),
                                   Spacer(),
-                                  LastMonthContainer(
-                                    isShrinked: true,
-                                    savingPercentage:
-                                        weeklyDashboardData.percentChange,
-                                  ),
+                                  isFirstWeek.value == null ||
+                                          isFirstWeek.value!
+                                      ? SizedBox.shrink()
+                                      : LastMonthContainer(
+                                          isShrinked: true,
+                                          savingPercentage:
+                                              weeklyDashboardData.percentChange,
+                                        ),
                                 ],
                               ),
                               Divider(height: 12),

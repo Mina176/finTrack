@@ -1,5 +1,6 @@
 import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_supabase_service.dart';
+import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -80,5 +81,30 @@ Future<double> getNetWorth(Ref ref) async {
       total += account.currentBalance;
     }
   }
-    return total;
+  return total;
+}
+
+class NetWorthStats {
+  final double currentBalance;
+  final int percentChange;
+  NetWorthStats({required this.currentBalance, required this.percentChange});
+}
+@riverpod
+Future<NetWorthStats> netWorthStats(Ref ref) async {
+  final currentNetWorth = await ref.watch(getNetWorthProvider.future);
+  final previousMonthTotal = await ref.watch(
+    getPreviousMonthTotalProvider.future,
+  );
+  int percentageChange = 0;
+  if (previousMonthTotal == 0) {
+    percentageChange = currentNetWorth > 0 ? 100 : 0;
+  } else {
+    percentageChange =
+        ((currentNetWorth - previousMonthTotal) / previousMonthTotal * 100)
+            .round();
+  }
+  return NetWorthStats(
+    currentBalance: currentNetWorth,
+    percentChange: percentageChange,
+  );
 }

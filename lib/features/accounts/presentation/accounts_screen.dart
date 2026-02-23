@@ -3,6 +3,7 @@ import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/accounts/logic/account_supabase_service.dart';
+import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
@@ -29,6 +30,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
     final accountsAsync = ref.watch(getAccountsProvider);
     final netWorthAsync = ref.watch(getNetWorthProvider);
     final currencySymbol = ref.watch(currencySymbolProvider);
+    final isFirstMonth = ref.watch(isFirstMonthOfActivityProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -64,33 +66,31 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
           horizontal: Sizes.kHorizontalPadding,
           vertical: Sizes.kVerticalPadding,
         ),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    'Total Balance',
-                    style: TextStyles.subtitle.copyWith(fontSize: 14),
-                    textAlign: TextAlign.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Total Balance',
+              style: TextStyles.subtitle.copyWith(fontSize: 14),
+              textAlign: TextAlign.center,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  netWorthAsync.when(
+                    data: (data) => '$currencySymbol${data.toStringAsFixed(2)}',
+                    error: (error, stackTrace) => 'Error',
+                    loading: () => '${currencySymbol}0.00',
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        netWorthAsync.when(
-                          data: (data) =>
-                              '$currencySymbol${data.toStringAsFixed(2)}',
-                          error: (error, stackTrace) => 'Error',
-                          loading: () => 'Loading...',
-                        ),
-                        style: TextStyles.title,
-                        textAlign: TextAlign.center,
-                      ),
-                      gapW4,
-                      LastMonthContainer(
+                  style: TextStyles.title,
+                  textAlign: TextAlign.center,
+                ),
+                gapW4,
+                isFirstMonth.value == null || isFirstMonth.value!
+                    ? SizedBox.shrink()
+                    : LastMonthContainer(
                         savingPercentage: 2,
                         isShrinked: true,
                       ),
