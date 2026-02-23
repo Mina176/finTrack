@@ -181,20 +181,15 @@ class CustomFabLocation extends FloatingActionButtonLocation {
 
   @override
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
-    // 1. Calculate X (Centered Horizontally)
     final double fabX =
         (scaffoldGeometry.scaffoldSize.width -
             scaffoldGeometry.floatingActionButtonSize.width) /
         2.0;
 
-    // 2. Calculate Y
-    // contentBottom is the Y-coordinate where the body ends and the BottomAppBar begins.
-    // We subtract half the FAB height to vertically center it on that line.
     final double standardY =
         scaffoldGeometry.contentBottom -
         (scaffoldGeometry.floatingActionButtonSize.height / 2.0);
 
-    // 3. Add custom offset (positive pushes it down, negative pulls it up)
     return Offset(fabX, standardY + offsetY);
   }
 }

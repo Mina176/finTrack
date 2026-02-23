@@ -1,4 +1,3 @@
-// lib/core/utils/validators.dart
 
 class Validators {
   static String? validateEmail(String? value) {

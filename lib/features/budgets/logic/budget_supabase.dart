@@ -37,7 +37,7 @@ class BudgetSupabaseService {
         .lte('date', end.toIso8601String())
         .eq('is_expense', true);
     final transactions = (transactionsResponse as List)
-        .map((e) => TransactionModel.fromMap(e)) // Assuming you have fromMap
+        .map((e) => TransactionModel.fromMap(e))
         .toList();
 
     return budgets.map((budget) {

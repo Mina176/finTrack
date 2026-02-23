@@ -16,11 +16,9 @@ import 'package:go_router/go_router.dart';
 
 class AccountsScreen extends ConsumerStatefulWidget {
   const AccountsScreen({super.key});
-
   @override
   ConsumerState<AccountsScreen> createState() => _AccountsScreenState();
 }
-
 class _AccountsScreenState extends ConsumerState<AccountsScreen> {
   @override
   Widget build(BuildContext context) {

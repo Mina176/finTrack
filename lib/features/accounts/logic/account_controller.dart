@@ -10,7 +10,6 @@ part 'account_controller.g.dart';
 class AccountController extends _$AccountController {
   @override
   FutureOr<void> build() {}
-
   Future<void> createAccount(AccountModel account) async {
     state = const AsyncLoading();
 
@@ -72,6 +71,7 @@ Future<List<AccountModel>> getAccounts(Ref ref) async {
   final service = ref.read(accountSupabaseServiceProvider);
   return service.getAccounts();
 }
+
 @riverpod
 Future<double> getNetWorth(Ref ref) async {
   final accounts = await ref.watch(getAccountsProvider.future);

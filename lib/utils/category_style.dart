@@ -14,7 +14,6 @@ class IconStyle {
   });
 }
 
-// SINGLE SOURCE OF TRUTH
 IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
   switch (type) {
     // --- Spending ---

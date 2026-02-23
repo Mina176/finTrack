@@ -1,4 +1,3 @@
-// Helper method to get account icon based on account type
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
 import 'package:fintrack/widgets/category_icon.dart';
 

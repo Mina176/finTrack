@@ -55,7 +55,7 @@ Future<List<double>> getWeeklySpendings(Ref ref) async {
 
   for (var item in data) {
     final date = DateTime.parse(item['date']);
-    final amount = (item['amount'] as num).toDouble(); // Force to double
+    final amount = (item['amount'] as num).toDouble(); 
 
     int dayIndex = date.weekday - 1;
     weeklySpendings[dayIndex] += amount;

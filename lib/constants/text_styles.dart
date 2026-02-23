@@ -46,8 +46,6 @@ class TextStyles {
     height: 1.5,
   );
 
-
-
   static const addTransactionSettingstitle = TextStyle(
     fontWeight: FontWeight.w900,
     fontSize: 14,

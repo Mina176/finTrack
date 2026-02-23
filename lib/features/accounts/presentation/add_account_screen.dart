@@ -13,11 +13,9 @@ import 'package:go_router/go_router.dart';
 
 class AddAccountScreen extends ConsumerStatefulWidget {
   const AddAccountScreen({super.key});
-
   @override
   ConsumerState<AddAccountScreen> createState() => _AddAccountScreenState();
 }
-
 class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
   AccountTypes selectedAccount = AccountTypes.debitCard;
   bool includeInNetWorth = true;
