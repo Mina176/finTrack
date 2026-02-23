@@ -3,7 +3,8 @@ import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/controllers/keyboard_controller.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
 import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
-import 'package:fintrack/features/add%20transaction/utils/categories_lists.dart';
+import 'package:fintrack/utils/categories_lists.dart';
+import 'package:fintrack/utils/helpers.dart';
 import 'package:fintrack/features/appearance/logic/theme_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';
@@ -13,7 +14,6 @@ import 'package:fintrack/features/budgets/presentation/animated_position_button.
 import 'package:fintrack/features/budgets/presentation/recurrence_duration_selector.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/category_style.dart';
-import 'package:fintrack/utils/get_hardcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

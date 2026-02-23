@@ -1,6 +1,6 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/add%20transaction/utils/helpers.dart';
+import 'package:fintrack/utils/helpers.dart';
 import 'package:fintrack/features/budgets/data/budget_model.dart';
 import 'package:fintrack/features/budgets/logic/budget_controller.dart';
 import 'package:fintrack/features/budgets/presentation/left_to_spend_card.dart';

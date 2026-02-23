@@ -8,7 +8,7 @@ import 'package:fintrack/features/add%20transaction/presentation/add_note_sectio
 import 'package:fintrack/features/add%20transaction/presentation/animated_button_with_icon.dart';
 import 'package:fintrack/features/add%20transaction/presentation/display_amount.dart';
 import 'package:fintrack/features/add%20transaction/presentation/expense_or_income.dart';
-import 'package:fintrack/features/add%20transaction/utils/helpers.dart';
+import 'package:fintrack/utils/helpers.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/utils/category_style.dart';
 import 'package:fintrack/widgets/category_icon.dart';

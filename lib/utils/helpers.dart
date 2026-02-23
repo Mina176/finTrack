@@ -15,7 +15,6 @@ AccountIcon getAccountIcon(AccountTypes accountType) {
   }
 }
 
-// Helper method to get account name based on account type
 String getAccountName(AccountTypes accountType) {
   switch (accountType) {
     case AccountTypes.debitCard:
@@ -55,5 +54,15 @@ String getCategoryName(CategoryTypes categoryType) {
       return "Investment";
     case CategoryTypes.others:
       return "Others";
+  }
+}
+
+String getInfoText(int selectedRecurrenceIndex) {
+  if (selectedRecurrenceIndex == 0) {
+    return 'The budget will reset automatically on Monday of every week.';
+  } else if (selectedRecurrenceIndex == 1) {
+    return 'The budget will reset automatically on 1st of every month';
+  } else {
+    return 'The budget will reset automatically on 1st Jan of every year.';
   }
 }

@@ -2,7 +2,7 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
-import 'package:fintrack/features/add%20transaction/utils/categories_lists.dart';
+import 'package:fintrack/utils/categories_lists.dart';
 import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/authentication/presentation/auth_field.dart';

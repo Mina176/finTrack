@@ -13,7 +13,7 @@ import 'package:fintrack/features/onboarding/presentation/onboarding_screen.dart
 import 'package:fintrack/features/onboarding/presentation/splash_screen.dart';
 import 'package:fintrack/features/appearance/presentation/set_appearance_screen.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
-import 'package:fintrack/utils/refresh_listenable.dart';
+import 'package:fintrack/routing/refresh_listenable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
