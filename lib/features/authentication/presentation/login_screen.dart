@@ -159,6 +159,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
+                                gapH4,
                                 Text('Continue with Google'),
                               ],
                             ),

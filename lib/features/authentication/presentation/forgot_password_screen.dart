@@ -99,6 +99,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text('Send Reset Link'),
                           Icon(Icons.arrow_forward_rounded),

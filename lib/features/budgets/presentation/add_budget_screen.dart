@@ -32,143 +32,145 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
   int selectedRecurrenceIndex = 1;
   @override
   Widget build(BuildContext context) {
-    final double buttonAreaHeight = 90.0;
     final isLoading = ref.watch(budgetControllerProvider).isLoading;
     ref.listen(budgetControllerProvider, (previous, next) {
       if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
         context.pop();
       }
     });
-    return GestureDetector(
-      onTap: ref.read(keypadControllerProvider.notifier).hide,
-      behavior: HitTestBehavior.translucent,
-      child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: AppBar(
-          forceMaterialTransparency: true,
-          title: const Text('New Budget'),
-        ),
-        body: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Column(
-                spacing: 10,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  DisplayAmount(
-                    controller: amountController,
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        title: const Text('New Budget'),
+      ),
+      body: CustomScrollView(
+        physics: const ClampingScrollPhysics(),
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              spacing: 10,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                DisplayAmount(
+                  controller: amountController,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Sizes.kHorizontalPadding,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Sizes.kHorizontalPadding,
-                    ),
-                    child: TextFieldWithLabel(
-                      label: 'Budget Name',
-                      hintText: 'e.g. Monthly Groceries',
-                      controller: nameController,
-                    ),
+                  child: TextFieldWithLabel(
+                    label: 'Budget Name',
+                    hintText: 'e.g. Monthly Groceries',
+                    controller: nameController,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Sizes.kHorizontalPadding,
-                    ),
-
-                    child: Text('Category', style: TextStyles.labelText),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Sizes.kHorizontalPadding,
                   ),
-                  ChooseCategoryHorizontalListView(
-                    selectedCategory: selectedCategory,
-                    onCategorySelected: (category) {
+                  child: Text('Category', style: TextStyles.labelText),
+                ),
+                ChooseCategoryHorizontalListView(
+                  selectedCategory: selectedCategory,
+                  onCategorySelected: (category) {
+                    setState(() {
+                      selectedCategory = category;
+                    });
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Sizes.kHorizontalPadding,
+                  ),
+                  child: Text(
+                    'Recurrence Duration',
+                    style: TextStyles.labelText,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Sizes.kHorizontalPadding,
+                  ),
+                  child: RecurrenceDurationSelector(
+                    selectedIndex: selectedRecurrenceIndex,
+                    onChanged: (value) {
                       setState(() {
-                        selectedCategory = category;
+                        selectedRecurrenceIndex = value;
                       });
                     },
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Sizes.kHorizontalPadding,
-                    ),
-                    child: Text(
-                      'Recurrence Duration',
-                      style: TextStyles.labelText,
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Sizes.kHorizontalPadding,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Sizes.kHorizontalPadding,
-                    ),
-                    child: RecurrenceDurationSelector(
-                      selectedIndex: selectedRecurrenceIndex,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedRecurrenceIndex = value;
-                        });
-                      },
-                    ),
+                  child: Text(
+                    getInfoText(selectedRecurrenceIndex),
+                    style: TextStyles.subtitle.copyWith(fontSize: 10),
+                    textAlign: TextAlign.center,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Sizes.kHorizontalPadding,
-                    ),
-                    child: Text(
-                      getInfoText(selectedRecurrenceIndex),
-                      style: TextStyles.subtitle.copyWith(fontSize: 10),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(height: buttonAreaHeight),
-                ],
-              ),
+                ),
+              ],
             ),
-            SliverFillRemaining(
-              hasScrollBody: false,
-
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: Sizes.kVerticalPadding,
-                  ),
-                  child: AnimatedPositionButton(
-                    onTap: () async {
-                      if (isLoading) return;
-                      if (amountController.text == "0.00") return;
-                      ref.read(keypadControllerProvider.notifier).hide();
-                      try {
-                        final userId = ref
-                            .read(authServiceProvider)
-                            .currentUser!
-                            .userId;
-                        await ref
-                            .read(budgetControllerProvider.notifier)
-                            .createBudget(
-                              BudgetModel(
-                                userId: userId,
-                                limit: amountController.text.isEmpty
-                                    ? 0.0
-                                    : double.parse(amountController.text),
-                                spent: 0.0,
-                                budgetName: nameController.text.isEmpty
-                                    ? "Unnamed Budget"
-                                    : nameController.text,
-                                category: selectedCategory,
-                                recurrenceDuration: selectedRecurrenceIndex == 0
-                                    ? RecurrenceDuration.weekly
-                                    : selectedRecurrenceIndex == 1
-                                    ? RecurrenceDuration.monthly
-                                    : RecurrenceDuration.yearly,
-                              ),
-                            );
-                      } catch (e) {
-                        throw Exception("Failed to create budget: $e");
-                      }
-                    },
-                    isLoading: isLoading,
-                  ),
+          ),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Sizes.kHorizontalPadding,
+                  vertical: Sizes.kVerticalPadding,
+                ),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (isLoading) return;
+                    if (amountController.text == "0.00") return;
+                    try {
+                      final userId = ref
+                          .read(authServiceProvider)
+                          .currentUser!
+                          .userId;
+                      await ref
+                          .read(budgetControllerProvider.notifier)
+                          .createBudget(
+                            BudgetModel(
+                              userId: userId,
+                              limit: amountController.text.isEmpty
+                                  ? 0.0
+                                  : double.parse(amountController.text),
+                              spent: 0.0,
+                              budgetName: nameController.text.isEmpty
+                                  ? "Unnamed Budget"
+                                  : nameController.text,
+                              category: selectedCategory,
+                              recurrenceDuration: selectedRecurrenceIndex == 0
+                                  ? RecurrenceDuration.weekly
+                                  : selectedRecurrenceIndex == 1
+                                  ? RecurrenceDuration.monthly
+                                  : RecurrenceDuration.yearly,
+                            ),
+                          );
+                    } catch (e) {
+                      throw Exception("Failed to create budget: $e");
+                    }
+                  },
+                  child: isLoading
+                      ? CircularProgressIndicator()
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.check_circle),
+                            gapW4,
+                            Text('Save Budget'),
+                          ],
+                        ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

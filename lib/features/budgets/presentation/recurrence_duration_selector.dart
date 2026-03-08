@@ -32,16 +32,16 @@ class RecurrenceDurationSelector extends StatelessWidget {
                   duration: addTransactionAnimationDuration,
                   curve: Curves.easeInCubic,
                   left: selectedIndex == 0
-                      ? 4
+                      ? 6
                       : selectedIndex == 1
-                      ? width / 3 + 4
-                      : (width / 3) * 2 + 4,
+                      ? width / 3
+                      : (width / 3) * 2,
                   top: 6,
                   bottom: 6,
                   width: pillWidth,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).hoverColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
