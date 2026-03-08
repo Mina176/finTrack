@@ -47,10 +47,8 @@ class AuthController extends _$AuthController {
 
   Future<void> signOut() async {
     state = const AuthLoadingState(LoadingStateEnum.loading, null);
-
-    final authService = ref.read(authServiceProvider);
     try {
-      await authService.signOut();
+      await ref.read(authServiceProvider).signOut();
       state = const AuthLoadingState(LoadingStateEnum.success, null);
     } on Exception catch (e) {
       state = AuthLoadingState(LoadingStateEnum.error, e);

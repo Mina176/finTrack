@@ -105,8 +105,13 @@ class AuthService {
       throw Exception('Failed to sign in with Google: $e');
     }
   }
+
   Future<void> signOut() async {
-    await GoogleSignIn.instance.signOut();
+    try {
+      await GoogleSignIn.instance.signOut();
+    } catch (e) {
+      print('Skipping Google Sign-Out: $e');
+    }
     await _supabaseAuth.signOut();
   }
 }
