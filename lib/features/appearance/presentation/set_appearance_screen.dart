@@ -38,7 +38,6 @@ class _SetAppearanceScreenState extends ConsumerState<SetAppearanceScreen> {
             ),
             Text(
               'Customize the look of your money tracker Select a theme to preview how your dashboard and transactions appear.',
-              style: TextStyles.hintText,
             ),
             Row(
               children: List.generate(
@@ -101,59 +100,75 @@ class SelectThemeItem extends StatelessWidget {
                         spacing: 8,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 6,
-                            width: 36,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: isLightTheme
-                                    ? Colors.grey[300]
-                                    : Colors.grey[700],
-                                borderRadius: BorderRadius.circular(8),
+                          Expanded(
+                            flex: 1,
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              width: 36,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  color: isLightTheme
+                                      ? Colors.grey[300]
+                                      : Colors.grey[700],
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 60,
-                            width: double.infinity,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: isLightTheme
-                                    ? Colors.grey[300]
-                                    : Colors.grey[700],
-                                borderRadius: BorderRadius.circular(8),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.1,
+                              width: double.infinity,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  color: isLightTheme
+                                      ? Colors.grey[300]
+                                      : Colors.grey[700],
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                           ),
-                          Row(
-                            spacing: 8,
-                            children: List.generate(
-                              2,
-                              (index) => Expanded(
-                                child: SizedBox(
-                                  height: 80,
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: isLightTheme
-                                          ? Colors.grey[300]
-                                          : Colors.grey[700],
-                                      borderRadius: BorderRadius.circular(8),
+                          Expanded(
+                            flex: 4,
+                            child: Row(
+                              spacing: 8,
+                              children: List.generate(
+                                2,
+                                (index) => Expanded(
+                                  child: SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height *
+                                        0.20,
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        color: isLightTheme
+                                            ? Colors.grey[300]
+                                            : Colors.grey[700],
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          Spacer(),
-                          SizedBox(
-                            height: 22,
-                            width: double.infinity,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: isLightTheme
-                                    ? AppColors.kPrimaryColor.withOpacity(0.2)
-                                    : AppColors.kPrimaryColor.withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(8),
+                          Spacer(flex: 1),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.08,
+                              width: double.infinity,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  color: isLightTheme
+                                      ? AppColors.kPrimaryColor.withOpacity(0.2)
+                                      : AppColors.kPrimaryColor.withOpacity(
+                                          0.4,
+                                        ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                           ),
