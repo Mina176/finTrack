@@ -14,6 +14,10 @@ class CustomAppBar extends ConsumerWidget {
     final String? photoUrl = currentUser?.avatarUrl;
     final bool hasValidPhoto =
         photoUrl != null && photoUrl.startsWith('https://');
+    final String guestId = currentUser?.userId != null
+        ? currentUser!.userId.substring(0, 5)
+        : '76186';
+    final String displayName = currentUser?.name ?? 'Guest $guestId';
     return Row(
       children: [
         GestureDetector(
@@ -23,9 +27,6 @@ class CustomAppBar extends ConsumerWidget {
             backgroundImage: hasValidPhoto
                 ? NetworkImage(photoUrl)
                 : const AssetImage('assets/9440461.jpg'),
-            child: currentUser?.avatarUrl == null
-                ? const Icon(Icons.person, color: Colors.white)
-                : null,
           ),
         ),
         gapW8,
@@ -37,8 +38,7 @@ class CustomAppBar extends ConsumerWidget {
               style: TextStyles.subtitle.copyWith(fontSize: 14),
             ),
             Text(
-              currentUser?.name ??
-                  'Guest${currentUser!.userId.substring(0, 5)}',
+              displayName,
               style: TextStyles.title.copyWith(fontSize: 18),
             ),
           ],
