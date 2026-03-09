@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:fintrack/constants/duration_constants.dart';
 import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
+import 'package:fintrack/features/home_screen/presentation/custom_card.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:flutter/widgets.dart';
 

@@ -1,5 +1,5 @@
-import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
-import 'package:fintrack/features/add%20transaction/presentation/category_icon_with_label.dart';
+import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
+import 'package:fintrack/features/add_transaction/presentation/category_icon_with_label.dart';
 import 'package:fintrack/widgets/category_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

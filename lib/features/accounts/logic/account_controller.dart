@@ -1,6 +1,6 @@
 import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_supabase_service.dart';
-import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
+import 'package:fintrack/features/add_transaction/logic/transaction_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -89,6 +89,7 @@ class NetWorthStats {
   final int percentChange;
   NetWorthStats({required this.currentBalance, required this.percentChange});
 }
+
 @riverpod
 Future<NetWorthStats> netWorthStats(Ref ref) async {
   final currentNetWorth = await ref.watch(getNetWorthProvider.future);

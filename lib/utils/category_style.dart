@@ -1,4 +1,4 @@
-import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
+import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -145,7 +145,7 @@ IconStyle getAccountStyle(AccountTypes type, ThemeMode themeMode) {
     case AccountTypes.creditCard:
       return IconStyle(
         icon: Icons.credit_card_rounded,
-        color: themeMode == ThemeMode .dark
+        color: themeMode == ThemeMode.dark
             ? Colors.orange.shade300
             : const Color(0xFFEA580C),
         backgroundColor: themeMode == ThemeMode.dark

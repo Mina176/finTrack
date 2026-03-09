@@ -1,5 +1,5 @@
-import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
-import 'package:fintrack/features/add%20transaction/logic/transaction_supabase_service.dart';
+import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
+import 'package:fintrack/features/add_transaction/logic/transaction_supabase_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -55,7 +55,7 @@ Future<List<double>> getWeeklySpendings(Ref ref) async {
 
   for (var item in data) {
     final date = DateTime.parse(item['date']);
-    final amount = (item['amount'] as num).toDouble(); 
+    final amount = (item['amount'] as num).toDouble();
 
     int dayIndex = date.weekday - 1;
     weeklySpendings[dayIndex] += amount;

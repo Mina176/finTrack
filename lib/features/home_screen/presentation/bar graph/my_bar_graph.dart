@@ -1,5 +1,5 @@
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
-import 'package:fintrack/features/home%20screen/presentation/bar%20graph/bar_data.dart';
+import 'package:fintrack/features/home_screen/presentation/bar%20graph/bar_data.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';

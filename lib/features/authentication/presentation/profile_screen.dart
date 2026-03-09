@@ -5,7 +5,7 @@ import 'package:fintrack/features/appearance/logic/theme_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
-import 'package:fintrack/features/home%20screen/presentation/custom_app_bar.dart';
+import 'package:fintrack/features/home_screen/presentation/custom_app_bar.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/utils/helpers.dart';

@@ -1,4 +1,4 @@
-import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
+import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/widgets/category_icon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,13 +1,13 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
-import 'package:fintrack/features/add%20transaction/logic/transaction_controller.dart';
+import 'package:fintrack/features/add_transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
-import 'package:fintrack/features/home%20screen/presentation/custom_app_bar.dart';
-import 'package:fintrack/features/home%20screen/presentation/custom_card.dart';
-import 'package:fintrack/features/home%20screen/presentation/last_month_container.dart';
-import 'package:fintrack/features/home%20screen/presentation/transaction_card.dart';
-import 'package:fintrack/features/home%20screen/presentation/weekly_spending_summary.dart';
+import 'package:fintrack/features/home_screen/presentation/custom_app_bar.dart';
+import 'package:fintrack/features/home_screen/presentation/custom_card.dart';
+import 'package:fintrack/features/home_screen/presentation/last_month_container.dart';
+import 'package:fintrack/features/home_screen/presentation/transaction_card.dart';
+import 'package:fintrack/features/home_screen/presentation/weekly_spending_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

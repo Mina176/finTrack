@@ -1,6 +1,6 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
+import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
 import 'package:fintrack/widgets/category_icon.dart';
 import 'package:flutter/material.dart';
 

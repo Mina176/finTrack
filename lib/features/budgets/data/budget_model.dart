@@ -1,4 +1,4 @@
-import 'package:fintrack/features/add%20transaction/data/transaction_model.dart';
+import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
 
 enum RecurrenceDuration { weekly, monthly, yearly }
 
