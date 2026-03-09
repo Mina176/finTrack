@@ -23,6 +23,44 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
   final TextEditingController accountNameController = TextEditingController();
   final TextEditingController balanceController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  addAccount(bool isLoading) {
+    if (isLoading) return;
+    if (formKey.currentState!.validate()) {
+      final currentUser = ref.read(authServiceProvider).currentUser;
+      if (currentUser == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Error: User not found. Please log in again.',
+            ),
+          ),
+        );
+        return;
+      }
+      final parsedBalance = double.tryParse(balanceController.text) ?? 0.0;
+      ref
+          .read(accountControllerProvider.notifier)
+          .createAccount(
+            AccountModel(
+              userId: currentUser.userId,
+              accountType: selectedAccount,
+              accountName: accountNameController.text,
+              balance: parsedBalance,
+              includeInNetWorth: includeInNetWorth,
+              currentBalance: parsedBalance,
+            ),
+          );
+    }
+  }
+
+  @override
+  void dispose() {
+    accountNameController.dispose();
+    balanceController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final isLoading = ref.watch(accountControllerProvider).isLoading;
@@ -43,47 +81,48 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
         ),
         child: CustomScrollView(
           slivers: [
+            SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.7,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final isSelected =
+                      selectedAccount == AccountTypes.values[index];
+                  return GestureDetector(
+                    onTap: () => setState(
+                      () => selectedAccount = AccountTypes.values[index],
+                    ),
+                    child: CustomCard(
+                      isSelected: isSelected,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(accountTypes[index]['icon'], size: 28),
+                          gapH4,
+                          Text(
+                            accountTypes[index]['label'],
+                            style: TextStyles.subtitle.copyWith(
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                childCount: accountTypes.length,
+              ),
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
             SliverFillRemaining(
+              hasScrollBody: false,
               child: Column(
                 spacing: 10,
                 children: [
-                  GridView.builder(
-                    itemCount: accountTypes.length,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 1.7,
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
-                        ),
-                    itemBuilder: (context, index) {
-                      final isSelected =
-                          selectedAccount == AccountTypes.values[index];
-                      return GestureDetector(
-                        onTap: () => setState(
-                          () => selectedAccount = AccountTypes.values[index],
-                        ),
-                        child: CustomCard(
-                          isSelected: isSelected,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(accountTypes[index]['icon'], size: 28),
-                              gapH4,
-                              Text(
-                                accountTypes[index]['label'],
-                                style: TextStyles.subtitle.copyWith(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
                   Form(
                     key: formKey,
                     child: Column(
@@ -110,6 +149,9 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Account Balance is required';
+                            }
+                            if (double.tryParse(value) == null) {
+                              return 'Please enter a valid number';
                             }
                             return null;
                           },
@@ -144,33 +186,13 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
                       bottom: Sizes.kVerticalPadding,
                     ),
                     child: ElevatedButton(
-                      onPressed: () {
-                        if (isLoading) return;
-                        if (formKey.currentState!.validate()) {
-                          final userId = ref
-                              .read(authServiceProvider)
-                              .currentUser!
-                              .userId;
-                          ref
-                              .read(accountControllerProvider.notifier)
-                              .createAccount(
-                                AccountModel(
-                                  userId: userId,
-                                  accountType: selectedAccount,
-                                  accountName: accountNameController.text,
-                                  balance:
-                                      double.tryParse(balanceController.text) ??
-                                      0.0,
-                                  includeInNetWorth: includeInNetWorth,
-                                  currentBalance:
-                                      double.tryParse(balanceController.text) ??
-                                      0.0,
-                                ),
-                              );
-                        }
-                      },
+                      onPressed: isLoading ? null : () => addAccount(isLoading),
                       child: isLoading
-                          ? CircularProgressIndicator()
+                          ? SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(),
+                            )
                           : Text(
                               'Add Account',
                             ),
