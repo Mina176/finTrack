@@ -106,7 +106,7 @@ class SelectAccountScreen extends ConsumerWidget {
           child: CircularProgressIndicator(),
         ),
         error: (error, stackTrace) => Center(
-          child: Text(error.toString()),
+          child: Text('Something went wrong. Please try again.'),
         ),
       ),
     );

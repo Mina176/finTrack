@@ -122,7 +122,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                   child: CircularProgressIndicator(),
                 ),
                 error: (error, stackTrace) => Center(
-                  child: Text(error.toString()),
+                  child: Text('Something went wrong. Please try again.'),
                 ),
               ),
             ),

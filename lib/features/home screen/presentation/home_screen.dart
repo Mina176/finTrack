@@ -50,7 +50,8 @@ class HomeScreen extends ConsumerWidget {
                             netWorthStatsAsync.when(
                               data: (data) =>
                                   '$currencySymbol${data.currentBalance.toStringAsFixed(2)}',
-                              error: (error, stackTrace) => 'Error',
+                              error: (error, stackTrace) =>
+                                  'Something went wrong. Please try again.',
                               loading: () => '${currencySymbol}0.00',
                             ),
                             style: TextStyles.title,
@@ -103,8 +104,7 @@ class HomeScreen extends ConsumerWidget {
                                     ],
                                   ),
                                   Spacer(),
-                                  isFirstWeek.value == null ||
-                                          isFirstWeek.value!
+                                  isFirstWeek.value ?? true
                                       ? SizedBox.shrink()
                                       : LastMonthContainer(
                                           isShrinked: true,
@@ -129,7 +129,9 @@ class HomeScreen extends ConsumerWidget {
                           ),
                         ),
                         error: (error, stackTrace) => Center(
-                          child: Text('Error: $error'),
+                          child: Text(
+                            'Something went wrong. Please try again.',
+                          ),
                         ),
                       ),
                     ),
