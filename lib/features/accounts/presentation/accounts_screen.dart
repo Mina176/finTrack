@@ -19,6 +19,7 @@ class AccountsScreen extends ConsumerStatefulWidget {
   @override
   ConsumerState<AccountsScreen> createState() => _AccountsScreenState();
 }
+
 class _AccountsScreenState extends ConsumerState<AccountsScreen> {
   @override
   Widget build(BuildContext context) {
@@ -88,20 +89,20 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
             ),
             gapH16,
             Expanded(
-              child: SingleChildScrollView(
-                child: accountsAsync.when(
-                  data: (accounts) {
-                    if (accounts.isEmpty) {
-                      return Center(
-                        child: Text(
-                          'No accounts added yet.',
-                          style: TextStyles.subtitle.copyWith(
-                            color: Colors.grey,
-                          ),
+              child: accountsAsync.when(
+                data: (accounts) {
+                  if (accounts.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'No accounts added yet.',
+                        style: TextStyles.subtitle.copyWith(
+                          color: Colors.grey,
                         ),
-                      );
-                    }
-                    return SettingsSection(
+                      ),
+                    );
+                  }
+                  return SingleChildScrollView(
+                    child: SettingsSection(
                       backgroundColor: Theme.of(context).cardColor,
                       widgets: List.generate(
                         accounts.length,
@@ -115,14 +116,14 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                           );
                         },
                       ),
-                    );
-                  },
-                  loading: () => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  error: (error, stackTrace) => Center(
-                    child: Text(error.toString()),
-                  ),
+                    ),
+                  );
+                },
+                loading: () => Center(
+                  child: CircularProgressIndicator(),
+                ),
+                error: (error, stackTrace) => Center(
+                  child: Text(error.toString()),
                 ),
               ),
             ),
