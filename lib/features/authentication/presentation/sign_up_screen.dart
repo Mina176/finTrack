@@ -61,7 +61,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         context.go(AppRoutes.home.path);
       } else if (next.hasError) {
         setState(() {
-          emailErrorText = next.error.toString().replaceAll('Exception: ', '');
+          emailErrorText = next.errorMessage;
         });
       }
     });

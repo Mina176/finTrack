@@ -1,8 +1,8 @@
 class AuthLoadingState {
-  const AuthLoadingState(this.state, this.error);
+  const AuthLoadingState(this.state, this.errorMessage);
 
   final LoadingStateEnum state;
-  final Exception? error;
+  final String? errorMessage;
 
   bool get isLoading => state == LoadingStateEnum.loading;
 

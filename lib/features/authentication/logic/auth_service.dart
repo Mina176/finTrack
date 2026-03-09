@@ -48,12 +48,11 @@ class AuthService {
         email: email,
         password: password,
         data: {
-          'full_name':
-              fullName, // You can also use 'full_name' depending on your preference
+          'full_name': fullName,
         },
       );
     } on supabase.AuthException catch (e) {
-      throw Exception(e.message);
+      rethrow;
     } catch (e) {
       throw Exception('An error occurred during sign up.');
     }

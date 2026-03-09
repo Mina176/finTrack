@@ -50,7 +50,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (next.state == LoadingStateEnum.success) {
         context.go(AppRoutes.home.path);
       } else if (next.hasError) {
-        final error = next.error.toString();
+        final error = next.errorMessage.toString();
         if (error.contains('auth credential is incorrect')) {
           setState(() => emailError = "No account found with this email");
         } else if (error.contains('credential is incorrect')) {

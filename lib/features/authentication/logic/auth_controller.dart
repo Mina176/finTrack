@@ -1,6 +1,7 @@
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/authentication/logic/loading_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 part 'auth_controller.g.dart';
 
@@ -24,7 +25,7 @@ class AuthController extends _$AuthController {
       );
       state = const AuthLoadingState(LoadingStateEnum.success, null);
     } on Exception catch (e) {
-      state = AuthLoadingState(LoadingStateEnum.error, e);
+      state = AuthLoadingState(LoadingStateEnum.error, e.toString());
     }
   }
 
@@ -42,8 +43,13 @@ class AuthController extends _$AuthController {
         fullName: fullName,
       );
       state = const AuthLoadingState(LoadingStateEnum.success, null);
+    } on supabase.AuthException catch (e) {
+      state = AuthLoadingState(LoadingStateEnum.error, e.message);
     } on Exception catch (e) {
-      state = AuthLoadingState(LoadingStateEnum.error, e);
+      state = AuthLoadingState(
+        LoadingStateEnum.error,
+        'An unexpected error occurred',
+      );
     }
   }
 
@@ -53,7 +59,7 @@ class AuthController extends _$AuthController {
       await ref.read(authServiceProvider).signOut();
       state = const AuthLoadingState(LoadingStateEnum.success, null);
     } on Exception catch (e) {
-      state = AuthLoadingState(LoadingStateEnum.error, e);
+      state = AuthLoadingState(LoadingStateEnum.error, e.toString());
     }
   }
 
@@ -64,7 +70,7 @@ class AuthController extends _$AuthController {
       await authService.sendPasswordResetEmail(email);
       state = const AuthLoadingState(LoadingStateEnum.success, null);
     } on Exception catch (e) {
-      state = AuthLoadingState(LoadingStateEnum.error, e);
+      state = AuthLoadingState(LoadingStateEnum.error, e.toString());
     }
   }
 
@@ -75,7 +81,7 @@ class AuthController extends _$AuthController {
       await authService.signInWithGoogle();
       state = const AuthLoadingState(LoadingStateEnum.success, null);
     } on Exception catch (e) {
-      state = AuthLoadingState(LoadingStateEnum.error, e);
+      state = AuthLoadingState(LoadingStateEnum.error, e.toString());
     }
   }
 }

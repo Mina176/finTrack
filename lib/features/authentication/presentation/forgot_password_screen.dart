@@ -47,7 +47,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
         );
         context.pop();
       } else if (next.hasError) {
-        final error = next.error.toString();
+        final error = next.errorMessage.toString();
         final validationError = Validators.getResetError(error);
         if (validationError != null) {
           setState(() => emailError = validationError);
