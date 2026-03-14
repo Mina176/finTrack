@@ -22,6 +22,14 @@ class AccountSupabaseService {
     return AccountModel.fromMap(response);
   }
 
+  Future<void> deleteAccount(int accountId) async {
+    await client
+        .from('accounts')
+        .delete()
+        .eq('id', accountId)
+        .eq('user_id', userId);
+  }
+
   Future<List<AccountModel>> getAccounts() async {
     final response = await client
         .from('accounts')

@@ -25,6 +25,22 @@ class AccountController extends _$AccountController {
     }
   }
 
+  Future<void> deleteAccount(int accountId) async {
+    state = const AsyncLoading();
+
+    state = await AsyncValue.guard(() async {
+      final service = ref.read(accountSupabaseServiceProvider);
+      await service.deleteAccount(accountId);
+
+      ref.invalidate(getAccountsProvider);
+    });
+
+    if (state.hasError) {
+      print('=== SUPABASE DELETION ERROR ===');
+      print(state.error);
+    }
+  }
+
   Future<AccountModel> updateAccountBalance({
     required AccountModel account,
     required double amount,
