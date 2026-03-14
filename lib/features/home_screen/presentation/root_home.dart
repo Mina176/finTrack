@@ -28,7 +28,6 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
       floatingActionButtonLocation: const CustomFabLocation(20),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.push(AppRoutes.addTransaction.path),
-        foregroundColor: AppColors.kTitleColor,
         shape: const CircleBorder(),
         child: const Icon(Icons.add),
       ),

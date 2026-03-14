@@ -111,6 +111,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
             budgetsAsync.when(
               data: (budgets) => budgets.isEmpty
                   ? SliverFillRemaining(
+                      hasScrollBody: false,
                       child: Center(
                         child: Text(
                           "Press the + button above to add a budget.",
