@@ -58,12 +58,15 @@ final netWorthStatsProvider = AutoDisposeFutureProvider<NetWorthStats>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NetWorthStatsRef = AutoDisposeFutureProviderRef<NetWorthStats>;
-String _$accountControllerHash() => r'c343e1f610221838c9555260aaa7fd420a09b535';
+String _$accountControllerHash() => r'27f0407e21b74073a742d1df8304ba7102cfb4e8';
 
 /// See also [AccountController].
 @ProviderFor(AccountController)
 final accountControllerProvider =
-    AutoDisposeAsyncNotifierProvider<AccountController, void>.internal(
+    AutoDisposeAsyncNotifierProvider<
+      AccountController,
+      List<AccountModel>
+    >.internal(
       AccountController.new,
       name: r'accountControllerProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -73,6 +76,6 @@ final accountControllerProvider =
       allTransitiveDependencies: null,
     );
 
-typedef _$AccountController = AutoDisposeAsyncNotifier<void>;
+typedef _$AccountController = AutoDisposeAsyncNotifier<List<AccountModel>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
