@@ -9,7 +9,11 @@ part 'account_controller.g.dart';
 @riverpod
 class AccountController extends _$AccountController {
   @override
-  FutureOr<void> build() {}
+  FutureOr<List<AccountModel>> build() async {
+    final service = ref.read(accountSupabaseServiceProvider);
+    return service.getAccounts();
+  }
+
   Future<void> createAccount(AccountModel account) async {
     state = const AsyncLoading();
 
@@ -17,9 +21,7 @@ class AccountController extends _$AccountController {
       final service = ref.read(accountSupabaseServiceProvider);
       await service.createAccount(account);
 
-      state = const AsyncData(null);
-
-      ref.invalidate(getAccountsProvider);
+      ref.invalidateSelf();
     } catch (error, stackTrace) {
       state = AsyncError(error, stackTrace);
     }
@@ -27,17 +29,15 @@ class AccountController extends _$AccountController {
 
   Future<void> deleteAccount(int accountId) async {
     state = const AsyncLoading();
-
-    state = await AsyncValue.guard(() async {
+    if (state.hasValue) {
+      final updatedList = state.value!.where((a) => a.id != accountId).toList();
+      state = AsyncData(updatedList);
+    }
+    try {
       final service = ref.read(accountSupabaseServiceProvider);
       await service.deleteAccount(accountId);
-
-      ref.invalidate(getAccountsProvider);
-    });
-
-    if (state.hasError) {
-      print('=== SUPABASE DELETION ERROR ===');
-      print(state.error);
+    } catch (error, stackTrace) {
+      state = AsyncError(error, stackTrace);
     }
   }
 
@@ -71,7 +71,6 @@ class AccountController extends _$AccountController {
         isExpense,
       );
 
-      state = const AsyncData(null);
       ref.invalidate(getAccountsProvider);
 
       return updatedAccount;
@@ -90,7 +89,7 @@ Future<List<AccountModel>> getAccounts(Ref ref) async {
 
 @riverpod
 Future<double> getNetWorth(Ref ref) async {
-  final accounts = await ref.watch(getAccountsProvider.future);
+  final accounts = await ref.watch(accountControllerProvider.future);
   double total = 0.0;
   for (var account in accounts) {
     if (account.includeInNetWorth) {
