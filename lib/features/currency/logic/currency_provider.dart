@@ -1,10 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-// Make sure this matches your file name!
-// If your file is called 'currency_provider.dart', this must be 'currency_provider.g.dart'
 part 'currency_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class CurrencyCode extends _$CurrencyCode {
   @override
   String build() {
@@ -16,7 +14,7 @@ class CurrencyCode extends _$CurrencyCode {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class CurrencySymbol extends _$CurrencySymbol {
   @override
   String build() {

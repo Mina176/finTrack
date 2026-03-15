@@ -20,7 +20,7 @@ final class CurrencyCodeProvider
         argument: null,
         retry: null,
         name: r'currencyCodeProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class CurrencyCodeProvider
   }
 }
 
-String _$currencyCodeHash() => r'0f9ad6040a567e029e73555accfc473ff79ea2fb';
+String _$currencyCodeHash() => r'862216eb626a3748b52c254bdca295aec43fcb6d';
 
 abstract class _$CurrencyCode extends $Notifier<String> {
   String build();
@@ -72,7 +72,7 @@ final class CurrencySymbolProvider
         argument: null,
         retry: null,
         name: r'currencySymbolProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -93,7 +93,7 @@ final class CurrencySymbolProvider
   }
 }
 
-String _$currencySymbolHash() => r'703a44c0bef6bb5f3d04daa3ebf0d33392963953';
+String _$currencySymbolHash() => r'01990463309cedc47277703470256ffc588f5734';
 
 abstract class _$CurrencySymbol extends $Notifier<String> {
   String build();

@@ -64,10 +64,12 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                     context: context,
                     onSelect: (value) {
-                      ref.read(currencyCodeProvider.notifier).state =
-                          value.code;
-                      ref.read(currencySymbolProvider.notifier).state =
-                          value.symbol;
+                      ref
+                          .read(currencyCodeProvider.notifier)
+                          .setCurrencyCode(value.code);
+                      ref
+                          .read(currencySymbolProvider.notifier)
+                          .setCurrencySymbol(value.symbol);
                     },
                   ),
                   leading: const Icon(
