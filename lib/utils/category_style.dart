@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IconStyle {
-  final IconData? icon;
+  final IconData icon;
   final Color color;
   final Color backgroundColor;
 
   IconStyle({
-    this.icon,
+    required this.icon,
     required this.color,
     required this.backgroundColor,
   });
@@ -134,6 +134,7 @@ IconStyle getAccountStyle(AccountTypes type, ThemeMode themeMode) {
   switch (type) {
     case AccountTypes.debitCard:
       return IconStyle(
+        icon: Icons.credit_card_rounded,
         color: themeMode == ThemeMode.dark
             ? Colors.blueGrey.shade300
             : const Color(0xFF0284C7),
@@ -143,6 +144,7 @@ IconStyle getAccountStyle(AccountTypes type, ThemeMode themeMode) {
       );
     case AccountTypes.creditCard:
       return IconStyle(
+        icon: FontAwesomeIcons.ccVisa,
         color: themeMode == ThemeMode.dark
             ? Colors.orange.shade300
             : const Color(0xFFEA580C),
@@ -152,6 +154,7 @@ IconStyle getAccountStyle(AccountTypes type, ThemeMode themeMode) {
       );
     case AccountTypes.cashWallet:
       return IconStyle(
+        icon: Icons.wallet_rounded,
         color: themeMode == ThemeMode.dark
             ? Colors.brown.shade300
             : const Color(0xFF2E7D32),
@@ -161,6 +164,7 @@ IconStyle getAccountStyle(AccountTypes type, ThemeMode themeMode) {
       );
     case AccountTypes.investment:
       return IconStyle(
+        icon: Icons.trending_up_rounded,
         color: themeMode == ThemeMode.dark
             ? Colors.green.shade300
             : const Color(0xFFE11D48),

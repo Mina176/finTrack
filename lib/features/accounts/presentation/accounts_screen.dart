@@ -2,12 +2,14 @@ import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/accounts/data/account_model.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
+import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
 import 'package:fintrack/features/add_transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/features/home_screen/presentation/custom_card.dart';
 import 'package:fintrack/features/home_screen/presentation/last_month_container.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
+import 'package:fintrack/utils/helpers.dart';
 import 'package:fintrack/widgets/settings_section.dart';
 import 'package:fintrack/widgets/slidable_settings_tile.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +121,7 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                             },
                             child: AccountCard(
                               icon: account.accountTypeIcon,
-                              accountType: accounts[index].accountType.name,
+                              accountType: accounts[index].accountType,
                               accountName: accounts[index].accountName,
                               balance: accounts[index].balance,
                               currentBalance: accounts[index].currentBalance,
@@ -156,7 +158,7 @@ class AccountCard extends StatelessWidget {
     required this.currencySymbol,
     required this.icon,
   });
-  final String accountType;
+  final AccountTypes accountType;
   final String accountName;
   final double balance;
   final double currentBalance;
@@ -169,10 +171,8 @@ class AccountCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
           children: [
-            Icon(
-              icon,
-            ),
-            gapW20,
+            getAccountIcon(accountType),
+            gapW16,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
