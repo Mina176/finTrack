@@ -21,7 +21,7 @@ enum AccountTypes {
 }
 
 class TransactionModel {
-  final int? id;
+  final int id;
   final String userId;
   final bool isExpense;
   final double amount;
@@ -31,7 +31,7 @@ class TransactionModel {
   final String? note;
 
   TransactionModel({
-    this.id,
+    required this.id,
     required this.userId,
     required this.isExpense,
     required this.amount,
@@ -56,7 +56,7 @@ class TransactionModel {
 
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
-      id: map['id'] as int?,
+      id: map['id'] as int,
       userId: map['user_id'] as String,
       isExpense: map['is_expense'] as bool,
       amount: (map['amount'] as num).toDouble(),

@@ -192,6 +192,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                       if (isLoading) return;
                       if (amountController.text == "0.00") return;
                       final transaction = TransactionModel(
+                        id: DateTime.now().millisecondsSinceEpoch,
                         userId: uid,
                         isExpense: expenseOrIncome == 0,
                         amount: double.tryParse(amountController.text) ?? 0.0,
