@@ -48,11 +48,9 @@ class AllTransactionsScreen extends ConsumerWidget {
                     return SlidableSettingsTile(
                       itemKey: ValueKey(transactions[index].id),
                       onDeleteTapped: () {
-                        if (transaction.id != null) {
-                          ref
-                              .read(transactionControllerProvider.notifier)
-                              .deleteTransaction(transaction.id!);
-                        }
+                        ref
+                            .read(transactionControllerProvider.notifier)
+                            .deleteTransaction(transaction.id);
                       },
                       child: TransactionCard(
                         transaction: transaction,

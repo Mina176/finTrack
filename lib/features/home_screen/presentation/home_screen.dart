@@ -62,6 +62,16 @@ class HomeScreen extends ConsumerWidget {
                           ),
                           netWorthStatsAsync.when(
                             skipLoadingOnReload: true,
+                            data: (netWorthStats) {
+                              final firstMonth = isFirstMonth.value ?? true;
+                              if (firstMonth) return const SizedBox.shrink();
+                              return isFirstMonth.value!
+                                  ? const SizedBox.shrink()
+                                  : LastMonthContainer(
+                                      savingPercentage:
+                                          netWorthStats.percentChange,
+                                    );
+                            },
                             error: (error, stackTrace) =>
                                 const SizedBox.shrink(),
                             loading: () => const Text(
@@ -163,17 +173,24 @@ class HomeScreen extends ConsumerWidget {
                   if (allTransactions.isEmpty) {
                     return SliverFillRemaining(
                       hasScrollBody: false,
-                      child: Center(
-                        child: Text(
-                          "Press the + button below to add a transaction.",
-                          textAlign: TextAlign.center,
-                          style: TextStyles.hintText.copyWith(
-                            color: Colors.grey,
+                      child: SizedBox(
+                        height: 200,
+                        child: Center(
+                          child: Text(
+                            "Press the + button below to add a transaction.",
+                            textAlign: TextAlign.center,
+                            style: TextStyles.hintText.copyWith(
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                       ),
                     );
                   }
+                  return SliverToBoxAdapter(
+                    child: SettingsSection(
+                      backgroundColor: Theme.of(context).cardColor,
+                      widgets: List.generate(
                         recentTransactions.length,
                         (index) {
                           final transaction = recentTransactions[index];
