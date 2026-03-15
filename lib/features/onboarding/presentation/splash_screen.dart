@@ -1,3 +1,5 @@
+import 'package:fintrack/features/accounts/logic/account_controller.dart';
+import 'package:fintrack/features/add_transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/authentication/logic/auth_service.dart';
 import 'package:fintrack/features/onboarding/data/onboarding_repository.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
@@ -7,13 +9,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SplashScreen extends ConsumerWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends ConsumerState<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _preloadDatabase();
+  }
+
+  Future<void> _preloadDatabase() async {
+    await ref.read(transactionControllerProvider.future);
+    await ref.read(accountControllerProvider.future);
+
+    final user = ref.read(authServiceProvider).currentUser;
+
+    if (user != null && user.avatarUrl != null && user.avatarUrl!.isNotEmpty) {
+      if (mounted) {
+        await precacheImage(NetworkImage(user.avatarUrl!), context);
+      }
+    }
+    final onboardingCompleted = ref
+        .read(onboardingRepositoryProvider)
+        .isOnboardingCompleted;
+    if (user != null) {
+      context.go(AppRoutes.home.path);
+    } else if (onboardingCompleted) {
+      context.go(AppRoutes.signIn.path);
+    } else {
+      context.go(AppRoutes.onboarding.path);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
@@ -38,19 +74,6 @@ class SplashScreen extends ConsumerWidget {
                 ],
               ),
             );
-          },
-          onEnd: () {
-            final user = ref.read(authServiceProvider).currentUser;
-            final onboardingCompleted = ref
-                .read(onboardingRepositoryProvider)
-                .isOnboardingCompleted;
-            if (user != null) {
-              context.go(AppRoutes.home.path);
-            } else if (onboardingCompleted) {
-              context.go(AppRoutes.signIn.path);
-            } else {
-              context.go(AppRoutes.onboarding.path);
-            }
           },
         ),
       ),
