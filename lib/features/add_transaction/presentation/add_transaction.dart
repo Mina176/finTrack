@@ -58,11 +58,6 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
     final transactionState = ref.watch(transactionControllerProvider);
     final accountState = ref.watch(accountControllerProvider);
     final isLoading = transactionState.isLoading || accountState.isLoading;
-    ref.listen(transactionControllerProvider, (previous, next) {
-      if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
-        context.pop();
-      }
-    });
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -216,6 +211,9 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                         await ref
                             .read(transactionControllerProvider.notifier)
                             .createTransaction(transaction);
+                        if (context.mounted) {
+                          context.pop();
+                        }
                       } catch (e) {
                         throw Exception("Failed to add transaction: $e");
                       }
