@@ -6,25 +6,6 @@ part of 'transaction_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getTransactionsHash() => r'c8c57b6141543b8cbcb5053b7a47038fa3d4c78d';
-
-/// See also [getTransactions].
-@ProviderFor(getTransactions)
-final getTransactionsProvider =
-    AutoDisposeFutureProvider<List<TransactionModel>>.internal(
-      getTransactions,
-      name: r'getTransactionsProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$getTransactionsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GetTransactionsRef =
-    AutoDisposeFutureProviderRef<List<TransactionModel>>;
 String _$getWeeklySpendingsHash() =>
     r'b8d22121329afbb31be3e8811a882d7c553697d0';
 
@@ -137,12 +118,15 @@ final isFirstWeekOfActivityProvider = AutoDisposeFutureProvider<bool>.internal(
 // ignore: unused_element
 typedef IsFirstWeekOfActivityRef = AutoDisposeFutureProviderRef<bool>;
 String _$transactionControllerHash() =>
-    r'd891f8eb8193221875dceeddda9003324ddfdb3e';
+    r'20d0179aad129e4fa79eda5c2ae9bbc797fc8f02';
 
 /// See also [TransactionController].
 @ProviderFor(TransactionController)
 final transactionControllerProvider =
-    AutoDisposeAsyncNotifierProvider<TransactionController, void>.internal(
+    AutoDisposeAsyncNotifierProvider<
+      TransactionController,
+      List<TransactionModel>
+    >.internal(
       TransactionController.new,
       name: r'transactionControllerProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -152,6 +136,7 @@ final transactionControllerProvider =
       allTransitiveDependencies: null,
     );
 
-typedef _$TransactionController = AutoDisposeAsyncNotifier<void>;
+typedef _$TransactionController =
+    AutoDisposeAsyncNotifier<List<TransactionModel>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

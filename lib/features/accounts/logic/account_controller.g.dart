@@ -6,25 +6,7 @@ part of 'account_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getAccountsHash() => r'224ea9ed0cd26ff6cb209c2a1c35372baddf5eab';
-
-/// See also [getAccounts].
-@ProviderFor(getAccounts)
-final getAccountsProvider =
-    AutoDisposeFutureProvider<List<AccountModel>>.internal(
-      getAccounts,
-      name: r'getAccountsProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$getAccountsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GetAccountsRef = AutoDisposeFutureProviderRef<List<AccountModel>>;
-String _$getNetWorthHash() => r'493c327911e8ff04011043a94aea42dc196140d9';
+String _$getNetWorthHash() => r'59708e229c35a89cd6d29c4e71fdf313fa06b211';
 
 /// See also [getNetWorth].
 @ProviderFor(getNetWorth)
@@ -58,7 +40,7 @@ final netWorthStatsProvider = AutoDisposeFutureProvider<NetWorthStats>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NetWorthStatsRef = AutoDisposeFutureProviderRef<NetWorthStats>;
-String _$accountControllerHash() => r'27f0407e21b74073a742d1df8304ba7102cfb4e8';
+String _$accountControllerHash() => r'57f054fb4f02fd0024e3ecab0851af3d035ca18c';
 
 /// See also [AccountController].
 @ProviderFor(AccountController)

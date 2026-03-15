@@ -19,7 +19,7 @@ class SlidableSettingsTile extends StatelessWidget {
       key: itemKey,
       endActionPane: ActionPane(
         motion: const ScrollMotion(),
-        extentRatio: 0.45,
+        extentRatio: 0.3,
         dismissible: DismissiblePane(
           onDismissed: onDeleteTapped,
         ),
