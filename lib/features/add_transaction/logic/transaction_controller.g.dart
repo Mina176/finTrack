@@ -6,6 +6,26 @@ part of 'transaction_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$recentTransactionsHash() =>
+    r'5abcdf892a004e4a57ef39a79df6591743c77f7e';
+
+/// See also [recentTransactions].
+@ProviderFor(recentTransactions)
+final recentTransactionsProvider =
+    AutoDisposeFutureProvider<List<TransactionModel>>.internal(
+      recentTransactions,
+      name: r'recentTransactionsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$recentTransactionsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef RecentTransactionsRef =
+    AutoDisposeFutureProviderRef<List<TransactionModel>>;
 String _$getWeeklySpendingsHash() =>
     r'44cc938e2bf764149ba7eef6f362409f23fbd71d';
 
@@ -118,7 +138,7 @@ final getWeeklyDashboardDataProvider =
 // ignore: unused_element
 typedef GetWeeklyDashboardDataRef = AutoDisposeFutureProviderRef<DashboardData>;
 String _$transactionControllerHash() =>
-    r'4c2002344c0a6783b06323de838f91c5b56b75e7';
+    r'e4a8769010173bf475aff2169396139ca57e12e6';
 
 /// See also [TransactionController].
 @ProviderFor(TransactionController)
