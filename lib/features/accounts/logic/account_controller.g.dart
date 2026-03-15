@@ -22,7 +22,7 @@ final class AccountControllerProvider
         argument: null,
         retry: null,
         name: r'accountControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -35,7 +35,7 @@ final class AccountControllerProvider
   AccountController create() => AccountController();
 }
 
-String _$accountControllerHash() => r'a4ae6a24fd9c618e34f6711460768abe5c35a885';
+String _$accountControllerHash() => r'7bc305fd31699d3a5e415a4286318f8faf90e7ed';
 
 @JsonPersist()
 abstract class _$AccountControllerBase
@@ -70,7 +70,7 @@ final class GetNetWorthProvider
         argument: null,
         retry: null,
         name: r'getNetWorthProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -89,7 +89,7 @@ final class GetNetWorthProvider
   }
 }
 
-String _$getNetWorthHash() => r'59708e229c35a89cd6d29c4e71fdf313fa06b211';
+String _$getNetWorthHash() => r'0e54ba7c5320915c3c7aa1c6097a38f26ae2ad47';
 
 @ProviderFor(netWorthStats)
 final netWorthStatsProvider = NetWorthStatsProvider._();
@@ -108,7 +108,7 @@ final class NetWorthStatsProvider
         argument: null,
         retry: null,
         name: r'netWorthStatsProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -128,7 +128,7 @@ final class NetWorthStatsProvider
   }
 }
 
-String _$netWorthStatsHash() => r'a8913cc7930f4d25e1f15ad36464d052ab3fcf82';
+String _$netWorthStatsHash() => r'815091300f9adcca21987b2ca58a2ed775bf60a9';
 
 // **************************************************************************
 // JsonGenerator

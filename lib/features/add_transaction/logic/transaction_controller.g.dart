@@ -23,7 +23,7 @@ final class TransactionControllerProvider
         argument: null,
         retry: null,
         name: r'transactionControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -37,7 +37,7 @@ final class TransactionControllerProvider
 }
 
 String _$transactionControllerHash() =>
-    r'7991d41722a32edd480a210718138f1ee71fced8';
+    r'cce8cbb313022d17be26f99f8b595076c542736c';
 
 @JsonPersist()
 abstract class _$TransactionControllerBase
@@ -102,7 +102,7 @@ final class GetWeeklySpendingsProvider
 }
 
 String _$getWeeklySpendingsHash() =>
-    r'06901d8cd12e22264b871659be9a853653a8c224';
+    r'c42e8719579db610a3384f46f31a8b37fb7b2f23';
 
 @ProviderFor(getPreviousWeekTotal)
 final getPreviousWeekTotalProvider = GetPreviousWeekTotalProvider._();
@@ -136,7 +136,7 @@ final class GetPreviousWeekTotalProvider
 }
 
 String _$getPreviousWeekTotalHash() =>
-    r'bbd1f226d0740cd2b842e4b16969cf4d5248d6b6';
+    r'e9fc6de8b3b36ab603271728e857d4ff88270c29';
 
 @ProviderFor(getPreviousMonthTotal)
 final getPreviousMonthTotalProvider = GetPreviousMonthTotalProvider._();
@@ -170,7 +170,7 @@ final class GetPreviousMonthTotalProvider
 }
 
 String _$getPreviousMonthTotalHash() =>
-    r'a21a9361aab77e66763cac622632a9ea44bbfb82';
+    r'755d1a997a12cc9dee74094caccc913aeb0e139e';
 
 @ProviderFor(isFirstMonthOfActivity)
 final isFirstMonthOfActivityProvider = IsFirstMonthOfActivityProvider._();
@@ -184,7 +184,7 @@ final class IsFirstMonthOfActivityProvider
         argument: null,
         retry: null,
         name: r'isFirstMonthOfActivityProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -204,7 +204,7 @@ final class IsFirstMonthOfActivityProvider
 }
 
 String _$isFirstMonthOfActivityHash() =>
-    r'bd70b761fa3fae5416e6ac180de5ef3f3529a734';
+    r'55e0fe094f10956954b8dad4a299aad38aa7f399';
 
 @ProviderFor(isFirstWeekOfActivity)
 final isFirstWeekOfActivityProvider = IsFirstWeekOfActivityProvider._();
@@ -218,7 +218,7 @@ final class IsFirstWeekOfActivityProvider
         argument: null,
         retry: null,
         name: r'isFirstWeekOfActivityProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -238,7 +238,7 @@ final class IsFirstWeekOfActivityProvider
 }
 
 String _$isFirstWeekOfActivityHash() =>
-    r'8586bc13553a20ab465c5f8da19f545b7ac1f6b1';
+    r'eef4643847fdeb8b0fd1cc9294385e2c33903a65';
 
 @ProviderFor(getWeeklyDashboardData)
 final getWeeklyDashboardDataProvider = GetWeeklyDashboardDataProvider._();
@@ -257,7 +257,7 @@ final class GetWeeklyDashboardDataProvider
         argument: null,
         retry: null,
         name: r'getWeeklyDashboardDataProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -278,7 +278,7 @@ final class GetWeeklyDashboardDataProvider
 }
 
 String _$getWeeklyDashboardDataHash() =>
-    r'46d65a4a6ff5e609ccfda03562ccf40cdaaeca9d';
+    r'2dc34267ffc1be459af98f4e8f55666aead92ece';
 
 // **************************************************************************
 // JsonGenerator

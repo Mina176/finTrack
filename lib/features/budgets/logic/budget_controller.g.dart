@@ -20,7 +20,7 @@ final class BudgetControllerProvider
   }) : super(
          retry: null,
          name: r'budgetControllerProvider',
-         isAutoDispose: true,
+         isAutoDispose: false,
          dependencies: null,
          $allTransitiveDependencies: null,
        );
@@ -50,7 +50,7 @@ final class BudgetControllerProvider
   }
 }
 
-String _$budgetControllerHash() => r'0e27a197a14cfe5549e642a4ed6b1b4bc61a87c1';
+String _$budgetControllerHash() => r'10af1dd5ea5f35ec11622b95b207cf2dbeeae8d7';
 
 final class BudgetControllerFamily extends $Family
     with
@@ -67,7 +67,7 @@ final class BudgetControllerFamily extends $Family
         name: r'budgetControllerProvider',
         dependencies: null,
         $allTransitiveDependencies: null,
-        isAutoDispose: true,
+        isAutoDispose: false,
       );
 
   BudgetControllerProvider call(RecurrenceDuration period) =>
