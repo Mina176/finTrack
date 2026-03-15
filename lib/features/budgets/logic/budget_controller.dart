@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:fintrack/features/budgets/data/budget_model.dart';
 import 'package:fintrack/features/budgets/logic/budget_supabase.dart';
 import 'package:fintrack/utils/storage_provider.dart';
@@ -39,26 +42,28 @@ class BudgetController extends _$BudgetController {
   }
 
   Future<void> createBudget(BudgetModel budget) async {
-    state = const AsyncLoading();
+    state = const AsyncLoading<List<BudgetModel>>();
+    state = await AsyncValue.guard(() async {
+      final service = ref.read(budgetSupabaseServiceProvider);
+      await service.createBudget(budget);
+      return service.getBudgets(period);
+    });
+  }
+
+  Future<void> deleteBudget(int budgetId) async {
+    final previousState = state;
+    if (state.hasValue) {
+      state = AsyncData(
+        state.requireValue.where((b) => b.id != budgetId).toList(),
+      );
+    }
 
     try {
       final service = ref.read(budgetSupabaseServiceProvider);
-      await service.createBudget(budget);
-      state = const AsyncData(null);
-      ref.invalidate(getBudgetsProvider);
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+      await service.deleteBudget(budgetId);
+    } catch (_) {
+      state = previousState;
     }
-  }
-}
-
-@riverpod
-Future<List<BudgetModel>> getBudgets(Ref ref, RecurrenceDuration period) async {
-  try {
-    final service = ref.watch(budgetSupabaseServiceProvider);
-    return await service.getBudgets(period);
-  } catch (error) {
-    throw Exception('Failed to fetch budgets: $error');
   }
 }
 
@@ -67,7 +72,7 @@ Future<AllBudgetsDetails> getAllBudgetsDetails(
   Ref ref,
   RecurrenceDuration period,
 ) async {
-  final budgets = await ref.watch(getBudgetsProvider(period).future);
+  final budgets = await ref.watch(budgetControllerProvider(period).future);
   double totalLimit = 0.0;
   for (var budget in budgets) {
     totalLimit += budget.limit;

@@ -8,6 +8,7 @@ import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
 import 'package:fintrack/widgets/category_icon.dart';
+import 'package:fintrack/widgets/slidable_settings_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final budgetsAsync = ref.watch(getBudgetsProvider(selectedPeriod));
+    final budgetsAsync = ref.watch(budgetControllerProvider(selectedPeriod));
     final budgetsDetails = ref.watch(
       getAllBudgetsDetailsProvider(selectedPeriod),
     );
@@ -129,42 +130,54 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                         final safeBudgetLimit = budget.limit == 0
                             ? 1
                             : budget.limit;
-                        return LeftToSpendCard(
-                          spendLimit: budget.limit,
-                          spentAmount: budget.spent,
-                          leading: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CategoryIcon(
-                                categoryType: budget.category,
-                              ),
-                              gapW8,
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    getCategoryName(
-                                      budget.category,
+                        return SlidableSettingsTile(
+                          itemKey: ValueKey(budgets[index].id),
+                          onDeleteTapped: () => ref
+                              .read(
+                                budgetControllerProvider(
+                                  selectedPeriod,
+                                ).notifier,
+                              )
+                              .deleteBudget(budget.id),
+                          child: LeftToSpendCard(
+                            spendLimit: budget.limit,
+                            spentAmount: budget.spent,
+                            leading: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CategoryIcon(
+                                  categoryType: budget.category,
+                                ),
+                                gapW8,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      getCategoryName(
+                                        budget.category,
+                                      ),
+                                      style: TextStyles.title.copyWith(
+                                        fontSize: 14,
+                                      ),
                                     ),
-                                    style: TextStyles.title.copyWith(
-                                      fontSize: 14,
+                                    gapH4,
+                                    Text(
+                                      '$currencySymbol${(budget.limit - budget.spent).round()} remaining',
+                                      style: TextStyles.subtitle.copyWith(
+                                        fontSize: 12,
+                                      ),
                                     ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                Text(
+                                  '${(budget.spent * 100 / safeBudgetLimit).round()}%',
+                                  style: TextStyles.title.copyWith(
+                                    fontSize: 14,
                                   ),
-                                  gapH4,
-                                  Text(
-                                    '$currencySymbol${(budget.limit - budget.spent).round()} remaining',
-                                    style: TextStyles.subtitle.copyWith(
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Text(
-                                '${(budget.spent * 100 / safeBudgetLimit).round()}%',
-                                style: TextStyles.title.copyWith(fontSize: 14),
-                              ),
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

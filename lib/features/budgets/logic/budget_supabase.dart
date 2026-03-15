@@ -16,6 +16,14 @@ class BudgetSupabaseService {
     await Supabase.instance.client.from('budgets').insert(budget.toJson());
   }
 
+  Future<void> deleteBudget(int budgetId) async {
+    await Supabase.instance.client
+        .from('budgets')
+        .delete()
+        .eq('id', budgetId)
+        .eq('user_id', userId);
+  }
+
   Future<List<BudgetModel>> getBudgets(RecurrenceDuration period) async {
     final client = Supabase.instance.client;
     final response = await client
@@ -25,7 +33,7 @@ class BudgetSupabaseService {
         .eq('recurrence_duration', period.name);
 
     final budgets = (response as List)
-        .map((e) => BudgetModel.fromMap(e))
+        .map((e) => BudgetModel.fromJson(e))
         .toList();
 
     final DateTime now = DateTime.now();

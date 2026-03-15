@@ -3,6 +3,7 @@ import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
 enum RecurrenceDuration { weekly, monthly, yearly }
 
 class BudgetModel {
+  final int id;
   final String userId;
   final double limit;
   final double spent;
@@ -11,6 +12,7 @@ class BudgetModel {
   final RecurrenceDuration recurrenceDuration;
 
   BudgetModel({
+    required this.id,
     required this.limit,
     required this.spent,
     required this.budgetName,
@@ -20,6 +22,7 @@ class BudgetModel {
   });
 
   BudgetModel copyWith({
+    int? id,
     String? userId,
     double? limit,
     double? spent,
@@ -28,6 +31,7 @@ class BudgetModel {
     RecurrenceDuration? recurrenceDuration,
   }) {
     return BudgetModel(
+      id: id ?? this.id,
       userId: userId ?? this.userId,
       limit: limit ?? this.limit,
       spent: spent ?? this.spent,
@@ -39,6 +43,7 @@ class BudgetModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'user_id': userId,
       'limit': limit,
       'budget_name': budgetName,
@@ -50,6 +55,7 @@ class BudgetModel {
 
   factory BudgetModel.fromJson(Map<String, dynamic> map) {
     return BudgetModel(
+      id: map['id'] as int,
       userId: (map['user_id'] ?? "") as String,
       budgetName: (map['budget_name'] ?? "Unnamed Budget") as String,
       limit: (map['limit'] ?? 0.0).toDouble(),
