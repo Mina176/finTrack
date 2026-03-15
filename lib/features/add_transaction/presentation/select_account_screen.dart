@@ -5,6 +5,7 @@ import 'package:fintrack/features/accounts/presentation/accounts_screen.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';
+import 'package:fintrack/utils/helpers.dart';
 import 'package:fintrack/widgets/settings_section.dart' show SettingsSection;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -68,10 +69,7 @@ class SelectAccountScreen extends ConsumerWidget {
                       onTap: () {
                         context.pop(accounts[index]);
                       },
-                      leading: Icon(
-                        accounts[index].accountTypeIcon,
-                        color: AppColors.kPrimaryColor,
-                      ),
+                      leading: getAccountIcon(accounts[index].accountType),
                       title: Text(
                         accounts[index].accountName,
                         style: TextStyles.title.copyWith(fontSize: 16),
