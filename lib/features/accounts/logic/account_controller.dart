@@ -31,13 +31,18 @@ class AccountController extends _$AccountController {
   }
 
   Future<void> createAccount(AccountModel account) async {
-    state = const AsyncLoading();
-    state = await AsyncValue.guard(() async {
+    final previousState = state;
+
+    if (state.hasValue) {
+      state = AsyncData([...state.value!, account]);
+    }
+    try {
       final service = ref.read(accountSupabaseServiceProvider);
       await service.createAccount(account);
-
-      return service.getAccounts();
-    });
+    } catch (error) {
+      state = previousState;
+      rethrow;
+    }
   }
 
   Future<void> deleteAccount(int accountId) async {

@@ -23,34 +23,34 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
   final TextEditingController accountNameController = TextEditingController();
   final TextEditingController balanceController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
-  addAccount(bool isLoading) {
+  addAccount() async {
     if (isLoading) return;
-    if (formKey.currentState!.validate()) {
+    if (!formKey.currentState!.validate()) return;
+    setState(() => isLoading = true);
+    try {
       final currentUser = ref.read(authServiceProvider).currentUser;
-      if (currentUser == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'Error: User not found. Please log in again.',
-            ),
-          ),
-        );
-        return;
-      }
       final parsedBalance = double.tryParse(balanceController.text) ?? 0.0;
-      ref
+      await ref
           .read(accountControllerProvider.notifier)
           .createAccount(
             AccountModel(
-              userId: currentUser.userId,
+              userId: currentUser!.userId,
               accountType: selectedAccount,
-              accountName: accountNameController.text,
+              accountName: accountNameController.text.trim(),
               balance: parsedBalance,
               includeInNetWorth: includeInNetWorth,
               currentBalance: parsedBalance,
             ),
           );
+      if (mounted) {
+        context.pop();
+      }
+    } finally {
+      if (mounted) {
+        setState(() => isLoading = false);
+      }
     }
   }
 
@@ -63,12 +63,6 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(accountControllerProvider).isLoading;
-    ref.listen(accountControllerProvider, (previous, next) {
-      if (previous?.isLoading == true && !next.isLoading && !next.hasError) {
-        context.pop();
-      }
-    });
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -185,7 +179,7 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
                       bottom: Sizes.kVerticalPadding,
                     ),
                     child: ElevatedButton(
-                      onPressed: isLoading ? null : () => addAccount(isLoading),
+                      onPressed: isLoading ? null : addAccount,
                       child: isLoading
                           ? const SizedBox(
                               height: 24,
