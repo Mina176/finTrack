@@ -137,7 +137,11 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                                   .currentUser!
                                   .userId;
                               await ref
-                                  .read(budgetControllerProvider.notifier)
+                                  .read(
+                                    budgetControllerProvider(
+                                      selectedDuration,
+                                    ).notifier,
+                                  )
                                   .createBudget(
                                     BudgetModel(
                                       userId: userId,
