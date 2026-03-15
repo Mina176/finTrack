@@ -29,6 +29,19 @@ class TransactionSupabaseService {
     return data.map((item) => TransactionModel.fromMap(item)).toList();
   }
 
+  Future<List<TransactionModel>> recentTransactions() async {
+    final response = await Supabase.instance.client
+        .from('transactions')
+        .select()
+        .eq('user_id', userId)
+        .order('id', ascending: false)
+        .limit(5);
+
+    final data = response as List<dynamic>;
+
+    return data.map((item) => TransactionModel.fromMap(item)).toList();
+  }
+
   Future<List<double>> getWeeklySpendings() async {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -37,7 +50,6 @@ class TransactionSupabaseService {
     final response = await Supabase.instance.client
         .from('transactions')
         .select('amount, date, is_expense')
-        .eq('user_id', userId)
         .gte('date', startOfWeek.toIso8601String())
         .lt('date', endOfWeek.toIso8601String())
         .eq('is_expense', true);
@@ -51,11 +63,71 @@ class TransactionSupabaseService {
       final amount = (item['amount'] as num).toDouble();
 
       int dayIndex = date.weekday - 1;
-
       weeklySpendings[dayIndex] += amount;
     }
-
     return weeklySpendings;
+  }
+
+  Future<double> getPreviousWeekTotal() async {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+
+    final currentWeekStart = today.subtract(Duration(days: now.weekday - 1));
+    final lastWeekStart = currentWeekStart.subtract(const Duration(days: 7));
+    final lastWeekEnd = currentWeekStart.subtract(const Duration(seconds: 1));
+
+    final response = await Supabase.instance.client
+        .from('transactions')
+        .select('amount, is_expense')
+        .gte('date', lastWeekStart.toIso8601String())
+        .lte('date', lastWeekEnd.toIso8601String())
+        .eq('is_expense', true);
+    final data = response as List<dynamic>;
+    return data.fold<double>(
+      0.0,
+      (double sum, dynamic item) {
+        final amount = item['amount'] as num;
+        return sum + amount.toDouble();
+      },
+    );
+  }
+
+  Future<double> getPreviousMonthTotal() async {
+    final now = DateTime.now();
+    final firstDayCurrentMonth = DateTime(now.year, now.month, 1);
+    final lastDayPrevMonth = firstDayCurrentMonth.subtract(
+      const Duration(days: 1),
+    );
+    final firstDayPrevMonth = DateTime(
+      lastDayPrevMonth.year,
+      lastDayPrevMonth.month,
+      1,
+    );
+    final endOfPrevMonth = DateTime(
+      lastDayPrevMonth.year,
+      lastDayPrevMonth.month,
+      lastDayPrevMonth.day,
+      23,
+      59,
+      59,
+    );
+
+    final response = await Supabase.instance.client
+        .from('transactions')
+        .select('amount, is_expense')
+        .gte('date', firstDayPrevMonth.toIso8601String())
+        .lte('date', endOfPrevMonth.toIso8601String())
+        .eq('is_expense', true);
+
+    final data = response as List<dynamic>;
+
+    return data.fold<double>(
+      0.0,
+      (double sum, dynamic item) {
+        final amount = item['amount'] as num;
+        return sum + amount.toDouble();
+      },
+    );
   }
 
   Future<DateTime?> getFirstTransactionDate() async {

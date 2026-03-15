@@ -21,102 +21,57 @@ class TransactionController extends _$TransactionController {
       await service.createTransaction(transaction);
 
       ref.invalidate(getWeeklySpendingsProvider);
+      ref.invalidate(getPreviousWeekTotalProvider);
+      ref.invalidate(getPreviousMonthTotalProvider);
       return service.getTransactions();
     });
+  }
+
+  Future<List<TransactionModel>> recentTransactions() async {
+    final service = ref.read(transactionSupabaseServiceProvider);
+    return service.recentTransactions();
   }
 }
 
 @riverpod
 Future<List<double>> getWeeklySpendings(Ref ref) async {
-  final now = DateTime.now();
-  final today = DateTime(now.year, now.month, now.day);
-
-  final startOfWeek = today.subtract(Duration(days: now.weekday - 1));
-  final endOfWeek = startOfWeek.add(const Duration(days: 7));
-
-  final response = await Supabase.instance.client
-      .from('transactions')
-      .select('amount, date, is_expense')
-      .gte('date', startOfWeek.toIso8601String())
-      .lt('date', endOfWeek.toIso8601String())
-      .eq('is_expense', true);
-
-  final data = response as List<dynamic>;
-
-  List<double> weeklySpendings = List.filled(7, 0.0);
-
-  for (var item in data) {
-    final date = DateTime.parse(item['date']);
-    final amount = (item['amount'] as num).toDouble();
-
-    int dayIndex = date.weekday - 1;
-    weeklySpendings[dayIndex] += amount;
-  }
-  return weeklySpendings;
+  final service = ref.read(transactionSupabaseServiceProvider);
+  return service.getWeeklySpendings();
 }
 
 @riverpod
 Future<double> getPreviousWeekTotal(Ref ref) async {
-  final now = DateTime.now();
-  final today = DateTime(now.year, now.month, now.day);
-
-  final currentWeekStart = today.subtract(Duration(days: now.weekday - 1));
-  final lastWeekStart = currentWeekStart.subtract(const Duration(days: 7));
-  final lastWeekEnd = currentWeekStart.subtract(const Duration(seconds: 1));
-
-  final response = await Supabase.instance.client
-      .from('transactions')
-      .select('amount, is_expense')
-      .gte('date', lastWeekStart.toIso8601String())
-      .lte('date', lastWeekEnd.toIso8601String())
-      .eq('is_expense', true);
-  final data = response as List<dynamic>;
-  return data.fold<double>(
-    0.0,
-    (double sum, dynamic item) {
-      final amount = item['amount'] as num;
-      return sum + amount.toDouble();
-    },
-  );
+  final service = ref.read(transactionSupabaseServiceProvider);
+  return service.getPreviousWeekTotal();
 }
 
 @riverpod
 Future<double> getPreviousMonthTotal(Ref ref) async {
+  final service = ref.read(transactionSupabaseServiceProvider);
+  return service.getPreviousMonthTotal();
+}
+
+@riverpod
+Future<bool> isFirstMonthOfActivity(Ref ref) async {
+  final service = ref.read(transactionSupabaseServiceProvider);
+  final earliestDate = await service.getFirstTransactionDate();
+
+  if (earliestDate == null) return true;
   final now = DateTime.now();
-  final firstDayCurrentMonth = DateTime(now.year, now.month, 1);
-  final lastDayPrevMonth = firstDayCurrentMonth.subtract(
-    const Duration(days: 1),
-  );
-  final firstDayPrevMonth = DateTime(
-    lastDayPrevMonth.year,
-    lastDayPrevMonth.month,
-    1,
-  );
-  final endOfPrevMonth = DateTime(
-    lastDayPrevMonth.year,
-    lastDayPrevMonth.month,
-    lastDayPrevMonth.day,
-    23,
-    59,
-    59,
-  );
+  return earliestDate.year == now.year && earliestDate.month == now.month;
+}
 
-  final response = await Supabase.instance.client
-      .from('transactions')
-      .select('amount, is_expense')
-      .gte('date', firstDayPrevMonth.toIso8601String())
-      .lte('date', endOfPrevMonth.toIso8601String())
-      .eq('is_expense', true);
+@riverpod
+Future<bool> isFirstWeekOfActivity(Ref ref) async {
+  final service = ref.read(transactionSupabaseServiceProvider);
+  final earliestDate = await service.getFirstTransactionDate();
 
-  final data = response as List<dynamic>;
+  if (earliestDate == null) return true;
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
+  final startOfWeek = today.subtract(Duration(days: now.weekday - 1));
 
-  return data.fold<double>(
-    0.0,
-    (double sum, dynamic item) {
-      final amount = item['amount'] as num;
-      return sum + amount.toDouble();
-    },
-  );
+  return earliestDate.isAfter(startOfWeek);
 }
 
 class DashboardData {
@@ -155,29 +110,4 @@ Future<DashboardData> getWeeklyDashboardData(Ref ref) async {
     totalThisWeek: currentTotal,
     percentChange: percent.round(),
   );
-}
-
-@riverpod
-Future<bool> isFirstMonthOfActivity(Ref ref) async {
-  final service = ref.watch(transactionSupabaseServiceProvider);
-  final earliestDate = await service.getFirstTransactionDate();
-
-  if (earliestDate == null) return true;
-
-  final now = DateTime.now();
-  return earliestDate.year == now.year && earliestDate.month == now.month;
-}
-
-@riverpod
-Future<bool> isFirstWeekOfActivity(Ref ref) async {
-  final service = ref.watch(transactionSupabaseServiceProvider);
-  final earliestDate = await service.getFirstTransactionDate();
-
-  if (earliestDate == null) return true;
-
-  final now = DateTime.now();
-  final today = DateTime(now.year, now.month, now.day);
-  final startOfWeek = today.subtract(Duration(days: now.weekday - 1));
-
-  return earliestDate.isAfter(startOfWeek);
 }
