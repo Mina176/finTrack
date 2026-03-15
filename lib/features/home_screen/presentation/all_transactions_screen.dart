@@ -1,6 +1,5 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/accounts/logic/account_controller.dart';
 import 'package:fintrack/features/add_transaction/logic/transaction_controller.dart';
 import 'package:fintrack/features/home_screen/presentation/transaction_card.dart';
 import 'package:fintrack/widgets/settings_section.dart';

@@ -2,10 +2,8 @@ import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
 import 'package:fintrack/features/add_transaction/logic/transaction_supabase_service.dart';
 import 'package:fintrack/utils/storage_provider.dart';
 import 'package:flutter_riverpod/experimental/persist.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/experimental/json_persist.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'transaction_controller.g.dart';
 

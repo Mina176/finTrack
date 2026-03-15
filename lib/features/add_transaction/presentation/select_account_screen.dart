@@ -1,7 +1,6 @@
 import 'package:fintrack/constants/app_sizes.dart';
 import 'package:fintrack/constants/text_styles.dart';
 import 'package:fintrack/features/accounts/logic/account_controller.dart';
-import 'package:fintrack/features/accounts/presentation/accounts_screen.dart';
 import 'package:fintrack/features/currency/logic/currency_provider.dart';
 import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/theming/app_colors.dart';

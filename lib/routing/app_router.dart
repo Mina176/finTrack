@@ -17,7 +17,6 @@ import 'package:fintrack/routing/app_route_enum.dart';
 import 'package:fintrack/routing/refresh_listenable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authService = ref.watch(authServiceProvider);
