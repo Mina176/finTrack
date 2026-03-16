@@ -29,7 +29,9 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
     final accountsAsync = ref.watch(accountControllerProvider);
     final netWorthAsync = ref.watch(getNetWorthProvider);
     final currencySymbol = ref.watch(currencySymbolProvider);
-    final isFirstMonth = ref.watch(isFirstMonthOfActivityProvider);
+    final isFirstMonth =
+        ref.watch(isFirstMonthOfActivityProvider).value ?? true;
+    final weeklyDashboard = ref.watch(getWeeklyDashboardDataProvider).value;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -80,10 +82,10 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen> {
                   textAlign: TextAlign.center,
                 ),
                 gapW4,
-                isFirstMonth.value == null || isFirstMonth.value!
+                isFirstMonth || weeklyDashboard == null
                     ? const SizedBox.shrink()
-                    : const LastMonthContainer(
-                        savingPercentage: 2,
+                    : LastMonthContainer(
+                        savingPercentage: weeklyDashboard.percentChange,
                         isShrinked: true,
                       ),
               ],
