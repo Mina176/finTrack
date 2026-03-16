@@ -35,7 +35,7 @@ final class AccountControllerProvider
   AccountController create() => AccountController();
 }
 
-String _$accountControllerHash() => r'7bc305fd31699d3a5e415a4286318f8faf90e7ed';
+String _$accountControllerHash() => r'16ce7a7129d8fe4ffed096b53ac685e32f567c0d';
 
 @JsonPersist()
 abstract class _$AccountControllerBase

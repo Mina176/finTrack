@@ -41,7 +41,7 @@ final class AuthControllerProvider
   }
 }
 
-String _$authControllerHash() => r'2c3198ac7bf81f2881d4f2fd22929dac3600e778';
+String _$authControllerHash() => r'3968c6160140feafb371c424aeed7e5d336bd4ed';
 
 abstract class _$AuthController extends $Notifier<AuthLoadingState> {
   AuthLoadingState build();
@@ -54,6 +54,59 @@ abstract class _$AuthController extends $Notifier<AuthLoadingState> {
             as $ClassProviderElement<
               AnyNotifier<AuthLoadingState, AuthLoadingState>,
               AuthLoadingState,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(IsRecoveringPassword)
+final isRecoveringPasswordProvider = IsRecoveringPasswordProvider._();
+
+final class IsRecoveringPasswordProvider
+    extends $NotifierProvider<IsRecoveringPassword, bool> {
+  IsRecoveringPasswordProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isRecoveringPasswordProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isRecoveringPasswordHash();
+
+  @$internal
+  @override
+  IsRecoveringPassword create() => IsRecoveringPassword();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isRecoveringPasswordHash() =>
+    r'79183e7209f9450ff99903744be53af9b1cd358d';
+
+abstract class _$IsRecoveringPassword extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
               Object?,
               Object?
             >;
