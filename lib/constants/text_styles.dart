@@ -10,8 +10,7 @@ class TextStyles {
   );
 
   static const subtitle = TextStyle(
-    fontWeight: FontWeight.w400,
-    fontSize: 16,
+    fontSize: 12,
     height: 1.4,
   );
 

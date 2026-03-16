@@ -24,7 +24,6 @@ class TransactionCard extends ConsumerWidget {
         DateFormat('EEE, MMM d').format(transaction.date),
         style: TextStyles.subtitle.copyWith(
           fontSize: 12,
-          color: Colors.grey,
         ),
       ),
       trailing: Text(
