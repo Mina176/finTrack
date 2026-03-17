@@ -9,12 +9,13 @@ import 'package:fintrack/routing/app_router.dart';
 import 'package:fintrack/theming/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  usePathUrlStrategy();
   await Supabase.initialize(
     url: 'https://dzztxtttepayqevwdhvg.supabase.co',
     anonKey:

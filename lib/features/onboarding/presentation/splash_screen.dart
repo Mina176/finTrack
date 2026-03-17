@@ -43,7 +43,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     } catch (e) {
       debugPrint("Splash preload error safely caught: $e");
     }
-    await Future.delayed(const Duration(milliseconds: 1500));
+    await Future.delayed(const Duration(seconds: 1));
     if (!mounted) return;
     final isRecovering = ref.read(isRecoveringPasswordProvider);
     if (isRecovering) {
