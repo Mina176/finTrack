@@ -1,7 +1,7 @@
 import 'package:fynt/features/accounts/data/account_model.dart';
 import 'package:fynt/features/accounts/logic/account_supabase_service.dart';
-import 'package:fynt/features/add_transaction/logic/transaction_controller.dart';
-import 'package:fynt/utils/storage_provider.dart';
+import 'package:fynt/features/transactions/logic/transaction_controller.dart';
+import 'package:fynt/core/utils/storage_provider.dart';
 import 'package:flutter_riverpod/experimental/persist.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/experimental/json_persist.dart';

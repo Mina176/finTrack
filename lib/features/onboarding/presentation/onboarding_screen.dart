@@ -1,6 +1,6 @@
 import 'package:fynt/features/onboarding/data/onboarding_repository.dart';
-import 'package:fynt/routing/app_route_enum.dart';
-import 'package:fynt/constants/app_sizes.dart';
+import 'package:fynt/core/routing/app_route_enum.dart';
+import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/features/onboarding/presentation/onboarding_page_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

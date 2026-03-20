@@ -1,7 +1,7 @@
-import 'package:fynt/constants/app_sizes.dart';
-import 'package:fynt/constants/text_styles.dart';
-import 'package:fynt/features/currency/logic/currency_provider.dart';
-import 'package:fynt/features/home_screen/presentation/custom_card.dart';
+import 'package:fynt/core/constants/app_sizes.dart';
+import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/features/settings/currency/logic/currency_provider.dart';
+import 'package:fynt/core/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

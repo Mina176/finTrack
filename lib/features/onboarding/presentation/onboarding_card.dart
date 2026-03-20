@@ -1,6 +1,6 @@
-import 'package:fynt/theming/app_colors.dart';
-import 'package:fynt/constants/app_sizes.dart';
-import 'package:fynt/constants/text_styles.dart';
+import 'package:fynt/core/theming/app_colors.dart';
+import 'package:fynt/core/constants/app_sizes.dart';
+import 'package:fynt/core/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingCard extends StatelessWidget {

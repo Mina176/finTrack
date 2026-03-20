@@ -1,8 +1,8 @@
-import 'package:fynt/constants/app_sizes.dart';
+import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
 import 'package:fynt/features/authentication/presentation/auth_field.dart';
-import 'package:fynt/routing/app_route_enum.dart';
-import 'package:fynt/utils/validators.dart';
+import 'package:fynt/core/routing/app_route_enum.dart';
+import 'package:fynt/core/utils/validators.dart';
 import 'package:fynt/features/onboarding/presentation/onboarding_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

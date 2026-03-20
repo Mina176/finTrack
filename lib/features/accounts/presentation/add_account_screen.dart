@@ -1,12 +1,12 @@
-import 'package:fynt/constants/app_sizes.dart';
-import 'package:fynt/constants/text_styles.dart';
+import 'package:fynt/core/constants/app_sizes.dart';
+import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/features/accounts/data/account_model.dart';
 import 'package:fynt/features/accounts/logic/account_controller.dart';
-import 'package:fynt/utils/categories_lists.dart';
-import 'package:fynt/features/add_transaction/data/transaction_model.dart';
+import 'package:fynt/core/utils/categories_lists.dart';
+import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
 import 'package:fynt/features/authentication/presentation/auth_field.dart';
-import 'package:fynt/features/home_screen/presentation/custom_card.dart';
+import 'package:fynt/core/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

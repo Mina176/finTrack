@@ -1,4 +1,4 @@
-import 'package:fynt/features/add_transaction/data/transaction_model.dart';
+import 'package:fynt/features/transactions/data/transaction_model.dart';
 
 enum RecurrenceDuration { weekly, monthly, yearly }
 
