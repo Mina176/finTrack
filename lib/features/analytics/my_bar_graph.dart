@@ -11,15 +11,9 @@ class MyBarGraph extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currencySymbol = ref.watch(currencySymbolProvider);
-    BarData myBarData = BarData(
-      sunAmount: weeklySummary[0].toDouble(),
-      monAmount: weeklySummary[1].toDouble(),
-      tueAmount: weeklySummary[2].toDouble(),
-      wedAmount: weeklySummary[3].toDouble(),
-      thuAmount: weeklySummary[4].toDouble(),
-      friAmount: weeklySummary[5].toDouble(),
-      satAmount: weeklySummary[6].toDouble(),
-    );
+
+    BarData myBarData = BarData(amounts: weeklySummary);
+    // getting highest spend
     List<double> sortedList = List.from(weeklySummary)..sort();
     double highestSpend = sortedList.last;
     myBarData.getBarData();
@@ -89,42 +83,31 @@ class MyBarGraph extends ConsumerWidget {
   }
 
   Widget getBottomTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: Colors.grey,
-      fontWeight: FontWeight.bold,
-      fontSize: 10,
-    );
-    Widget text;
-    switch (value.toInt()) {
-      case 0:
-        text = const Text('Mon', style: style);
-        break;
-      case 1:
-        text = const Text('Tue', style: style);
-        break;
-      case 2:
-        text = const Text('Wed', style: style);
-        break;
-      case 3:
-        text = const Text('Thu', style: style);
-        break;
-      case 4:
-        text = const Text('Fri', style: style);
-        break;
-      case 5:
-        text = const Text('Sat', style: style);
-        break;
-      case 6:
-        text = const Text('Sun', style: style);
-        break;
-      default:
-        text = const Text('', style: style);
-        break;
-    }
+    final day = WeekDays.values[value.toInt()];
     return SideTitleWidget(
       meta: meta,
       space: 8.0,
-      child: text,
+      child: Text(day.label, style: WeekDays.style),
     );
   }
+}
+
+enum WeekDays {
+  mon(label: 'Mon'),
+  tue(label: 'Tue'),
+  wed(label: 'Wed'),
+  thu(label: 'Thu'),
+  fri(label: 'Fri'),
+  sat(label: 'Sat'),
+  sun(label: 'Sun')
+  ;
+
+  final String label;
+  const WeekDays({required this.label});
+
+  static const style = TextStyle(
+    color: Colors.grey,
+    fontWeight: FontWeight.bold,
+    fontSize: 10,
+  );
 }
