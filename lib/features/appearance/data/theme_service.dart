@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final themeServiceProvider = Provider<ThemeRepository>((ref) {
-  throw UnimplementedError();
-});
+part 'theme_service.g.dart';
+
+@Riverpod(keepAlive: true)
+ThemeRepository themeService(Ref ref) {
+  throw UnimplementedError('themeService must be overridden in main()');
+}
 
 class ThemeRepository {
   final SharedPreferences _prefs;
-  static const _key = 'theme_mode';
 
   ThemeRepository(this._prefs);
 
+  static const _key = 'theme_mode';
+
   Future<void> setThemeMode(ThemeMode mode) async {
-    if (mode == ThemeMode.light) {
-      await _prefs.setString(_key, 'light');
-    } else if (mode == ThemeMode.dark) {
-      await _prefs.setString(_key, 'dark');
-    } else {
-      await _prefs.setString(_key, 'system');
-    }
+    await _prefs.setString(_key, mode.name);
   }
 
   ThemeMode getThemeMode() {
-    final saved = _prefs.getString(_key);
-    if (saved == 'light') return ThemeMode.light;
-    if (saved == 'dark') return ThemeMode.dark;
-    return ThemeMode.system;
+    final saved = _prefs.getString(_key) ?? ThemeMode.dark.name;
+    return ThemeMode.values.firstWhere(
+      (element) => element.name == saved,
+      orElse: () => ThemeMode.dark,
+    );
   }
 }

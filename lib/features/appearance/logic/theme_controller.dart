@@ -1,14 +1,11 @@
 import 'package:fynt/features/appearance/data/theme_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final themeControllerProvider = NotifierProvider<ThemeController, ThemeMode>(
-  () {
-    return ThemeController();
-  },
-);
+part 'theme_controller.g.dart';
 
-class ThemeController extends Notifier<ThemeMode> {
+@Riverpod(keepAlive: true)
+class ThemeController extends _$ThemeController {
   @override
   ThemeMode build() {
     final repository = ref.watch(themeServiceProvider);
