@@ -18,6 +18,8 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
+  String? emailError;
+  String? passwordError;
   final formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -37,9 +39,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           );
     }
   }
-
-  String? emailError;
-  String? passwordError;
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +93,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             label: 'Email Address',
                             hintText: 'name@example.com',
                             controller: _emailController,
-                            errorText: emailError,
-                            validator: Validators.validateEmail,
+                            validator: (val) =>
+                                emailError ?? Validators.validateEmail(val),
                             onChanged: (val) {
                               if (emailError != null) {
                                 setState(() => emailError = null);
@@ -107,8 +106,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             hintText: '••••••••',
                             controller: _passwordController,
                             isPassword: true,
-                            errorText: passwordError,
-                            validator: Validators.validatePasswordWhenSignIn,
+                            validator: (val) =>
+                                passwordError ??
+                                Validators.validatePasswordWhenSignUp(val),
                             onChanged: (val) {
                               if (passwordError != null) {
                                 setState(() => passwordError = null);

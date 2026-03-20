@@ -23,13 +23,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  String? emailErrorText;
-  String? passwordErrorText;
+  String? emailError;
+  String? passwordError;
 
   void _signUp() async {
     setState(() {
-      emailErrorText = null;
-      passwordErrorText = null;
+      emailError = null;
+      passwordError = null;
     });
 
     if (_formKey.currentState!.validate()) {
@@ -55,13 +55,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authControllerProvider);
     final isLoading = authState.isLoading;
-
     ref.listen(authControllerProvider, (previous, next) {
       if (next.state == LoadingStateEnum.success) {
         context.go(AppRoutes.home.path);
       } else if (next.hasError) {
         setState(() {
-          emailErrorText = next.errorMessage;
+          emailError = next.errorMessage;
         });
       }
     });
@@ -108,16 +107,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             controller: _emailController,
                             label: 'Email',
                             hintText: 'john@example.com',
-                            errorText: emailErrorText,
-                            validator: Validators.validateEmail,
+                            validator: (val) =>
+                                emailError ?? Validators.validateEmail(val),
                           ),
                           TextFieldWithLabel(
                             controller: _passwordController,
                             label: 'Password',
                             hintText: '••••••••',
-                            errorText: passwordErrorText,
                             isPassword: true,
-                            validator: Validators.validatePasswordWhenSignUp,
+                            validator: (val) =>
+                                passwordError ??
+                                Validators.validatePasswordWhenSignUp(val),
                           ),
                           TextFieldWithLabel(
                             label: 'Confirm Password',

@@ -11,7 +11,6 @@ class TextFieldWithLabel extends StatefulWidget {
     this.controller,
     this.onSaved,
     this.validator,
-    this.errorText,
     this.onChanged,
     this.keyboardType,
   });
@@ -22,7 +21,6 @@ class TextFieldWithLabel extends StatefulWidget {
   final FormFieldSetter<String>? onSaved;
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
-  final String? errorText;
   final TextInputType? keyboardType;
 
   @override
@@ -45,15 +43,11 @@ class _TextFieldWithLabelState extends State<TextFieldWithLabel> {
           onChanged: widget.onChanged,
           obscureText: isObscured && widget.isPassword == true,
           validator: (val) {
-            // Priority 1: Custom Error (from your Submit logic)
-            if (widget.errorText != null) return widget.errorText;
-            // Priority 2: Standard Validator (if provided)
             if (widget.validator != null) return widget.validator!(val);
             return null;
           },
           decoration: InputDecoration(
             hintText: widget.hintText,
-            errorText: widget.errorText,
             suffixIcon: widget.isPassword
                 ? IconButton(
                     onPressed: () {

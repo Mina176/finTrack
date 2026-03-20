@@ -78,9 +78,10 @@ class _ResetPasswordScreenState extends ConsumerState<UpdatePasswordScreen> {
                           label: 'New Password',
                           hintText: 'Enter your new password',
                           isPassword: true,
-                          errorText: passwordError,
                           controller: _passwordController,
-                          validator: Validators.validatePasswordWhenSignUp,
+                          validator: (val) =>
+                              passwordError ??
+                              Validators.validatePasswordWhenSignUp(val),
                         ),
                       ),
                     ],

@@ -80,9 +80,9 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                         child: TextFieldWithLabel(
                           label: 'Email Address',
                           hintText: 'you@example.com',
-                          errorText: emailError,
                           controller: _emailContoller,
-                          validator: Validators.validateEmail,
+                          validator: (val) =>
+                              emailError ?? Validators.validateEmail(val),
                         ),
                       ),
                     ],
