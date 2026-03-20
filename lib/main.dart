@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:fynt/features/appearance/data/theme_service.dart';
 import 'package:fynt/features/appearance/logic/theme_controller.dart';
 import 'package:fynt/features/authentication/logic/auth_controller.dart';
@@ -11,11 +13,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
+  if (kIsWeb) {
+    databaseFactory = databaseFactoryFfiWeb;
+  } else if (Platform.isWindows || Platform.isLinux) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
   await Supabase.initialize(
     url: 'https://dzztxtttepayqevwdhvg.supabase.co',
     anonKey:
