@@ -3,6 +3,7 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/core/enums/recurrence_type.dart';
+import 'package:fynt/core/widgets/app_bar_action.dart';
 import 'package:fynt/features/budgets/logic/budget_controller.dart';
 import 'package:fynt/features/budgets/presentation/widgets/budget_sliver_list.dart';
 import 'package:fynt/features/budgets/presentation/widgets/choose_period_horizontal_list_view.dart';
@@ -75,33 +76,6 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
               currencySymbol: currencySymbol,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class AppBarAction extends StatelessWidget {
-  const AppBarAction({
-    super.key,
-    required this.appRoute,
-  });
-  final AppRoutes appRoute;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.push(appRoute.path),
-      child: const DecoratedBox(
-        decoration: BoxDecoration(
-          color: AppColors.kPrimaryColor,
-          shape: BoxShape.circle,
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(6),
-          child: Icon(
-            Icons.add,
-            color: Colors.black,
-          ),
         ),
       ),
     );
