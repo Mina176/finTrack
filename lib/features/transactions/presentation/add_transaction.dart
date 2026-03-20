@@ -10,7 +10,6 @@ import 'package:fynt/features/transactions/presentation/add_note_section.dart';
 import 'package:fynt/features/transactions/presentation/animated_button_with_icon.dart';
 import 'package:fynt/features/transactions/presentation/display_amount.dart';
 import 'package:fynt/features/transactions/presentation/expense_or_income.dart';
-import 'package:fynt/core/utils/helpers.dart';
 import 'package:fynt/core/routing/app_route_enum.dart';
 import 'package:fynt/core/utils/category_style.dart';
 import 'package:fynt/core/widgets/category_icon.dart';

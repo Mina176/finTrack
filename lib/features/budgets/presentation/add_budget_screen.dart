@@ -2,9 +2,7 @@ import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/core/enums/category_type.dart';
 import 'package:fynt/core/enums/recurrence_type.dart';
-import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:fynt/features/transactions/presentation/display_amount.dart';
-import 'package:fynt/core/utils/helpers.dart';
 import 'package:fynt/features/settings/appearance/logic/theme_controller.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
 import 'package:fynt/features/authentication/presentation/auth_field.dart';
@@ -154,6 +152,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                                     ),
                                   );
                               if (mounted) {
+                                // ignore: use_build_context_synchronously
                                 context.pop();
                               }
                             } catch (e) {

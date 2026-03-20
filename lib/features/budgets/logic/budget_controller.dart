@@ -6,7 +6,6 @@ import 'package:fynt/features/budgets/data/budget_model.dart';
 import 'package:fynt/features/budgets/logic/budget_supabase.dart';
 import 'package:fynt/core/utils/storage_provider.dart';
 import 'package:flutter_riverpod/experimental/persist.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'budget_controller.g.dart';

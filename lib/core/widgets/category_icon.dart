@@ -1,6 +1,5 @@
 import 'package:fynt/core/enums/account_type.dart';
 import 'package:fynt/core/enums/category_type.dart';
-import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:fynt/features/settings/appearance/logic/theme_controller.dart';
 import 'package:fynt/core/utils/category_style.dart';
 import 'package:flutter/material.dart';

@@ -68,6 +68,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           child: CustomScrollView(
             slivers: [
               SliverFillRemaining(
+                hasScrollBody: false,
                 child: Column(
                   spacing: 10,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +109,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             isPassword: true,
                             validator: (val) =>
                                 passwordError ??
-                                Validators.validatePasswordWhenSignUp(val),
+                                Validators.validatePasswordWhenSignIn(val),
                             onChanged: (val) {
                               if (passwordError != null) {
                                 setState(() => passwordError = null);

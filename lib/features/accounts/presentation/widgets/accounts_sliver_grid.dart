@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fynt/core/enums/account_type.dart';
 import 'package:fynt/features/accounts/presentation/widgets/account_type_card.dart';
-import 'package:fynt/features/accounts/presentation/add_account_screen.dart';
 
 class AccountsSliverGrid extends StatelessWidget {
   const AccountsSliverGrid({

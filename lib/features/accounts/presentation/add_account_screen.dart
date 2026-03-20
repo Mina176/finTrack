@@ -1,5 +1,4 @@
 import 'package:fynt/core/constants/app_sizes.dart';
-import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/core/enums/account_type.dart';
 import 'package:fynt/features/accounts/data/account_model.dart';
 import 'package:fynt/features/accounts/logic/account_controller.dart';
@@ -8,11 +7,8 @@ import 'package:fynt/features/accounts/presentation/widgets/accounts_sliver_grid
 import 'package:fynt/features/accounts/presentation/widgets/add_account_button.dart';
 import 'package:fynt/features/accounts/presentation/widgets/include_in_net_worth_row.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
-import 'package:fynt/features/authentication/presentation/auth_field.dart';
-import 'package:fynt/core/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:go_router/go_router.dart';
 
 class AddAccountScreen extends ConsumerStatefulWidget {

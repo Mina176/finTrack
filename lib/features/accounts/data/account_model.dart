@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fynt/core/enums/account_type.dart';
-import 'package:fynt/features/transactions/data/transaction_model.dart';
 
 class AccountModel {
   final int? id;

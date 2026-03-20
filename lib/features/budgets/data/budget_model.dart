@@ -1,6 +1,5 @@
 import 'package:fynt/core/enums/category_type.dart';
 import 'package:fynt/core/enums/recurrence_type.dart';
-import 'package:fynt/features/transactions/data/transaction_model.dart';
 
 class BudgetModel {
   final int id;

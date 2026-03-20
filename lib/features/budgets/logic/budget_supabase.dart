@@ -1,7 +1,6 @@
 import 'package:fynt/core/enums/recurrence_type.dart';
 import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:fynt/features/budgets/data/budget_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 part 'budget_supabase.g.dart';
