@@ -1,3 +1,5 @@
+import 'package:fynt/core/enums/account_type.dart';
+import 'package:fynt/core/enums/category_type.dart';
 import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:fynt/features/settings/appearance/logic/theme_controller.dart';
 import 'package:fynt/core/utils/category_style.dart';
@@ -10,7 +12,7 @@ class CategoryIcon extends ConsumerWidget {
     required this.categoryType,
     this.themeMode,
   });
-  final CategoryTypes categoryType;
+  final CategoryType categoryType;
   final ThemeMode? themeMode;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,13 +39,13 @@ class CategoryIcon extends ConsumerWidget {
 class AccountIcon extends ConsumerWidget {
   const AccountIcon({
     super.key,
-    required this.accountTypes,
+    required this.accountType,
   });
-  final AccountType accountTypes;
+  final AccountType accountType;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final style = getAccountStyle(
-      accountTypes,
+      accountType,
       ref.watch(themeControllerProvider),
     );
     return DecoratedBox(

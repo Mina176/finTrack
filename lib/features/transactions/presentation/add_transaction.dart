@@ -1,5 +1,7 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/enums/account_type.dart';
+import 'package:fynt/core/enums/category_type.dart';
 import 'package:fynt/features/accounts/data/account_model.dart';
 import 'package:fynt/features/accounts/logic/account_controller.dart';
 import 'package:fynt/features/transactions/data/transaction_model.dart';
@@ -33,7 +35,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   final TextEditingController amountController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
   CategoryIcon selectedCategory = const CategoryIcon(
-    categoryType: CategoryTypes.food,
+    categoryType: CategoryType.food,
   );
   final uid = Supabase.instance.client.auth.currentUser!.id;
   late AccountModel selectedAccount = AccountModel(
@@ -125,11 +127,11 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                             });
                           }
                         },
-                        leading: getAccountIcon(
-                          selectedAccount.accountType,
+                        leading: AccountIcon(
+                          accountType: selectedAccount.accountType,
                         ),
                         title: Text(
-                          getAccountName(selectedAccount.accountType),
+                          selectedAccount.accountType.label,
                           style: TextStyles.addTransactionSettingstitle,
                         ),
                         subtitle: Text(

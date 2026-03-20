@@ -1,13 +1,20 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
-import 'package:fynt/core/utils/categories_lists.dart';
 import 'package:flutter/material.dart';
+import 'package:fynt/core/enums/category_type.dart';
+import 'package:fynt/features/transactions/presentation/category_icon_with_label.dart';
 
 class ChooseCategoryScreen extends StatelessWidget {
   const ChooseCategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final spendingCategories = CategoryType.values
+        .where((c) => !c.isIncome)
+        .toList();
+    final incomeCategories = CategoryType.values
+        .where((c) => c.isIncome)
+        .toList();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -38,14 +45,19 @@ class ChooseCategoryScreen extends StatelessWidget {
                   mainAxisSpacing: Sizes.kVerticalPadding,
                   crossAxisSpacing: Sizes.kHorizontalPadding,
                 ),
-                itemCount: spendingCategoriesWithLabelsList.length,
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => Navigator.pop(
-                    context,
-                    spendingCategoriesList[index],
-                  ),
-                  child: spendingCategoriesWithLabelsList[index],
-                ),
+                itemCount: spendingCategories.length,
+                itemBuilder: (context, index) {
+                  final spendingCategory = spendingCategories[index];
+                  return GestureDetector(
+                    onTap: () => Navigator.pop(
+                      context,
+                      spendingCategories[index],
+                    ),
+                    child: CategoryIconWithLabel(
+                      categoryType: spendingCategory,
+                    ),
+                  );
+                },
               ),
             ),
             Text(
@@ -65,14 +77,19 @@ class ChooseCategoryScreen extends StatelessWidget {
                   mainAxisSpacing: Sizes.kVerticalPadding,
                   crossAxisSpacing: Sizes.kHorizontalPadding,
                 ),
-                itemCount: incomeCategoriesWithLabelsList.length,
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => Navigator.pop(
-                    context,
-                    incomeCategoriesList[index],
-                  ),
-                  child: incomeCategoriesWithLabelsList[index],
-                ),
+                itemCount: incomeCategories.length,
+                itemBuilder: (context, index) {
+                  final incomeCategory = incomeCategories[index];
+                  return GestureDetector(
+                    onTap: () => Navigator.pop(
+                      context,
+                      incomeCategories[index],
+                    ),
+                    child: CategoryIconWithLabel(
+                      categoryType: incomeCategory,
+                    ),
+                  );
+                },
               ),
             ),
           ],

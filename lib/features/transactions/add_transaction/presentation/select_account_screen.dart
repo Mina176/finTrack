@@ -67,9 +67,11 @@ class SelectAccountScreen extends ConsumerWidget {
                     final account = accounts[index];
                     return ListTile(
                       onTap: () {
-                        context.pop(accounts[index]);
+                        context.pop(account);
                       },
-                      leading: AccountIcon(accountType: account.accountType),
+                      leading: AccountIcon(
+                        accountType: account.accountType,
+                      ),
                       title: Text(
                         account.accountName,
                         style: TextStyles.title.copyWith(fontSize: 16),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/enums/account_type.dart';
 import 'package:fynt/core/utils/helpers.dart';
+import 'package:fynt/core/widgets/category_icon.dart';
 import 'package:fynt/core/widgets/custom_card.dart';
 import 'package:fynt/features/settings/currency/logic/currency_provider.dart';
 import 'package:fynt/features/transactions/data/transaction_model.dart';
@@ -29,7 +31,7 @@ class AccountCard extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
           children: [
-            getAccountIcon(accountType),
+            AccountIcon(accountType: accountType),
             gapW16,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,15 +1,16 @@
 import 'package:fynt/core/constants/duration_constants.dart';
 import 'package:fynt/core/constants/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:fynt/core/enums/recurrence_type.dart';
 
 class RecurrenceDurationSelector extends StatelessWidget {
   const RecurrenceDurationSelector({
     super.key,
     required this.onChanged,
-    required this.selectedIndex,
+    required this.selectedDuration,
   });
-  final int selectedIndex;
-  final ValueChanged<int> onChanged;
+  final RecurrenceDuration selectedDuration;
+  final ValueChanged<RecurrenceDuration> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +31,9 @@ class RecurrenceDurationSelector extends StatelessWidget {
                 AnimatedPositioned(
                   duration: addTransactionAnimationDuration,
                   curve: Curves.easeInCubic,
-                  left: selectedIndex == 0
+                  left: selectedDuration == RecurrenceDuration.weekly
                       ? 6
-                      : selectedIndex == 1
+                      : selectedDuration == RecurrenceDuration.monthly
                       ? width / 3
                       : (width / 3) * 2,
                   top: 6,
@@ -52,7 +53,13 @@ class RecurrenceDurationSelector extends StatelessWidget {
                     3,
                     (index) => Expanded(
                       child: GestureDetector(
-                        onTap: () => onChanged(index),
+                        onTap: () => onChanged(
+                          index == 0
+                              ? RecurrenceDuration.weekly
+                              : index == 1
+                              ? RecurrenceDuration.monthly
+                              : RecurrenceDuration.yearly,
+                        ),
                         behavior: HitTestBehavior.opaque,
                         child: Align(
                           alignment: Alignment.center,

@@ -1,3 +1,5 @@
+import 'package:fynt/core/enums/account_type.dart';
+import 'package:fynt/core/enums/category_type.dart';
 import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,10 +16,10 @@ class IconStyle {
   });
 }
 
-IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
+IconStyle getCategoryStyle(CategoryType type, ThemeMode themeMode) {
   switch (type) {
     // --- Spending ---
-    case CategoryTypes.food:
+    case CategoryType.food:
       return IconStyle(
         icon: Icons.restaurant_rounded,
         color: const Color(0xFFFB923C),
@@ -25,7 +27,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF321704)
             : const Color(0xFFFFF2E5),
       );
-    case CategoryTypes.transport:
+    case CategoryType.transport:
       return IconStyle(
         icon: Icons.directions_car_rounded,
         color: themeMode == ThemeMode.dark
@@ -35,7 +37,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF221131)
             : const Color(0xFFEBEAFF),
       );
-    case CategoryTypes.housing:
+    case CategoryType.housing:
       return IconStyle(
         icon: Icons.home_rounded,
         color: const Color(0xFFFACC15),
@@ -43,7 +45,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF2F2402)
             : const Color(0xFFFFF9E5),
       );
-    case CategoryTypes.health:
+    case CategoryType.health:
       return IconStyle(
         icon: Icons.health_and_safety_rounded,
         color: const Color(0xFF4ADE80),
@@ -51,7 +53,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF072713)
             : const Color(0xFFE5FFEF),
       );
-    case CategoryTypes.entertainment:
+    case CategoryType.entertainment:
       return IconStyle(
         icon: Icons.movie_rounded,
         color: themeMode == ThemeMode.dark
@@ -61,7 +63,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF2F0E1F)
             : const Color(0xFFFFE5F1),
       );
-    case CategoryTypes.shopping:
+    case CategoryType.shopping:
       return IconStyle(
         icon: Icons.shopping_bag_rounded,
         color: themeMode == ThemeMode.dark
@@ -71,7 +73,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF0C1930)
             : const Color(0xFFE5F1FF),
       );
-    case CategoryTypes.bills:
+    case CategoryType.bills:
       return IconStyle(
         icon: Icons.receipt_long_rounded,
         color: themeMode == ThemeMode.dark
@@ -81,7 +83,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF01242A)
             : const Color(0xFFE5FCFF),
       );
-    case CategoryTypes.freelance:
+    case CategoryType.freelance:
       return IconStyle(
         icon: Icons.work_rounded,
         color: themeMode == ThemeMode.dark
@@ -91,7 +93,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF141430)
             : const Color(0xFFEDE9FE),
       );
-    case CategoryTypes.investment:
+    case CategoryType.investment:
       return IconStyle(
         icon: Icons.trending_up_rounded,
         color: themeMode == ThemeMode.dark
@@ -101,7 +103,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF310D13)
             : const Color(0xFFFFE5E5),
       );
-    case CategoryTypes.salary:
+    case CategoryType.salary:
       return IconStyle(
         icon: FontAwesomeIcons.moneyBills,
         color: themeMode == ThemeMode.dark
@@ -111,7 +113,7 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
             ? const Color(0xFF03251A)
             : const Color(0xFFEAFFF4),
       );
-    case CategoryTypes.gifts:
+    case CategoryType.gifts:
       return IconStyle(
         icon: Icons.card_giftcard_rounded,
         color: themeMode == ThemeMode.dark

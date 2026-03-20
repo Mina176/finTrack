@@ -6,7 +6,7 @@ class TransactionModel {
   final String userId;
   final bool isExpense;
   final double amount;
-  final CategoryTypes category;
+  final CategoryType category;
   final AccountType account;
   final DateTime date;
   final String? note;
@@ -41,9 +41,9 @@ class TransactionModel {
       userId: map['user_id'] as String,
       isExpense: map['is_expense'] as bool,
       amount: (map['amount'] as num).toDouble(),
-      category: CategoryTypes.values.firstWhere(
+      category: CategoryType.values.firstWhere(
         (e) => e.name == map['category'],
-        orElse: () => CategoryTypes.others,
+        orElse: () => CategoryType.others,
       ),
       account: AccountType.values.firstWhere(
         (e) => e.name == map['account_type'],
