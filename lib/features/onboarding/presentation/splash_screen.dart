@@ -43,7 +43,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     } catch (e) {
       debugPrint("Splash preload error safely caught: $e");
     }
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
     final isRecovering = ref.read(isRecoveringPasswordProvider);
     if (isRecovering) {
@@ -76,7 +76,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           builder: (context, opacity, child) {
             return Opacity(
               opacity: opacity,
-              child: const Column(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   OnboardingCard(
@@ -84,7 +84,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                     height: 120,
                     title: 'fynt',
                     subTitle: 'Master your money',
-                    icon: Icons.account_balance_wallet,
+                    image: Image.asset(
+                      fit: BoxFit.fill,
+                      'assets/Logo.png',
+                    ),
                     borderRadius: Sizes.p24,
                   ),
                 ],
