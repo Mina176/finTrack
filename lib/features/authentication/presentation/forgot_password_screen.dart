@@ -1,7 +1,5 @@
 import 'package:fynt/constants/app_sizes.dart';
-import 'package:fynt/features/authentication/logic/auth_controller.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
-import 'package:fynt/features/authentication/logic/loading_state.dart';
 import 'package:fynt/features/authentication/presentation/auth_field.dart';
 import 'package:fynt/utils/validators.dart';
 import 'package:fynt/features/onboarding/presentation/onboarding_card.dart';
