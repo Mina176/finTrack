@@ -5,7 +5,7 @@ import 'package:fynt/features/transactions/presentation/select_account_screen.da
 import 'package:fynt/features/authentication/logic/auth_service.dart';
 import 'package:fynt/features/authentication/presentation/forgot_password_screen.dart';
 import 'package:fynt/features/authentication/presentation/login_screen.dart';
-import 'package:fynt/features/authentication/presentation/profile_screen.dart';
+import 'package:fynt/features/settings/settings_screen.dart';
 import 'package:fynt/features/authentication/presentation/update_password_screen.dart';
 import 'package:fynt/features/authentication/presentation/sign_up_screen.dart';
 import 'package:fynt/features/budgets/presentation/add_budget_screen.dart';
@@ -77,8 +77,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const UpdatePasswordScreen(),
       ),
       GoRoute(
-        path: AppRoutes.profile.path,
-        builder: (context, state) => const ProfileScreen(),
+        path: AppRoutes.settings.path,
+        builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
         path: AppRoutes.home.path,

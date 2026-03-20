@@ -1,5 +1,5 @@
 import 'package:fynt/features/accounts/presentation/accounts_screen.dart';
-import 'package:fynt/features/authentication/presentation/profile_screen.dart';
+import 'package:fynt/features/settings/settings_screen.dart';
 import 'package:fynt/features/budgets/presentation/budgets_screen.dart';
 import 'package:fynt/features/dashboard/dashboard_screen.dart';
 import 'package:fynt/core/routing/app_route_enum.dart';
@@ -20,7 +20,7 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
     const DashboardScreen(),
     const AccountsScreen(),
     const BudgetsScreen(),
-    const ProfileScreen(),
+    const SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ enum AppRoutes {
   allTransactions,
   forgotPassword,
   updatePassword,
-  profile,
+  settings,
   addTransaction,
   chooseCategory,
   addAccount,
@@ -35,8 +35,8 @@ extension AppRoutesExtension on AppRoutes {
         return '/home';
       case AppRoutes.allTransactions:
         return '/transactions';
-      case AppRoutes.profile:
-        return '/profile';
+      case AppRoutes.settings:
+        return '/settings';
       case AppRoutes.addTransaction:
         return '/addTransaction';
       case AppRoutes.chooseCategory:
