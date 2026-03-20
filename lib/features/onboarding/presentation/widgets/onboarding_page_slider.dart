@@ -1,5 +1,5 @@
-import 'package:fynt/features/onboarding/presentation/onboarding_card.dart';
-import 'package:fynt/features/onboarding/presentation/slider_index.dart';
+import 'package:fynt/features/onboarding/presentation/widgets/onboarding_card.dart';
+import 'package:fynt/features/onboarding/presentation/widgets/slider_index.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

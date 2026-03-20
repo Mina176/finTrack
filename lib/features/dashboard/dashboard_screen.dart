@@ -2,7 +2,7 @@ import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/features/accounts/logic/account_controller.dart';
 import 'package:fynt/features/transactions/logic/transaction_controller.dart';
-import 'package:fynt/features/settings/currency/logic/currency_provider.dart';
+import 'package:fynt/features/settings/currency/currency_provider.dart';
 import 'package:fynt/features/dashboard/custom_app_bar.dart';
 import 'package:fynt/core/widgets/custom_card.dart';
 import 'package:fynt/core/widgets/last_month_container.dart';

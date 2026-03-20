@@ -1,4 +1,4 @@
-import 'package:fynt/features/settings/currency/logic/currency_provider.dart';
+import 'package:fynt/features/settings/currency/currency_provider.dart';
 import 'package:fynt/features/analytics/bar_data.dart';
 import 'package:fynt/core/theming/app_colors.dart';
 import 'package:fl_chart/fl_chart.dart';

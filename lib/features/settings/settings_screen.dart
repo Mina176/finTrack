@@ -1,23 +1,17 @@
-import 'package:currency_picker/currency_picker.dart';
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
-import 'package:fynt/features/settings/appearance/logic/theme_controller.dart';
 import 'package:fynt/features/authentication/logic/auth_controller.dart';
-import 'package:fynt/features/authentication/logic/auth_service.dart';
-import 'package:fynt/features/settings/currency/logic/currency_provider.dart';
-import 'package:fynt/core/routing/app_route_enum.dart';
 import 'package:fynt/core/theming/app_colors.dart';
-import 'package:fynt/core/widgets/settings_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:fynt/features/settings/widgets/settings_content.dart';
+import 'package:fynt/features/settings/widgets/user_info_section.dart';
 
-class SettingsScreen extends ConsumerWidget {
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentCurrencyCode = ref.watch(currencyCodeProvider);
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -28,150 +22,37 @@ class SettingsScreen extends ConsumerWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(
+          vertical: Sizes.kVerticalPadding,
+          horizontal: Sizes.kHorizontalPadding,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 12,
           children: [
-            const DetailsSection(),
+            const UserInfoSection(),
             gapH12,
-            SettingsSection(
-              header: Text(
-                "APP PREFERENCES",
-                style: TextStyles.subtitle.copyWith(fontSize: 12),
-                textAlign: TextAlign.left,
-              ),
-              widgets: [
-                ListTile(
-                  onTap: () => showCurrencyPicker(
-                    showFlag: false,
-                    theme: CurrencyPickerThemeData(
-                      inputDecoration: const InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: AppColors.kSubtitleColor,
-                        ),
-                        hintText: 'Search currency name or code',
-                      ),
-                      backgroundColor: Theme.of(
-                        context,
-                      ).scaffoldBackgroundColor,
-                      titleTextStyle: TextStyles.title.copyWith(fontSize: 18),
-                      subtitleTextStyle: TextStyles.subtitle.copyWith(
-                        fontSize: 14,
-                      ),
-                    ),
-                    context: context,
-                    onSelect: (value) {
-                      ref
-                          .read(currencyCodeProvider.notifier)
-                          .setCurrencyCode(value.code);
-                      ref
-                          .read(currencySymbolProvider.notifier)
-                          .setCurrencySymbol(value.symbol);
-                    },
-                  ),
-                  leading: const Icon(
-                    Icons.attach_money,
-                    color: AppColors.kPrimaryColor,
-                  ),
-                  title: const Text(
-                    'Currency',
-                    style: TextStyles.labelText,
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        currentCurrencyCode,
-                        style: TextStyles.subtitle.copyWith(fontSize: 12),
-                      ),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.arrow_forward_ios, size: 14),
-                    ],
-                  ),
-                ),
-                ListTile(
-                  onTap: () => context.push(AppRoutes.setAppearance.path),
-                  leading: const Icon(
-                    Icons.color_lens,
-                    color: AppColors.kPrimaryColor,
-                  ),
-                  title: const Text(
-                    'Theme',
-                    style: TextStyles.labelText,
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        ref.watch(themeControllerProvider) == ThemeMode.light
-                            ? 'Light'
-                            : 'Dark',
-                        style: TextStyles.subtitle.copyWith(fontSize: 12),
-                      ),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.arrow_forward_ios, size: 14),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            const SettingsContent(),
             const Spacer(),
-            ElevatedButton(
-              onPressed: () =>
-                  ref.read(authControllerProvider.notifier).signOut(),
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: AppColors.kErrorColor,
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
+            Consumer(
+              builder: (context, ref, child) {
+                return ElevatedButton.icon(
+                  onPressed: () =>
+                      ref.read(authControllerProvider.notifier).signOut(),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: AppColors.kErrorColor,
+                  ),
+                  label: const Text('Log Out'),
+                  icon: const Icon(
                     Icons.logout,
                   ),
-                  gapW4,
-                  Text('Log Out'),
-                ],
-              ),
+                );
+              },
             ),
-            gapW16,
           ],
         ),
       ),
-    );
-  }
-}
-
-class DetailsSection extends ConsumerWidget {
-  const DetailsSection({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentUser = ref.watch(authServiceProvider).currentUser;
-
-    final String guestId = currentUser?.userId != null
-        ? currentUser!.userId.substring(0, 5)
-        : '76186';
-
-    final String displayName =
-        (currentUser?.fullName != null && currentUser!.fullName.isNotEmpty)
-        ? currentUser.fullName
-        : 'Guest#$guestId';
-    return Column(
-      children: [
-        Text(
-          displayName,
-          textAlign: TextAlign.center,
-          style: TextStyles.title.copyWith(fontSize: 28),
-        ),
-        Text(
-          currentUser?.email ?? '',
-          textAlign: TextAlign.center,
-          style: TextStyles.subtitle.copyWith(fontSize: 16),
-        ),
-      ],
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/core/widgets/category_icon.dart';
 import 'package:fynt/features/accounts/logic/account_controller.dart';
-import 'package:fynt/features/settings/currency/logic/currency_provider.dart';
+import 'package:fynt/features/settings/currency/currency_provider.dart';
 import 'package:fynt/core/routing/app_route_enum.dart';
 import 'package:fynt/core/theming/app_colors.dart';
 import 'package:fynt/core/widgets/settings_section.dart' show SettingsSection;

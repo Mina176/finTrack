@@ -1,7 +1,8 @@
+import 'package:fynt/core/widgets/scrollable_content_with_sticky_button.dart';
 import 'package:fynt/features/onboarding/data/onboarding_repository.dart';
 import 'package:fynt/core/routing/app_route_enum.dart';
 import 'package:fynt/core/constants/app_sizes.dart';
-import 'package:fynt/features/onboarding/presentation/onboarding_page_slider.dart';
+import 'package:fynt/features/onboarding/presentation/widgets/onboarding_page_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -35,39 +36,33 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(Sizes.p12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: completeOnboarding,
-                child: const Text('skip'),
+          child: ScrollableContentWithStickyButton(
+            column: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: completeOnboarding,
+                  child: const Text('skip'),
+                ),
+                const Spacer(),
+                OnboardingPageSlider(
+                  currentPage: currentPage,
+                  pageController: _pageController,
+                  onSlide: (index) => setState(() => currentPage = index),
+                ),
+              ],
+            ),
+            button: ElevatedButton(
+              onPressed: () => setState(
+                () => currentPage < 2
+                    ? _pageController.nextPage(
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.linear,
+                      )
+                    : completeOnboarding(),
               ),
-              const Spacer(),
-              OnboardingPageSlider(
-                currentPage: currentPage,
-                pageController: _pageController,
-                onSlide: (index) => setState(() {
-                  currentPage = index;
-                }),
-              ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  currentPage < 2
-                      ? _pageController.nextPage(
-                          duration: const Duration(milliseconds: 250),
-                          curve: Curves.linear,
-                        )
-                      : completeOnboarding();
-                }),
-                child: currentPage < 2
-                    ? const Text('Next')
-                    : ElevatedButton(
-                        onPressed: completeOnboarding,
-                        child: const Text('Get Started'),
-                      ),
-              ),
-            ],
+              child: Text(currentPage < 2 ? 'Next' : 'Get Started'),
+            ),
           ),
         ),
       ),

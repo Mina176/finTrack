@@ -3,7 +3,7 @@ import 'package:fynt/core/widgets/scrollable_content_with_sticky_button.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
 import 'package:fynt/features/authentication/presentation/auth_field.dart';
 import 'package:fynt/core/utils/validators.dart';
-import 'package:fynt/features/onboarding/presentation/onboarding_card.dart';
+import 'package:fynt/features/onboarding/presentation/widgets/onboarding_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

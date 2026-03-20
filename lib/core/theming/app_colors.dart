@@ -37,7 +37,7 @@ class AppColors {
   static const kKeyboardKeyColor = Color(0xFF434344);
 
   static const kDefaultTileBackground = Color(0xFF1C1C1E);
-  static const kErrorColor = Color(0xFFF43F5E);
+  static const kErrorColor = Color.fromARGB(255, 184, 34, 59);
 
   static const darkGradientColors = LinearGradient(
     begin: Alignment.topLeft,

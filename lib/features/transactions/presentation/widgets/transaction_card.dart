@@ -1,6 +1,6 @@
 import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/features/transactions/data/transaction_model.dart';
-import 'package:fynt/features/settings/currency/logic/currency_provider.dart';
+import 'package:fynt/features/settings/currency/currency_provider.dart';
 import 'package:fynt/core/theming/app_colors.dart';
 import 'package:fynt/core/widgets/category_icon.dart';
 import 'package:flutter/material.dart';
