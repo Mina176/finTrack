@@ -4,7 +4,7 @@ import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/core/widgets/settings_section.dart';
 import 'package:fynt/core/widgets/slidable_settings_tile.dart';
 import 'package:fynt/features/accounts/logic/account_controller.dart';
-import 'package:fynt/features/accounts/presentation/account_card.dart';
+import 'package:fynt/features/accounts/presentation/widgets/account_card.dart';
 
 class AccountsList extends ConsumerWidget {
   const AccountsList({

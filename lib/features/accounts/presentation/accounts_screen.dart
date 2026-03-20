@@ -1,7 +1,7 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
-import 'package:fynt/features/accounts/presentation/accounts_list.dart';
-import 'package:fynt/features/accounts/presentation/balance_with_last_month.dart';
+import 'package:fynt/features/accounts/presentation/widgets/accounts_list.dart';
+import 'package:fynt/features/accounts/presentation/widgets/balance_with_last_month.dart';
 import 'package:fynt/core/routing/app_route_enum.dart';
 import 'package:fynt/core/theming/app_colors.dart';
 import 'package:flutter/material.dart';
