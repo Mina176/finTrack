@@ -36,17 +36,3 @@ final List<CategoryIconWithLabel> incomeCategoriesWithLabelsList = [
   const CategoryIconWithLabel(categoryType: CategoryTypes.salary),
   const CategoryIconWithLabel(categoryType: CategoryTypes.gifts),
 ];
-
-final List<Map<String, dynamic>> accountTypes = [
-  {'icon': Icons.credit_card, 'label': 'Debit Card'},
-  {'icon': FontAwesomeIcons.ccVisa, 'label': 'Credit Card'},
-  {'icon': Icons.wallet, 'label': 'Cash Wallet'},
-  {'icon': FontAwesomeIcons.arrowTrendUp, 'label': 'Investment'},
-];
-
-final List<AccountIcon> accountTypesList = [
-  const AccountIcon(accountTypes: AccountTypes.cashWallet),
-  const AccountIcon(accountTypes: AccountTypes.debitCard),
-  const AccountIcon(accountTypes: AccountTypes.creditCard),
-  const AccountIcon(accountTypes: AccountTypes.investment),
-];

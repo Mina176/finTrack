@@ -74,41 +74,23 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
         ),
         child: CustomScrollView(
           slivers: [
-            SliverGrid(
+            SliverGrid.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.7,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
               ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final isSelected =
-                      selectedAccount == AccountTypes.values[index];
-                  return GestureDetector(
-                    onTap: () => setState(
-                      () => selectedAccount = AccountTypes.values[index],
-                    ),
-                    child: CustomCard(
-                      isSelected: isSelected,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(accountTypes[index]['icon'], size: 28),
-                          gapH4,
-                          Text(
-                            accountTypes[index]['label'],
-                            style: TextStyles.subtitle.copyWith(
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                childCount: accountTypes.length,
-              ),
+              itemCount: AccountTypes.values.length,
+              itemBuilder: (context, index) {
+                final accountType = AccountTypes.values[index];
+                return AccountTypeCard(
+                  isSelected: selectedAccount == accountType,
+                  icon: accountType.icon,
+                  label: accountType.label,
+                  onTap: () => setState(() => selectedAccount = accountType),
+                );
+              },
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
             SliverFillRemaining(
@@ -192,6 +174,44 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
                     ),
                   ),
                 ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AccountTypeCard extends StatelessWidget {
+  final bool isSelected;
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  const AccountTypeCard({
+    super.key,
+    required this.isSelected,
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: CustomCard(
+        isSelected: isSelected,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 28),
+            gapH4, // Assuming this is from your app_sizes.dart
+            Text(
+              label,
+              style: TextStyles.subtitle.copyWith(
+                fontSize: 12,
               ),
             ),
           ],
