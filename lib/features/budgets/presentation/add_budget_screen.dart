@@ -1,8 +1,9 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/enums/category_type.dart';
+import 'package:fynt/core/enums/recurrence_type.dart';
 import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:fynt/features/transactions/presentation/display_amount.dart';
-import 'package:fynt/core/utils/categories_lists.dart';
 import 'package:fynt/core/utils/helpers.dart';
 import 'package:fynt/features/settings/appearance/logic/theme_controller.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
@@ -26,15 +27,10 @@ class AddBudgetScreen extends ConsumerStatefulWidget {
 class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
   final TextEditingController amountController = TextEditingController();
   final nameController = TextEditingController();
-  CategoryTypes selectedCategory = CategoryTypes.food;
-  int selectedRecurrenceIndex = 1;
+  CategoryType selectedCategory = CategoryType.food;
+  RecurrenceDuration selectedDuration = RecurrenceDuration.monthly;
   @override
   Widget build(BuildContext context) {
-    final selectedDuration = selectedRecurrenceIndex == 0
-        ? RecurrenceDuration.weekly
-        : selectedRecurrenceIndex == 1
-        ? RecurrenceDuration.monthly
-        : RecurrenceDuration.yearly;
     final isLoading = ref
         .watch(budgetControllerProvider(selectedDuration))
         .isLoading;
@@ -92,10 +88,10 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                     horizontal: Sizes.kHorizontalPadding,
                   ),
                   child: RecurrenceDurationSelector(
-                    selectedIndex: selectedRecurrenceIndex,
+                    selectedDuration: selectedDuration,
                     onChanged: (value) {
                       setState(() {
-                        selectedRecurrenceIndex = value;
+                        selectedDuration = value;
                       });
                     },
                   ),
@@ -105,7 +101,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                     horizontal: Sizes.kHorizontalPadding,
                   ),
                   child: Text(
-                    getInfoText(selectedRecurrenceIndex),
+                    selectedDuration.infoText,
                     style: TextStyles.subtitle.copyWith(fontSize: 10),
                     textAlign: TextAlign.center,
                   ),
@@ -154,12 +150,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                                           ? "Unnamed Budget"
                                           : nameController.text,
                                       category: selectedCategory,
-                                      recurrenceDuration:
-                                          selectedRecurrenceIndex == 0
-                                          ? RecurrenceDuration.weekly
-                                          : selectedRecurrenceIndex == 1
-                                          ? RecurrenceDuration.monthly
-                                          : RecurrenceDuration.yearly,
+                                      recurrenceDuration: selectedDuration,
                                     ),
                                   );
                               if (mounted) {
@@ -196,17 +187,20 @@ class ChooseCategoryHorizontalListView extends StatelessWidget {
     required this.selectedCategory,
     required this.onCategorySelected,
   });
-  final CategoryTypes selectedCategory;
-  final ValueChanged<CategoryTypes> onCategorySelected;
+  final CategoryType selectedCategory;
+  final ValueChanged<CategoryType> onCategorySelected;
   @override
   Widget build(BuildContext context) {
+    final spendingCategories = CategoryType.values
+        .where((c) => !c.isIncome)
+        .toList();
     return SizedBox(
       height: 40,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: spendingCategoriesList.length,
+        itemCount: spendingCategories.length,
         itemBuilder: (context, index) {
-          final categoryType = spendingCategoriesList[index].categoryType;
+          final categoryType = spendingCategories[index];
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: SelectCategoryListviewItem(
@@ -229,7 +223,7 @@ class SelectCategoryListviewItem extends ConsumerWidget {
     required this.onTap,
   });
   final bool isSelected;
-  final CategoryTypes categoryType;
+  final CategoryType categoryType;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

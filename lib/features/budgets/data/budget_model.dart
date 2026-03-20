@@ -1,6 +1,6 @@
+import 'package:fynt/core/enums/category_type.dart';
+import 'package:fynt/core/enums/recurrence_type.dart';
 import 'package:fynt/features/transactions/data/transaction_model.dart';
-
-enum RecurrenceDuration { weekly, monthly, yearly }
 
 class BudgetModel {
   final int id;
@@ -8,7 +8,7 @@ class BudgetModel {
   final double limit;
   final double spent;
   final String budgetName;
-  final CategoryTypes category;
+  final CategoryType category;
   final RecurrenceDuration recurrenceDuration;
 
   BudgetModel({
@@ -27,7 +27,7 @@ class BudgetModel {
     double? limit,
     double? spent,
     String? budgetName,
-    CategoryTypes? category,
+    CategoryType? category,
     RecurrenceDuration? recurrenceDuration,
   }) {
     return BudgetModel(
@@ -60,9 +60,9 @@ class BudgetModel {
       budgetName: (map['budget_name'] ?? "Unnamed Budget") as String,
       limit: (map['limit'] ?? 0.0).toDouble(),
       spent: (map['spent'] ?? 0.0).toDouble(),
-      category: CategoryTypes.values.firstWhere(
+      category: CategoryType.values.firstWhere(
         (e) => e.name == (map['category'] ?? ""),
-        orElse: () => CategoryTypes.others,
+        orElse: () => CategoryType.others,
       ),
       recurrenceDuration: RecurrenceDuration.values.firstWhere(
         (e) => e.name == (map['recurrence_duration'] ?? ""),

@@ -1,5 +1,6 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/enums/account_type.dart';
 import 'package:fynt/features/accounts/data/account_model.dart';
 import 'package:fynt/features/accounts/logic/account_controller.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
