@@ -1,8 +1,7 @@
-
-import 'package:fintrack/constants/duration_constants.dart';
-import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/home_screen/presentation/custom_card.dart';
-import 'package:fintrack/theming/app_colors.dart';
+import 'package:fynt/constants/duration_constants.dart';
+import 'package:fynt/constants/text_styles.dart';
+import 'package:fynt/features/home_screen/presentation/custom_card.dart';
+import 'package:fynt/theming/app_colors.dart';
 import 'package:flutter/widgets.dart';
 
 class ExpenseOrIncome extends StatelessWidget {

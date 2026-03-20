@@ -1,6 +1,6 @@
-import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
-import 'package:fintrack/features/appearance/logic/theme_controller.dart';
-import 'package:fintrack/utils/category_style.dart';
+import 'package:fynt/features/add_transaction/data/transaction_model.dart';
+import 'package:fynt/features/appearance/logic/theme_controller.dart';
+import 'package:fynt/utils/category_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

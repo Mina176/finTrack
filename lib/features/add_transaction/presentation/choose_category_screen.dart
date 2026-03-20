@@ -1,6 +1,6 @@
-import 'package:fintrack/constants/app_sizes.dart';
-import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/utils/categories_lists.dart';
+import 'package:fynt/constants/app_sizes.dart';
+import 'package:fynt/constants/text_styles.dart';
+import 'package:fynt/utils/categories_lists.dart';
 import 'package:flutter/material.dart';
 
 class ChooseCategoryScreen extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
-import 'package:fintrack/features/budgets/data/budget_model.dart';
+import 'package:fynt/features/add_transaction/data/transaction_model.dart';
+import 'package:fynt/features/budgets/data/budget_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

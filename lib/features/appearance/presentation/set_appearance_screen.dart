@@ -1,8 +1,8 @@
-import 'package:fintrack/constants/app_sizes.dart';
-import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/appearance/logic/theme_controller.dart';
-import 'package:fintrack/features/home_screen/presentation/custom_card.dart';
-import 'package:fintrack/theming/app_colors.dart';
+import 'package:fynt/constants/app_sizes.dart';
+import 'package:fynt/constants/text_styles.dart';
+import 'package:fynt/features/appearance/logic/theme_controller.dart';
+import 'package:fynt/features/home_screen/presentation/custom_card.dart';
+import 'package:fynt/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

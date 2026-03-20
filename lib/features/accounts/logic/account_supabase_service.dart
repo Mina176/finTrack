@@ -1,4 +1,4 @@
-import 'package:fintrack/features/accounts/data/account_model.dart';
+import 'package:fynt/features/accounts/data/account_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

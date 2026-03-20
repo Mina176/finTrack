@@ -1,6 +1,6 @@
-import 'package:fintrack/features/currency/logic/currency_provider.dart';
-import 'package:fintrack/features/home_screen/presentation/bar%20graph/bar_data.dart';
-import 'package:fintrack/theming/app_colors.dart';
+import 'package:fynt/features/currency/logic/currency_provider.dart';
+import 'package:fynt/features/home_screen/presentation/bar%20graph/bar_data.dart';
+import 'package:fynt/theming/app_colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

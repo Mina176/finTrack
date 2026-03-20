@@ -1,5 +1,5 @@
-import 'package:fintrack/features/authentication/logic/auth_service.dart';
-import 'package:fintrack/features/authentication/logic/loading_state.dart';
+import 'package:fynt/features/authentication/logic/auth_service.dart';
+import 'package:fynt/features/authentication/logic/loading_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 

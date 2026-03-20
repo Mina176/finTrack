@@ -1,6 +1,6 @@
-import 'package:fintrack/utils/category_style.dart';
-import 'package:fintrack/widgets/category_icon.dart';
-import 'package:fintrack/widgets/settings_section.dart';
+import 'package:fynt/utils/category_style.dart';
+import 'package:fynt/widgets/category_icon.dart';
+import 'package:fynt/widgets/settings_section.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/text_styles.dart';

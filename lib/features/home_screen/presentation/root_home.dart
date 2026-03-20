@@ -1,9 +1,9 @@
-import 'package:fintrack/features/accounts/presentation/accounts_screen.dart';
-import 'package:fintrack/features/authentication/presentation/profile_screen.dart';
-import 'package:fintrack/features/budgets/presentation/budgets_screen.dart';
-import 'package:fintrack/features/home_screen/presentation/home_screen.dart';
-import 'package:fintrack/routing/app_route_enum.dart';
-import 'package:fintrack/theming/app_colors.dart';
+import 'package:fynt/features/accounts/presentation/accounts_screen.dart';
+import 'package:fynt/features/authentication/presentation/profile_screen.dart';
+import 'package:fynt/features/budgets/presentation/budgets_screen.dart';
+import 'package:fynt/features/home_screen/presentation/home_screen.dart';
+import 'package:fynt/routing/app_route_enum.dart';
+import 'package:fynt/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

@@ -1,5 +1,5 @@
-import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/currency/logic/currency_provider.dart';
+import 'package:fynt/constants/text_styles.dart';
+import 'package:fynt/features/currency/logic/currency_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

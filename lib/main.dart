@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:fintrack/features/appearance/data/theme_service.dart';
-import 'package:fintrack/features/appearance/logic/theme_controller.dart';
-import 'package:fintrack/features/authentication/logic/auth_controller.dart';
-import 'package:fintrack/features/onboarding/data/onboarding_repository.dart';
-import 'package:fintrack/routing/app_route_enum.dart';
-import 'package:fintrack/routing/app_router.dart';
-import 'package:fintrack/theming/app_theme.dart';
+import 'package:fynt/features/appearance/data/theme_service.dart';
+import 'package:fynt/features/appearance/logic/theme_controller.dart';
+import 'package:fynt/features/authentication/logic/auth_controller.dart';
+import 'package:fynt/features/onboarding/data/onboarding_repository.dart';
+import 'package:fynt/routing/app_route_enum.dart';
+import 'package:fynt/routing/app_router.dart';
+import 'package:fynt/theming/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';

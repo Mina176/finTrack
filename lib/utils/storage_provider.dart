@@ -9,6 +9,6 @@ part 'storage_provider.g.dart';
 @Riverpod(keepAlive: true)
 Future<Storage<String, String>> storage(Ref ref) async {
   return JsonSqFliteStorage.open(
-    join(await getDatabasesPath(), 'fintrack.db'),
+    join(await getDatabasesPath(), 'fynt.db'),
   );
 }

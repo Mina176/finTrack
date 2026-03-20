@@ -1,4 +1,4 @@
-import 'package:fintrack/features/authentication/data/user_model.dart';
+import 'package:fynt/features/authentication/data/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -78,7 +78,7 @@ class AuthService {
     try {
       await _supabaseAuth.resetPasswordForEmail(
         email,
-        redirectTo: 'fintrack://reset',
+        redirectTo: 'fynt://reset',
       );
     } on supabase.AuthException catch (e) {
       throw Exception('Failed to send reset email. Message: ${e.message}');

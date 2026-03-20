@@ -1,11 +1,11 @@
-import 'package:fintrack/features/accounts/logic/account_controller.dart';
-import 'package:fintrack/features/add_transaction/logic/transaction_controller.dart';
-import 'package:fintrack/features/authentication/logic/auth_controller.dart';
-import 'package:fintrack/features/authentication/logic/auth_service.dart';
-import 'package:fintrack/features/onboarding/data/onboarding_repository.dart';
-import 'package:fintrack/routing/app_route_enum.dart';
-import 'package:fintrack/constants/app_sizes.dart';
-import 'package:fintrack/features/onboarding/presentation/onboarding_card.dart';
+import 'package:fynt/features/accounts/logic/account_controller.dart';
+import 'package:fynt/features/add_transaction/logic/transaction_controller.dart';
+import 'package:fynt/features/authentication/logic/auth_controller.dart';
+import 'package:fynt/features/authentication/logic/auth_service.dart';
+import 'package:fynt/features/onboarding/data/onboarding_repository.dart';
+import 'package:fynt/routing/app_route_enum.dart';
+import 'package:fynt/constants/app_sizes.dart';
+import 'package:fynt/features/onboarding/presentation/onboarding_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -82,7 +82,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                   OnboardingCard(
                     width: 120,
                     height: 120,
-                    title: 'FinTrack',
+                    title: 'fynt',
                     subTitle: 'Master your money',
                     icon: Icons.account_balance_wallet,
                     borderRadius: Sizes.p24,

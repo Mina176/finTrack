@@ -1,4 +1,4 @@
-import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
+import 'package:fynt/features/add_transaction/data/transaction_model.dart';
 
 class AccountModel {
   final int? id;

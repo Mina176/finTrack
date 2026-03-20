@@ -1,4 +1,4 @@
-import 'package:fintrack/features/home_screen/presentation/bar%20graph/my_bar_graph.dart';
+import 'package:fynt/features/home_screen/presentation/bar%20graph/my_bar_graph.dart';
 import 'package:flutter/material.dart';
 
 class WeeklySpendingSummary extends StatelessWidget {

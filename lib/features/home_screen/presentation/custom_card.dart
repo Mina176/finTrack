@@ -1,4 +1,4 @@
-import 'package:fintrack/theming/app_colors.dart';
+import 'package:fynt/theming/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {

@@ -1,9 +1,9 @@
-import 'package:fintrack/constants/app_sizes.dart';
-import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/add_transaction/logic/transaction_controller.dart';
-import 'package:fintrack/features/home_screen/presentation/transaction_card.dart';
-import 'package:fintrack/widgets/settings_section.dart';
-import 'package:fintrack/widgets/slidable_settings_tile.dart';
+import 'package:fynt/constants/app_sizes.dart';
+import 'package:fynt/constants/text_styles.dart';
+import 'package:fynt/features/add_transaction/logic/transaction_controller.dart';
+import 'package:fynt/features/home_screen/presentation/transaction_card.dart';
+import 'package:fynt/widgets/settings_section.dart';
+import 'package:fynt/widgets/slidable_settings_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

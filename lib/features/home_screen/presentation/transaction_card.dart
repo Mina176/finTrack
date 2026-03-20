@@ -1,8 +1,8 @@
-import 'package:fintrack/constants/text_styles.dart';
-import 'package:fintrack/features/add_transaction/data/transaction_model.dart';
-import 'package:fintrack/features/currency/logic/currency_provider.dart';
-import 'package:fintrack/theming/app_colors.dart';
-import 'package:fintrack/widgets/category_icon.dart';
+import 'package:fynt/constants/text_styles.dart';
+import 'package:fynt/features/add_transaction/data/transaction_model.dart';
+import 'package:fynt/features/currency/logic/currency_provider.dart';
+import 'package:fynt/theming/app_colors.dart';
+import 'package:fynt/widgets/category_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';

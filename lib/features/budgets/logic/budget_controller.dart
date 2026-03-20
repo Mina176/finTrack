@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:fintrack/features/budgets/data/budget_model.dart';
-import 'package:fintrack/features/budgets/logic/budget_supabase.dart';
-import 'package:fintrack/utils/storage_provider.dart';
+import 'package:fynt/features/budgets/data/budget_model.dart';
+import 'package:fynt/features/budgets/logic/budget_supabase.dart';
+import 'package:fynt/utils/storage_provider.dart';
 import 'package:flutter_riverpod/experimental/persist.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
