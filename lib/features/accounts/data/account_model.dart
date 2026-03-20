@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fynt/features/transactions/data/transaction_model.dart';
 
 class AccountModel {
   final int? id;
   final String userId;
-  final AccountTypes accountType;
+  final AccountType accountType;
   final String accountName;
   final double balance;
   final bool includeInNetWorth;
@@ -34,9 +36,9 @@ class AccountModel {
     return AccountModel(
       id: map['id'] as int?,
       userId: map['user_id'] as String,
-      accountType: AccountTypes.values.firstWhere(
+      accountType: AccountType.values.firstWhere(
         (e) => e.name == map['account_type'],
-        orElse: () => AccountTypes.cashWallet,
+        orElse: () => AccountType.cashWallet,
       ),
       accountName: map['account_name'] as String,
       balance: (map['balance'] as num).toDouble(),

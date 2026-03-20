@@ -3,28 +3,28 @@ import 'package:fynt/features/authentication/logic/auth_service.dart';
 import 'package:fynt/core/widgets/category_icon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-AccountIcon getAccountIcon(AccountTypes accountType) {
+AccountIcon getAccountIcon(AccountType accountType) {
   switch (accountType) {
-    case AccountTypes.debitCard:
-      return const AccountIcon(accountTypes: AccountTypes.debitCard);
-    case AccountTypes.creditCard:
-      return const AccountIcon(accountTypes: AccountTypes.creditCard);
-    case AccountTypes.investment:
-      return const AccountIcon(accountTypes: AccountTypes.investment);
-    case AccountTypes.cashWallet:
-      return const AccountIcon(accountTypes: AccountTypes.cashWallet);
+    case AccountType.debitCard:
+      return const AccountIcon(accountTypes: AccountType.debitCard);
+    case AccountType.creditCard:
+      return const AccountIcon(accountTypes: AccountType.creditCard);
+    case AccountType.investment:
+      return const AccountIcon(accountTypes: AccountType.investment);
+    case AccountType.cashWallet:
+      return const AccountIcon(accountTypes: AccountType.cashWallet);
   }
 }
 
-String getAccountName(AccountTypes accountType) {
+String getAccountName(AccountType accountType) {
   switch (accountType) {
-    case AccountTypes.debitCard:
+    case AccountType.debitCard:
       return "Debit Card";
-    case AccountTypes.creditCard:
+    case AccountType.creditCard:
       return "Credit Card";
-    case AccountTypes.investment:
+    case AccountType.investment:
       return "Investment";
-    case AccountTypes.cashWallet:
+    case AccountType.cashWallet:
       return "Cash Wallet";
   }
 }

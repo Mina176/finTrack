@@ -2,13 +2,12 @@ import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/features/accounts/data/account_model.dart';
 import 'package:fynt/features/accounts/logic/account_controller.dart';
-import 'package:fynt/core/utils/categories_lists.dart';
-import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
 import 'package:fynt/features/authentication/presentation/auth_field.dart';
 import 'package:fynt/core/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fynt/features/transactions/data/transaction_model.dart';
 import 'package:go_router/go_router.dart';
 
 class AddAccountScreen extends ConsumerStatefulWidget {
@@ -18,7 +17,7 @@ class AddAccountScreen extends ConsumerStatefulWidget {
 }
 
 class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
-  AccountTypes selectedAccount = AccountTypes.debitCard;
+  AccountType selectedAccount = AccountType.debitCard;
   bool includeInNetWorth = true;
   final TextEditingController accountNameController = TextEditingController();
   final TextEditingController balanceController = TextEditingController();
@@ -81,13 +80,13 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
               ),
-              itemCount: AccountTypes.values.length,
+              itemCount: AccountType.values.length,
               itemBuilder: (context, index) {
-                final accountType = AccountTypes.values[index];
+                final accountType = AccountType.values[index];
                 return AccountTypeCard(
                   isSelected: selectedAccount == accountType,
                   icon: accountType.icon,
-                  label: accountType.label,
+                  label: accountType.name,
                   onTap: () => setState(() => selectedAccount = accountType),
                 );
               },

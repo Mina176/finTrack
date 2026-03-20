@@ -130,9 +130,9 @@ IconStyle getCategoryStyle(CategoryTypes type, ThemeMode themeMode) {
   }
 }
 
-IconStyle getAccountStyle(AccountTypes type, ThemeMode themeMode) {
+IconStyle getAccountStyle(AccountType type, ThemeMode themeMode) {
   switch (type) {
-    case AccountTypes.debitCard:
+    case AccountType.debitCard:
       return IconStyle(
         icon: Icons.credit_card_rounded,
         color: themeMode == ThemeMode.dark
@@ -142,7 +142,7 @@ IconStyle getAccountStyle(AccountTypes type, ThemeMode themeMode) {
             ? Colors.blueGrey.shade100
             : const Color(0xFFE0F2FE),
       );
-    case AccountTypes.creditCard:
+    case AccountType.creditCard:
       return IconStyle(
         icon: FontAwesomeIcons.ccVisa,
         color: themeMode == ThemeMode.dark
@@ -152,7 +152,7 @@ IconStyle getAccountStyle(AccountTypes type, ThemeMode themeMode) {
             ? Colors.orange.shade900
             : const Color(0xFFFFF2E6),
       );
-    case AccountTypes.cashWallet:
+    case AccountType.cashWallet:
       return IconStyle(
         icon: Icons.wallet_rounded,
         color: themeMode == ThemeMode.dark
@@ -162,7 +162,7 @@ IconStyle getAccountStyle(AccountTypes type, ThemeMode themeMode) {
             ? Colors.brown.shade900
             : const Color(0xFFE8F5E9),
       );
-    case AccountTypes.investment:
+    case AccountType.investment:
       return IconStyle(
         icon: Icons.trending_up_rounded,
         color: themeMode == ThemeMode.dark

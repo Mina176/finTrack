@@ -38,7 +38,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   final uid = Supabase.instance.client.auth.currentUser!.id;
   late AccountModel selectedAccount = AccountModel(
     userId: uid,
-    accountType: AccountTypes.debitCard,
+    accountType: AccountType.debitCard,
     accountName: "Select Account",
     balance: 0.0,
     includeInNetWorth: true,

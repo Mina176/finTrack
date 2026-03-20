@@ -39,7 +39,7 @@ class AccountIcon extends ConsumerWidget {
     super.key,
     required this.accountTypes,
   });
-  final AccountTypes accountTypes;
+  final AccountType accountTypes;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final style = getAccountStyle(
