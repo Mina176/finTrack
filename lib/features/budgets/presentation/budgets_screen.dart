@@ -4,12 +4,12 @@ import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/core/enums/recurrence_type.dart';
 import 'package:fynt/features/budgets/logic/budget_controller.dart';
-import 'package:fynt/features/budgets/presentation/widgets/left_to_spend_card.dart';
+import 'package:fynt/features/budgets/presentation/widgets/budget_sliver_list.dart';
+import 'package:fynt/features/budgets/presentation/widgets/choose_period_horizontal_list_view.dart';
+import 'package:fynt/features/budgets/presentation/widgets/left_to_spend_section.dart';
 import 'package:fynt/features/settings/currency/logic/currency_provider.dart';
 import 'package:fynt/core/routing/app_route_enum.dart';
 import 'package:fynt/core/theming/app_colors.dart';
-import 'package:fynt/core/widgets/category_icon.dart';
-import 'package:fynt/core/widgets/slidable_settings_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -36,23 +36,8 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('My budgets'),
-        actions: [
-          GestureDetector(
-            onTap: () => context.push(AppRoutes.addBudget.path),
-            child: const DecoratedBox(
-              decoration: BoxDecoration(
-                color: AppColors.kPrimaryColor,
-                shape: BoxShape.circle,
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(6),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+        actions: const [
+          AppBarAction(appRoute: AppRoutes.addBudget),
           gapW20,
         ],
       ),
@@ -96,232 +81,26 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
   }
 }
 
-class BudgetSliverList extends ConsumerWidget {
-  const BudgetSliverList({
+class AppBarAction extends StatelessWidget {
+  const AppBarAction({
     super.key,
-    required this.selectedPeriod,
-    required this.currencySymbol,
+    required this.appRoute,
   });
-
-  final RecurrenceDuration selectedPeriod;
-  final String currencySymbol;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final budgetsAsync = ref.watch(budgetControllerProvider(selectedPeriod));
-    return budgetsAsync.when(
-      data: (budgets) => budgets.isEmpty
-          ? const EmptyListSLiverFillRemaining(
-              message: 'Press the + button above to add a budget.',
-            )
-          : SliverList.separated(
-              itemCount: budgets.length,
-              separatorBuilder: (context, index) => gapH12,
-              itemBuilder: (context, index) {
-                final budget = budgets[index];
-                final safeBudgetLimit = budget.limit == 0 ? 1 : budget.limit;
-                return SlidableSettingsTile(
-                  itemKey: ValueKey(budgets[index].id),
-                  onDeleteTapped: () => ref
-                      .read(
-                        budgetControllerProvider(
-                          selectedPeriod,
-                        ).notifier,
-                      )
-                      .deleteBudget(budget.id),
-                  child: LeftToSpendCard(
-                    spendLimit: budget.limit,
-                    spentAmount: budget.spent,
-                    leading: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CategoryIcon(
-                          categoryType: budget.category,
-                        ),
-                        gapW8,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              budget.category.label,
-                              style: TextStyles.title.copyWith(
-                                fontSize: 14,
-                              ),
-                            ),
-                            gapH4,
-                            Text(
-                              '$currencySymbol${(budget.limit - budget.spent).round()} remaining',
-                              style: TextStyles.subtitle.copyWith(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Text(
-                          '${(budget.spent * 100 / safeBudgetLimit).round()}%',
-                          style: TextStyles.title.copyWith(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-      loading: () => const SliverFillRemaining(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-      error: (error, stackTrace) => const SliverFillRemaining(
-        child: Center(
-          child: Text('Error loading budgets'),
-        ),
-      ),
-    );
-  }
-}
-
-class EmptyListSLiverFillRemaining extends StatelessWidget {
-  const EmptyListSLiverFillRemaining({
-    super.key,
-    required this.message,
-  });
-  final String message;
-  @override
-  Widget build(BuildContext context) {
-    return SliverFillRemaining(
-      hasScrollBody: false,
-      child: Center(
-        child: Text(
-          message,
-          textAlign: TextAlign.center,
-          style: TextStyles.hintText.copyWith(
-            color: Colors.grey,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LeftToSpendSection extends StatelessWidget {
-  const LeftToSpendSection({
-    super.key,
-    required this.currencySymbol,
-    required this.spendLimit,
-    required this.spentAmount,
-  });
-
-  final String currencySymbol;
-  final double spendLimit;
-  final double spentAmount;
-
-  @override
-  Widget build(BuildContext context) {
-    return LeftToSpendCard(
-      leading: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'LEFT TO SPEND',
-                style: TextStyles.headerLink,
-              ),
-              Text(
-                '$currencySymbol${spendLimit == 0 ? 0 : (spendLimit - spentAmount).round()}',
-                style: TextStyles.header.copyWith(fontSize: 32),
-              ),
-            ],
-          ),
-          Text(
-            '${spendLimit == 0 ? 0 : (spentAmount * 100 / spendLimit).round()}%',
-            style: TextStyles.title.copyWith(fontSize: 14),
-          ),
-        ],
-      ),
-      spentAmount: spentAmount,
-      spendLimit: spendLimit,
-    );
-  }
-}
-
-class ChoosePeriodHorizontalListView extends StatelessWidget {
-  const ChoosePeriodHorizontalListView({
-    super.key,
-    required this.selectedPeriod,
-    required this.onPeriodSelected,
-  });
-  final RecurrenceDuration selectedPeriod;
-  final ValueChanged<RecurrenceDuration> onPeriodSelected;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 36,
-      child: Row(
-        children: List.generate(
-          RecurrenceDuration.values.length,
-          (index) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: ChoosePeriodHorizontalListViewItem(
-              isSelected: selectedPeriod == RecurrenceDuration.values[index],
-              period: RecurrenceDuration.values[index],
-              onTap: () {
-                onPeriodSelected(RecurrenceDuration.values[index]);
-              },
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ChoosePeriodHorizontalListViewItem extends StatelessWidget {
-  const ChoosePeriodHorizontalListViewItem({
-    super.key,
-    required this.isSelected,
-    required this.period,
-    required this.onTap,
-  });
-  final bool isSelected;
-  final RecurrenceDuration period;
-  final VoidCallback onTap;
+  final AppRoutes appRoute;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
-      child: DecoratedBox(
+      onTap: () => context.push(appRoute.path),
+      child: const DecoratedBox(
         decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.kPrimaryColor
-              : Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(18),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: AppColors.kPrimaryColor.withOpacity(0.5),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ]
-              : [],
+          color: AppColors.kPrimaryColor,
+          shape: BoxShape.circle,
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          child: Center(
-            child: Text(
-              period.name.toUpperCase()[0] + period.name.substring(1),
-              style: TextStyles.title.copyWith(
-                fontSize: 12,
-                color: isSelected ? Colors.black : null,
-              ),
-            ),
+          padding: EdgeInsets.all(6),
+          child: Icon(
+            Icons.add,
+            color: Colors.black,
           ),
         ),
       ),
