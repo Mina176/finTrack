@@ -35,34 +35,42 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(Sizes.p12),
-          child: ScrollableContentWithStickyButton(
-            column: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                GestureDetector(
+          padding: const EdgeInsets.symmetric(
+            vertical: Sizes.kVerticalPadding,
+            horizontal: Sizes.kHorizontalPadding,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
                   onTap: completeOnboarding,
                   child: const Text('skip'),
                 ),
-                const Spacer(),
-                OnboardingPageSlider(
+              ),
+              Expanded(
+                child: OnboardingPageSlider(
                   currentPage: currentPage,
                   pageController: _pageController,
-                  onSlide: (index) => setState(() => currentPage = index),
+                  onSlide: (index) => setState(() {
+                    currentPage = index;
+                  }),
                 ),
-              ],
-            ),
-            button: ElevatedButton(
-              onPressed: () => setState(
-                () => currentPage < 2
-                    ? _pageController.nextPage(
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.linear,
-                      )
-                    : completeOnboarding(),
               ),
-              child: Text(currentPage < 2 ? 'Next' : 'Get Started'),
-            ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: () => setState(
+                  () => currentPage < 2
+                      ? _pageController.nextPage(
+                          duration: const Duration(milliseconds: 250),
+                          curve: Curves.linear,
+                        )
+                      : completeOnboarding(),
+                ),
+                child: Text(currentPage < 2 ? 'Next' : 'Get Started'),
+              ),
+            ],
           ),
         ),
       ),

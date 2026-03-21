@@ -20,8 +20,7 @@ class OnboardingPageSlider extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.58,
+        Expanded(
           child: PageView(
             onPageChanged: onSlide,
             controller: pageController,
