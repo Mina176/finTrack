@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fynt/features/settings/appearance/data/theme_service.dart';
 import 'package:fynt/features/settings/appearance/logic/theme_controller.dart';
 import 'package:fynt/features/authentication/logic/auth_controller.dart';
@@ -12,6 +13,7 @@ import 'package:fynt/core/theming/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:fynt/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
@@ -83,6 +85,16 @@ class _MainAppState extends ConsumerState<MainApp> {
     final themeMode = ref.watch(themeControllerProvider);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+      ],
       routerConfig: router,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
