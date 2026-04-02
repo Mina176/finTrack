@@ -23,11 +23,11 @@ class AccountDetailsForm extends StatelessWidget {
         children: [
           TextFieldWithLabel(
             label: context.l10n.accountName,
-            hintText: 'e.g. My Savings',
+            hintText: context.l10n.accountNameHintPersonal,
             controller: accountNameController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Account name is required';
+                return context.l10n.errorAccountNameRequired;
               }
               return null;
             },
@@ -41,10 +41,10 @@ class AccountDetailsForm extends StatelessWidget {
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Account Balance is required';
+                return context.l10n.errorAccountBalanceRequired;
               }
               if (double.tryParse(value) == null) {
-                return 'Please enter a valid number';
+                return context.l10n.errorValidNumber;
               }
               return null;
             },

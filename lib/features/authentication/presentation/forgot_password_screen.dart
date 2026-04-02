@@ -66,14 +66,13 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
               spacing: 16,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const OnboardingCard(
+                OnboardingCard(
                   icon: Icons.lock_reset_sharp,
                   borderRadius: 50,
                   width: 100,
                   height: 100,
-                  title: 'Forgot Password?',
-                  subTitle:
-                      'Don\'t worry, it happens. Please enter the email address associated with your account.',
+                  title: context.l10n.forgotPassword,
+                  subTitle: context.l10n.forgotPasswordDescription,
                 ),
                 Form(
                   key: formKey,
@@ -101,11 +100,11 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                           strokeWidth: 2,
                         ),
                       )
-                    : const Row(
+                    : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Send Reset Link'),
-                          Icon(Icons.arrow_forward_rounded),
+                          Text(context.l10n.sendResetLink),
+                          const Icon(Icons.arrow_forward_rounded),
                         ],
                       ),
               ),

@@ -16,7 +16,6 @@ class SettingsContent extends StatelessWidget {
       header: Text(
         context.l10n.appPreferences,
         style: TextStyles.subtitle.copyWith(fontSize: 12),
-        textAlign: TextAlign.left,
       ),
       widgets: const [
         CurrencyListTile(),

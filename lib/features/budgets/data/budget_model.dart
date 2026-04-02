@@ -56,7 +56,7 @@ class BudgetModel {
     return BudgetModel(
       id: map['id'] as int,
       userId: (map['user_id'] ?? "") as String,
-      budgetName: (map['budget_name'] ?? "Unnamed Budget") as String,
+      budgetName: (map['budget_name'] ?? '') as String,
       limit: (map['limit'] ?? 0.0).toDouble(),
       spent: (map['spent'] ?? 0.0).toDouble(),
       category: CategoryType.values.firstWhere(

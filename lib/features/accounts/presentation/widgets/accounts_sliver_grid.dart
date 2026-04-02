@@ -26,7 +26,7 @@ class AccountsSliverGrid extends StatelessWidget {
         return AccountTypeCard(
           isSelected: selectedAccount == accountType,
           icon: accountType.icon,
-          label: accountType.label,
+          label: accountType.localizedLabel(context),
           onTap: () => onAccountTypeSelected(accountType),
         );
       },

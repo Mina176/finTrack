@@ -2,6 +2,7 @@ import 'package:fynt/features/accounts/presentation/accounts_screen.dart';
 import 'package:fynt/features/settings/settings_screen.dart';
 import 'package:fynt/features/budgets/presentation/budgets_screen.dart';
 import 'package:fynt/features/dashboard/dashboard_screen.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/core/routing/app_route_enum.dart';
 import 'package:fynt/core/theming/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -47,19 +48,19 @@ class _RootHomeScreenState extends State<RootHomeScreen> {
         selectedColor: AppColors.kPrimaryColor,
         items: [
           FABBottomAppBarItem(
-            text: 'Home',
+            text: context.l10n.home,
             iconData: Icons.home_rounded,
           ),
           FABBottomAppBarItem(
-            text: 'Wallet',
+            text: context.l10n.wallet,
             iconData: Icons.account_balance_wallet,
           ),
           FABBottomAppBarItem(
-            text: 'Budgets',
+            text: context.l10n.budgets,
             iconData: Icons.pie_chart,
           ),
           FABBottomAppBarItem(
-            text: 'Profile',
+            text: context.l10n.profile,
             iconData: Icons.person,
           ),
         ],
@@ -167,9 +168,11 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Icon(item.iconData, color: color, size: widget.iconSize),
-            Text(
-              item.text,
-              style: TextStyle(color: color),
+            FittedBox(
+              child: Text(
+                item.text,
+                style: TextStyle(color: color),
+              ),
             ),
           ],
         ),

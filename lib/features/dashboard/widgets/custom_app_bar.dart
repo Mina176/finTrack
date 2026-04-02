@@ -1,5 +1,6 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
 import 'package:fynt/core/utils/helpers.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class CustomAppBar extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'WELCOME BACK',
+                context.l10n.welcomeBack.toUpperCase(),
                 style: TextStyles.subtitle.copyWith(fontSize: 14),
               ),
               Text(

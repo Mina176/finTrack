@@ -158,6 +158,18 @@ abstract class AppLocalizations {
   /// **'Total Balance'**
   String get totalBalance;
 
+  /// No description provided for @totalSpentThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Total spent this week'**
+  String get totalSpentThisWeek;
+
+  /// No description provided for @vsLastMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'{percentage}% vs last month'**
+  String vsLastMonth(Object percentage);
+
   /// No description provided for @somethingWentWrong.
   ///
   /// In en, this message translates to:
@@ -655,6 +667,336 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Spending'**
   String get spending;
+
+  /// No description provided for @updatePasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Password'**
+  String get updatePasswordTitle;
+
+  /// No description provided for @updatePasswordDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your new password.'**
+  String get updatePasswordDescription;
+
+  /// No description provided for @enterNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your new password'**
+  String get enterNewPassword;
+
+  /// No description provided for @sendResetLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Reset Link'**
+  String get sendResetLink;
+
+  /// No description provided for @loginSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your wealth securely.\n Please log in to your account.'**
+  String get loginSubtitle;
+
+  /// No description provided for @noAccountFoundWithEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'No account found with this email'**
+  String get noAccountFoundWithEmail;
+
+  /// No description provided for @passwordIncorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is incorrect'**
+  String get passwordIncorrect;
+
+  /// No description provided for @incorrectPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect password'**
+  String get incorrectPassword;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @wallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get wallet;
+
+  /// No description provided for @budgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Budgets'**
+  String get budgets;
+
+  /// No description provided for @cleanAndBright.
+  ///
+  /// In en, this message translates to:
+  /// **'Clean and bright'**
+  String get cleanAndBright;
+
+  /// No description provided for @easyOnEyes.
+  ///
+  /// In en, this message translates to:
+  /// **'Easy on the eyes'**
+  String get easyOnEyes;
+
+  /// No description provided for @leftToSpend.
+  ///
+  /// In en, this message translates to:
+  /// **'LEFT TO SPEND'**
+  String get leftToSpend;
+
+  /// No description provided for @totalSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Spent'**
+  String get totalSpent;
+
+  /// No description provided for @remaining.
+  ///
+  /// In en, this message translates to:
+  /// **'remaining'**
+  String get remaining;
+
+  /// No description provided for @balanceAffectsTotalAssets.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance will affect total assets'**
+  String get balanceAffectsTotalAssets;
+
+  /// No description provided for @noAccountsFoundAddFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'No accounts found. Please add account first.\n'**
+  String get noAccountsFoundAddFirst;
+
+  /// No description provided for @goToAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Accounts'**
+  String get goToAccounts;
+
+  /// No description provided for @accountNameHintPersonal.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. My Savings'**
+  String get accountNameHintPersonal;
+
+  /// No description provided for @errorAccountNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Account name is required'**
+  String get errorAccountNameRequired;
+
+  /// No description provided for @errorAccountBalanceRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Account balance is required'**
+  String get errorAccountBalanceRequired;
+
+  /// No description provided for @errorValidNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid number'**
+  String get errorValidNumber;
+
+  /// No description provided for @masterYourMoney.
+  ///
+  /// In en, this message translates to:
+  /// **'Master your money'**
+  String get masterYourMoney;
+
+  /// No description provided for @onboardingTitleFreedom.
+  ///
+  /// In en, this message translates to:
+  /// **'Financial Freedom'**
+  String get onboardingTitleFreedom;
+
+  /// No description provided for @onboardingSubtitleFreedom.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your spending, save more, and achieve financial freedom.'**
+  String get onboardingSubtitleFreedom;
+
+  /// No description provided for @onboardingTitleSmartCategorization.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart Categorization'**
+  String get onboardingTitleSmartCategorization;
+
+  /// No description provided for @onboardingSubtitleSmartCategorization.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically categorize your transactions for effortless tracking.'**
+  String get onboardingSubtitleSmartCategorization;
+
+  /// No description provided for @onboardingTitleBudgetMaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Master your Monthly Budget'**
+  String get onboardingTitleBudgetMaster;
+
+  /// No description provided for @onboardingSubtitleBudgetMaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Set your first budget and start saving today! Track every expense and watch your savings grow.'**
+  String get onboardingSubtitleBudgetMaster;
+
+  /// No description provided for @addBudgetPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Press the + button above to add a budget.'**
+  String get addBudgetPrompt;
+
+  /// No description provided for @addTransactionPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Press the + button below to add a transaction.'**
+  String get addTransactionPrompt;
+
+  /// No description provided for @amountWithCurrency.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount ({currencyCode})'**
+  String amountWithCurrency(Object currencyCode);
+
+  /// No description provided for @weeklyResetInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'The budget will reset automatically on Monday of every week.'**
+  String get weeklyResetInfo;
+
+  /// No description provided for @monthlyResetInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'The budget will reset automatically on 1st of every month.'**
+  String get monthlyResetInfo;
+
+  /// No description provided for @yearlyResetInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'The budget will reset automatically on 1st Jan of every year.'**
+  String get yearlyResetInfo;
+
+  /// No description provided for @mondayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Mon'**
+  String get mondayShort;
+
+  /// No description provided for @tuesdayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Tue'**
+  String get tuesdayShort;
+
+  /// No description provided for @wednesdayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Wed'**
+  String get wednesdayShort;
+
+  /// No description provided for @thursdayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Thu'**
+  String get thursdayShort;
+
+  /// No description provided for @fridayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Fri'**
+  String get fridayShort;
+
+  /// No description provided for @saturdayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sat'**
+  String get saturdayShort;
+
+  /// No description provided for @sundayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun'**
+  String get sundayShort;
+
+  /// No description provided for @transport.
+  ///
+  /// In en, this message translates to:
+  /// **'Transport'**
+  String get transport;
+
+  /// No description provided for @bills.
+  ///
+  /// In en, this message translates to:
+  /// **'Bills'**
+  String get bills;
+
+  /// No description provided for @salary.
+  ///
+  /// In en, this message translates to:
+  /// **'Salary'**
+  String get salary;
+
+  /// No description provided for @freelance.
+  ///
+  /// In en, this message translates to:
+  /// **'Freelance'**
+  String get freelance;
+
+  /// No description provided for @housing.
+  ///
+  /// In en, this message translates to:
+  /// **'Housing'**
+  String get housing;
+
+  /// No description provided for @health.
+  ///
+  /// In en, this message translates to:
+  /// **'Health'**
+  String get health;
+
+  /// No description provided for @gifts.
+  ///
+  /// In en, this message translates to:
+  /// **'Gifts'**
+  String get gifts;
+
+  /// No description provided for @others.
+  ///
+  /// In en, this message translates to:
+  /// **'Others'**
+  String get others;
+
+  /// No description provided for @cashWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash Wallet'**
+  String get cashWallet;
+
+  /// No description provided for @investment.
+  ///
+  /// In en, this message translates to:
+  /// **'Investment'**
+  String get investment;
+
+  /// No description provided for @selectAccountToContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Account'**
+  String get selectAccountToContinue;
+
+  /// No description provided for @unnamedBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Unnamed Budget'**
+  String get unnamedBudget;
 }
 
 class _AppLocalizationsDelegate

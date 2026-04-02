@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/features/budgets/presentation/widgets/left_to_spend_card.dart';
 
 class LeftToSpendSection extends StatelessWidget {
@@ -24,8 +25,8 @@ class LeftToSpendSection extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'LEFT TO SPEND',
+              Text(
+                context.l10n.leftToSpend,
                 style: TextStyles.headerLink,
               ),
               Text(

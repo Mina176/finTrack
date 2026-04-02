@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/core/theming/app_colors.dart';
 import 'package:fynt/core/widgets/custom_card.dart';
 import 'package:fynt/features/settings/appearance/logic/theme_controller.dart';
@@ -149,7 +150,9 @@ class SelectThemeRow extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            isLightCard ? 'Light' : 'Dark',
+                            isLightCard
+                                ? context.l10n.light
+                                : context.l10n.dark,
                             style: TextStyles.title.copyWith(fontSize: 16),
                           ),
                           SizedBox(
@@ -166,7 +169,9 @@ class SelectThemeRow extends ConsumerWidget {
                         ],
                       ),
                       Text(
-                        isLightCard ? 'Clean and bright' : 'Easy on the eyes',
+                        isLightCard
+                            ? context.l10n.cleanAndBright
+                            : context.l10n.easyOnEyes,
                         style: TextStyles.subtitle.copyWith(fontSize: 12),
                       ),
                     ],

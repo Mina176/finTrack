@@ -16,8 +16,7 @@ class TransactionCard extends ConsumerWidget {
     return ListTile(
       leading: CategoryIcon(categoryType: transaction.category),
       title: Text(
-        transaction.category.name[0].toUpperCase() +
-            transaction.category.name.substring(1),
+        transaction.category.localizedLabel(context),
         style: TextStyles.title.copyWith(fontSize: 16),
       ),
       subtitle: Text(

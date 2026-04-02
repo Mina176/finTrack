@@ -25,8 +25,8 @@ class BudgetSliverList extends ConsumerWidget {
     final budgetsAsync = ref.watch(budgetControllerProvider(selectedPeriod));
     return budgetsAsync.when(
       data: (budgets) => budgets.isEmpty
-          ? const EmptyListSLiverFillRemaining(
-              message: 'Press the + button above to add a budget.',
+          ? EmptyListSLiverFillRemaining(
+              message: context.l10n.addBudgetPrompt,
             )
           : SliverList.separated(
               itemCount: budgets.length,
@@ -57,14 +57,14 @@ class BudgetSliverList extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              budget.category.label,
+                              budget.category.localizedLabel(context),
                               style: TextStyles.title.copyWith(
                                 fontSize: 14,
                               ),
                             ),
                             gapH4,
                             Text(
-                              '$currencySymbol${(budget.limit - budget.spent).round()} remaining',
+                              '$currencySymbol${(budget.limit - budget.spent).round()} ${context.l10n.remaining}',
                               style: TextStyles.subtitle.copyWith(
                                 fontSize: 12,
                               ),

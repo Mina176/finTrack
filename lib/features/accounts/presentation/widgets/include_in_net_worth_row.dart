@@ -23,7 +23,7 @@ class IncludeInNetWorthRow extends StatelessWidget {
               context.l10n.includeInNetWorth,
               style: TextStyles.title.copyWith(fontSize: 14),
             ),
-            const Text('Balance will affect total assets'),
+            Text(context.l10n.balanceAffectsTotalAssets),
           ],
         ),
         Switch(

@@ -17,8 +17,8 @@ class RecentTransactionList extends ConsumerWidget {
       data: (allTransactions) {
         final recentTransactions = allTransactions.take(5).toList();
         if (allTransactions.isEmpty) {
-          return const EmptyListSLiverFillRemaining(
-            message: "Press the + button below to add a transaction.",
+          return EmptyListSLiverFillRemaining(
+            message: context.l10n.addTransactionPrompt,
           );
         }
         return SliverToBoxAdapter(

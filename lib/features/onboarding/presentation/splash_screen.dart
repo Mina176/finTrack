@@ -3,6 +3,7 @@ import 'package:fynt/features/transactions/logic/transaction_controller.dart';
 import 'package:fynt/features/authentication/logic/auth_controller.dart';
 import 'package:fynt/features/authentication/logic/auth_service.dart';
 import 'package:fynt/features/onboarding/data/onboarding_repository.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/core/routing/app_route_enum.dart';
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/features/onboarding/presentation/widgets/onboarding_card.dart';
@@ -83,7 +84,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                     width: 120,
                     height: 120,
                     title: 'fynt',
-                    subTitle: 'Master your money',
+                    subTitle: context.l10n.masterYourMoney,
                     image: Image.asset(
                       fit: BoxFit.fill,
                       'assets/Logo.png',

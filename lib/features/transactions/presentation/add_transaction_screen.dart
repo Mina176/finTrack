@@ -43,7 +43,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
     selectedAccount = AccountModel(
       userId: uid,
       accountType: AccountType.debitCard,
-      accountName: "Select Account",
+      accountName: '',
       balance: 0.0,
       includeInNetWorth: true,
       currentBalance: 0.0,
@@ -91,7 +91,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
         context.pop();
       }
     } catch (e) {
-      throw Exception("Failed to add transaction: $e");
+      throw Exception('${context.l10n.failedToAddTransaction}: $e');
     }
   }
 
@@ -181,7 +181,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
             child: AnimatedButtonWithIcon(
               onTap: addTransaction,
               icon: Icons.check,
-              label: "Add Transaction",
+              label: context.l10n.addTransaction,
               isLoading: isLoading,
               expenseOrIncome: expenseOrIncome,
             ),

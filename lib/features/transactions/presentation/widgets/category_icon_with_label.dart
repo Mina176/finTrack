@@ -17,7 +17,7 @@ class CategoryIconWithLabel extends StatelessWidget {
         CategoryIcon(categoryType: categoryType),
         gapH4,
         Text(
-          categoryType.label,
+          categoryType.localizedLabel(context),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyles.subtitle.copyWith(

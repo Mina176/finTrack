@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 
 enum CategoryType {
   food(
@@ -78,4 +79,35 @@ enum CategoryType {
     required this.icon,
     required this.isIncome,
   });
+
+  String localizedLabel(BuildContext context) {
+    switch (this) {
+      case CategoryType.food:
+        return context.l10n.food;
+      case CategoryType.transport:
+        return context.l10n.transport;
+      case CategoryType.entertainment:
+        return context.l10n.entertainment;
+      case CategoryType.shopping:
+        return context.l10n.shopping;
+      case CategoryType.bills:
+        return context.l10n.bills;
+      case CategoryType.salary:
+        return context.l10n.salary;
+      case CategoryType.freelance:
+        return context.l10n.freelance;
+      case CategoryType.investment:
+        return context.l10n.investment;
+      case CategoryType.housing:
+        return context.l10n.housing;
+      case CategoryType.health:
+        return context.l10n.health;
+      case CategoryType.gifts:
+        return context.l10n.gifts;
+      case CategoryType.others:
+        return context.l10n.other;
+      case CategoryType.othersIncome:
+        return context.l10n.other;
+    }
+  }
 }

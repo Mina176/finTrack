@@ -40,7 +40,7 @@ class UserInfoSection extends ConsumerWidget {
               return TextButton.icon(
                 onPressed: () =>
                     ref.read(authControllerProvider.notifier).signOut(),
-                label: Text(context.l10n.logout),
+                label: FittedBox(child: Text(context.l10n.logout)),
                 icon: const Icon(
                   Icons.logout,
                 ),

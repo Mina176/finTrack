@@ -40,6 +40,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get totalBalance => 'Total Balance';
 
   @override
+  String get totalSpentThisWeek => 'Total spent this week';
+
+  @override
+  String vsLastMonth(Object percentage) {
+    return '$percentage% vs last month';
+  }
+
+  @override
   String get somethingWentWrong => 'Something went wrong. Please try again.';
 
   @override
@@ -290,4 +298,180 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get spending => 'Spending';
+
+  @override
+  String get updatePasswordTitle => 'Update Password';
+
+  @override
+  String get updatePasswordDescription => 'Please enter your new password.';
+
+  @override
+  String get enterNewPassword => 'Enter your new password';
+
+  @override
+  String get sendResetLink => 'Send Reset Link';
+
+  @override
+  String get loginSubtitle =>
+      'Track your wealth securely.\n Please log in to your account.';
+
+  @override
+  String get noAccountFoundWithEmail => 'No account found with this email';
+
+  @override
+  String get passwordIncorrect => 'Password is incorrect';
+
+  @override
+  String get incorrectPassword => 'Incorrect password';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get wallet => 'Wallet';
+
+  @override
+  String get budgets => 'Budgets';
+
+  @override
+  String get cleanAndBright => 'Clean and bright';
+
+  @override
+  String get easyOnEyes => 'Easy on the eyes';
+
+  @override
+  String get leftToSpend => 'LEFT TO SPEND';
+
+  @override
+  String get totalSpent => 'Total Spent';
+
+  @override
+  String get remaining => 'remaining';
+
+  @override
+  String get balanceAffectsTotalAssets => 'Balance will affect total assets';
+
+  @override
+  String get noAccountsFoundAddFirst =>
+      'No accounts found. Please add account first.\n';
+
+  @override
+  String get goToAccounts => 'Go to Accounts';
+
+  @override
+  String get accountNameHintPersonal => 'e.g. My Savings';
+
+  @override
+  String get errorAccountNameRequired => 'Account name is required';
+
+  @override
+  String get errorAccountBalanceRequired => 'Account balance is required';
+
+  @override
+  String get errorValidNumber => 'Please enter a valid number';
+
+  @override
+  String get masterYourMoney => 'Master your money';
+
+  @override
+  String get onboardingTitleFreedom => 'Financial Freedom';
+
+  @override
+  String get onboardingSubtitleFreedom =>
+      'Track your spending, save more, and achieve financial freedom.';
+
+  @override
+  String get onboardingTitleSmartCategorization => 'Smart Categorization';
+
+  @override
+  String get onboardingSubtitleSmartCategorization =>
+      'Automatically categorize your transactions for effortless tracking.';
+
+  @override
+  String get onboardingTitleBudgetMaster => 'Master your Monthly Budget';
+
+  @override
+  String get onboardingSubtitleBudgetMaster =>
+      'Set your first budget and start saving today! Track every expense and watch your savings grow.';
+
+  @override
+  String get addBudgetPrompt => 'Press the + button above to add a budget.';
+
+  @override
+  String get addTransactionPrompt =>
+      'Press the + button below to add a transaction.';
+
+  @override
+  String amountWithCurrency(Object currencyCode) {
+    return 'Amount ($currencyCode)';
+  }
+
+  @override
+  String get weeklyResetInfo =>
+      'The budget will reset automatically on Monday of every week.';
+
+  @override
+  String get monthlyResetInfo =>
+      'The budget will reset automatically on 1st of every month.';
+
+  @override
+  String get yearlyResetInfo =>
+      'The budget will reset automatically on 1st Jan of every year.';
+
+  @override
+  String get mondayShort => 'Mon';
+
+  @override
+  String get tuesdayShort => 'Tue';
+
+  @override
+  String get wednesdayShort => 'Wed';
+
+  @override
+  String get thursdayShort => 'Thu';
+
+  @override
+  String get fridayShort => 'Fri';
+
+  @override
+  String get saturdayShort => 'Sat';
+
+  @override
+  String get sundayShort => 'Sun';
+
+  @override
+  String get transport => 'Transport';
+
+  @override
+  String get bills => 'Bills';
+
+  @override
+  String get salary => 'Salary';
+
+  @override
+  String get freelance => 'Freelance';
+
+  @override
+  String get housing => 'Housing';
+
+  @override
+  String get health => 'Health';
+
+  @override
+  String get gifts => 'Gifts';
+
+  @override
+  String get others => 'Others';
+
+  @override
+  String get cashWallet => 'Cash Wallet';
+
+  @override
+  String get investment => 'Investment';
+
+  @override
+  String get selectAccountToContinue => 'Select Account';
+
+  @override
+  String get unnamedBudget => 'Unnamed Budget';
 }

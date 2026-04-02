@@ -36,7 +36,7 @@ class TransactionDetails extends StatelessWidget {
             style: TextStyles.addTransactionSettingstitle,
           ),
           subtitle: Text(
-            transaction.category.name,
+            transaction.category.localizedLabel(context),
             style: TextStyles.addTransactionSettingsSubtitle,
           ),
         ),
@@ -47,7 +47,7 @@ class TransactionDetails extends StatelessWidget {
             accountType: selectedAccount.accountType,
           ),
           title: Text(
-            selectedAccount.accountType.label,
+            selectedAccount.accountType.localizedLabel(context),
             style: TextStyles.addTransactionSettingstitle,
           ),
           subtitle: Text(

@@ -69,7 +69,7 @@ class ChoosePeriodHorizontalListViewItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Center(
             child: Text(
-              period.name.toUpperCase()[0] + period.name.substring(1),
+              period.localizedName(context),
               style: TextStyles.title.copyWith(
                 fontSize: 12,
                 color: isSelected ? Colors.black : null,

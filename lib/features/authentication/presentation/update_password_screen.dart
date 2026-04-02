@@ -64,19 +64,19 @@ class _ResetPasswordScreenState extends ConsumerState<UpdatePasswordScreen> {
               spacing: 16,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const OnboardingCard(
+                OnboardingCard(
                   icon: Icons.lock_reset_sharp,
                   borderRadius: 50,
                   width: 100,
                   height: 100,
-                  title: 'Update Password',
-                  subTitle: 'Please enter your new password.',
+                  title: context.l10n.updatePasswordTitle,
+                  subTitle: context.l10n.updatePasswordDescription,
                 ),
                 Form(
                   key: formKey,
                   child: TextFieldWithLabel(
                     label: context.l10n.password,
-                    hintText: 'Enter your new password',
+                    hintText: context.l10n.enterNewPassword,
                     isPassword: true,
                     controller: _passwordController,
                     validator: (val) =>
@@ -100,7 +100,7 @@ class _ResetPasswordScreenState extends ConsumerState<UpdatePasswordScreen> {
                           strokeWidth: 2,
                         ),
                       )
-                    : const Text('Update Password'),
+                    : Text(context.l10n.updatePasswordTitle),
               ),
             ),
           ),

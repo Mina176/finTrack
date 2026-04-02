@@ -1,4 +1,5 @@
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/features/settings/currency/currency_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +16,7 @@ class DisplayAmount extends ConsumerWidget {
     return Column(
       children: [
         Text(
-          "Amount ($currencyCode)",
+          context.l10n.amountWithCurrency(currencyCode),
           textAlign: TextAlign.center,
           style: const TextStyle(color: Colors.grey),
         ),

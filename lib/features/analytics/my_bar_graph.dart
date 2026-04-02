@@ -1,3 +1,4 @@
+import 'package:fynt/core/enums/weekday.dart';
 import 'package:fynt/features/settings/currency/currency_provider.dart';
 import 'package:fynt/features/analytics/bar_data.dart';
 import 'package:fynt/core/theming/app_colors.dart';
@@ -54,7 +55,8 @@ class MyBarGraph extends ConsumerWidget {
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
-              getTitlesWidget: getBottomTitles,
+              getTitlesWidget: (value, meta) =>
+                  getBottomTitles(value, meta, context),
             ),
           ),
         ),
@@ -82,32 +84,12 @@ class MyBarGraph extends ConsumerWidget {
     );
   }
 
-  Widget getBottomTitles(double value, TitleMeta meta) {
+  Widget getBottomTitles(double value, TitleMeta meta, BuildContext context) {
     final day = WeekDays.values[value.toInt()];
     return SideTitleWidget(
       meta: meta,
       space: 8.0,
-      child: Text(day.label, style: WeekDays.style),
+      child: Text(day.localizedLabel(context), style: WeekDays.style),
     );
   }
-}
-
-enum WeekDays {
-  mon(label: 'Mon'),
-  tue(label: 'Tue'),
-  wed(label: 'Wed'),
-  thu(label: 'Thu'),
-  fri(label: 'Fri'),
-  sat(label: 'Sat'),
-  sun(label: 'Sun')
-  ;
-
-  final String label;
-  const WeekDays({required this.label});
-
-  static const style = TextStyle(
-    color: Colors.grey,
-    fontWeight: FontWeight.bold,
-    fontSize: 10,
-  );
 }

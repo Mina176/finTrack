@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/core/widgets/custom_card.dart';
 import 'package:fynt/core/widgets/last_month_container.dart';
 import 'package:fynt/features/analytics/weekly_spending_summary.dart';
@@ -46,7 +47,7 @@ class WeeklyDashboard extends ConsumerWidget {
                         },
                       ),
                       Text(
-                        'Total spent this week',
+                        context.l10n.totalSpentThisWeek,
                         style: TextStyles.subtitle.copyWith(
                           fontSize: 12,
                         ),
@@ -76,9 +77,9 @@ class WeeklyDashboard extends ConsumerWidget {
             child: CircularProgressIndicator(),
           ),
         ),
-        error: (error, stackTrace) => const Center(
+        error: (error, stackTrace) => Center(
           child: Text(
-            'Something went wrong. Please try again.',
+            context.l10n.somethingWentWrong,
           ),
         ),
       ),

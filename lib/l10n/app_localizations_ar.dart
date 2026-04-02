@@ -41,6 +41,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get totalBalance => 'الرصيد الإجمالي';
 
   @override
+  String get totalSpentThisWeek => 'إجمالي الإنفاق هذا الأسبوع';
+
+  @override
+  String vsLastMonth(Object percentage) {
+    return '$percentage% مقارنة بالشهر الماضي';
+  }
+
+  @override
   String get somethingWentWrong => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
 
   @override
@@ -291,4 +299,179 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get spending => 'نفقة';
+
+  @override
+  String get updatePasswordTitle => 'تحديث كلمة المرور';
+
+  @override
+  String get updatePasswordDescription => 'يرجى إدخال كلمة المرور الجديدة.';
+
+  @override
+  String get enterNewPassword => 'أدخل كلمة المرور الجديدة';
+
+  @override
+  String get sendResetLink => 'إرسال رابط إعادة التعيين';
+
+  @override
+  String get loginSubtitle =>
+      'تتبع أموالك بأمان.\n يرجى تسجيل الدخول إلى حسابك.';
+
+  @override
+  String get noAccountFoundWithEmail => 'لا يوجد حساب بهذا البريد الإلكتروني';
+
+  @override
+  String get passwordIncorrect => 'كلمة المرور غير صحيحة';
+
+  @override
+  String get incorrectPassword => 'كلمة المرور خاطئة';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get wallet => 'المحفظة';
+
+  @override
+  String get budgets => 'الميزانيات';
+
+  @override
+  String get cleanAndBright => 'نظيف ومشرق';
+
+  @override
+  String get easyOnEyes => 'مريح للعين';
+
+  @override
+  String get leftToSpend => 'المتبقي للإنفاق';
+
+  @override
+  String get totalSpent => 'إجمالي المصروف';
+
+  @override
+  String get remaining => 'متبقي';
+
+  @override
+  String get balanceAffectsTotalAssets => 'الرصيد يؤثر على إجمالي الأصول';
+
+  @override
+  String get noAccountsFoundAddFirst =>
+      'لم يتم العثور على حسابات. يرجى إضافة حساب أولاً.\n';
+
+  @override
+  String get goToAccounts => 'الانتقال إلى الحسابات';
+
+  @override
+  String get accountNameHintPersonal => 'مثال: مدخراتي';
+
+  @override
+  String get errorAccountNameRequired => 'اسم الحساب مطلوب';
+
+  @override
+  String get errorAccountBalanceRequired => 'رصيد الحساب مطلوب';
+
+  @override
+  String get errorValidNumber => 'يرجى إدخال رقم صحيح';
+
+  @override
+  String get masterYourMoney => 'تحكم في أموالك';
+
+  @override
+  String get onboardingTitleFreedom => 'حرية مالية';
+
+  @override
+  String get onboardingSubtitleFreedom =>
+      'تتبع مصروفاتك، وادخر أكثر، وحقق الحرية المالية.';
+
+  @override
+  String get onboardingTitleSmartCategorization => 'تصنيف ذكي';
+
+  @override
+  String get onboardingSubtitleSmartCategorization =>
+      'تصنيف معاملاتك تلقائيًا لتتبع أسهل.';
+
+  @override
+  String get onboardingTitleBudgetMaster => 'اتقن ميزانيتك الشهرية';
+
+  @override
+  String get onboardingSubtitleBudgetMaster =>
+      'ضع ميزانيتك الأولى وابدأ الادخار اليوم! تتبع كل مصروف وشاهد مدخراتك تنمو.';
+
+  @override
+  String get addBudgetPrompt => 'اضغط زر + بالأعلى لإضافة ميزانية.';
+
+  @override
+  String get addTransactionPrompt => 'اضغط زر + بالأسفل لإضافة معاملة.';
+
+  @override
+  String amountWithCurrency(Object currencyCode) {
+    return 'المبلغ ($currencyCode)';
+  }
+
+  @override
+  String get weeklyResetInfo =>
+      'ستتم إعادة تعيين الميزانية تلقائيًا كل يوم اثنين من كل أسبوع.';
+
+  @override
+  String get monthlyResetInfo =>
+      'ستتم إعادة تعيين الميزانية تلقائيًا في اليوم الأول من كل شهر.';
+
+  @override
+  String get yearlyResetInfo =>
+      'ستتم إعادة تعيين الميزانية تلقائيًا في 1 يناير من كل عام.';
+
+  @override
+  String get mondayShort => 'الإثنين';
+
+  @override
+  String get tuesdayShort => 'الثلاثاء';
+
+  @override
+  String get wednesdayShort => 'الأربعاء';
+
+  @override
+  String get thursdayShort => 'الخميس';
+
+  @override
+  String get fridayShort => 'الجمعة';
+
+  @override
+  String get saturdayShort => 'السبت';
+
+  @override
+  String get sundayShort => 'الأحد';
+
+  @override
+  String get transport => 'المواصلات';
+
+  @override
+  String get bills => 'الفواتير';
+
+  @override
+  String get salary => 'الراتب';
+
+  @override
+  String get freelance => 'عمل حر';
+
+  @override
+  String get housing => 'السكن';
+
+  @override
+  String get health => 'الصحة';
+
+  @override
+  String get gifts => 'الهدايا';
+
+  @override
+  String get others => 'أخرى';
+
+  @override
+  String get cashWallet => 'محفظة نقدية';
+
+  @override
+  String get investment => 'استثمار';
+
+  @override
+  String get selectAccountToContinue => 'اختر حسابًا';
+
+  @override
+  String get unnamedBudget => 'ميزانية بدون اسم';
 }

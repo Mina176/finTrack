@@ -1,5 +1,6 @@
 import 'package:fynt/features/onboarding/presentation/widgets/onboarding_card.dart';
 import 'package:fynt/features/onboarding/presentation/widgets/slider_index.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -24,31 +25,28 @@ class OnboardingPageSlider extends StatelessWidget {
           child: PageView(
             onPageChanged: onSlide,
             controller: pageController,
-            children: const [
+            children: [
               OnboardingCard(
                 width: 180,
                 height: 180,
-                title: 'Financial Freedom',
-                subTitle:
-                    'Track your spending, save more, and achieve financial freedom.',
+                title: context.l10n.onboardingTitleFreedom,
+                subTitle: context.l10n.onboardingSubtitleFreedom,
                 icon: FontAwesomeIcons.chartSimple,
                 borderRadius: 128,
               ),
               OnboardingCard(
                 width: 180,
                 height: 180,
-                title: 'Smart Categorization',
-                subTitle:
-                    'Automatically categorize your transactions for effortless tracking.',
+                title: context.l10n.onboardingTitleSmartCategorization,
+                subTitle: context.l10n.onboardingSubtitleSmartCategorization,
                 icon: FontAwesomeIcons.chartPie,
                 borderRadius: 32,
               ),
               OnboardingCard(
                 width: 180,
                 height: 180,
-                title: 'Master your Monthly Budget',
-                subTitle:
-                    'Set your first budget and start saving today! Track every expense and watch your savings grow.',
+                title: context.l10n.onboardingTitleBudgetMaster,
+                subTitle: context.l10n.onboardingSubtitleBudgetMaster,
                 icon: Icons.account_balance_wallet_rounded,
                 borderRadius: 32,
               ),

@@ -1,5 +1,6 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/features/settings/currency/currency_provider.dart';
 import 'package:fynt/core/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class LeftToSpendCard extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Total Spent',
+                  context.l10n.totalSpent,
                   style: TextStyles.subtitle.copyWith(fontSize: 12),
                 ),
                 Text(

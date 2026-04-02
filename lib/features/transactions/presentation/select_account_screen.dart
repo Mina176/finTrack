@@ -1,5 +1,6 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/core/widgets/category_icon.dart';
 import 'package:fynt/features/accounts/logic/account_controller.dart';
 import 'package:fynt/features/settings/currency/currency_provider.dart';
@@ -21,7 +22,7 @@ class SelectAccountScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Select Account'),
+        title: Text(context.l10n.selectAccount),
       ),
       body: accountsAsync.when(
         data: (accounts) {
@@ -34,11 +35,11 @@ class SelectAccountScreen extends ConsumerWidget {
               child: Center(
                 child: Text.rich(
                   TextSpan(
-                    text: 'No accounts found. Please add account first.\n',
+                    text: context.l10n.noAccountsFoundAddFirst,
                     style: TextStyles.subtitle,
                     children: [
                       TextSpan(
-                        text: 'Go to Accounts',
+                        text: context.l10n.goToAccounts,
                         style: TextStyles.subtitle.copyWith(
                           color: AppColors.kPrimaryColor,
                           fontWeight: FontWeight.bold,
@@ -102,8 +103,8 @@ class SelectAccountScreen extends ConsumerWidget {
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
-        error: (error, stackTrace) => const Center(
-          child: Text('Something went wrong. Please try again.'),
+        error: (error, stackTrace) => Center(
+          child: Text(context.l10n.somethingWentWrong),
         ),
       ),
     );

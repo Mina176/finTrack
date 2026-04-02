@@ -48,7 +48,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                     : double.parse(amountController.text),
                 spent: 0.0,
                 budgetName: nameController.text.isEmpty
-                    ? "Unnamed Budget"
+                    ? context.l10n.unnamedBudget
                     : nameController.text,
                 category: selectedCategory,
                 recurrenceDuration: selectedDuration,
@@ -58,7 +58,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
           context.pop();
         }
       } catch (e) {
-        throw Exception("Failed to create budget: $e");
+        throw Exception('${context.l10n.failedToCreateBudget}: $e');
       }
     };
   }
@@ -132,7 +132,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                 horizontal: Sizes.kHorizontalPadding,
               ),
               child: Text(
-                selectedDuration.infoText,
+                selectedDuration.localizedInfoText(context),
                 style: TextStyles.subtitle.copyWith(fontSize: 10),
                 textAlign: TextAlign.center,
               ),

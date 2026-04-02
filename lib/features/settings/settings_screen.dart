@@ -1,5 +1,6 @@
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/constants/text_styles.dart';
+import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:fynt/features/settings/widgets/settings_content.dart';
 import 'package:fynt/features/settings/widgets/user_info_section.dart';
@@ -14,7 +15,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Profile',
+          context.l10n.profile,
           style: TextStyles.title.copyWith(fontSize: 18),
         ),
       ),
@@ -24,6 +25,7 @@ class SettingsScreen extends StatelessWidget {
           horizontal: Sizes.kHorizontalPadding,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 12,
           children: [
             UserInfoSection(),

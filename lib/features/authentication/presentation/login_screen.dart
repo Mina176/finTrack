@@ -52,11 +52,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       } else if (next.hasError) {
         final error = next.errorMessage.toString();
         if (error.contains('auth credential is incorrect')) {
-          setState(() => emailError = "No account found with this email");
+          setState(() => emailError = context.l10n.noAccountFoundWithEmail);
         } else if (error.contains('credential is incorrect')) {
-          setState(() => passwordError = "Password is incorrect");
+          setState(() => passwordError = context.l10n.passwordIncorrect);
         } else if (error.contains('wrong-password')) {
-          setState(() => passwordError = "Incorrect password");
+          setState(() => passwordError = context.l10n.incorrectPassword);
         } else {}
       }
     });
@@ -81,8 +81,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       style: TextStyles.title,
                       textAlign: TextAlign.center,
                     ),
-                    const Text(
-                      'Track your wealth securely.\n Please log in to your account.',
+                    Text(
+                      context.l10n.loginSubtitle,
                       style: TextStyles.subtitle,
                       textAlign: TextAlign.center,
                     ),
@@ -135,7 +135,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     gapH8,
                     ElevatedButton(
                       onPressed: isLoading ? null : _signIn,
-                      child: Text(context.l10n.signUp),
+                      child: Text(context.l10n.signIn),
                     ),
                     CustomDivider(
                       centeredText: context.l10n.continueWith,
@@ -163,7 +163,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   ),
                                 ),
                                 gapH4,
-                                const Text('Continue with Google'),
+                                Text(context.l10n.continueWithGoogle),
                               ],
                             ),
                     ),
@@ -171,12 +171,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Don\'t have an account?'),
+                        Text(context.l10n.dontHaveAccount),
                         GestureDetector(
                           onTap: () => context.push(AppRoutes.signUp.path),
-                          child: const Text(
-                            ' Sign Up',
-                            style: TextStyle(
+                          child: Text(
+                            ' ${context.l10n.signUp}',
+                            style: const TextStyle(
                               color: AppColors.kPrimaryColor,
                               fontWeight: FontWeight.w600,
                             ),
