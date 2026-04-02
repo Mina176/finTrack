@@ -53,7 +53,6 @@ class AppTheme {
             borderRadius: BorderRadius.circular(16),
             side: const BorderSide(color: AppColors.kPrimaryColor),
           ),
-          foregroundColor: AppColors.kPrimaryColor,
           textStyle: TextStyles.buttonLabel,
         ),
       ),
@@ -100,6 +99,15 @@ class AppTheme {
           foregroundColor: AppColors.kButtonLabelColor,
           textStyle: TextStyles.buttonLabel,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: const BorderSide(color: AppColors.kPrimaryColor),
+          ),
+          textStyle: TextStyles.buttonLabel,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
