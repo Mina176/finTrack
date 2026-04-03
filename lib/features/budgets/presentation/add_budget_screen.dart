@@ -29,38 +29,37 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
   RecurrenceDuration selectedDuration = RecurrenceDuration.monthly;
 
   void addBudget() async {
-    () async {
-      if (amountController.text == "0.00") return;
-      try {
-        final userId = ref.read(authServiceProvider).currentUser!.userId;
-        await ref
-            .read(
-              budgetControllerProvider(
-                selectedDuration,
-              ).notifier,
-            )
-            .createBudget(
-              BudgetModel(
-                id: DateTime.now().millisecondsSinceEpoch,
-                userId: userId,
-                limit: amountController.text.isEmpty
-                    ? 0.0
-                    : double.parse(amountController.text),
-                spent: 0.0,
-                budgetName: nameController.text.isEmpty
-                    ? context.l10n.unnamedBudget
-                    : nameController.text,
-                category: selectedCategory,
-                recurrenceDuration: selectedDuration,
-              ),
-            );
-        if (mounted) {
-          context.pop();
-        }
-      } catch (e) {
-        throw Exception('${context.l10n.failedToCreateBudget}: $e');
+    if (amountController.text == "0.00") return;
+    try {
+      final userId = ref.read(authServiceProvider).currentUser!.userId;
+      await ref
+          .read(
+            budgetControllerProvider(
+              selectedDuration,
+            ).notifier,
+          )
+          .createBudget(
+            BudgetModel(
+              id: DateTime.now().millisecondsSinceEpoch,
+              userId: userId,
+              limit: amountController.text.isEmpty
+                  ? 0.0
+                  : double.parse(amountController.text),
+              spent: 0.0,
+              budgetName: nameController.text.isEmpty
+                  ? context.l10n.unnamedBudget
+                  : nameController.text,
+              category: selectedCategory,
+              recurrenceDuration: selectedDuration,
+            ),
+          );
+      if (mounted) {
+        context.pop();
       }
-    };
+    } catch (e) {
+      throw Exception('${context.l10n.failedToCreateBudget}: $e');
+    }
+    print('Budget added successfully');
   }
 
   @override
@@ -147,7 +146,11 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
           child: ElevatedButton(
             onPressed: isLoading ? null : addBudget,
             child: isLoading
-                ? const CircularProgressIndicator()
+                ? const SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(),
+                  )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
