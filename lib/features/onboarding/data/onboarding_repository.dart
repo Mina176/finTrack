@@ -1,8 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fynt/features/settings/appearance/logic/theme_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final onboardingRepositoryProvider = Provider<OnboardingRepository>((ref) {
-  throw UnimplementedError();
+  final prefs = ref.watch(sharedPreferencesProvider);
+  return OnboardingRepository(prefs);
 });
 
 class OnboardingRepository {
