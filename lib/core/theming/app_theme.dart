@@ -7,9 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
-  static ThemeData get darkTheme {
+  static ThemeData darkTheme(String languageCode) {
     final base = ThemeData.dark();
-    final baseTextTheme = GoogleFonts.interTextTheme(base.textTheme);
+    final isArabic = languageCode == 'ar';
+    final baseTextTheme = isArabic
+        ? GoogleFonts.cairoTextTheme(base.textTheme)
+        : GoogleFonts.interTextTheme(base.textTheme);
     return ThemeData(
       useMaterial3: true,
       colorScheme: const ColorScheme.dark(
@@ -68,9 +71,12 @@ class AppTheme {
     );
   }
 
-  static ThemeData get lightTheme {
+  static ThemeData lightTheme(String languageCode) {
     final base = ThemeData.light();
-    final baseTextTheme = GoogleFonts.interTextTheme(base.textTheme);
+    final isArabic = languageCode == 'ar';
+    final baseTextTheme = isArabic
+        ? GoogleFonts.cairoTextTheme(base.textTheme)
+        : GoogleFonts.interTextTheme(base.textTheme);
 
     return ThemeData(
       useMaterial3: true,
