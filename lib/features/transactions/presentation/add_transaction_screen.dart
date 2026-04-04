@@ -29,7 +29,8 @@ class AddTransactionScreen extends ConsumerStatefulWidget {
 
 class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   int expenseOrIncome = 0;
-
+  late String accountName;
+  bool isInitialized = false;
   final TextEditingController amountController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
 
@@ -39,25 +40,34 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   @override
   void initState() {
     super.initState();
-    final uid = Supabase.instance.client.auth.currentUser!.id;
-    selectedAccount = AccountModel(
-      userId: uid,
-      accountType: AccountType.debitCard,
-      accountName: '',
-      balance: 0.0,
-      includeInNetWorth: true,
-      currentBalance: 0.0,
-    );
-    transaction = TransactionModel(
-      id: DateTime.now().millisecondsSinceEpoch,
-      userId: uid,
-      isExpense: true,
-      amount: 0.0,
-      category: CategoryType.food,
-      account: selectedAccount.accountType,
-      date: DateTime.now(),
-      note: "",
-    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!isInitialized) {
+      accountName = context.l10n.accountName;
+      final uid = Supabase.instance.client.auth.currentUser!.id;
+      selectedAccount = AccountModel(
+        userId: uid,
+        accountType: AccountType.debitCard,
+        accountName: accountName,
+        balance: 0.0,
+        includeInNetWorth: true,
+        currentBalance: 0.0,
+      );
+      transaction = TransactionModel(
+        id: DateTime.now().millisecondsSinceEpoch,
+        userId: uid,
+        isExpense: true,
+        amount: 0.0,
+        category: CategoryType.food,
+        account: selectedAccount.accountType,
+        date: DateTime.now(),
+        note: "",
+      );
+      isInitialized = true;
+    }
   }
 
   @override
@@ -145,7 +155,6 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: Sizes.kVerticalPadding,
           horizontal: Sizes.kHorizontalPadding,
         ),
         child: ScrollableContentWithStickyButton(
