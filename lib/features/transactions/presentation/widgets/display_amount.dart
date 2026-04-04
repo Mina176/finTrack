@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:fynt/core/constants/text_styles.dart';
 import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/features/settings/currency/currency_provider.dart';
@@ -23,6 +24,9 @@ class DisplayAmount extends ConsumerWidget {
         TextField(
           controller: controller,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*[\.,]?\d*')),
+          ],
           textAlign: TextAlign.center,
           style: TextStyles.amount,
           showCursor: false,

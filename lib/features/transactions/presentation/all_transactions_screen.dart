@@ -1,3 +1,4 @@
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fynt/core/constants/app_sizes.dart';
 import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:fynt/core/constants/text_styles.dart';
@@ -39,23 +40,26 @@ class AllTransactionsScreen extends ConsumerWidget {
               );
             }
             return SingleChildScrollView(
-              child: SettingsSection(
-                widgets: List.generate(
-                  transactions.length,
-                  (index) {
-                    final transaction = transactions[index];
-                    return SlidableSettingsTile(
-                      itemKey: ValueKey(transactions[index].id),
-                      onDeleteTapped: () {
-                        ref
-                            .read(transactionControllerProvider.notifier)
-                            .deleteTransaction(transaction.id);
-                      },
-                      child: TransactionCard(
-                        transaction: transaction,
-                      ),
-                    );
-                  },
+              child: SlidableAutoCloseBehavior(
+                child: SettingsSection(
+                  widgets: List.generate(
+                    transactions.length,
+                    (index) {
+                      final transaction = transactions[index];
+                      return SlidableSettingsTile(
+                        itemKey: ValueKey(transaction.id),
+                        groupTag: 'all_transactions',
+                        onDeleteTapped: () {
+                          ref
+                              .read(transactionControllerProvider.notifier)
+                              .deleteTransaction(transaction.id);
+                        },
+                        child: TransactionCard(
+                          transaction: transaction,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             );

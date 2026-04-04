@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:ios_multi_slidable/ios_multi_slidable.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SlidableSettingsTile extends StatelessWidget {
   const SlidableSettingsTile({
     super.key,
     required this.itemKey,
+    required this.groupTag,
     required this.child,
     required this.onDeleteTapped,
   });
 
   final Key itemKey;
+  final Object? groupTag;
   final Widget child;
   final VoidCallback onDeleteTapped;
 
   @override
   Widget build(BuildContext context) {
-    return IosMultiSlidable(
+    return Slidable(
       key: itemKey,
-      rightActions: [
-        SlidableAction(
-          onTap: onDeleteTapped,
-          color: Colors.red,
-          child: const Icon(Icons.delete, color: Colors.white),
-        ),
-      ],
+      groupTag: groupTag,
+      closeOnScroll: true,
+      startActionPane: ActionPane(
+        extentRatio: 0.3,
+        openThreshold: 0.12,
+        motion: const StretchMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (context) => onDeleteTapped(),
+            backgroundColor: const Color(0xFFFE4A49),
+            foregroundColor: Colors.white,
+            icon: Icons.delete,
+          ),
+        ],
+      ),
       child: child,
     );
   }

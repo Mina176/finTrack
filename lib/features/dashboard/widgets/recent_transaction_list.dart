@@ -1,3 +1,4 @@
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,21 +23,24 @@ class RecentTransactionList extends ConsumerWidget {
           );
         }
         return SliverToBoxAdapter(
-          child: SettingsSection(
-            widgets: List.generate(
-              recentTransactions.length,
-              (index) {
-                final transaction = recentTransactions[index];
-                return SlidableSettingsTile(
-                  itemKey: ValueKey(recentTransactions[index].id),
-                  onDeleteTapped: () => ref
-                      .read(transactionControllerProvider.notifier)
-                      .deleteTransaction(transaction.id),
-                  child: TransactionCard(
-                    transaction: transaction,
-                  ),
-                );
-              },
+          child: SlidableAutoCloseBehavior(
+            child: SettingsSection(
+              widgets: List.generate(
+                recentTransactions.length,
+                (index) {
+                  final transaction = recentTransactions[index];
+                  return SlidableSettingsTile(
+                    itemKey: ValueKey(transaction.id),
+                    groupTag: 'recent_transactions',
+                    onDeleteTapped: () => ref
+                        .read(transactionControllerProvider.notifier)
+                        .deleteTransaction(transaction.id),
+                    child: TransactionCard(
+                      transaction: transaction,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         );

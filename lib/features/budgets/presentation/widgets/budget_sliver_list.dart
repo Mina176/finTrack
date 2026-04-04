@@ -1,3 +1,4 @@
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,61 +29,64 @@ class BudgetSliverList extends ConsumerWidget {
           ? EmptyListSLiverFillRemaining(
               message: context.l10n.addBudgetPrompt,
             )
-          : SliverList.separated(
-              itemCount: budgets.length,
-              separatorBuilder: (context, index) => gapH12,
-              itemBuilder: (context, index) {
-                final budget = budgets[index];
-                final safeBudgetLimit = budget.limit == 0 ? 1 : budget.limit;
-                return SlidableSettingsTile(
-                  itemKey: ValueKey(budgets[index].id),
-                  onDeleteTapped: () => ref
-                      .read(
-                        budgetControllerProvider(
-                          selectedPeriod,
-                        ).notifier,
-                      )
-                      .deleteBudget(budget.id),
-                  child: LeftToSpendCard(
-                    spendLimit: budget.limit,
-                    spentAmount: budget.spent,
-                    leading: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CategoryIcon(
-                          categoryType: budget.category,
-                        ),
-                        gapW8,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              budget.category.localizedLabel(context),
-                              style: TextStyles.title.copyWith(
-                                fontSize: 14,
-                              ),
-                            ),
-                            gapH4,
-                            Text(
-                              '$currencySymbol${(budget.limit - budget.spent).round()} ${context.l10n.remaining}',
-                              style: TextStyles.subtitle.copyWith(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Text(
-                          '${(budget.spent * 100 / safeBudgetLimit).round()}%',
-                          style: TextStyles.title.copyWith(
-                            fontSize: 14,
+          : SlidableAutoCloseBehavior(
+              child: SliverList.separated(
+                itemCount: budgets.length,
+                separatorBuilder: (context, index) => gapH12,
+                itemBuilder: (context, index) {
+                  final budget = budgets[index];
+                  final safeBudgetLimit = budget.limit == 0 ? 1 : budget.limit;
+                  return SlidableSettingsTile(
+                    itemKey: ValueKey(budgets[index].id),
+                    groupTag: context,
+                    onDeleteTapped: () => ref
+                        .read(
+                          budgetControllerProvider(
+                            selectedPeriod,
+                          ).notifier,
+                        )
+                        .deleteBudget(budget.id),
+                    child: LeftToSpendCard(
+                      spendLimit: budget.limit,
+                      spentAmount: budget.spent,
+                      leading: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CategoryIcon(
+                            categoryType: budget.category,
                           ),
-                        ),
-                      ],
+                          gapW8,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                budget.category.localizedLabel(context),
+                                style: TextStyles.title.copyWith(
+                                  fontSize: 14,
+                                ),
+                              ),
+                              gapH4,
+                              Text(
+                                '$currencySymbol${(budget.limit - budget.spent).round()} ${context.l10n.remaining}',
+                                style: TextStyles.subtitle.copyWith(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          Text(
+                            '${(budget.spent * 100 / safeBudgetLimit).round()}%',
+                            style: TextStyles.title.copyWith(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
       loading: () => const SliverFillRemaining(
         child: Center(

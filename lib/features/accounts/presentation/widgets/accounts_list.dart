@@ -1,3 +1,4 @@
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fynt/core/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,29 +32,32 @@ class AccountsList extends ConsumerWidget {
             );
           }
           return SingleChildScrollView(
-            child: SettingsSection(
-              widgets: List.generate(
-                accounts.length,
-                (index) {
-                  final account = accounts[index];
-                  return SlidableSettingsTile(
-                    itemKey: ValueKey(accounts[index].id),
-                    onDeleteTapped: () {
-                      if (account.id != null) {
-                        ref
-                            .read(accountControllerProvider.notifier)
-                            .deleteAccount(account.id!);
-                      }
-                    },
-                    child: AccountCard(
-                      icon: account.accountType.icon,
-                      accountType: account.accountType,
-                      accountName: account.accountName,
-                      balance: account.balance,
-                      currentBalance: account.currentBalance,
-                    ),
-                  );
-                },
+            child: SlidableAutoCloseBehavior(
+              child: SettingsSection(
+                widgets: List.generate(
+                  accounts.length,
+                  (index) {
+                    final account = accounts[index];
+                    return SlidableSettingsTile(
+                      itemKey: ValueKey(accounts[index].id),
+                      groupTag: 'accounts',
+                      onDeleteTapped: () {
+                        if (account.id != null) {
+                          ref
+                              .read(accountControllerProvider.notifier)
+                              .deleteAccount(account.id!);
+                        }
+                      },
+                      child: AccountCard(
+                        icon: account.accountType.icon,
+                        accountType: account.accountType,
+                        accountName: account.accountName,
+                        balance: account.balance,
+                        currentBalance: account.currentBalance,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           );
