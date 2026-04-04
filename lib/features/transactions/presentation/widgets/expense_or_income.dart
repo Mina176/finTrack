@@ -31,10 +31,10 @@ class ExpenseOrIncome extends StatelessWidget {
           padding: const EdgeInsets.all(0),
           child: Stack(
             children: [
-              AnimatedPositioned(
+              AnimatedPositionedDirectional(
                 duration: addTransactionAnimationDuration,
                 curve: Curves.easeInCubic,
-                left: selectedIndex == 0 ? 4 : width - 4 - pillWidth,
+                start: selectedIndex == 0 ? 4 : width - 4 - pillWidth,
                 top: 6,
                 bottom: 6,
                 width: pillWidth,
@@ -67,16 +67,7 @@ class ExpenseOrIncome extends StatelessWidget {
                                 ? AppColors.kPrimaryColor
                                 : AppColors.kSubtitleColor,
                           ),
-                          child: Text(
-                            expenseOrIncome[index],
-                            style: TextStyle(
-                              color: isSelected(index) && selectedIndex == 0
-                                  ? const Color(0xFFFF453A)
-                                  : isSelected(index) && selectedIndex == 1
-                                  ? AppColors.kPrimaryColor
-                                  : null,
-                            ),
-                          ),
+                          child: Text(expenseOrIncome[index]),
                         ),
                       ),
                     ),
