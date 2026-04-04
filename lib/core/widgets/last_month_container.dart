@@ -64,7 +64,7 @@ class LastMonthContainer extends ConsumerWidget {
                 fontSize: 14,
               ),
             ),
-            gapW8,
+            gapW4,
             isSaving
                 ? Icon(
                     FontAwesomeIcons.arrowTrendUp,

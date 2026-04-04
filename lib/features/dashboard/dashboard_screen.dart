@@ -17,7 +17,6 @@ class DashboardScreen extends ConsumerWidget {
       body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: Sizes.kVerticalPadding,
             horizontal: Sizes.kHorizontalPadding,
           ),
           child: CustomScrollView(
@@ -25,11 +24,14 @@ class DashboardScreen extends ConsumerWidget {
               SliverToBoxAdapter(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 16,
                   children: [
+                    gapH4,
                     CustomAppBar(),
+                    gapH16,
                     TotalBalanceCard(),
+                    gapH16,
                     WeeklyDashboard(),
+                    gapH16,
                     RecentTransactionHeader(),
                   ],
                 ),

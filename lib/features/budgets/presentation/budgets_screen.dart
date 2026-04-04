@@ -35,7 +35,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text(context.l10n.addBudget),
+        title: Text(context.l10n.budgets),
         actions: const [
           AppBarAction(appRoute: AppRoutes.addBudget),
           gapW20,
@@ -43,7 +43,6 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: Sizes.kVerticalPadding,
           horizontal: Sizes.kHorizontalPadding,
         ),
         child: CustomScrollView(
